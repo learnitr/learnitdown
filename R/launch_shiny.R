@@ -33,6 +33,6 @@ launch_shiny <- function(name, url, img, width = 780, height = 500,
   res <- glue::glue("\n<img onclick=\"launchApp('{name}', '{url}');\" src=\"{img}\" width=\"{width}\" height=\"{height}\" class=\"shiny-img\" id=\"img{name}\"/>
 <iframe width=\"{width}\" height=\"{height}\" frameborder=\"0\" scrolling=\"auto\" style=\"display:none\" class=\"shiny-app\" id=\"{name}\"></iframe>\n")
   if (!is.null(alt))
-    res <- paste0(res, alt, "\n")
+    res <- paste0(res, "\n", alt, "\n")
   res
 }
