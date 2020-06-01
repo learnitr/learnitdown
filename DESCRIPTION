@@ -1,0 +1,29 @@
+Package: learndown
+Type: Package
+Version: 0.0.9000
+Date: 2020-06-01
+Title: 'SciViews' - R Markdown and Bookdown Additions for Learning Material
+Description: Extension to R Markdown and Bookdown for building better learning
+  and e-learning material: H5P integration, course-contextual divs, different
+  loading of Shiny and learnr applications, and much more ...
+Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
+  email = "phgrosjean@sciviews.org",
+  comment = c(ORCID = "0000-0002-2694-9471")))
+Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
+Depends: R (>= 3.0.0)
+Imports: glue
+Suggests: 
+    covr,
+    knitr,
+    rmarkdown,
+    testthat,
+    spelling
+License: MIT + file LICENSE
+URL: https://github.com/SciViews/learndown, https://www.sciviews.org/learndown/
+BugReports: https://github.com/SciViews/learndown/issues
+LazyData: yes
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+VignetteBuilder: knitr
+Encoding: UTF-8
+Language: en-US

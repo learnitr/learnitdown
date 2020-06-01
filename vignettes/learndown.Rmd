@@ -1,0 +1,65 @@
+---
+title: "learndown - R Markdown and Bookdown Additions for Learning Material"
+author: "Philippe Grosjean (phgrosjean@sciviews.org)"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{learndown - R Markdown and Bookdown Additions for Learning Material}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(learndown)
+```
+
+# Make better learning inline material with learndown
+
+> R Markdown, and especially bookdown with the gitbook format are extensively used by the R community for textbook documentation. The 'learndown' package aims to transform bookdown/gitbook into an interactive learning environment with a rich set of functions like [H5P](https://h5p.org) content, differed Shiny and learnr app starting, course-specific areas, etc.
+
+## Include H5P content
+
+H5P content is rich interactive content for e-learning. It is written in HTML5 (HTML + CSS + Javascript). The H5P content is displayed in an iframe inside your document, and it sends xAPI events (a standard to pass "experience API" event to LRS -Learning Record Store-). The parent page is responsible of handling these events. Here, the parent is our R Markdown or bookdown pages. With **learndown**, you can make it work by ... TODO: continue!
+
+## Selectively show details
+
+A long, monotonously linear textual development, a.k.a., textbook has proven useful for software documentation. Organization in chapters and sections with an easily available table of content is enough to find and read the sections of interest in the document. In a learning context, the same document appears boringly long. More diversification and interactivity brings live to the learning material.
+
+An easy way to break with the linear monotony of a textbook is to show or hide details in the text. Four complimentary mechanisms are provided: details, tabs, contextual sections, and show/hide code. We will demonstrate them here.
+
+### Details
+
+If you want to hide details, but allow the reader to reveal them at will in your page, you can use the `<details>...</details>` tag. Everything that is enclosed inside these tags will be hidden by default, with a "Details" marked inviting to open the details section. Using `<summary>...</summary>` at the very beginning of the `<details>` section allows for custom text in collapsed mode. Here is an example:
+
+<details>
+<summary>For more details, unfold me...</summary>
+Here are the details, possibly with multiple paragraphs and other formattings:
+
+- A list item 1
+- Item 2
+
+Also an equation:
+
+$$E = m \times c^2$$
+</details>
+
+### Tabs
+
+With a little bit of CSS, it is possible to transform titles into tabs or 'pills' that display or portion of the page. Since it uses bootstrap CSS, it is not available in bookdown's gitbook format, except if the corresponding code is injected oi your document. TODO: example + injection of that code in bookdown.
+
+### Contextual divs
+
+Given a context set with Javascript variables, one can show or hide whole divs or spans. TODO: example + code.
+
+### Show/hide code
+
+The show/hide code was introduced with the R Notebook document, and it is usable also in the R Markdown formats, but not in bookdown. TODO: example + code for making it work in bookdown.

@@ -37,3 +37,12 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# Locally generated pkgdown site
+docs
+docs/
+
+# Mac files
+.DS_Store
+doc
+Meta
