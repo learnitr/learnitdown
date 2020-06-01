@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • learndown</title>
+<title>Placeholder with screenshot to launch Shiny application on click. — launch_shiny • learndown</title>
 
 
 <!-- jquery -->
@@ -52,7 +52,14 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Placeholder with screenshot to launch Shiny application on click. — launch_shiny" />
+<meta property="og:description" content="Shiny applications can be embedded in certain R Markdown documents. However,
+the application is automatically loaded at the same time as the main page,
+and that may not be the desired behavior. With launch_shiny(), you display
+just a screenshot of the Shiny application in the page. The user has to click
+on it to actually launch the application (that replaces the screenshot on the
+page)." />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -78,7 +85,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
 <div class="preloader">
@@ -155,48 +162,75 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Placeholder with screenshot to launch Shiny application on click.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/launch_shiny.R'><code>R/launch_shiny.R</code></a></small>
+    <div class="hidden name"><code>launch_shiny.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Shiny applications can be embedded in certain R Markdown documents. However,
+the application is automatically loaded at the same time as the main page,
+and that may not be the desired behavior. With <code>launch_shiny()</code>, you display
+just a screenshot of the Shiny application in the page. The user has to click
+on it to actually launch the application (that replaces the screenshot on the
+page).</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>launch_shiny</span>(
+  <span class='no'>name</span>,
+  <span class='no'>url</span>,
+  <span class='no'>img</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>780</span>,
+  <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+  <span class='kw'>alt</span> <span class='kw'>=</span> <span class='st'>"*Click to start the application.*"</span>
+)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="h5p.html">h5p()</a></code> </p>
-        </td>
-        <td><p>Insert H5P content in the document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="launch_shiny.html">launch_shiny()</a></code> </p>
-        </td>
-        <td><p>Placeholder with screenshot to launch Shiny application on click.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>Name of the shiny application (cannot be duplicated on a page).</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The URL of the Shiny application.</p></td>
+    </tr>
+    <tr>
+      <th>img</th>
+      <td><p>The relative or absolute path to the image. Best effect is
+obtained with a slightly darkened screenshot of the actual application saved
+in a PNG image of exactly the same size as the iframe that embeds the Shiny
+application. You can also add an icon on top of the image that suggests to
+click on it to launch the application for an even better effect.</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>The width of the image and iframe for the app.</p></td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td><p>The height of image and iframe.</p></td>
+    </tr>
+    <tr>
+      <th>alt</th>
+      <td><p>Alternate text to display at the bottom of the screenshot. If
+<code>NULL</code>, nothing is displayed below the screenshot.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The HTML content that creates the image and the iframe. The function
+must be called from within an R inline expression of an R chunk with
+<code>results='asis'</code> in an HTML-rendered version of the R Markdown document to
+get the correct result.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># TODO...</span></div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
