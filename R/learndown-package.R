@@ -2,7 +2,7 @@
 #' The SciViews learndown package provides additional R Markdown tags to build
 #' richer learning material with interactivity.
 #'
-#' See [h5p()]
+#' See [h5p()] or [launch_shiny()]
 #' @keywords internal
 "_PACKAGE"
 

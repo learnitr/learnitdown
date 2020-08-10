@@ -2,4 +2,5 @@
 
 export(h5p)
 export(launch_shiny)
+export(learndown_init)
 importFrom(glue,glue)
