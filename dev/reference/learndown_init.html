@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>learndown - To do list • learndown</title>
+<title>Initialize learndown features in a R MArkdown document — learndown_init • learndown</title>
 
 
 <!-- jquery -->
@@ -19,8 +19,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
@@ -34,25 +34,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 <!-- svPkgdown -->
-<script src="script.js"></script>
+<script src="../script.js"></script>
 
 <!-- themify icon -->
-<link rel="stylesheet" href="themify-icons.css?nocache=123">
-<!--<link rel="stylesheet" href="style.css?nocache=123">-->
+<link rel="stylesheet" href="../themify-icons.css?nocache=123">
+<!--<link rel="stylesheet" href="../style.css?nocache=123">-->
 
 <!-- bootstrat v4.1.1, required CSS from more recent version -->
-<link rel="stylesheet" href="bootstrap.more.css?nocache=123">
+<link rel="stylesheet" href="../bootstrap.more.css?nocache=123">
 
-<link href="style.css?nocache=123" rel="stylesheet">
+<link href="../style.css?nocache=123" rel="stylesheet">
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="learndown - To do list" />
+<meta property="og:title" content="Initialize learndown features in a R MArkdown document — learndown_init" />
+<meta property="og:description" content="This function must be called at the begining of a R Markdown document (e.g,
+bookdown) to installe required CSS and Javascript." />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -78,11 +81,11 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
 <div class="preloader">
-  <img src="preloader.gif" alt="loading...">
+  <img src="../preloader.gif" alt="loading...">
 </div>
 <!-- preloader end -->
 
@@ -98,7 +101,7 @@
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
          <a class="navbar-brand" href="https://www.sciviews.org">
-          <img src="logo_full.png" alt="SciViews">
+          <img src="../logo_full.png" alt="SciViews">
          </a>
        </div>
        <div class="navbar-brand-package">
@@ -119,19 +122,19 @@
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="articles/learndown.html">Get started</a>
+  <a href="../articles/learndown.html">Get started</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
         <li>
   <a href="https://github.com/SciViews/learndown/">
@@ -142,7 +145,7 @@
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="index.html"><p class = "h2">learndown <small>v0.0.9000</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v0.0.9000</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -155,33 +158,84 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>learndown - To do list</h1>
+    <h1>Initialize learndown features in a R MArkdown document</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_init.R'><code>R/learndown_init.R</code></a></small>
+    <div class="hidden name"><code>learndown_init.Rd</code></div>
     </div>
 
-<div id="learndown---to-do-list" class="section level1">
+    <div class="ref-description">
+    <p>This function must be called at the begining of a R Markdown document (e.g,
+bookdown) to installe required CSS and Javascript.</p>
+    </div>
 
-<ul>
-<li><p>Add contextual show-hide sections</p></li>
-<li><p>Include <code>ictitle</code>, the full title of the course from Moodle.</p></li>
-<li><p>Get user info from URL for Shiny apps</p></li>
-<li><p>Allow to record xAPI events form H5P</p></li>
-<li><p>Code folding (se <a href="https://statnmap.com/fr/2017-11-13-afficher-cacher-les-zones-de-code-avec-bookdown-et-blogdown/" class="uri">https://statnmap.com/fr/2017-11-13-afficher-cacher-les-zones-de-code-avec-bookdown-et-blogdown/</a>) and tabulations in bookdwon</p></li>
-<li><p>Automatic light and dark theme</p></li>
-</ul>
-</div>
+    <pre class="usage"><span class='fu'>learndown_init</span>(
+  shiny = <span class='fl'>TRUE</span>,
+  h5p = <span class='fl'>TRUE</span>,
+  use.query = <span class='fl'>FALSE</span>,
+  iframe.links = <span class='fl'>TRUE</span>,
+  details.css = <span class='fl'>TRUE</span>,
+  institutions = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"institution1"</span>, <span class='st'>"institution2"</span>),
+  courses = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"course1"</span>, <span class='st'>"course2"</span>, <span class='st'>"course3"</span>)
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>shiny</th>
+      <td><p>Do we use Shiny applications and do we want to pass parameters
+and or launch the application on a click?</p></td>
+    </tr>
+    <tr>
+      <th>h5p</th>
+      <td><p>Do we use H5P served from a Wordpress site in the same domain as
+our R Markdown document?</p></td>
+    </tr>
+    <tr>
+      <th>use.query</th>
+      <td><p>Do we collect user/course/institution data through the URL
+query string (the part after the question mark in thje URL).</p></td>
+    </tr>
+    <tr>
+      <th>iframe.links</th>
+      <td><p>If our document is displayed in an iframe, external link
+should better tartget ther parent window. With this option, external links
+with no defined target are automatically retargetted when the page loads.</p></td>
+    </tr>
+    <tr>
+      <th>details.css</th>
+      <td><p>Do we want to enhance the <code>&lt;details&gt;</code> section with a
+summary surrounded by a light gray box in order to better evidence it.</p></td>
+    </tr>
+    <tr>
+      <th>institutions</th>
+      <td><p>The list of possible institutions that have specific
+sectionsq in this document.</p></td>
+    </tr>
+    <tr>
+      <th>courses</th>
+      <td><p>The list of courses with specific sections in this document.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The containt to be inserted in trhe HTML document with CSS and
+Javascript code required to implement the various learndown features.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># This is better placed in a setup R chunk or an R inline expression on its</span>
+<span class='co'># own line</span>
+<span class='fu'>learndown_init</span>()</div><div class='output co'>#&gt; [1] "&lt;style&gt;\n.institution1 .institution2 {\n  display: none;\n}\n\n.noinstitution {\n  display: block;\n}\n\n.course1 .course2 .course3 {\n  display: none;\n}\n\n.nocourse {\n  display: block;\n}\n\nsummary {\n  background:  #f5f5f5;\n  border: 1px solid #ccc;\n}\n&lt;/style&gt;\n\n&lt;script&gt;\nfunction getParameterByName(name, url) {\n  name = name.replace(/[\\[\\]]/g,\"\\\\$&amp;\");\n  // Try to get the value from local storage\n  if (window.localStorage) {\n    return localStorage.getItem(name);\n  } else {\n    return '';\n  }\n}\n\n// Collect parameters and store their values (as passed by Moodle/Wordpress)\nvar login       = getParameterByName('login');\nvar email       = getParameterByName('email');\nvar displayname = getParameterByName('displayname');\nvar firstname   = getParameterByName('firstname');\nvar lastname    = getParameterByName('lastname');\nvar iemail      = getParameterByName('iemail');\nvar iid         = getParameterByName('iid');\nvar ifirstname  = getParameterByName('ifirstname');\nvar ilastname   = getParameterByName('ilastname');\nvar institution = getParameterByName('institution');\nvar icourse     = getParameterByName('icourse');\nvar ictitle     = getParameterByName('ictitle');\nvar iurl        = getParameterByName('iurl');\nvar iref        = getParameterByName('iref');\n\nlet institutions = ['institution1', 'institution2', 'noinstitution'];\nlet courses = ['course1', 'course2', 'course3', 'nocourse'];\n\nfunction toggleDisplay(item, target) {\n  var style = item == target ? 'block' : 'none';\n  var elems = document.getElementsByClassName(item);\n  for (i = 0; i &lt; elems.length; i++) {\n    var elem = elems[i];\n    elem.style.display = style;\n  }\n}\n\nfunction toggleInstitution(name) {\n  // Disable all institutions except that one\n  // Since they are already all hidden, just reenable it and hide noinstitution\n  toggleDisplay('noinstitution', name);\n  toggleDisplay(name, name);\n}\n\nfunction toggleCourse(name) {\n  // Disable all courses except that one\n  // Since they are already all hidden, just reenable it and hide nocourse\n  toggleDisplay('nocourse', name);\n  toggleDisplay(name, name);\n}\n\nfunction processParameters() {\n  // Content related to an institution\n  if (institution !== null) {\n    toggleInstitution(institution);\n  }\n  // Content relative to a course\n  if (icourse !== null) {\n    toggleCourse(icourse);\n  }\n  // Process other parameters too here...\n  // ...\n}\n\n\nfunction retargetLinks() {\n  // If displayed in an iframe, open external links into parent\n  // Adapted from Yihui Xie blog\n  var links = document.getElementsByTagName('a');\n  for (var i = 0; i &lt; links.length; i++) {\n    if (/^(https?:)?\\/\\//.test(links[i].getAttribute('href')) &amp;&amp;\n      links[i].target != null) {\n      links[i].target = '_parent';\n    }\n  }\n};\n\nwindow.onload = function() {processParameters(); retargetLinks();};\n&lt;/script&gt;\n\n&lt;noscript&gt;Please enable JavaScript for learndown extra features.&lt;/a&gt;&lt;/noscript&gt;\n"</div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>

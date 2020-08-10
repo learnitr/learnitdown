@@ -114,11 +114,17 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The latest stable version of <strong>learndown</strong> can simply be installed from <a href="http://cran.r-project.org">CRAN</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"learndown"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"learndown"</span>)
+</pre></div>
 <p>You can also install the latest developement version. Make sure you have the <strong>remotes</strong> R package installed (note: <strong>not yet!</strong>):</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"remotes"</span>)
+</pre></div>
 <p>Use <code>install_github()</code> to install the <strong>learndown</strong> package from Github (source from <strong>master</strong> branch will be recompiled on your machine):</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">dremotes</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"SciViews/learndown"</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">dremotes</span>::<span class="fu">install_github</span>(<span class="st">"SciViews/learndown"</span>)
+</pre></div>
 <p>R should install all required dependencies automatically, and then it should compile and install <strong>learndown</strong>.</p>
 <p>Latest development version of <strong>learndown</strong> (source + Windows binaires for the latest stable version of R at the time of compilation) is also available from <a href="https://ci.appveyor.com/project/phgrosjean/learndown/build/artifacts">appveyor</a>.</p>
 </div>
@@ -126,11 +132,15 @@
 <h2 class="hasAnchor">
 <a href="#further-explore-learndown" class="anchor"></a>Further explore learndown</h2>
 <p>You can get further help about this package this way: Make the <strong>learndown</strong> package available in your R session:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"learndown"</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://github.com/SciViews/learndown">"learndown"</a></span>)
+</pre></div>
 <p>Get help about this package:</p>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">help</span> <span class="kw">=</span> <span class="st">"learndown"</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(help = <span class="st">"learndown"</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="st">"learndown-package"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"learndown"</span>) <span class="co"># None is installed with install_github()</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span>(<span class="st">"learndown"</span>) <span class="co"># None is installed with install_github()</span>
+</pre></div>
 <p>For further instructions, please, refer to these help pages at <a href="https://www.sciviews.org/learndown/" class="uri">https://www.sciviews.org/learndown/</a>.</p>
 </div>
 <div id="code-of-conduct" class="section level2">

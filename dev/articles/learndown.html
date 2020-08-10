@@ -99,13 +99,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="learndown_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>learndown - R Markdown and Bookdown Additions for Learning Material</h1>
                         <h4 class="author">Philippe Grosjean (<a href="mailto:phgrosjean@sciviews.org" class="email">phgrosjean@sciviews.org</a>)</h4>
             
-            <h4 class="date">2020-06-01</h4>
+            <h4 class="date">2020-08-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/SciViews/learndown/blob/master/vignettes/learndown.Rmd"><code>vignettes/learndown.Rmd</code></a></small>
       <div class="hidden name"><code>learndown.Rmd</code></div>
@@ -114,7 +114,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">learndown</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/SciViews/learndown">learndown</a></span>)
+</pre></div>
 <div id="make-better-learning-inline-material-with-learndown" class="section level1">
 <h1 class="hasAnchor">
 <a href="#make-better-learning-inline-material-with-learndown" class="anchor"></a>Make better learning inline material with learndown</h1>
@@ -125,13 +127,15 @@
 <h2 class="hasAnchor">
 <a href="#include-h5p-content" class="anchor"></a>Include H5P content</h2>
 <p>H5P content is rich interactive content for e-learning. It is written in HTML5 (HTML + CSS + Javascript). The H5P content is displayed in an iframe inside your document, and it sends xAPI events (a standard to pass “experience API” event to LRS -Learning Record Store-). The parent page is responsible of handling these events. Here, the parent is our R Markdown or bookdown pages. With <strong>learndown</strong>, you can make it work by … TODO: continue!</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/h5p.html">h5p</a></span>(<span class="fl">1</span>, <span class="st">"https://www.example.com"</span>, <span class="kw">width</span> <span class="kw">=</span> <span class="fl">780</span>, <span class="kw">height</span> <span class="kw">=</span> <span class="fl">500</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/h5p.html">h5p</a></span>(<span class="fl">1</span>, <span class="st">"https://www.example.com"</span>, width = <span class="fl">780</span>, height = <span class="fl">500</span>)
+</pre></div>
 </div>
 <div id="differ-shinylearnr-app-loading" class="section level2">
 <h2 class="hasAnchor">
 <a href="#differ-shinylearnr-app-loading" class="anchor"></a>Differ Shiny/learnr app loading</h2>
 <p>When a page with Shiny apps or learnr tutorials is loaded, the applications are automatically started. While it may seen nice, it slows down page loading and it uses unnecessary resources on the Shiny server if the application is <strong>not</strong> used. In <strong>learndown</strong>, a mechanism is provided to display only a screenshot image of the application, and to load the actual Shiny application only if the image is clicked (and then, the image is replaced by the Shiny application). This trick is done by coupling an image and a Shiny app and with a little bit of CSS and Javascript on the client-side. All this is hidden in a function that you call in an R Markdown document in an isolated R inline expression (expression on its own line, surrounded by blank lines above and below it).</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r">launch_shiny("app1", url = "https://phgrosjean.shinyapps.io/url-parameters/", img = "images/sdd1_01/app1.png", height=700, alt = "*Cliquez pour lancer ou exécutez `BioDataScience::runApp("url-parameters")` dans la svbox2019.*")</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">launch_shiny</span>(<span class="st">"app1"</span>, <span class="dt">url =</span> <span class="st">"https://phgrosjean.shinyapps.io/url-parameters/"</span>, <span class="dt">img =</span> <span class="st">"images/sdd1_01/app1.png"</span>, <span class="dt">height=</span><span class="dv">700</span>, <span class="dt">alt =</span> <span class="st">"*Cliquez pour lancer ou exécutez `BioDataScience::runApp("</span>url<span class="op">-</span>parameters<span class="st">")` dans la svbox2019.*"</span>)</span></code></pre></div>
 </div>
 <div id="selectively-show-details" class="section level2">
 <h2 class="hasAnchor">
