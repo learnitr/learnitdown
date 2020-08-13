@@ -10,6 +10,7 @@ learndown_init(
   use.query = FALSE,
   iframe.links = TRUE,
   details.css = TRUE,
+  baseurl = "https://example.org",
   institutions = c("institution1", "institution2"),
   courses = c("course1", "course2", "course3"),
   style = "style.css",
@@ -23,7 +24,9 @@ learndown_init(
 and or launch the application on a click?}
 
 \item{h5p}{Do we use H5P served from a Wordpress site in the same domain as
-our R Markdown document?}
+our R Markdown document? The H5P integration plugin, and the H5PxAPIkatchu
+Wordpress plugins must be installed in order to serve H5P apps and to record
+the H5P events through the xAPI interface.}
 
 \item{use.query}{Do we collect user/course/institution data through the URL
 query string (the part after the question mark in the URL).}
@@ -34,6 +37,10 @@ with no defined target are automatically retargeted when the page loads.}
 
 \item{details.css}{Do we want to enhance the \verb{<details>} section with a
 summary surrounded by a light gray box in order to better evidence it.}
+
+\item{baseurl}{The URL where the site is server from (for H5P integration),
+it is also the base URL for the associated Wordpress server with H5P plugin.
+Provide it \strong{without} the trailing /!}
 
 \item{institutions}{The list of possible institutions that have specific
 sections in this document.}

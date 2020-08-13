@@ -6,7 +6,9 @@
 #' @param shiny Do we use Shiny applications and do we want to pass parameters
 #' and or launch the application on a click?
 #' @param h5p Do we use H5P served from a Wordpress site in the same domain as
-#' our R Markdown document?
+#' our R Markdown document? The H5P integration plugin, and the H5PxAPIkatchu
+#' Wordpress plugins must be installed in order to serve H5P apps and to record
+#' the H5P events through the xAPI interface.
 #' @param use.query Do we collect user/course/institution data through the URL
 #' query string (the part after the question mark in the URL).
 #' @param iframe.links If our document is displayed in an iframe, external link
@@ -14,6 +16,9 @@
 #' with no defined target are automatically retargeted when the page loads.
 #' @param details.css Do we want to enhance the `<details>` section with a
 #' summary surrounded by a light gray box in order to better evidence it.
+#' @param baseurl The URL where the site is server from (for H5P integration),
+#' it is also the base URL for the associated Wordpress server with H5P plugin.
+#' Provide it **without** the trailing /!
 #' @param institutions The list of possible institutions that have specific
 #' sections in this document.
 #' @param courses The list of courses with specific sections in this document.
@@ -49,7 +54,7 @@
 #' rm(odir)
 #'
 learndown_init <- function(shiny = TRUE, h5p = TRUE, use.query = FALSE,
-iframe.links = TRUE, details.css = TRUE,
+iframe.links = TRUE, details.css = TRUE, baseurl = "https://example.org",
 institutions = c("institution1", "institution2"),
 courses = c("course1", "course2", "course3"),
 style = "style.css", style0 = "style0.css",
@@ -305,8 +310,45 @@ launchApp = function(id, src) {
 }
 ")
 
-  # finalize
+  # Add Javascript code required to record H5P events
+  if (isTRUE(h5p))
+    res_header <- paste0(res_header, "
+  var H5PIntegration = parent.H5PIntegration;
+  var wpAJAXurl = '", gsub("/", "\\\\/", baseurl), "\\/wp-admin\\/admin-ajax.php';
+  var debugEnabled = '0';
+  var captureAllH5pContentTypes = '1';
+  var h5pContentTypes = [''];
+
+")
+
+  # finalize this script section
   res_header <- paste0(res_header, "</script>
+")
+
+  # Add further code for H5P integration
+  if (isTRUE(h5p))
+    res_header <- paste0(res_header, "
+<link rel='stylesheet' id='h5p-core-styles-h5p-css'  href='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/styles/h5p.css' media='all' />
+<link rel='stylesheet' id='h5p-core-styles-h5p-confirmation-dialog-css'  href='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/styles/h5p-confirmation-dialog.css' media='all' />
+<link rel='stylesheet' id='h5p-core-styles-h5p-core-button-css'  href='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/styles/h5p-core-button.css' media='all' />
+
+<script src='", baseurl, "/wp-includes/js/wp-embed.min.js'></script>
+
+<!--
+<script src='", baseurl, "/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script src='", baseurl, "/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+-->
+
+<script src='", baseurl, "/wp-content/plugins/h5pxapikatchu/js/h5pxapikatchu-variables.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/jquery.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-event-dispatcher.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-x-api-event.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-x-api.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-content-type.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-confirmation-dialog.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-action-bar.js'></script>
+<script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/request-queue.js'></script>
 ")
 
   # Possibly add content form header0
