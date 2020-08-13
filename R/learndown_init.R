@@ -28,6 +28,7 @@
 #' @param header The path to the 'header.html' file.
 #' @param header0 The path to a file with additional content to add to
 #' 'header.html'.
+#' @param hide.code.msg The message to display for hidden code.
 #'
 #' @return A list with `css` and `html` components with the content that was
 #' added to respective files is returned invisibly for debugging purposes '(the
@@ -58,7 +59,8 @@ iframe.links = TRUE, details.css = TRUE, baseurl = "https://example.org",
 institutions = c("institution1", "institution2"),
 courses = c("course1", "course2", "course3"),
 style = "style.css", style0 = "style0.css",
-header = "header.html", header0 = "header0.html") {
+header = "header.html", header0 = "header0.html",
+hide.code.msg = "See code") {
 
   # Process style.css
   # Add styles for institution/noinstitution & course/nocourse
@@ -210,6 +212,28 @@ function processParameters() {
 
 ")
 
+  # Show/hide R code as details (for hidden-code class)
+  res_header <- paste0(res_header, "
+function hideCode() {
+  //var codes = document.querySelectorAll('pre:not([class])');
+  var codes = document.getElementsByClassName('hidden-code');
+  var code, i, d, s, p;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    d = document.createElement('details');
+    s = document.createElement('summary');
+    s.innerText = '", as.character(hide.code.msg)[1], "';
+    //<details><summary>hide.code.msg</summary></details>
+    d.appendChild(s);
+    // move the code into <details>
+    p.replaceChild(d, code);
+    d.appendChild(code);
+  }
+}
+
+")
+
   # Possibly retarget links
   if (isTRUE(iframe.links)) {
     res_header <- paste0(res_header, "
@@ -225,11 +249,11 @@ function retargetLinks() {
   }
 };
 
-window.onload = function() {processParameters(); retargetLinks();};
+window.onload = function() {processParameters(); hideCode(); retargetLinks();};
 ")
   } else {
     res_header <- paste0(res_header, "
-window.onload = processParameters;
+window.onload = function() {processParameters(); hideCode();};
 ")
   }
   # Handle parameters
@@ -313,12 +337,11 @@ launchApp = function(id, src) {
   # Add Javascript code required to record H5P events
   if (isTRUE(h5p))
     res_header <- paste0(res_header, "
-  var H5PIntegration = parent.H5PIntegration;
-  var wpAJAXurl = '", gsub("/", "\\\\/", baseurl), "\\/wp-admin\\/admin-ajax.php';
-  var debugEnabled = '0';
-  var captureAllH5pContentTypes = '1';
-  var h5pContentTypes = [''];
-
+var H5PIntegration = parent.H5PIntegration;
+var wpAJAXurl = '", gsub("/", "\\\\/", baseurl), "\\/wp-admin\\/admin-ajax.php';
+var debugEnabled = '0';
+var captureAllH5pContentTypes = '1';
+var h5pContentTypes = [''];
 ")
 
   # finalize this script section

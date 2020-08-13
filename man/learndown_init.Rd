@@ -16,7 +16,8 @@ learndown_init(
   style = "style.css",
   style0 = "style0.css",
   header = "header.html",
-  header0 = "header0.html"
+  header0 = "header0.html",
+  hide.code.msg = "See code"
 )
 }
 \arguments{
@@ -56,6 +57,8 @@ sections in this document.}
 
 \item{header0}{The path to a file with additional content to add to
 'header.html'.}
+
+\item{hide.code.msg}{The message to display for hidden code.}
 }
 \value{
 A list with \code{css} and \code{html} components with the content that was
