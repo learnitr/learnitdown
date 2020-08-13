@@ -2,8 +2,6 @@
 
 - Add contextual show-hide sections
 
-- Include `ictitle`, the full title of the course from Moodle.
-
 - Get user info from URL for Shiny apps
 
 - Allow to record xAPI events form H5P

@@ -14,7 +14,7 @@ Extension to R Markdown and Bookdown for building better learning
 The SciViews learndown package provides additional R Markdown tags to build
 richer learning material with interactivity.
 
-See \code{\link[=h5p]{h5p()}}
+See \code{\link[=h5p]{h5p()}} or \code{\link[=launch_shiny]{launch_shiny()}}
 }
 \seealso{
 Useful links:

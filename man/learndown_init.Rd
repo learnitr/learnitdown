@@ -2,7 +2,7 @@
 % Please edit documentation in R/learndown_init.R
 \name{learndown_init}
 \alias{learndown_init}
-\title{Initialize learndown features in a R MArkdown document}
+\title{Initialize learndown features in an R Markdown document}
 \usage{
 learndown_init(
   shiny = TRUE,
@@ -11,7 +11,11 @@ learndown_init(
   iframe.links = TRUE,
   details.css = TRUE,
   institutions = c("institution1", "institution2"),
-  courses = c("course1", "course2", "course3")
+  courses = c("course1", "course2", "course3"),
+  style = "style.css",
+  style0 = "style0.css",
+  header = "header.html",
+  header0 = "header0.html"
 )
 }
 \arguments{
@@ -22,30 +26,56 @@ and or launch the application on a click?}
 our R Markdown document?}
 
 \item{use.query}{Do we collect user/course/institution data through the URL
-query string (the part after the question mark in thje URL).}
+query string (the part after the question mark in the URL).}
 
 \item{iframe.links}{If our document is displayed in an iframe, external link
-should better tartget ther parent window. With this option, external links
-with no defined target are automatically retargetted when the page loads.}
+should better target their parent window. With this option, external links
+with no defined target are automatically retargeted when the page loads.}
 
 \item{details.css}{Do we want to enhance the \verb{<details>} section with a
 summary surrounded by a light gray box in order to better evidence it.}
 
 \item{institutions}{The list of possible institutions that have specific
-sectionsq in this document.}
+sections in this document.}
 
 \item{courses}{The list of courses with specific sections in this document.}
+
+\item{style}{The path to the 'style.css' file.}
+
+\item{style0}{The path to a file with additional content to add to the
+'style.css' file.}
+
+\item{header}{The path to the 'header.html' file.}
+
+\item{header0}{The path to a file with additional content to add to
+'header.html'.}
 }
 \value{
-The containt to be inserted in trhe HTML document with CSS and
-Javascript code required to implement the various learndown features.
+A list with \code{css} and \code{html} components with the content that was
+added to respective files is returned invisibly for debugging purposes '(the
+function is mainly used for its side effect of creating \code{style.css} and
+\code{header.html} files for the bookdown format).
 }
 \description{
-This function must be called at the begining of a R Markdown document (e.g,
-bookdown) to installe required CSS and Javascript.
+This function must be called in a script run by \code{before_chapter_script} entry
+in \verb{_bookdown.yml} to create required \code{style.css} and \code{header.html} files.
 }
 \examples{
 # This is better placed in a setup R chunk or an R inline expression on its
-# own line
-learndown_init()
+# own line. To see the code injected, use `cat()` at the R prompt:
+odir <- setwd(tempdir())
+dir.create("temp")
+setwd("temp")
+# Create fake style0.css and header0.html files to see what happens
+cat("\n/* Content from style0.css */\n", file = "style0.css")
+cat("\n<!-- Content from header0.html -->\n", file = "header0.html")
+# Create style.css and header.html files
+(learndown_init())
+cat(readLines('style.css'), sep = "\n")
+cat(readLines('header.html'), sep = "\n")
+setwd("..")
+unlink("temp")
+setwd(odir)
+rm(odir)
+
 }
