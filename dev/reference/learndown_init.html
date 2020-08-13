@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Initialize learndown features in a R MArkdown document — learndown_init • learndown</title>
+<title>Initialize learndown features in an R Markdown document — learndown_init • learndown</title>
 
 
 <!-- jquery -->
@@ -52,9 +52,9 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Initialize learndown features in a R MArkdown document — learndown_init" />
-<meta property="og:description" content="This function must be called at the begining of a R Markdown document (e.g,
-bookdown) to installe required CSS and Javascript." />
+<meta property="og:title" content="Initialize learndown features in an R Markdown document — learndown_init" />
+<meta property="og:description" content="This function must be called in a script run by before_chapter_script entry
+in _bookdown.yml to create required style.css and header.html files." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -160,14 +160,14 @@ bookdown) to installe required CSS and Javascript." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Initialize learndown features in a R MArkdown document</h1>
+    <h1>Initialize learndown features in an R Markdown document</h1>
     <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_init.R'><code>R/learndown_init.R</code></a></small>
     <div class="hidden name"><code>learndown_init.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function must be called at the begining of a R Markdown document (e.g,
-bookdown) to installe required CSS and Javascript.</p>
+    <p>This function must be called in a script run by <code>before_chapter_script</code> entry
+in <code>_bookdown.yml</code> to create required <code>style.css</code> and <code>header.html</code> files.</p>
     </div>
 
     <pre class="usage"><span class='fu'>learndown_init</span>(
@@ -177,7 +177,11 @@ bookdown) to installe required CSS and Javascript.</p>
   iframe.links = <span class='fl'>TRUE</span>,
   details.css = <span class='fl'>TRUE</span>,
   institutions = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"institution1"</span>, <span class='st'>"institution2"</span>),
-  courses = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"course1"</span>, <span class='st'>"course2"</span>, <span class='st'>"course3"</span>)
+  courses = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"course1"</span>, <span class='st'>"course2"</span>, <span class='st'>"course3"</span>),
+  style = <span class='st'>"style.css"</span>,
+  style0 = <span class='st'>"style0.css"</span>,
+  header = <span class='st'>"header.html"</span>,
+  header0 = <span class='st'>"header0.html"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -196,13 +200,13 @@ our R Markdown document?</p></td>
     <tr>
       <th>use.query</th>
       <td><p>Do we collect user/course/institution data through the URL
-query string (the part after the question mark in thje URL).</p></td>
+query string (the part after the question mark in the URL).</p></td>
     </tr>
     <tr>
       <th>iframe.links</th>
       <td><p>If our document is displayed in an iframe, external link
-should better tartget ther parent window. With this option, external links
-with no defined target are automatically retargetted when the page loads.</p></td>
+should better target their parent window. With this option, external links
+with no defined target are automatically retargeted when the page loads.</p></td>
     </tr>
     <tr>
       <th>details.css</th>
@@ -212,23 +216,232 @@ summary surrounded by a light gray box in order to better evidence it.</p></td>
     <tr>
       <th>institutions</th>
       <td><p>The list of possible institutions that have specific
-sectionsq in this document.</p></td>
+sections in this document.</p></td>
     </tr>
     <tr>
       <th>courses</th>
       <td><p>The list of courses with specific sections in this document.</p></td>
     </tr>
+    <tr>
+      <th>style</th>
+      <td><p>The path to the 'style.css' file.</p></td>
+    </tr>
+    <tr>
+      <th>style0</th>
+      <td><p>The path to a file with additional content to add to the
+'style.css' file.</p></td>
+    </tr>
+    <tr>
+      <th>header</th>
+      <td><p>The path to the 'header.html' file.</p></td>
+    </tr>
+    <tr>
+      <th>header0</th>
+      <td><p>The path to a file with additional content to add to
+'header.html'.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The containt to be inserted in trhe HTML document with CSS and
-Javascript code required to implement the various learndown features.</p>
+    <p>A list with <code>css</code> and <code>html</code> components with the content that was
+added to respective files is returned invisibly for debugging purposes '(the
+function is mainly used for its side effect of creating <code>style.css</code> and
+<code>header.html</code> files for the bookdown format).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># This is better placed in a setup R chunk or an R inline expression on its</span>
-<span class='co'># own line</span>
-<span class='fu'>learndown_init</span>()</div><div class='output co'>#&gt; [1] "&lt;style&gt;\n.institution1 .institution2 {\n  display: none;\n}\n\n.noinstitution {\n  display: block;\n}\n\n.course1 .course2 .course3 {\n  display: none;\n}\n\n.nocourse {\n  display: block;\n}\n\nsummary {\n  background:  #f5f5f5;\n  border: 1px solid #ccc;\n}\n&lt;/style&gt;\n\n&lt;script&gt;\nfunction getParameterByName(name, url) {\n  name = name.replace(/[\\[\\]]/g,\"\\\\$&amp;\");\n  // Try to get the value from local storage\n  if (window.localStorage) {\n    return localStorage.getItem(name);\n  } else {\n    return '';\n  }\n}\n\n// Collect parameters and store their values (as passed by Moodle/Wordpress)\nvar login       = getParameterByName('login');\nvar email       = getParameterByName('email');\nvar displayname = getParameterByName('displayname');\nvar firstname   = getParameterByName('firstname');\nvar lastname    = getParameterByName('lastname');\nvar iemail      = getParameterByName('iemail');\nvar iid         = getParameterByName('iid');\nvar ifirstname  = getParameterByName('ifirstname');\nvar ilastname   = getParameterByName('ilastname');\nvar institution = getParameterByName('institution');\nvar icourse     = getParameterByName('icourse');\nvar ictitle     = getParameterByName('ictitle');\nvar iurl        = getParameterByName('iurl');\nvar iref        = getParameterByName('iref');\n\nlet institutions = ['institution1', 'institution2', 'noinstitution'];\nlet courses = ['course1', 'course2', 'course3', 'nocourse'];\n\nfunction toggleDisplay(item, target) {\n  var style = item == target ? 'block' : 'none';\n  var elems = document.getElementsByClassName(item);\n  for (i = 0; i &lt; elems.length; i++) {\n    var elem = elems[i];\n    elem.style.display = style;\n  }\n}\n\nfunction toggleInstitution(name) {\n  // Disable all institutions except that one\n  // Since they are already all hidden, just reenable it and hide noinstitution\n  toggleDisplay('noinstitution', name);\n  toggleDisplay(name, name);\n}\n\nfunction toggleCourse(name) {\n  // Disable all courses except that one\n  // Since they are already all hidden, just reenable it and hide nocourse\n  toggleDisplay('nocourse', name);\n  toggleDisplay(name, name);\n}\n\nfunction processParameters() {\n  // Content related to an institution\n  if (institution !== null) {\n    toggleInstitution(institution);\n  }\n  // Content relative to a course\n  if (icourse !== null) {\n    toggleCourse(icourse);\n  }\n  // Process other parameters too here...\n  // ...\n}\n\n\nfunction retargetLinks() {\n  // If displayed in an iframe, open external links into parent\n  // Adapted from Yihui Xie blog\n  var links = document.getElementsByTagName('a');\n  for (var i = 0; i &lt; links.length; i++) {\n    if (/^(https?:)?\\/\\//.test(links[i].getAttribute('href')) &amp;&amp;\n      links[i].target != null) {\n      links[i].target = '_parent';\n    }\n  }\n};\n\nwindow.onload = function() {processParameters(); retargetLinks();};\n&lt;/script&gt;\n\n&lt;noscript&gt;Please enable JavaScript for learndown extra features.&lt;/a&gt;&lt;/noscript&gt;\n"</div></pre>
+<span class='co'># own line. To see the code injected, use `cat()` at the R prompt:</span>
+<span class='kw'>odir</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>())
+<span class='fu'><a href='https://rdrr.io/r/base/files2.html'>dir.create</a></span>(<span class='st'>"temp"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span>(<span class='st'>"temp"</span>)
+<span class='co'># Create fake style0.css and header0.html files to see what happens</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"\n/* Content from style0.css */\n"</span>, file = <span class='st'>"style0.css"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"\n&lt;!-- Content from header0.html --&gt;\n"</span>, file = <span class='st'>"header0.html"</span>)
+<span class='co'># Create style.css and header.html files</span>
+(<span class='fu'>learndown_init</span>())</div><div class='output co'>#&gt; $style
+#&gt; [1] "\n.institution1, .institution2 {\n  display: none;\n}\n\n.noinstitution {\n  display: block;\n}\n\n.course1, .course2, .course3 {\n  display: none;\n}\n\n.nocourse {\n  display: block;\n}\n\nsummary {\n  background:  #f5f5f5;\n  border: 1px solid #ccc;\n}\n\n\n/* Content from style0.css */"
+#&gt; 
+#&gt; $html
+#&gt; [1] "&lt;script&gt;\nfunction getParameterByName(name, url) {\n  name = name.replace(/[\\[\\]]/g,\"\\\\$&amp;\");\n  // Try to get the value from local storage\n  if (window.localStorage) {\n    return localStorage.getItem(name);\n  } else {\n    return '';\n  }\n}\n\n// Collect parameters and store their values (as passed by Moodle/Wordpress)\nvar login       = getParameterByName('login');\nvar email       = getParameterByName('email');\nvar displayname = getParameterByName('displayname');\nvar firstname   = getParameterByName('firstname');\nvar lastname    = getParameterByName('lastname');\nvar iemail      = getParameterByName('iemail');\nvar iid         = getParameterByName('iid');\nvar ifirstname  = getParameterByName('ifirstname');\nvar ilastname   = getParameterByName('ilastname');\nvar institution = getParameterByName('institution');\nvar icourse     = getParameterByName('icourse');\nvar ictitle     = getParameterByName('ictitle');\nvar iurl        = getParameterByName('iurl');\nvar iref        = getParameterByName('iref');\n\nlet institutions = ['institution1', 'institution2', 'noinstitution'];\nlet courses = ['course1', 'course2', 'course3', 'nocourse'];\n\nfunction toggleDisplay(item, target) {\n  var style = item == target ? 'block' : 'none';\n  var elems = document.getElementsByClassName(item);\n  for (i = 0; i &lt; elems.length; i++) {\n    var elem = elems[i];\n    elem.style.display = style;\n  }\n}\n\nfunction toggleInstitution(name) {\n  // Disable all institutions except that one\n  // Since they are already all hidden, just reenable it and hide noinstitution\n  toggleDisplay('noinstitution', name);\n  toggleDisplay(name, name);\n}\n\nfunction toggleCourse(name) {\n  // Disable all courses except that one\n  // Since they are already all hidden, just reenable it and hide nocourse\n  toggleDisplay('nocourse', name);\n  toggleDisplay(name, name);\n}\n\nfunction processParameters() {\n  // Content related to an institution\n  if (institution !== null) {\n    toggleInstitution(institution);\n  }\n  // Content relative to a course\n  if (icourse !== null) {\n    toggleCourse(icourse);\n  }\n  // Process other parameters too here...\n  // ...\n}\n\n\nfunction retargetLinks() {\n  // If displayed in an iframe, open external links into parent\n  // Adapted from Yihui Xie blog\n  var links = document.getElementsByTagName('a');\n  for (var i = 0; i &lt; links.length; i++) {\n    if (/^(https?:)?\\/\\//.test(links[i].getAttribute('href')) &amp;&amp;\n      links[i].target != null) {\n      links[i].target = '_parent';\n    }\n  }\n};\n\nwindow.onload = function() {processParameters(); retargetLinks();};\n\nfunction encodeQueryParam(name, first = false) {\n  var value = localStorage.getItem(name);\n  if (value === null || value == '') return '';\n  var sep = first ? '' : '&amp;';\n  return sep + encodeURIComponent(name) + '=' + encodeURIComponent(value);\n}\n\nfunction encodeQueryString() {\n  // We got data from localStorage. So, if no data, no query string!\n  if (!window.localStorage) return('');\n  query = encodeQueryParam('login', true);\n  query += encodeQueryParam('email') + encodeQueryParam('displayname');\n  query += encodeQueryParam('firstname') + encodeQueryParam('lastname');\n  query += encodeQueryParam('iemail') + encodeQueryParam('iid');\n  query += encodeQueryParam('ifirstname') + encodeQueryParam('ilastname');\n  query += encodeQueryParam('institution');\n  query += encodeQueryParam('icourse') + encodeQueryParam('ictitle');\n  query += encodeQueryParam('iurl') + encodeQueryParam('iref');\n  // Detect if we have the Sepia or Night theme\n  // TODO: refine this because it is *always* detected\n  //if (document.getElementsByClassName('color-theme-1')) {\n  //  if (query == '') {\n  //    query = 'theme=Sepia';\n  //  } else {\n  //    query += '&amp;theme=Sepia';\n  //  }\n  //}\n  //if (document.getElementsByClassName('color-theme-22')) {\n  //  if (query == '') {\n  //    query = 'theme=Night';\n  //  } else {\n  //    query += '&amp;theme=Night';\n  //  }\n  //}\n  return query;\n}\n\n//var params = window.location.toString().split('?')[1];\nvar params = encodeQueryString();\n\nif (params !== undefined &amp;&amp; params != '') {\n  var apps = document.getElementsByClassName('app');\n  for (i = 0; i &lt; apps.length; i++) {\n    var appitem = apps[i];\n    appitem.src = appitem.src + '?' + params;\n  }\n\n  //var h5ps = document.getElementsByClassName('h5p');\n  //for (i = 0; i &lt; h5ps.length; i++) {\n  //  var h5pitem = h5ps[i];\n  //  h5pitem.src = h5pitem.src + '&amp;' + params;\n  //}\n}\n\nlaunchApp = function(id, src) {\n  //var params = window.location.toString().split('?')[1];\n  var params = encodeQueryString();\n  if (params !== undefined &amp;&amp; params != '') {\n    src = src + '?' + params;\n  }\n  var img = document.getElementById('img' + id);\n  var app = document.getElementById(id);\n  app.src = src;\n  app.style.display='block';\n  img.style.display='none';\n}\n&lt;/script&gt;\n\n\n&lt;!-- Content from header0.html --&gt;"
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='st'>'style.css'</span>), sep = <span class='st'>"\n"</span>)</div><div class='output co'>#&gt; 
+#&gt; .institution1, .institution2 {
+#&gt;   display: none;
+#&gt; }
+#&gt; 
+#&gt; .noinstitution {
+#&gt;   display: block;
+#&gt; }
+#&gt; 
+#&gt; .course1, .course2, .course3 {
+#&gt;   display: none;
+#&gt; }
+#&gt; 
+#&gt; .nocourse {
+#&gt;   display: block;
+#&gt; }
+#&gt; 
+#&gt; summary {
+#&gt;   background:  #f5f5f5;
+#&gt;   border: 1px solid #ccc;
+#&gt; }
+#&gt; 
+#&gt; 
+#&gt; /* Content from style0.css */</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span>(<span class='st'>'header.html'</span>), sep = <span class='st'>"\n"</span>)</div><div class='output co'>#&gt; &lt;script&gt;
+#&gt; function getParameterByName(name, url) {
+#&gt;   name = name.replace(/[\[\]]/g,"\\$&amp;");
+#&gt;   // Try to get the value from local storage
+#&gt;   if (window.localStorage) {
+#&gt;     return localStorage.getItem(name);
+#&gt;   } else {
+#&gt;     return '';
+#&gt;   }
+#&gt; }
+#&gt; 
+#&gt; // Collect parameters and store their values (as passed by Moodle/Wordpress)
+#&gt; var login       = getParameterByName('login');
+#&gt; var email       = getParameterByName('email');
+#&gt; var displayname = getParameterByName('displayname');
+#&gt; var firstname   = getParameterByName('firstname');
+#&gt; var lastname    = getParameterByName('lastname');
+#&gt; var iemail      = getParameterByName('iemail');
+#&gt; var iid         = getParameterByName('iid');
+#&gt; var ifirstname  = getParameterByName('ifirstname');
+#&gt; var ilastname   = getParameterByName('ilastname');
+#&gt; var institution = getParameterByName('institution');
+#&gt; var icourse     = getParameterByName('icourse');
+#&gt; var ictitle     = getParameterByName('ictitle');
+#&gt; var iurl        = getParameterByName('iurl');
+#&gt; var iref        = getParameterByName('iref');
+#&gt; 
+#&gt; let institutions = ['institution1', 'institution2', 'noinstitution'];
+#&gt; let courses = ['course1', 'course2', 'course3', 'nocourse'];
+#&gt; 
+#&gt; function toggleDisplay(item, target) {
+#&gt;   var style = item == target ? 'block' : 'none';
+#&gt;   var elems = document.getElementsByClassName(item);
+#&gt;   for (i = 0; i &lt; elems.length; i++) {
+#&gt;     var elem = elems[i];
+#&gt;     elem.style.display = style;
+#&gt;   }
+#&gt; }
+#&gt; 
+#&gt; function toggleInstitution(name) {
+#&gt;   // Disable all institutions except that one
+#&gt;   // Since they are already all hidden, just reenable it and hide noinstitution
+#&gt;   toggleDisplay('noinstitution', name);
+#&gt;   toggleDisplay(name, name);
+#&gt; }
+#&gt; 
+#&gt; function toggleCourse(name) {
+#&gt;   // Disable all courses except that one
+#&gt;   // Since they are already all hidden, just reenable it and hide nocourse
+#&gt;   toggleDisplay('nocourse', name);
+#&gt;   toggleDisplay(name, name);
+#&gt; }
+#&gt; 
+#&gt; function processParameters() {
+#&gt;   // Content related to an institution
+#&gt;   if (institution !== null) {
+#&gt;     toggleInstitution(institution);
+#&gt;   }
+#&gt;   // Content relative to a course
+#&gt;   if (icourse !== null) {
+#&gt;     toggleCourse(icourse);
+#&gt;   }
+#&gt;   // Process other parameters too here...
+#&gt;   // ...
+#&gt; }
+#&gt; 
+#&gt; 
+#&gt; function retargetLinks() {
+#&gt;   // If displayed in an iframe, open external links into parent
+#&gt;   // Adapted from Yihui Xie blog
+#&gt;   var links = document.getElementsByTagName('a');
+#&gt;   for (var i = 0; i &lt; links.length; i++) {
+#&gt;     if (/^(https?:)?\/\//.test(links[i].getAttribute('href')) &amp;&amp;
+#&gt;       links[i].target != null) {
+#&gt;       links[i].target = '_parent';
+#&gt;     }
+#&gt;   }
+#&gt; };
+#&gt; 
+#&gt; window.onload = function() {processParameters(); retargetLinks();};
+#&gt; 
+#&gt; function encodeQueryParam(name, first = false) {
+#&gt;   var value = localStorage.getItem(name);
+#&gt;   if (value === null || value == '') return '';
+#&gt;   var sep = first ? '' : '&amp;';
+#&gt;   return sep + encodeURIComponent(name) + '=' + encodeURIComponent(value);
+#&gt; }
+#&gt; 
+#&gt; function encodeQueryString() {
+#&gt;   // We got data from localStorage. So, if no data, no query string!
+#&gt;   if (!window.localStorage) return('');
+#&gt;   query = encodeQueryParam('login', true);
+#&gt;   query += encodeQueryParam('email') + encodeQueryParam('displayname');
+#&gt;   query += encodeQueryParam('firstname') + encodeQueryParam('lastname');
+#&gt;   query += encodeQueryParam('iemail') + encodeQueryParam('iid');
+#&gt;   query += encodeQueryParam('ifirstname') + encodeQueryParam('ilastname');
+#&gt;   query += encodeQueryParam('institution');
+#&gt;   query += encodeQueryParam('icourse') + encodeQueryParam('ictitle');
+#&gt;   query += encodeQueryParam('iurl') + encodeQueryParam('iref');
+#&gt;   // Detect if we have the Sepia or Night theme
+#&gt;   // TODO: refine this because it is *always* detected
+#&gt;   //if (document.getElementsByClassName('color-theme-1')) {
+#&gt;   //  if (query == '') {
+#&gt;   //    query = 'theme=Sepia';
+#&gt;   //  } else {
+#&gt;   //    query += '&amp;theme=Sepia';
+#&gt;   //  }
+#&gt;   //}
+#&gt;   //if (document.getElementsByClassName('color-theme-22')) {
+#&gt;   //  if (query == '') {
+#&gt;   //    query = 'theme=Night';
+#&gt;   //  } else {
+#&gt;   //    query += '&amp;theme=Night';
+#&gt;   //  }
+#&gt;   //}
+#&gt;   return query;
+#&gt; }
+#&gt; 
+#&gt; //var params = window.location.toString().split('?')[1];
+#&gt; var params = encodeQueryString();
+#&gt; 
+#&gt; if (params !== undefined &amp;&amp; params != '') {
+#&gt;   var apps = document.getElementsByClassName('app');
+#&gt;   for (i = 0; i &lt; apps.length; i++) {
+#&gt;     var appitem = apps[i];
+#&gt;     appitem.src = appitem.src + '?' + params;
+#&gt;   }
+#&gt; 
+#&gt;   //var h5ps = document.getElementsByClassName('h5p');
+#&gt;   //for (i = 0; i &lt; h5ps.length; i++) {
+#&gt;   //  var h5pitem = h5ps[i];
+#&gt;   //  h5pitem.src = h5pitem.src + '&amp;' + params;
+#&gt;   //}
+#&gt; }
+#&gt; 
+#&gt; launchApp = function(id, src) {
+#&gt;   //var params = window.location.toString().split('?')[1];
+#&gt;   var params = encodeQueryString();
+#&gt;   if (params !== undefined &amp;&amp; params != '') {
+#&gt;     src = src + '?' + params;
+#&gt;   }
+#&gt;   var img = document.getElementById('img' + id);
+#&gt;   var app = document.getElementById(id);
+#&gt;   app.src = src;
+#&gt;   app.style.display='block';
+#&gt;   img.style.display='none';
+#&gt; }
+#&gt; &lt;/script&gt;
+#&gt; 
+#&gt; 
+#&gt; &lt;!-- Content from header0.html --&gt;</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span>(<span class='st'>".."</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/unlink.html'>unlink</a></span>(<span class='st'>"temp"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span>(<span class='kw'>odir</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span>(<span class='kw'>odir</span>)
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
