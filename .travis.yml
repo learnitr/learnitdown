@@ -16,7 +16,7 @@ branches:
     - master
 #    - macosx
 
-# This is used to compact and check size of vignettes
+# This is used to compact and check size of vignettes + magick
 addons:
   apt:
     update: true
@@ -24,6 +24,16 @@ addons:
       - libgs-dev
       - qpdf
       - ghostscript
+      - libmagick++-dev
+      - librsvg2-dev
+      - libwebp-dev
+      - libpoppler-cpp-dev
+      - libtesseract-dev
+      - libleptonica-dev
+      - tesseract-ocr-eng
+      - libfftw3-dev
+      - cargo
+      - gsfonts
 
 # Be strict when checking our package, but don't build the manual
 warnings_are_errors: true
