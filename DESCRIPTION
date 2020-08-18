@@ -11,13 +11,8 @@ Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   comment = c(ORCID = "0000-0002-2694-9471")))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends: R (>= 3.0.0)
-Imports: glue
-Suggests: 
-    covr,
-    knitr,
-    rmarkdown,
-    testthat,
-    spelling
+Imports: glue, magick, webshot
+Suggests: covr, knitr, rmarkdown, testthat, spelling
 License: MIT + file LICENSE
 URL: https://github.com/SciViews/learndown, https://www.sciviews.org/learndown/
 BugReports: https://github.com/SciViews/learndown/issues

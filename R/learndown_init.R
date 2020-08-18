@@ -101,6 +101,14 @@ summary {
   border: 1px solid #ccc;
 }
 ")
+
+  # Add style for grayed out Shiny app screenshot
+  res_css <- paste0(res_css, "
+.shiny-img {
+  filter: brightness(80%);
+}
+")
+
   # Possibly add content form style0
   if (file.exists(style0))
     res_css <- paste0(res_css, "\n", paste(readLines(style0), collapse = "\n"))

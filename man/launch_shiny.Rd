@@ -2,38 +2,59 @@
 % Please edit documentation in R/launch_shiny.R
 \name{launch_shiny}
 \alias{launch_shiny}
-\title{Placeholder with screenshot to launch Shiny application on click.}
+\title{Launch Shiny application by clicking on its screenshot.}
 \usage{
 launch_shiny(
-  name,
   url,
-  img,
+  app = basename(url),
+  imgdir = "images/shinyapps",
+  img = paste0(imgdir, "/", app, ".png"),
+  createimg = TRUE,
   width = 780,
   height = 500,
-  alt = "*Click to start the application.*"
+  fun,
+  alt1 = "*Click to start the Shiny application.*",
+  alt2 = "*Click to start or run `{fun}(\\"{app}\\")`.*",
+  ...
 )
 }
 \arguments{
-\item{name}{Name of the shiny application (cannot be duplicated on a page).}
+\item{url}{The URL of the Shiny application. If both \verb{app =} and \verb{baseurl =}
+are provided, you don't need to specify it.}
 
-\item{url}{The URL of the Shiny application.}
+\item{app}{Name of the shiny application (cannot be duplicated on a page).}
 
-\item{img}{The relative or absolute path to the image. Best effect is
-obtained with a slightly darkened screenshot of the actual application saved
-in a PNG image of exactly the same size as the iframe that embeds the Shiny
-application. You can also add an icon on top of the image that suggests to
-click on it to launch the application for an even better effect.}
+\item{imgdir}{The directory without trailing "/" where images relative
+to Shiny applications are stored. By default, it is relative to current
+directory, in \code{images/shinyapps} subdirectories.}
+
+\item{img}{The relative or absolute path to the image with a screenshot of
+the Shiny application, as produced by \code{\link[=webshot_shiny]{webshot_shiny()}}.}
+
+\item{createimg}{If the app image (\code{img}) is not found, and there is no
+default image in \verb{imgdir =}, do we put it there (yes be default)?}
 
 \item{width}{The width of the image and iframe for the app.}
 
 \item{height}{The height of image and iframe.}
 
-\item{alt}{Alternate text to display at the bottom of the screenshot. If
+\item{fun}{The function to run as alternative to start the Shiny application
+locally. It is better to fully specify it (\verb{package::function}), and it
+should take one argument which is the application name in \verb{app =}.}
+
+\item{alt1}{Alternate text to display at the bottom of the screenshot. If
 \code{NULL}, nothing is displayed below the screenshot.}
+
+\item{alt2}{Alternate text to display at the bottom of the screenshot in case
+\verb{fun =} is provided.}
+
+\item{...}{Not used here, but it allows to add more arguments used by the
+screenshot addin, like \verb{delay =}, \verb{offsetx =} or \verb{offsety =}, see
+\code{\link[=webshot_shiny]{webshot_shiny()}}.}
 }
 \value{
 The HTML content that creates the image and the iframe. The function
-must be called from within an R inline expression of an R chunk with
+must be called from within an R inline expression or from an R chunk with
 \code{results='asis'} in an HTML-rendered version of the R Markdown document to
 get the correct result.
 }
@@ -47,4 +68,7 @@ page).
 }
 \examples{
 # TODO...
+}
+\seealso{
+\code{\link[=webshot_shiny]{webshot_shiny()}}
 }

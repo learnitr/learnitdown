@@ -7,6 +7,8 @@
 "_PACKAGE"
 
 #' @importFrom glue glue
+#' @importFrom webshot webshot
+#' @importFrom magick image_read image_write image_composite image_info image_crop
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
