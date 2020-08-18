@@ -227,7 +227,8 @@ function hideCode() {
   var codes = document.getElementsByClassName('hidden-code');
   var code, i, d, s, p;
   for (i = 0; i < codes.length; i++) {
-    code = codes[i];
+    // We want to place the parent div into details instead
+    code = codes[i].parentNode;
     p = code.parentNode;
     d = document.createElement('details');
     s = document.createElement('summary');
