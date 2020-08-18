@@ -4,6 +4,9 @@
     <loc>https://www.sciviews.org/learndown/index.html</loc>
   </url>
   <url>
+    <loc>https://www.sciviews.org/learndown/reference/diagnose_login.html</loc>
+  </url>
+  <url>
     <loc>https://www.sciviews.org/learndown/reference/h5p.html</loc>
   </url>
   <url>
@@ -14,6 +17,9 @@
   </url>
   <url>
     <loc>https://www.sciviews.org/learndown/reference/learndown_init.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learndown/reference/webshot_shiny.html</loc>
   </url>
   <url>
     <loc>https://www.sciviews.org/learndown/articles/learndown.html</loc>
