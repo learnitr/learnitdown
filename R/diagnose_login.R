@@ -1,6 +1,6 @@
 #' Insert code in an R Markdown document to diagnose personal data information (login, contextual data, ...)
 #'
-#' @param block Should the diagnostic be included in a black construct
+#' @param block Should the diagnostic be included in a block construct
 #' (not if `NULL`)?
 #' @param lang The language to use for diagnostic output (only `'en'` or `'fr'` currently)
 #'
@@ -69,8 +69,8 @@ function diagnoseSystemEn() {
 
   } else {
     // Explore the content of the storage
-    // Students are recognized by iemail (institutional email, or Wordpress email)
-    // but possibly, their login could be used too
+    // Students are recognized by their login (equivalent to their GitHub login)
+    // but we also show their iemail (institutional email, or Wordpress email)
     var login = localStorage.getItem('login');
     if (login === null) {
       login = '';
@@ -92,7 +92,7 @@ function diagnoseSystemEn() {
     content = content + \"<p><b>Content on these pages is contextual. </b>Please, check the following data are correct:</p>\\n<ul>\";
 
     var registered = false;
-    if (email == '' && login == '') {
+    if (login == '') {
       // Not registered
       content = content + \"\\n<li><u>You are anonymous on this site.</u> <b>Your progress in the exercises will not be recorded.</b></li>\";
 
@@ -211,8 +211,8 @@ function diagnoseSystemFr() {
 
   } else {
     // Explore the content of the storage
-    // Students are recognized by iemail (institutional email, or Wordpress email)
-    // but possibly, their login could be used too
+    // Students are recognized by their login (equivalent to their GitHub login)
+    // but we also show their iemail (institutional email, or Wordpress email)
     var login = localStorage.getItem('login');
     if (login === null) {
       login = '';
@@ -234,7 +234,7 @@ function diagnoseSystemFr() {
     content = content + \"<p><b>Le contenu de ce cours est contextuel.</b> V&eacute;rifiez les informations suivantes, s'il-vous-plait&nbsp;:</p>\\n<ul>\";
 
     var registered = false;
-    if (email == '' && login == '') {
+    if (login == '') {
       // Not registered
       content = content + \"\\n<li><u>Vous &ecirc;tes anonyme sur ce site.</u> <b>Votre progression dans les exercices ne sera pas enregistr&eacute;e.</b></li>\";
 

@@ -7,7 +7,7 @@
 diagnose_login(block = "info", lang = "en")
 }
 \arguments{
-\item{block}{Should the diagnostic be included in a black construct
+\item{block}{Should the diagnostic be included in a block construct
 (not if \code{NULL})?}
 
 \item{lang}{The language to use for diagnostic output (only \code{'en'} or \code{'fr'} currently)}
