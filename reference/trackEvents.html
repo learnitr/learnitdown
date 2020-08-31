@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • learndown</title>
+<title>Track events, the submit or the quit buttons — trackEvents • learndown</title>
 
 
 <!-- jquery -->
@@ -52,7 +52,13 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Track events, the submit or the quit buttons — trackEvents" />
+<meta property="og:description" content="These functions provide the required code to be inserted in the server part
+of a Shiny application to track events (start, stop, inputs, outputs, errors,
+result or quit), to check the answer when the user clicks on the submit
+button and to cleanly close the application when the user clicks on the quit
+button." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -78,7 +84,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
 <div class="preloader">
@@ -155,90 +161,140 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Track events, the submit or the quit buttons</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_shiny.R'><code>R/learndown_shiny.R</code></a></small>
+    <div class="hidden name"><code>trackEvents.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>These functions provide the required code to be inserted in the server part
+of a Shiny application to track events (start, stop, inputs, outputs, errors,
+result or quit), to check the answer when the user clicks on the submit
+button and to cleanly close the application when the user clicks on the quit
+button.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>trackEvents</span>(
+  <span class='kw'>session</span>,
+  <span class='kw'>input</span>,
+  <span class='kw'>output</span>,
+  url = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL"</span>),
+  db = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_BASE"</span>),
+  version = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"learndown.shiny.version"</span>),
+  path = <span class='st'>"shiny_logs"</span>,
+  log.errors = <span class='fl'>TRUE</span>,
+  log.outputs = <span class='fl'>FALSE</span>,
+  drop.dir = <span class='fl'>TRUE</span>
+)
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="diagnose_login.html">diagnose_login()</a></code> </p>
-        </td>
-        <td><p>Insert code in an R Markdown document to diagnose personal data information (login, contextual data, ...)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="h5p.html">h5p()</a></code> </p>
-        </td>
-        <td><p>Insert H5P content in the document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="launch_shiny.html">launch_shiny()</a></code> </p>
-        </td>
-        <td><p>Launch Shiny application by clicking on its screenshot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learndownShiny.html">learndownShiny()</a></code> <code><a href="learndownShiny.html">learndownShinyVersion()</a></code> <code><a href="learndownShiny.html">submitButton()</a></code> <code><a href="learndownShiny.html">quitButton()</a></code> <code><a href="learndownShiny.html">submitQuitButtons()</a></code> </p>
-        </td>
-        <td><p>Create and manage learndown Shiny applications</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learndown_init.html">learndown_init()</a></code> </p>
-        </td>
-        <td><p>Initialize learndown features in an R Markdown document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_shinylogs.html">read_shinylogs()</a></code> </p>
-        </td>
-        <td><p>Read shinylogs log data and format them in a data.frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="record_shiny.html">record_shiny()</a></code> </p>
-        </td>
-        <td><p>Record Shiny events in a MongoDB database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="trackEvents.html">trackEvents()</a></code> <code><a href="trackEvents.html">trackSubmit()</a></code> <code><a href="trackEvents.html">trackQuit()</a></code> </p>
-        </td>
-        <td><p>Track events, the submit or the quit buttons</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="webshot_shiny.html">webshot_shiny()</a></code> </p>
-        </td>
-        <td><p>Create the screenshot image of a Shiny application with a click icon</p></td>
-      </tr>
-    </tbody>
+<span class='fu'>trackSubmit</span>(
+  <span class='kw'>session</span>,
+  <span class='kw'>input</span>,
+  <span class='kw'>output</span>,
+  solution = <span class='kw'>NULL</span>,
+  comment = <span class='st'>""</span>,
+  message.success = <span class='st'>"Correct"</span>,
+  message.error = <span class='st'>"Incorrect"</span>
+)
+
+<span class='fu'>trackQuit</span>(<span class='kw'>session</span>, <span class='kw'>input</span>, <span class='kw'>output</span>, delay = <span class='fl'>60</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>session</th>
+      <td><p>The current Shiny <code>session</code>.</p></td>
+    </tr>
+    <tr>
+      <th>input</th>
+      <td><p>The Shiny <code>input</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>output</th>
+      <td><p>The Shiny <code>output</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The URL to reach the MongoDB database. By default, it is read from
+the <code>MONGO_URL</code> environment variable.</p></td>
+    </tr>
+    <tr>
+      <th>db</th>
+      <td><p>The database to populate in the MongoDB database. By default, it is
+read from the <code>MONGO_BASE</code> environment variable.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>The version of the current Shiny application. By default, it
+is the <code>learndown.shiny.version</code> option, as set by <code><a href='learndownShiny.html'>learndownShinyVersion()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The path where the temporary <code>shinylogs</code> log files are stored. By
+default, it is the <code>shiny_logs</code> subdirectory of the application.</p></td>
+    </tr>
+    <tr>
+      <th>log.errors</th>
+      <td><p>Do we log error events (yes by default)?</p></td>
+    </tr>
+    <tr>
+      <th>log.outputs</th>
+      <td><p>Do we log output events (no by default)?</p></td>
+    </tr>
+    <tr>
+      <th>drop.dir</th>
+      <td><p>Do we erase the directory indicated by <code>path =</code> if it is
+empty at the end of the process (yes by default).</p></td>
+    </tr>
+    <tr>
+      <th>solution</th>
+      <td><p>The correct solution as a named list. Names are the
+application inputs to check and their values are the correct values. The
+current state of these inputs will be compared against the solution, and the
+<code>message.success</code> or <code>message.error</code> is displayed accordingly. Also a result
+event is triggered with the <code>correct</code> field set to <code>TRUE</code> or <code>FALSE</code>
+accordingly. If <code>solution = NULL</code>, then the answer is considered to be always
+correct (use this if you just want to indicate that the user's answer is
+recorded in the database).</p></td>
+    </tr>
+    <tr>
+      <th>comment</th>
+      <td><p>A string with a comment to append to the value of the result
+event.</p></td>
+    </tr>
+    <tr>
+      <th>message.success</th>
+      <td><p>The message to display is the answer is correct
+("Correct" by default).</p></td>
+    </tr>
+    <tr>
+      <th>message.error</th>
+      <td><p>The message to display if the answer is wrong
+("Incorrect" by default).</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>The time to wait before we close the Shiny application in sec
+(60 sec by default). If <code>delay = -1</code>, the application is <strong>not</strong> closed, only
+the session is closed when the user clicks on the quit button.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The code to be inserted in the server part of the learndown Shiny
+application in order to properly identify the user and record the events.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># TODO...</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

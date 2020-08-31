@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • learndown</title>
+<title>Read shinylogs log data and format them in a data.frame — read_shinylogs • learndown</title>
 
 
 <!-- jquery -->
@@ -52,7 +52,12 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Read shinylogs log data and format them in a data.frame — read_shinylogs" />
+<meta property="og:description" content="Learndown Shiny applications are a special king of Shiny applications that log
+events and check results. It uses the shinylogs package to log Shiny events
+and read_shinylogs() reads such logs and convert their data into a format
+that is suitable to include, say in a MongoDB database." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -78,7 +83,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
 <div class="preloader">
@@ -155,90 +160,56 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Read shinylogs log data and format them in a data.frame</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_shiny.R'><code>R/learndown_shiny.R</code></a></small>
+    <div class="hidden name"><code>read_shinylogs.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Learndown Shiny applications are a special king of Shiny applications that log
+events and check results. It uses the <code>shinylogs</code> package to log Shiny events
+and <code>read_shinylogs()</code> reads such logs and convert their data into a format
+that is suitable to include, say in a MongoDB database.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>read_shinylogs</span>(<span class='kw'>file</span>, version = <span class='st'>"0"</span>, log.errors = <span class='fl'>TRUE</span>, log.outputs = <span class='fl'>FALSE</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="diagnose_login.html">diagnose_login()</a></code> </p>
-        </td>
-        <td><p>Insert code in an R Markdown document to diagnose personal data information (login, contextual data, ...)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="h5p.html">h5p()</a></code> </p>
-        </td>
-        <td><p>Insert H5P content in the document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="launch_shiny.html">launch_shiny()</a></code> </p>
-        </td>
-        <td><p>Launch Shiny application by clicking on its screenshot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learndownShiny.html">learndownShiny()</a></code> <code><a href="learndownShiny.html">learndownShinyVersion()</a></code> <code><a href="learndownShiny.html">submitButton()</a></code> <code><a href="learndownShiny.html">quitButton()</a></code> <code><a href="learndownShiny.html">submitQuitButtons()</a></code> </p>
-        </td>
-        <td><p>Create and manage learndown Shiny applications</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learndown_init.html">learndown_init()</a></code> </p>
-        </td>
-        <td><p>Initialize learndown features in an R Markdown document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_shinylogs.html">read_shinylogs()</a></code> </p>
-        </td>
-        <td><p>Read shinylogs log data and format them in a data.frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="record_shiny.html">record_shiny()</a></code> </p>
-        </td>
-        <td><p>Record Shiny events in a MongoDB database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="trackEvents.html">trackEvents()</a></code> <code><a href="trackEvents.html">trackSubmit()</a></code> <code><a href="trackEvents.html">trackQuit()</a></code> </p>
-        </td>
-        <td><p>Track events, the submit or the quit buttons</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="webshot_shiny.html">webshot_shiny()</a></code> </p>
-        </td>
-        <td><p>Create the screenshot image of a Shiny application with a click icon</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>file</th>
+      <td><p>The path to the RDS file that contains the shinylogs log data.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>The version of the Shiny application. Version is not recorded
+by shinylogs, so, we must provide it here.</p></td>
+    </tr>
+    <tr>
+      <th>log.errors</th>
+      <td><p>Do we record errors too?</p></td>
+    </tr>
+    <tr>
+      <th>log.outputs</th>
+      <td><p>Do we record outputs too (note that results are recorded
+with inputs)?</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame with the different events logged (one per line).</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='record_shiny.html'>record_shiny()</a></code>, <code><a href='trackEvents.html'>trackEvents()</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># TODO...</span>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
