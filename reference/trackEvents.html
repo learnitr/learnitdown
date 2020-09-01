@@ -182,6 +182,8 @@ button.</p>
   <span class='kw'>output</span>,
   url = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL"</span>),
   db = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_BASE"</span>),
+  user = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_USER"</span>),
+  password = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_PASSWORD"</span>),
   version = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"learndown.shiny.version"</span>),
   path = <span class='st'>"shiny_logs"</span>,
   log.errors = <span class='fl'>TRUE</span>,
@@ -227,6 +229,16 @@ the <code>MONGO_URL</code> environment variable.</p></td>
 read from the <code>MONGO_BASE</code> environment variable.</p></td>
     </tr>
     <tr>
+      <th>user</th>
+      <td><p>The user login to the MongoDB database. By default, it is
+read from the <code>MONGO_USER</code> environment variable.</p></td>
+    </tr>
+    <tr>
+      <th>password</th>
+      <td><p>The password to access the MongoDB database. By default, it is
+read from the <code>MONGO_PASSWORD</code> environment variable.</p></td>
+    </tr>
+    <tr>
       <th>version</th>
       <td><p>The version of the current Shiny application. By default, it
 is the <code>learndown.shiny.version</code> option, as set by <code><a href='learndownShiny.html'>learndownShinyVersion()</a></code>.</p></td>
@@ -234,7 +246,8 @@ is the <code>learndown.shiny.version</code> option, as set by <code><a href='lea
     <tr>
       <th>path</th>
       <td><p>The path where the temporary <code>shinylogs</code> log files are stored. By
-default, it is the <code>shiny_logs</code> subdirectory of the application.</p></td>
+default, it is the <code>shiny_logs</code> subdirectory of the application,and if that
+directory is not writable, a temporary directory is used instead.</p></td>
     </tr>
     <tr>
       <th>log.errors</th>
