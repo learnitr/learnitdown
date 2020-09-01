@@ -175,11 +175,17 @@ read_shinylogs <- function(file, version = "0",
     log.errors = log.errors, log.outputs = log.outputs)
 
   if (debug)
-    message(NROW(dat), " entries found in ", file)
+    message(NROW(dat), " events found in ", file)
 
   res <- try({
+    if (debug)
+      message("Connecting to database...")
     m <- mongolite::mongo(collection = collection, db = db, url = url)
+    if (debug)
+      message("Inserting events into the database...")
     m$insert(dat)
+    if (debug)
+      message("...done!")
   }, silent = TRUE)
 
   if (!inherits(res, "try-error")) {
