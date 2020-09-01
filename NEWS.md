@@ -1,3 +1,8 @@
+# learndown 1.0.1
+
+- Shiny apps: do not track events when no login and fallback to temporary
+directory if `path =` is not writeable in `trackEvents()`.
+
 # learndown 1.0.0
 
 - First version of the learndown package. Including code developed for
