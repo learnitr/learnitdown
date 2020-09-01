@@ -312,7 +312,8 @@ submitQuitButtons <- function() {
 #' @param version The version of the current Shiny application. By default, it
 #' is the `learndown.shiny.version` option, as set by [learndownShinyVersion()].
 #' @param path The path where the temporary `shinylogs` log files are stored. By
-#' default, it is the `shiny_logs` subdirectory of the application.
+#' default, it is the `shiny_logs` subdirectory of the application,and if that
+#' directory is not writeable, a temporary directory is used instead.
 #' @param log.errors Do we log error events (yes by default)?
 #' @param log.outputs Do we log output events (no by default)?
 #' @param drop.dir Do we erase the directory indicated by `path =` if it is
@@ -348,39 +349,55 @@ trackEvents <- function(session, input, output,
   version = getOption("learndown.shiny.version"), path = "shiny_logs",
   log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE) {
   observe({
+    # Get user information
     user_info <- parseQueryString(session$clientData$url_search)
+    # If there is no login in user_info, we don't track events
+    if (is.null(user_info$login)) {
+      message("No login: no events will be tracked")
+    } else {
+      # Check that 'path' exists and is writeable, or use a temporary directory
+      if (!dir.exists(path))
+        dir.create(path, showWarnings = FALSE, recursive = TRUE)
+      test_file <- file.path(path, "test.txt")
+      res <- try(cat("test, can be deleted", file = test_file), silent = TRUE)
+      # Switch to a temporary directory, if it is not there, or not writeable
+      if (inherits(res, "try-error") || !file.exists(test_file))
+        path <- file.path(tempdir(check = TRUE), session$token)
+      unlink(test_file)
+      message("Tracking events in ", path)
 
-    user_tracking <- function(session, query = user_info) {
-      # This is the original shinylogs function to retrieve the user
-      get_user <- function(session) {
-        if (!is.null(session$user))
-          return(session$user)
-        user <- Sys.getenv("SHINYPROXY_USERNAME")
-        if (user != "") {
-          return(user)
-        } else {
-          getOption("shinylogs.default_user", default = Sys.info()[['user']])
+      user_tracking <- function(session, query = user_info) {
+        # This is the original shinylogs function to retrieve the user
+        get_user <- function(session) {
+          if (!is.null(session$user))
+            return(session$user)
+          user <- Sys.getenv("SHINYPROXY_USERNAME")
+          if (user != "") {
+            return(user)
+          } else {
+            getOption("shinylogs.default_user", default = Sys.info()[['user']])
+          }
         }
-      }
-      user <- get_user(session)
+        user <- get_user(session)
 
-      if (!length(query)) {
-        query <- list(user = user)
-      } else {
-        query$user <- user
+        if (!length(query)) {
+          query <- list(user = user)
+        } else {
+          query$user <- user
+        }
+        as.character(jsonlite::toJSON(query))
       }
-      as.character(jsonlite::toJSON(query))
+
+      track_usage(storage_mode = store_rds(path = path),
+        get_user = user_tracking)
+
+      onSessionEnded(function() {
+        #message("url = ", url)
+        record_shiny(path, url = url, db = db,
+          version = version, log.errors = log.errors, log.outputs = log.outputs,
+          drop.dir = drop.dir)
+      })
     }
-
-    track_usage(storage_mode = store_rds(path = path),
-      get_user = user_tracking)
-
-    onSessionEnded(function() {
-      #message("url = ", url)
-      record_shiny(path, url = url, db = db,
-        version = version, log.errors = log.errors, log.outputs = log.outputs,
-        drop.dir = drop.dir)
-    })
   })
 }
 
