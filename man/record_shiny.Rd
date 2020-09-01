@@ -12,7 +12,8 @@ record_shiny(
   version = "0",
   log.errors = TRUE,
   log.outputs = FALSE,
-  drop.dir = FALSE
+  drop.dir = FALSE,
+  debug = FALSE
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ with inputs)?}
 
 \item{drop.dir}{If \code{TRUE} and path is empty at the end of the process, drop
 the logs directory.}
+
+\item{debug}{Do we debug the events recording by issuing extra messages?}
 }
 \value{
 \code{TRUE}if there where log files to export, \code{FALSE} otherwise.

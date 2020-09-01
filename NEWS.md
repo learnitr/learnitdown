@@ -1,3 +1,8 @@
+# learndown 1.0.2
+
+- Debug messages possibles in `trackEvents()` to determine the causes of errors
+when recording Shiny apps events in a MongoDB database.
+
 # learndown 1.0.1
 
 - Shiny apps: do not track events when no login and fallback to temporary

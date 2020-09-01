@@ -18,7 +18,8 @@ trackEvents(
   path = "shiny_logs",
   log.errors = TRUE,
   log.outputs = FALSE,
-  drop.dir = TRUE
+  drop.dir = TRUE,
+  debug = FALSE
 )
 
 trackSubmit(
@@ -65,6 +66,8 @@ directory is not writable, a temporary directory is used instead.}
 
 \item{drop.dir}{Do we erase the directory indicated by \verb{path =} if it is
 empty at the end of the process (yes by default).}
+
+\item{debug}{Do we debug recording of events using extra messages?}
 
 \item{solution}{The correct solution as a named list. Names are the
 application inputs to check and their values are the correct values. The

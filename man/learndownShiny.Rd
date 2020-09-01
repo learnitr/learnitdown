@@ -3,7 +3,7 @@
 \name{learndownShiny}
 \alias{learndownShiny}
 \alias{learndownShinyVersion}
-\alias{submitButton}
+\alias{submitAnswerButton}
 \alias{quitButton}
 \alias{submitQuitButtons}
 \title{Create and manage learndown Shiny applications}
@@ -12,7 +12,7 @@ learndownShiny(title, windowTitle = title)
 
 learndownShinyVersion(version)
 
-submitButton(
+submitAnswerButton(
   inputId = "submit",
   label = "Submit Answer",
   class = "btn-primary",

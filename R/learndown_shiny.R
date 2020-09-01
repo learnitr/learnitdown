@@ -166,7 +166,7 @@ read_shinylogs <- function(file, version = "0",
 }
 
 .record_shinylogs <- function(file, url, db, collection = "shiny",
-  version = "0", log.errors = TRUE, log.outputs = FALSE) {
+  version = "0", log.errors = TRUE, log.outputs = FALSE, debug = FALSE) {
 
   if (!file.exists(file))
     return(FALSE)
@@ -174,15 +174,23 @@ read_shinylogs <- function(file, version = "0",
   dat <- read_shinylogs(file, version = version,
     log.errors = log.errors, log.outputs = log.outputs)
 
-  m <- try(mongolite::mongo(collection = collection, db = db, url = url),
-    silent = TRUE)
+  if (debug)
+    message(NROW(dat), " entries found in ", file)
 
-  res <- try(m$insert(dat), silent = TRUE)
+  res <- try({
+    m <- mongolite::mongo(collection = collection, db = db, url = url)
+    m$insert(dat)
+  }, silent = TRUE)
 
   if (!inherits(res, "try-error")) {
     unlink(file)
+    if (debug)
+      message("Successful transfer of data from ", file,
+        " to the MongoDB database")
     TRUE
   } else {
+    if (debug)
+      message("Error while transferring log file ", file, ": ", res)
     FALSE
   }
 }
@@ -205,6 +213,7 @@ read_shinylogs <- function(file, version = "0",
 #' with inputs)?
 #' @param drop.dir If `TRUE` and path is empty at the end of the process, drop
 #' the logs directory.
+#' @param debug Do we debug the events recording by issuing extra messages?
 #'
 #' @return `TRUE`if there where log files to export, `FALSE` otherwise.
 #' @export
@@ -214,17 +223,30 @@ read_shinylogs <- function(file, version = "0",
 #' @examples
 #' # TODO...
 record_shiny <- function(path, url, db, collection = "shiny",
-  version = "0", log.errors = TRUE, log.outputs = FALSE, drop.dir = FALSE) {
+version = "0", log.errors = TRUE, log.outputs = FALSE, drop.dir = FALSE,
+debug = FALSE) {
+  debug <- isTRUE(debug)
   log_files <- dir(path, pattern = "\\.rds$", full.names = TRUE)
   if (length(log_files)) {
+    if (debug)
+      message(".rds log file(s) found in ", path, ": ", length(log_files))
     for (file in log_files)
       .record_shinylogs(file, url = url, db = db, collection = collection,
-        version = version, log.errors = log.errors, log.outputs = log.outputs)
+        version = version, log.errors = log.errors, log.outputs = log.outputs,
+        debug = debug)
   } else {
+    if (debug)
+      message("No .rds log file found in ", path)
     return(FALSE)
   }
-  if (isTRUE(drop.dir))
+  if (isTRUE(drop.dir)) {
+    if (debug) {
+      log_files_remaining <- dir(path, pattern = "\\.rds$")
+      message("Remaining log files after transfer to MongoDB: ",
+        length(log_files_remaining))
+    }
     suppressWarnings(file.remove(path)) # non-empty dir not deleted with warning
+  }
   TRUE
 }
 
@@ -275,7 +297,7 @@ learndownShinyVersion <- function(version)
 
 #' @export
 #' @rdname learndownShiny
-submitButton <- function(inputId = "submit", label = "Submit Answer",
+submitAnswerButton <- function(inputId = "submit", label = "Submit Answer",
 class = "btn-primary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
@@ -289,7 +311,7 @@ class = "btn-secondary", ...)
 #' @rdname learndownShiny
 submitQuitButtons <- function() {
   fluidRow(
-    submitButton(),
+    submitAnswerButton(),
     quitButton()
   )
 }
@@ -322,6 +344,7 @@ submitQuitButtons <- function() {
 #' @param log.outputs Do we log output events (no by default)?
 #' @param drop.dir Do we erase the directory indicated by `path =` if it is
 #' empty at the end of the process (yes by default).
+#' @param debug Do we debug recording of events using extra messages?
 #' @param solution The correct solution as a named list. Names are the
 #' application inputs to check and their values are the correct values. The
 #' current state of these inputs will be compared against the solution, and the
@@ -352,7 +375,7 @@ trackEvents <- function(session, input, output,
 url = Sys.getenv("MONGO_URL"), db = Sys.getenv("MONGO_BASE"),
 user = Sys.getenv("MONGO_USER"), password = Sys.getenv("MONGO_PASSWORD"),
 version = getOption("learndown.shiny.version"), path = "shiny_logs",
-log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE) {
+log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, debug = FALSE) {
 
   # Increment a session counter
   session_counter <- getOption("learndown.shiny.sessions", default = 0) + 1
@@ -389,7 +412,7 @@ log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE) {
       message("Tracking events in ", path, " for user ", user_info$login)
       toastr_info(paste("Enregistrement actif pour", user_info$login),
         closeButton = TRUE, position = "top-right", showDuration = 5)
-      updateActionButton(session, "quit", label = "Save & Quit")
+      updateActionButton(session, "quit", label = "Save/Quit")
 
       user_tracking <- function(session, query = user_info) {
         # This is the original shinylogs function to retrieve the user
@@ -419,10 +442,11 @@ log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE) {
       # Read log events from .rds files and insert them in the MongoDB database
       url <- glue(url) # User and password replaced in the URL
       onSessionEnded(function() {
-        #message("url = ", url)
+        if (isTRUE(debug))
+          message("Database URL: ", url, ", base: ", db)
         record_shiny(path, url = url, db = db,
           version = version, log.errors = log.errors, log.outputs = log.outputs,
-          drop.dir = drop.dir)
+          drop.dir = drop.dir, debug = debug)
       })
     }
   })
