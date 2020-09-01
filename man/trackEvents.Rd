@@ -12,6 +12,8 @@ trackEvents(
   output,
   url = Sys.getenv("MONGO_URL"),
   db = Sys.getenv("MONGO_BASE"),
+  user = Sys.getenv("MONGO_USER"),
+  password = Sys.getenv("MONGO_PASSWORD"),
   version = getOption("learndown.shiny.version"),
   path = "shiny_logs",
   log.errors = TRUE,
@@ -44,11 +46,18 @@ the \code{MONGO_URL} environment variable.}
 \item{db}{The database to populate in the MongoDB database. By default, it is
 read from the \code{MONGO_BASE} environment variable.}
 
+\item{user}{The user login to the MongoDB database. By default, it is
+read from the \code{MONGO_USER} environment variable.}
+
+\item{password}{The password to access the MongoDB database. By default, it is
+read from the \code{MONGO_PASSWORD} environment variable.}
+
 \item{version}{The version of the current Shiny application. By default, it
 is the \code{learndown.shiny.version} option, as set by \code{\link[=learndownShinyVersion]{learndownShinyVersion()}}.}
 
 \item{path}{The path where the temporary \code{shinylogs} log files are stored. By
-default, it is the \code{shiny_logs} subdirectory of the application.}
+default, it is the \code{shiny_logs} subdirectory of the application,and if that
+directory is not writable, a temporary directory is used instead.}
 
 \item{log.errors}{Do we log error events (yes by default)?}
 

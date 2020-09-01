@@ -276,13 +276,13 @@ learndownShinyVersion <- function(version)
 #' @export
 #' @rdname learndownShiny
 submitButton <- function(inputId = "submit", label = "Submit Answer",
-  class = "btn-primary", ...)
+class = "btn-primary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
 #' @export
 #' @rdname learndownShiny
 quitButton <- function(inputId = "quit", label = "Quit",
-  class = "btn-secondary", ...)
+class = "btn-secondary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
 #' @export
@@ -309,11 +309,15 @@ submitQuitButtons <- function() {
 #' the `MONGO_URL` environment variable.
 #' @param db The database to populate in the MongoDB database. By default, it is
 #' read from the `MONGO_BASE` environment variable.
+#' @param user The user login to the MongoDB database. By default, it is
+#' read from the `MONGO_USER` environment variable.
+#' @param password The password to access the MongoDB database. By default, it is
+#' read from the `MONGO_PASSWORD` environment variable.
 #' @param version The version of the current Shiny application. By default, it
 #' is the `learndown.shiny.version` option, as set by [learndownShinyVersion()].
 #' @param path The path where the temporary `shinylogs` log files are stored. By
 #' default, it is the `shiny_logs` subdirectory of the application,and if that
-#' directory is not writeable, a temporary directory is used instead.
+#' directory is not writable, a temporary directory is used instead.
 #' @param log.errors Do we log error events (yes by default)?
 #' @param log.outputs Do we log output events (no by default)?
 #' @param drop.dir Do we erase the directory indicated by `path =` if it is
@@ -345,15 +349,32 @@ submitQuitButtons <- function() {
 #' @examples
 #' # TODO...
 trackEvents <- function(session, input, output,
-  url = Sys.getenv("MONGO_URL"), db = Sys.getenv("MONGO_BASE"),
-  version = getOption("learndown.shiny.version"), path = "shiny_logs",
-  log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE) {
+url = Sys.getenv("MONGO_URL"), db = Sys.getenv("MONGO_BASE"),
+user = Sys.getenv("MONGO_USER"), password = Sys.getenv("MONGO_PASSWORD"),
+version = getOption("learndown.shiny.version"), path = "shiny_logs",
+log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE) {
+
+  # Increment a session counter
+  session_counter <- getOption("learndown.shiny.sessions", default = 0) + 1
+  options(learndown.shiny.sessions = session_counter)
+  message("Running sessions: ", session_counter)
+
+  # Install callbacks on session close
   observe({
+    # Decrement the number of opened sessions on session close
+    onSessionEnded(function() {
+      session_counter <- getOption("learndown.shiny.sessions", default = 0) - 1
+      options(learndown.shiny.sessions = session_counter)
+      message("Running sessions: ", session_counter)
+    })
+
     # Get user information
     user_info <- parseQueryString(session$clientData$url_search)
     # If there is no login in user_info, we don't track events
     if (is.null(user_info$login)) {
       message("No login: no events will be tracked")
+      toastr_warning("Utilisateur anonyme, aucun enregistrement.",
+        closeButton = TRUE, position = "top-right", showDuration = 5)
     } else {
       # Check that 'path' exists and is writeable, or use a temporary directory
       if (!dir.exists(path))
@@ -364,26 +385,30 @@ trackEvents <- function(session, input, output,
       if (inherits(res, "try-error") || !file.exists(test_file))
         path <- file.path(tempdir(check = TRUE), session$token)
       unlink(test_file)
-      message("Tracking events in ", path)
+
+      message("Tracking events in ", path, " for user ", user_info$login)
+      toastr_info(paste("Enregistrement actif pour", user_info$login),
+        closeButton = TRUE, position = "top-right", showDuration = 5)
+      updateActionButton(session, "quit", label = "Save & Quit")
 
       user_tracking <- function(session, query = user_info) {
         # This is the original shinylogs function to retrieve the user
         get_user <- function(session) {
           if (!is.null(session$user))
             return(session$user)
-          user <- Sys.getenv("SHINYPROXY_USERNAME")
-          if (user != "") {
-            return(user)
+          shiny_user <- Sys.getenv("SHINYPROXY_USERNAME")
+          if (shiny_user != "") {
+            return(shiny_user)
           } else {
             getOption("shinylogs.default_user", default = Sys.info()[['user']])
           }
         }
-        user <- get_user(session)
+        shiny_user <- get_user(session)
 
         if (!length(query)) {
-          query <- list(user = user)
+          query <- list(user = shiny_user)
         } else {
-          query$user <- user
+          query$user <- shiny_user
         }
         as.character(jsonlite::toJSON(query))
       }
@@ -391,6 +416,8 @@ trackEvents <- function(session, input, output,
       track_usage(storage_mode = store_rds(path = path),
         get_user = user_tracking)
 
+      # Read log events from .rds files and insert them in the MongoDB database
+      url <- glue(url) # User and password replaced in the URL
       onSessionEnded(function() {
         #message("url = ", url)
         record_shiny(path, url = url, db = db,
@@ -455,8 +482,11 @@ trackQuit <- function(session, input, output, delay = 60) {
   observeEvent(input$quit, {
     req(input$quit)
     session$close()
-    # Force closing the app after delay
+    # Force closing the app after delay if there is no other opened session
     if (delay != -1)
-      later::later(shiny::stopApp, delay = delay)
+      later::later(function() {
+        if (getOption("learndown.shiny.sessions", default = 2) < 1)
+          shiny::stopApp()
+      }, delay = delay)
   })
 }
