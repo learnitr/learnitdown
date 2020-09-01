@@ -148,7 +148,7 @@ button." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.1</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.2</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -188,7 +188,8 @@ button.</p>
   path = <span class='st'>"shiny_logs"</span>,
   log.errors = <span class='fl'>TRUE</span>,
   log.outputs = <span class='fl'>FALSE</span>,
-  drop.dir = <span class='fl'>TRUE</span>
+  drop.dir = <span class='fl'>TRUE</span>,
+  debug = <span class='fl'>FALSE</span>
 )
 
 <span class='fu'>trackSubmit</span>(
@@ -261,6 +262,10 @@ directory is not writable, a temporary directory is used instead.</p></td>
       <th>drop.dir</th>
       <td><p>Do we erase the directory indicated by <code>path =</code> if it is
 empty at the end of the process (yes by default).</p></td>
+    </tr>
+    <tr>
+      <th>debug</th>
+      <td><p>Do we debug recording of events using extra messages?</p></td>
     </tr>
     <tr>
       <th>solution</th>

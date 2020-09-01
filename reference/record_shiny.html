@@ -145,7 +145,7 @@ events and transfer them into a MongoDB database." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.1</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.2</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -178,7 +178,8 @@ events and transfer them into a MongoDB database.</p>
   version = <span class='st'>"0"</span>,
   log.errors = <span class='fl'>TRUE</span>,
   log.outputs = <span class='fl'>FALSE</span>,
-  drop.dir = <span class='fl'>FALSE</span>
+  drop.dir = <span class='fl'>FALSE</span>,
+  debug = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -217,6 +218,10 @@ with inputs)?</p></td>
       <th>drop.dir</th>
       <td><p>If <code>TRUE</code> and path is empty at the end of the process, drop
 the logs directory.</p></td>
+    </tr>
+    <tr>
+      <th>debug</th>
+      <td><p>Do we debug the events recording by issuing extra messages?</p></td>
     </tr>
     </table>
 
