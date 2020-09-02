@@ -148,7 +148,7 @@ button." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.3</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -181,6 +181,7 @@ button.</p>
   <span class='kw'>input</span>,
   <span class='kw'>output</span>,
   url = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL"</span>),
+  url.server = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL_SERVER"</span>),
   db = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_BASE"</span>),
   user = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_USER"</span>),
   password = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_PASSWORD"</span>),
@@ -223,6 +224,11 @@ button.</p>
       <th>url</th>
       <td><p>The URL to reach the MongoDB database. By default, it is read from
 the <code>MONGO_URL</code> environment variable.</p></td>
+    </tr>
+    <tr>
+      <th>url.server</th>
+      <td><p>The URL to reach the MongoDB database. By default, it is
+read from the <code>MONGO_URL_SERVER</code> environment variable.</p></td>
     </tr>
     <tr>
       <th>db</th>
