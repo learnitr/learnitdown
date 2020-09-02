@@ -11,6 +11,7 @@ trackEvents(
   input,
   output,
   url = Sys.getenv("MONGO_URL"),
+  url.server = Sys.getenv("MONGO_URL_SERVER"),
   db = Sys.getenv("MONGO_BASE"),
   user = Sys.getenv("MONGO_USER"),
   password = Sys.getenv("MONGO_PASSWORD"),
@@ -43,6 +44,9 @@ trackQuit(session, input, output, delay = 60)
 
 \item{url}{The URL to reach the MongoDB database. By default, it is read from
 the \code{MONGO_URL} environment variable.}
+
+\item{url.server}{The URL to reach the MongoDB database. By default, it is
+read from the \code{MONGO_URL_SERVER} environment variable.}
 
 \item{db}{The database to populate in the MongoDB database. By default, it is
 read from the \code{MONGO_BASE} environment variable.}

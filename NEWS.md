@@ -1,3 +1,8 @@
+# learndown 1.0.3
+
+- Allow using an alternate MongoDB server if a Shiny application is run from a
+server (using MONGO_URL_SERVER environment variable).
+
 # learndown 1.0.2
 
 - Debug messages possibles in `trackEvents()` to determine the causes of errors

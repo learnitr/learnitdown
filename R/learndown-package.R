@@ -12,6 +12,7 @@
 #' @importFrom shinytoastr useToastr toastr_error toastr_info toastr_success toastr_warning
 #' @importFrom shinylogs store_rds track_usage
 #' @importFrom shiny actionButton conditionalPanel fluidRow h4 isolate observe observeEvent onSessionEnded parseQueryString req tagList tags textInput updateActionButton updateTextInput
+#' @importFrom mongolite mongo
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start

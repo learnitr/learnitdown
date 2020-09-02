@@ -136,7 +136,7 @@ read_shinylogs <- function(file, version = "0",
       } else {
         correct[i] <- as.character(value$correct)
         value$correct <- NULL
-        values[i] <- as.character(jsonlite::toJSON(value))
+        values[i] <- as.character(jsonlite::toJSON(value, auto_unbox = TRUE))
       }
     }
     res$correct[is_result] <- correct
@@ -180,7 +180,7 @@ read_shinylogs <- function(file, version = "0",
   res <- try({
     if (debug)
       message("Connecting to database...")
-    m <- mongolite::mongo(collection = collection, db = db, url = url)
+    m <- mongo(collection = collection, db = db, url = url)
     if (debug)
       message("Inserting events into the database...")
     m$insert(dat)
@@ -335,6 +335,8 @@ submitQuitButtons <- function() {
 #' @param output The Shiny `output` object.
 #' @param url The URL to reach the MongoDB database. By default, it is read from
 #' the `MONGO_URL` environment variable.
+#' @param url.server The URL to reach the MongoDB database. By default, it is
+#' read from the `MONGO_URL_SERVER` environment variable.
 #' @param db The database to populate in the MongoDB database. By default, it is
 #' read from the `MONGO_BASE` environment variable.
 #' @param user The user login to the MongoDB database. By default, it is
@@ -378,8 +380,9 @@ submitQuitButtons <- function() {
 #' @examples
 #' # TODO...
 trackEvents <- function(session, input, output,
-url = Sys.getenv("MONGO_URL"), db = Sys.getenv("MONGO_BASE"),
-user = Sys.getenv("MONGO_USER"), password = Sys.getenv("MONGO_PASSWORD"),
+url = Sys.getenv("MONGO_URL"), url.server = Sys.getenv("MONGO_URL_SERVER"),
+db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
+password = Sys.getenv("MONGO_PASSWORD"),
 version = getOption("learndown.shiny.version"), path = "shiny_logs",
 log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, debug = FALSE) {
 
@@ -439,15 +442,37 @@ log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, debug = FALSE) {
         } else {
           query$user <- shiny_user
         }
-        as.character(jsonlite::toJSON(query))
+        as.character(jsonlite::toJSON(query, auto_unbox = TRUE))
       }
 
       track_usage(storage_mode = store_rds(path = path),
         get_user = user_tracking)
 
-      # Read log events from .rds files and insert them in the MongoDB database
       url <- glue(url) # User and password replaced in the URL
+      url.server <- glue(url.server)
+
       onSessionEnded(function() {
+        # Read log events from .rds files and insert them in a MongoDB database
+        # If MONGO_URL_SERVER exists and we are run from a server, we use it,
+        # otherwise, we use MONGO_URL
+        is_local <- function()
+          Sys.getenv('SHINY_PORT') == ""
+
+        is_server_up <- function(url, db) {
+          res <- try(mongo(collection = "shiny", db = db), silent = TRUE)
+          !inherits(res, "try-error")
+        }
+
+        if (is_local()) {
+          if (isTRUE(debug))
+            message("Application runs locally")
+          # We use url
+        } else {
+          if (isTRUE(debug))
+            message("Application runs from a server")
+          if (url.server != "" && is_server_up(url = url.server, db = db))
+            url <- url.server # Use server URL instead
+        }
         if (isTRUE(debug))
           message("Database URL: ", url, ", base: ", db)
         record_shiny(path, url = url, db = db,
@@ -501,7 +526,7 @@ trackSubmit <- function(session, input, output, solution = NULL, comment = "",
       solution = solution,
       comment = comment
     )
-    val_str <- as.character(jsonlite::toJSON(val))
+    val_str <- as.character(jsonlite::toJSON(val, auto_unbox = TRUE))
     updateTextInput(session, "learndown_result_", value = val_str)
   })
 }
