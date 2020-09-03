@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create and manage learndown Shiny applications — learndownShiny • learndown</title>
+<title>Record results of learnr exercises in a MongoDB database — record_learnr • learndown</title>
 
 
 <!-- jquery -->
@@ -52,11 +52,9 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Create and manage learndown Shiny applications — learndownShiny" />
-<meta property="og:description" content="A learndown Shiny application is an application whose events (start, stop,
-inputs, outputs, errors, result, quit) are recorded. It also provides a
-'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
-by the user and to close the application cleanly." />
+<meta property="og:title" content="Record results of learnr exercises in a MongoDB database — record_learnr" />
+<meta property="og:description" content="Record tutorial submissions in a MongoDB database. The
+function is used by learndown learnr tutorials and is not for end-users." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -162,86 +160,60 @@ by the user and to close the application cleanly." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create and manage learndown Shiny applications</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_shiny.R'><code>R/learndown_shiny.R</code></a></small>
-    <div class="hidden name"><code>learndownShiny.Rd</code></div>
+    <h1>Record results of learnr exercises in a MongoDB database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
+    <div class="hidden name"><code>record_learnr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A learndown Shiny application is an application whose events (start, stop,
-inputs, outputs, errors, result, quit) are recorded. It also provides a
-'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
-by the user and to close the application cleanly.</p>
+    <p>Record tutorial submissions in a MongoDB database. The
+function is used by learndown learnr tutorials and is not for end-users.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>learndownShiny</span>(<span class='kw'>title</span>, windowTitle = <span class='kw'>title</span>)
+    <pre class="usage"><span class='fu'>record_learnr</span>(<span class='kw'>tutorial_id</span>, <span class='kw'>tutorial_version</span>, <span class='kw'>user_id</span>, <span class='kw'>event</span>, <span class='kw'>data</span>)
 
-<span class='fu'>learndownShinyVersion</span>(<span class='kw'>version</span>)
+<span class='fu'>user_name</span>(<span class='kw'>value</span>)
 
-<span class='fu'>submitAnswerButton</span>(
-  inputId = <span class='st'>"submit"</span>,
-  label = <span class='st'>"Submit Answer"</span>,
-  class = <span class='st'>"btn-primary"</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='fu'>quitButton</span>(inputId = <span class='st'>"quit"</span>, label = <span class='st'>"Quit"</span>, class = <span class='st'>"btn-secondary"</span>, <span class='kw'>...</span>)
-
-<span class='fu'>submitQuitButtons</span>()</pre>
+<span class='fu'>user_email</span>(<span class='kw'>value</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>title</th>
-      <td><p>The title of the Shiny application</p></td>
+      <th>tutorial_id</th>
+      <td><p>The identifier of the tutorial.</p></td>
     </tr>
     <tr>
-      <th>windowTitle</th>
-      <td><p>The title of the window that holds the Shiny application,
-by default, it is the same as <code>title</code>. If <code>title = NULL</code>, no title is added.</p></td>
+      <th>tutorial_version</th>
+      <td><p>The version of the tutorial.</p></td>
     </tr>
     <tr>
-      <th>version</th>
-      <td><p>The version number (in a string character format) of the Shiny
-application to use in the events logger.</p></td>
+      <th>user_id</th>
+      <td><p>The user identifier for this learnr process.</p></td>
     </tr>
     <tr>
-      <th>inputId</th>
-      <td><p>The identifier of the button ("submit" or "quit").</p></td>
+      <th>event</th>
+      <td><p>The event that triggers the record, like <code>exercise_submission</code>
+or <code>question_submission</code></p></td>
     </tr>
     <tr>
-      <th>label</th>
-      <td><p>The button text ("Submit Answer" or "Quit").</p></td>
+      <th>data</th>
+      <td><p>A JSON field with event-dependent data content.</p></td>
     </tr>
     <tr>
-      <th>class</th>
-      <td><p>The bootstrap class of the button.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Further arguments passed to <code><a href='https://shiny.rstudio.com/reference/shiny/latest/actionButton.html'>shiny::actionButton()</a></code>.</p></td>
+      <th>value</th>
+      <td><p>The new value for user name or email (if not provided, the
+current value is returned).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The code to be inserted at the beginning of the Shiny application UI
-for <code>learndownShiny()</code> or where the buttons should be located for the other
-function.</p>
+    <p>Nothing. The function is used for its side-effects.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='trackEvents.html'>trackEvents()</a></code>, <code><a href='record_shiny.html'>record_shiny()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='send_mail_learnr.html'>send_mail_learnr()</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>learndownShiny</span>(<span class='st'>"My title"</span>)
-</div><div class='output co'>#&gt; &lt;h4&gt;My title&lt;/h4&gt;
-#&gt; &lt;div data-display-if="false" data-ns-prefix=""&gt;
-#&gt;   &lt;div class="form-group shiny-input-container"&gt;
-#&gt;     &lt;label class="control-label" for="learndown_result_"&gt;&lt;/label&gt;
-#&gt;     &lt;input id="learndown_result_" type="text" class="form-control" value=""/&gt;
-#&gt;   &lt;/div&gt;
-#&gt; &lt;/div&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

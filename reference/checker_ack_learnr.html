@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create and manage learndown Shiny applications — learndownShiny • learndown</title>
+<title>A default checker that just acknowledges submission — checker_ack_learnr • learndown</title>
 
 
 <!-- jquery -->
@@ -52,11 +52,10 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Create and manage learndown Shiny applications — learndownShiny" />
-<meta property="og:description" content="A learndown Shiny application is an application whose events (start, stop,
-inputs, outputs, errors, result, quit) are recorded. It also provides a
-'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
-by the user and to close the application cleanly." />
+<meta property="og:title" content="A default checker that just acknowledges submission — checker_ack_learnr" />
+<meta property="og:description" content="Check code submitted during an exercise. This version just
+acknowledges reception of the submission. This function is used internally
+by the tutorials and is not intended for the end-user." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -162,86 +161,71 @@ by the user and to close the application cleanly." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create and manage learndown Shiny applications</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_shiny.R'><code>R/learndown_shiny.R</code></a></small>
-    <div class="hidden name"><code>learndownShiny.Rd</code></div>
+    <h1>A default checker that just acknowledges submission</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
+    <div class="hidden name"><code>checker_ack_learnr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A learndown Shiny application is an application whose events (start, stop,
-inputs, outputs, errors, result, quit) are recorded. It also provides a
-'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
-by the user and to close the application cleanly.</p>
+    <p>Check code submitted during an exercise. This version just
+acknowledges reception of the submission. This function is used internally
+by the tutorials and is not intended for the end-user.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>learndownShiny</span>(<span class='kw'>title</span>, windowTitle = <span class='kw'>title</span>)
-
-<span class='fu'>learndownShinyVersion</span>(<span class='kw'>version</span>)
-
-<span class='fu'>submitAnswerButton</span>(
-  inputId = <span class='st'>"submit"</span>,
-  label = <span class='st'>"Submit Answer"</span>,
-  class = <span class='st'>"btn-primary"</span>,
+    <pre class="usage"><span class='fu'>checker_ack_learnr</span>(
+  <span class='kw'>label</span>,
+  <span class='kw'>user_code</span>,
+  <span class='kw'>solution_code</span>,
+  <span class='kw'>check_code</span>,
+  <span class='kw'>envir_result</span>,
+  <span class='kw'>evaluate_result</span>,
   <span class='kw'>...</span>
-)
-
-<span class='fu'>quitButton</span>(inputId = <span class='st'>"quit"</span>, label = <span class='st'>"Quit"</span>, class = <span class='st'>"btn-secondary"</span>, <span class='kw'>...</span>)
-
-<span class='fu'>submitQuitButtons</span>()</pre>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>title</th>
-      <td><p>The title of the Shiny application</p></td>
-    </tr>
-    <tr>
-      <th>windowTitle</th>
-      <td><p>The title of the window that holds the Shiny application,
-by default, it is the same as <code>title</code>. If <code>title = NULL</code>, no title is added.</p></td>
-    </tr>
-    <tr>
-      <th>version</th>
-      <td><p>The version number (in a string character format) of the Shiny
-application to use in the events logger.</p></td>
-    </tr>
-    <tr>
-      <th>inputId</th>
-      <td><p>The identifier of the button ("submit" or "quit").</p></td>
-    </tr>
-    <tr>
       <th>label</th>
-      <td><p>The button text ("Submit Answer" or "Quit").</p></td>
+      <td><p>The label for the learnr exercise.</p></td>
     </tr>
     <tr>
-      <th>class</th>
-      <td><p>The bootstrap class of the button.</p></td>
+      <th>user_code</th>
+      <td><p>The code submitted by the user.</p></td>
+    </tr>
+    <tr>
+      <th>solution_code</th>
+      <td><p>The code provided by the "-solution" chunk.</p></td>
+    </tr>
+    <tr>
+      <th>check_code</th>
+      <td><p>The code provided by the "-check" chunk.</p></td>
+    </tr>
+    <tr>
+      <th>envir_result</th>
+      <td><p>The environment after the execution of the chunk.</p></td>
+    </tr>
+    <tr>
+      <th>evaluate_result</th>
+      <td><p>Result from evaluation of the code.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further arguments passed to <code><a href='https://shiny.rstudio.com/reference/shiny/latest/actionButton.html'>shiny::actionButton()</a></code>.</p></td>
+      <td><p>Additional parameters (currently not used).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The code to be inserted at the beginning of the Shiny application UI
-for <code>learndownShiny()</code> or where the buttons should be located for the other
-function.</p>
+    <p>A list with components <code>message</code>, <code>correct</code> and <code>location</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This is a simple checker function for learndown learnr applications that just
+indicates to the user that its answer is taken into account.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='trackEvents.html'>trackEvents()</a></code>, <code><a href='record_shiny.html'>record_shiny()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='record_learnr.html'>record_learnr()</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>learndownShiny</span>(<span class='st'>"My title"</span>)
-</div><div class='output co'>#&gt; &lt;h4&gt;My title&lt;/h4&gt;
-#&gt; &lt;div data-display-if="false" data-ns-prefix=""&gt;
-#&gt;   &lt;div class="form-group shiny-input-container"&gt;
-#&gt;     &lt;label class="control-label" for="learndown_result_"&gt;&lt;/label&gt;
-#&gt;     &lt;input id="learndown_result_" type="text" class="form-control" value=""/&gt;
-#&gt;   &lt;/div&gt;
-#&gt; &lt;/div&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

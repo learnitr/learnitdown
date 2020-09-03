@@ -85,7 +85,7 @@
 </li>
       </ul>
 <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learndown <small>v1.0.3</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learndown <small>v1.0.4</small></p></a>
       </div>
     </div>
 <!--/.nav-collapse -->
@@ -104,7 +104,7 @@
       <h1 data-toc-skip>learndown - R Markdown and Bookdown Additions for Learning Material</h1>
                         <h4 class="author">Philippe Grosjean (<a href="mailto:phgrosjean@sciviews.org" class="email">phgrosjean@sciviews.org</a>)</h4>
             
-            <h4 class="date">2020-09-02</h4>
+            <h4 class="date">2020-09-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/SciViews/learndown/blob/master/vignettes/learndown.Rmd"><code>vignettes/learndown.Rmd</code></a></small>
       <div class="hidden name"><code>learndown.Rmd</code></div>
@@ -114,8 +114,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/SciViews/learndown">learndown</a></span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/SciViews/learndown">learndown</a></span>)</pre></div>
 <div id="make-better-learning-inline-material-with-learndown" class="section level1">
 <h1 class="hasAnchor">
 <a href="#make-better-learning-inline-material-with-learndown" class="anchor"></a>Make better learning inline material with learndown</h1>
@@ -127,8 +126,7 @@
 <a href="#include-h5p-content" class="anchor"></a>Include H5P content</h2>
 <p>H5P content is rich interactive content for e-learning. It is written in HTML5 (HTML + CSS + Javascript). The H5P content is displayed in an iframe inside your document, and it sends xAPI events (a standard to pass “experience API” event to LRS -Learning Record Store-). The parent page is responsible of handling these events. Here, the parent is our R Markdown or bookdown pages. With <strong>learndown</strong>, you can make it work by … TODO: continue!</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/h5p.html">h5p</a></span>(<span class="fl">1</span>, <span class="st">"https://www.example.com"</span>, width = <span class="fl">780</span>, height = <span class="fl">500</span>)
-</pre></div>
+<span class="fu"><a href="../reference/h5p.html">h5p</a></span>(<span class="fl">1</span>, <span class="st">"https://www.example.com"</span>, width = <span class="fl">780</span>, height = <span class="fl">500</span>)</pre></div>
 </div>
 <div id="differ-shinylearnr-app-loading" class="section level2">
 <h2 class="hasAnchor">

@@ -4,6 +4,9 @@
     <loc>https://www.sciviews.org/learndown/index.html</loc>
   </url>
   <url>
+    <loc>https://www.sciviews.org/learndown/reference/checker_ack_learnr.html</loc>
+  </url>
+  <url>
     <loc>https://www.sciviews.org/learndown/reference/diagnose_login.html</loc>
   </url>
   <url>
@@ -25,7 +28,16 @@
     <loc>https://www.sciviews.org/learndown/reference/read_shinylogs.html</loc>
   </url>
   <url>
+    <loc>https://www.sciviews.org/learndown/reference/record_learnr.html</loc>
+  </url>
+  <url>
     <loc>https://www.sciviews.org/learndown/reference/record_shiny.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learndown/reference/run.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learndown/reference/send_mail_learnr.html</loc>
   </url>
   <url>
     <loc>https://www.sciviews.org/learndown/reference/trackEvents.html</loc>

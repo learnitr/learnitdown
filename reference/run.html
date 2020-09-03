@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create and manage learndown Shiny applications — learndownShiny • learndown</title>
+<title>Run learndown learnr tutorials from a package — run • learndown</title>
 
 
 <!-- jquery -->
@@ -52,11 +52,9 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Create and manage learndown Shiny applications — learndownShiny" />
-<meta property="og:description" content="A learndown Shiny application is an application whose events (start, stop,
-inputs, outputs, errors, result, quit) are recorded. It also provides a
-'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
-by the user and to close the application cleanly." />
+<meta property="og:title" content="Run learndown learnr tutorials from a package — run" />
+<meta property="og:description" content="Start the learnr R engine in the current R session with the
+selected tutorial." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -162,86 +160,66 @@ by the user and to close the application cleanly." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create and manage learndown Shiny applications</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_shiny.R'><code>R/learndown_shiny.R</code></a></small>
-    <div class="hidden name"><code>learndownShiny.Rd</code></div>
+    <h1>Run learndown learnr tutorials from a package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
+    <div class="hidden name"><code>run.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A learndown Shiny application is an application whose events (start, stop,
-inputs, outputs, errors, result, quit) are recorded. It also provides a
-'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
-by the user and to close the application cleanly.</p>
+    <p>Start the learnr R engine in the current R session with the
+selected tutorial.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>learndownShiny</span>(<span class='kw'>title</span>, windowTitle = <span class='kw'>title</span>)
-
-<span class='fu'>learndownShinyVersion</span>(<span class='kw'>version</span>)
-
-<span class='fu'>submitAnswerButton</span>(
-  inputId = <span class='st'>"submit"</span>,
-  label = <span class='st'>"Submit Answer"</span>,
-  class = <span class='st'>"btn-primary"</span>,
-  <span class='kw'>...</span>
-)
-
-<span class='fu'>quitButton</span>(inputId = <span class='st'>"quit"</span>, label = <span class='st'>"Quit"</span>, class = <span class='st'>"btn-secondary"</span>, <span class='kw'>...</span>)
-
-<span class='fu'>submitQuitButtons</span>()</pre>
+    <pre class="usage"><span class='fu'>run</span>(<span class='kw'>tutorial</span>, <span class='kw'>package</span>, repos = <span class='kw'>NULL</span>, <span class='kw'>...</span>, update = <span class='kw'>ask</span>, ask = <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>title</th>
-      <td><p>The title of the Shiny application</p></td>
+      <th>tutorial</th>
+      <td><p>The name of the tutorial to use. If not provided, a list of
+available tutorials is displayed.</p></td>
     </tr>
     <tr>
-      <th>windowTitle</th>
-      <td><p>The title of the window that holds the Shiny application,
-by default, it is the same as <code>title</code>. If <code>title = NULL</code>, no title is added.</p></td>
+      <th>package</th>
+      <td><p>The package from where to run the tutorial.</p></td>
     </tr>
     <tr>
-      <th>version</th>
-      <td><p>The version number (in a string character format) of the Shiny
-application to use in the events logger.</p></td>
-    </tr>
-    <tr>
-      <th>inputId</th>
-      <td><p>The identifier of the button ("submit" or "quit").</p></td>
-    </tr>
-    <tr>
-      <th>label</th>
-      <td><p>The button text ("Submit Answer" or "Quit").</p></td>
-    </tr>
-    <tr>
-      <th>class</th>
-      <td><p>The bootstrap class of the button.</p></td>
+      <th>repos</th>
+      <td><p>The GitHub repository where the package is developed (for
+updates), use <code>NULL</code> to prevent any updates.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Further arguments passed to <code><a href='https://shiny.rstudio.com/reference/shiny/latest/actionButton.html'>shiny::actionButton()</a></code>.</p></td>
+      <td><p>Further arguments passed to <code>run_tutorial()</code></p></td>
+    </tr>
+    <tr>
+      <th>update</th>
+      <td><p>Do we check for an updated version first, and if it is found,
+update the package automatically?</p></td>
+    </tr>
+    <tr>
+      <th>ask</th>
+      <td><p>In case <code>tutorial</code> is not provided, do we ask to select in a list?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The code to be inserted at the beginning of the Shiny application UI
-for <code>learndownShiny()</code> or where the buttons should be located for the other
-function.</p>
+    <p>If <code>tutorial</code> is not provided, in interactive mode with <code>ask = TRUE</code>,
+you have to select one in a list, and in non interactive mode, or
+<code>ask = FALSE</code>, it returns the list of all available tutorials.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='trackEvents.html'>trackEvents()</a></code>, <code><a href='record_shiny.html'>record_shiny()</a></code></p></div>
+    <div class='dont-index'><p><code>run_tutorial()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>learndownShiny</span>(<span class='st'>"My title"</span>)
-</div><div class='output co'>#&gt; &lt;h4&gt;My title&lt;/h4&gt;
-#&gt; &lt;div data-display-if="false" data-ns-prefix=""&gt;
-#&gt;   &lt;div class="form-group shiny-input-container"&gt;
-#&gt;     &lt;label class="control-label" for="learndown_result_"&gt;&lt;/label&gt;
-#&gt;     &lt;input id="learndown_result_" type="text" class="form-control" value=""/&gt;
-#&gt;   &lt;/div&gt;
-#&gt; &lt;/div&gt;</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>#' # To start from a list of available tutorials:</span>
+<span class='fu'>run</span>(package = <span class='st'>"my_package"</span>)
+<span class='fu'>run</span>(<span class='st'>"my_tutorial"</span>, package = <span class='st'>"my_package"</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
