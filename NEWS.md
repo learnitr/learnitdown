@@ -1,3 +1,7 @@
+# learndown 1.0.4
+
+- Functions for learndown learnr applications added.
+
 # learndown 1.0.3
 
 - Allow using an alternate MongoDB server if a Shiny application is run from a

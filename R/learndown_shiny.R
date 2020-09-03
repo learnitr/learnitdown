@@ -28,11 +28,11 @@ read_shinylogs <- function(file, version = "0",
   if (!file.exists(file))
     stop("file not found")
 
-  logs <- shinylogs::read_rds_logs(file)
+  logs <- read_rds_logs(file)
 
   # Initialize the data.frame with start and stop events
   session <- logs[["session"]]
-  user_data <- try(jsonlite::fromJSON(session$user), silent = TRUE)
+  user_data <- try(fromJSON(session$user), silent = TRUE)
   if (inherits(user_data, "try-error"))
     user_data <- list(user = "", login = "", iemail = "")
   user <- user_data$user
@@ -129,14 +129,14 @@ read_shinylogs <- function(file, version = "0",
     correct <- character(0)
     for (i in 1:length(results)) {
       # We want to protect here again st wrong entries!
-      value <- try(jsonlite::fromJSON(results[i]), silent = TRUE)
+      value <- try(fromJSON(results[i]), silent = TRUE)
       if (inherits(value, "try-error")) {
         correct[i] <- "NA"
         values[i] <- results[i]
       } else {
         correct[i] <- as.character(value$correct)
         value$correct <- NULL
-        values[i] <- as.character(jsonlite::toJSON(value, auto_unbox = TRUE))
+        values[i] <- as.character(toJSON(value, auto_unbox = TRUE))
       }
     }
     res$correct[is_result] <- correct
@@ -386,6 +386,10 @@ password = Sys.getenv("MONGO_PASSWORD"),
 version = getOption("learndown.shiny.version"), path = "shiny_logs",
 log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, debug = FALSE) {
 
+  # Indicate this is a learndown Shiny application
+  if (isTRUE(debug))
+    message("Shiny application with learndown v. ", packageVersion("learndown"))
+
   # Increment a session counter
   session_counter <- getOption("learndown.shiny.sessions", default = 0) + 1
   options(learndown.shiny.sessions = session_counter)
@@ -442,7 +446,7 @@ log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, debug = FALSE) {
         } else {
           query$user <- shiny_user
         }
-        as.character(jsonlite::toJSON(query, auto_unbox = TRUE))
+        as.character(toJSON(query, auto_unbox = TRUE))
       }
 
       track_usage(storage_mode = store_rds(path = path),
@@ -526,7 +530,7 @@ trackSubmit <- function(session, input, output, solution = NULL, comment = "",
       solution = solution,
       comment = comment
     )
-    val_str <- as.character(jsonlite::toJSON(val, auto_unbox = TRUE))
+    val_str <- as.character(toJSON(val, auto_unbox = TRUE))
     updateTextInput(session, "learndown_result_", value = val_str)
   })
 }
@@ -541,7 +545,7 @@ trackQuit <- function(session, input, output, delay = 60) {
     if (delay != -1)
       later::later(function() {
         if (getOption("learndown.shiny.sessions", default = 2) < 1)
-          shiny::stopApp()
+          stopApp()
       }, delay = delay)
   })
 }
