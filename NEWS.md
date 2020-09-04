@@ -1,6 +1,7 @@
 # learndown 1.0.4
 
 - Functions for learndown learnr applications added.
+- `config()` function added.
 
 # learndown 1.0.3
 

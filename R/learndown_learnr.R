@@ -27,7 +27,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   password <- Sys.getenv("MONGO_PASSWORD")
   bds_file <- Sys.getenv("LOCAL_STORAGE")
   if (bds_file == "")
-    bds_file <- "~/.local/share/R/learnr/biodatascience" # Default value
+    bds_file <- "~/.local/share/R/learnr/events" # Default value
   debug <- isTRUE(getOption("learndown.learnr.debug", default = FALSE))
 
   # Add bese64 encrypted data in the local file (temporary storage if the
@@ -179,7 +179,7 @@ user_email <- function(value) {
 send_mail_learnr <- function(address, subject = "Learnr activity",
 file = Sys.getenv("LOCAL_STORAGE")) {
   if (file == "")
-    file <- "~/.local/share/R/learnr/biodatascience" # Default value
+    file <- "~/.local/share/R/learnr/events" # Default value
   if (file.exists(file)) {
     data <- readLines(file)
     file.rename(file, paste0(file, ".bak")) # One backup, just in case!
@@ -405,7 +405,7 @@ ask = interactive()) {
     }
   }
 
-  if (missing(tutorial)) {
+  if (missing(tutorial)|| is.null(tutorial) || tutorial == "") {
     tutos <- dir(system.file("tutorials", package = package))
     if (isTRUE(ask) && interactive()) {
       # Allow selecting from the list...
