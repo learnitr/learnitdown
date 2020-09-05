@@ -28,7 +28,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   bds_file <- Sys.getenv("LOCAL_STORAGE")
   if (bds_file == "")
     bds_file <- "~/.local/share/R/learnr/events" # Default value
-  debug <- isTRUE(getOption("learndown.learnr.debug", default = FALSE))
+  debug <- (Sys.getenv("LEARNDOWN_DEBUG", 0) != 0)
 
   # Add bese64 encrypted data in the local file (temporary storage if the
   # database is not available)
@@ -57,16 +57,14 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     tutorial = paste0("learnr_", tutorial_id), version = tutorial_version,
     user = user_id, login = user_name(), email = user_email(),
     label = label, correct = correct, event = event,
-    data = toJSON(data, auto_unbox = TRUE), value = "") # Put something here?
+    data = as.character(toJSON(data, auto_unbox = TRUE)), value = "")
 
   db_injected <- FALSE
-  if (debug)
-    message("Database URL: ", url, ", base: ", db)
   m <- try({
     m <- mongo(collection = "learnr", db = db, url = glue(url))
     m$insert(entry)
     if (debug)
-      message("Event inserted.")
+      message("Learnr event '", entry$event, "' inserted into database.")
     m
   }, silent = TRUE)
   if (!inherits(m, "try-error")) {
@@ -81,9 +79,10 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     }
   }
   # Only get rid of the entry if it was actually injected in the database
-  if (!isTRUE(db_injected)) {# MongoDB database not available, or error... save locally
+  if (!isTRUE(db_injected)) {
     if (debug)
-      message("Database not available, savin,g event locally.")
+      message("Database not available, saving event '", entry$event,
+        "' locally.")
     add_file_base64(entry, file = bds_file)
   }
 }

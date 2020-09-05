@@ -13,7 +13,7 @@ record_shiny(
   log.errors = TRUE,
   log.outputs = FALSE,
   drop.dir = FALSE,
-  debug = FALSE
+  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
 }
 \arguments{
@@ -35,7 +35,9 @@ with inputs)?}
 \item{drop.dir}{If \code{TRUE} and path is empty at the end of the process, drop
 the logs directory.}
 
-\item{debug}{Do we debug the events recording by issuing extra messages?}
+\item{debug}{Do we debug the events recording by issuing extra messages? By
+Default the value in the environment variable \code{LEARNDOWN_DEBUG} is used and
+debugging will be done if this value is different to \code{0}.}
 }
 \value{
 \code{TRUE}if there where log files to export, \code{FALSE} otherwise.

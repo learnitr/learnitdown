@@ -14,7 +14,7 @@ learndownShinyVersion(version)
 
 submitAnswerButton(
   inputId = "submit",
-  label = "Submit Answer",
+  label = "Submit",
   class = "btn-primary",
   ...
 )

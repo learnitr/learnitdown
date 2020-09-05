@@ -166,7 +166,8 @@ read_shinylogs <- function(file, version = "0",
 }
 
 .record_shinylogs <- function(file, url, db, collection = "shiny",
-  version = "0", log.errors = TRUE, log.outputs = FALSE, debug = FALSE) {
+version = "0", log.errors = TRUE, log.outputs = FALSE,
+debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
   if (!file.exists(file))
     return(FALSE)
@@ -219,7 +220,9 @@ read_shinylogs <- function(file, version = "0",
 #' with inputs)?
 #' @param drop.dir If `TRUE` and path is empty at the end of the process, drop
 #' the logs directory.
-#' @param debug Do we debug the events recording by issuing extra messages?
+#' @param debug Do we debug the events recording by issuing extra messages? By
+#' Default the value in the environment variable `LEARNDOWN_DEBUG` is used and
+#' debugging will be done if this value is different to `0`.
 #'
 #' @return `TRUE`if there where log files to export, `FALSE` otherwise.
 #' @export
@@ -230,7 +233,7 @@ read_shinylogs <- function(file, version = "0",
 #' # TODO...
 record_shiny <- function(path, url, db, collection = "shiny",
 version = "0", log.errors = TRUE, log.outputs = FALSE, drop.dir = FALSE,
-debug = FALSE) {
+debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
   log_files <- dir(path, pattern = "\\.rds$", full.names = TRUE)
   if (length(log_files)) {
@@ -303,7 +306,7 @@ learndownShinyVersion <- function(version)
 
 #' @export
 #' @rdname learndownShiny
-submitAnswerButton <- function(inputId = "submit", label = "Submit Answer",
+submitAnswerButton <- function(inputId = "submit", label = "Submit",
 class = "btn-primary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
@@ -352,7 +355,9 @@ submitQuitButtons <- function() {
 #' @param log.outputs Do we log output events (no by default)?
 #' @param drop.dir Do we erase the directory indicated by `path =` if it is
 #' empty at the end of the process (yes by default).
-#' @param debug Do we debug recording of events using extra messages?
+#' @param debug Do we debug recording of events using extra messages? By
+#' default, it is the value of the envirnoment variable `LEARNDOWN_DEBUG`, and
+#' debugging is activated when that value is different to `0`.
 #' @param solution The correct solution as a named list. Names are the
 #' application inputs to check and their values are the correct values. The
 #' current state of these inputs will be compared against the solution, and the
@@ -384,10 +389,12 @@ url = Sys.getenv("MONGO_URL"), url.server = Sys.getenv("MONGO_URL_SERVER"),
 db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
 password = Sys.getenv("MONGO_PASSWORD"),
 version = getOption("learndown.shiny.version"), path = "shiny_logs",
-log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, debug = FALSE) {
+log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE,
+debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
   # Indicate this is a learndown Shiny application
-  if (isTRUE(debug))
+  debug <- isTRUE(debug)
+  if (debug)
     message("Shiny application with learndown v. ", packageVersion("learndown"))
 
   # Increment a session counter

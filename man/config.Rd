@@ -6,7 +6,12 @@
 \alias{decrypt}
 \title{Configure the R environment for the course (including database information)}
 \usage{
-config(url, password, cache = ".learndown_config")
+config(
+  url,
+  password,
+  cache = ".learndown_config",
+  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
+)
 
 encrypt(object, password)
 
@@ -21,6 +26,10 @@ information.}
 \item{cache}{The path to the file to use to store a cached version of these
 data. Access to the database will be checked, and if it fails, the
 configuration data are refreshed from the URL.}
+
+\item{debug}{Do we issue debugging messages? By default, it is set according
+to the \code{LEARNDOWN_DEBUG} environment variable (yes, if this variable is not
+\code{0}).}
 
 \item{object}{An object to be encrypted.}
 }

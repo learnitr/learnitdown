@@ -20,7 +20,7 @@ trackEvents(
   log.errors = TRUE,
   log.outputs = FALSE,
   drop.dir = TRUE,
-  debug = FALSE
+  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
 
 trackSubmit(
@@ -71,7 +71,9 @@ directory is not writable, a temporary directory is used instead.}
 \item{drop.dir}{Do we erase the directory indicated by \verb{path =} if it is
 empty at the end of the process (yes by default).}
 
-\item{debug}{Do we debug recording of events using extra messages?}
+\item{debug}{Do we debug recording of events using extra messages? By
+default, it is the value of the envirnoment variable \code{LEARNDOWN_DEBUG}, and
+debugging is activated when that value is different to \code{0}.}
 
 \item{solution}{The correct solution as a named list. Names are the
 application inputs to check and their values are the correct values. The
