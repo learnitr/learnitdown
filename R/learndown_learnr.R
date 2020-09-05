@@ -31,7 +31,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   bds_file <- file.path(bds_dir, "learnr_events")
   debug <- (Sys.getenv("LEARNDOWN_DEBUG", 0) != 0)
 
-  # Add bese64 encrypted data in the local file (temporary storage if the
+  # Add base64 encrypted data in the local file (temporary storage if the
   # database is not available)
   add_file_base64 <- function(entry, file) {
     str <- gsub("\n", "", base64_enc(serialize(entry, NULL)))
@@ -47,24 +47,42 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   if (is.null(correct)) {
     correct <- data$feedback$correct
     if (is.null(correct))
-      correct <- ""
+      correct <- NA
   }
   data$correct <- NULL
 
+  # Rewrite events with equivalent xAPI verbs
+  # see https://rstudio.github.io/learnr/publishing.html
+  # and http://xapi.vocab.pub/verbs/index.html
+  verb <- switch(event,
+    exercise_hint       = "assisted",
+    exercise_submitted  = "submitted",
+    exercise_result     = "evaluated",
+    question_submission = "answered",
+    video_progress      = "seeked",
+    section_skipped     = "progressed",
+    section_viewed      = "displayed",
+    session_start       = "started",
+    session_stop        = "stopped",
+    event # Just in case there will be something not in the list
+    )
+
   # Create an entry for the database, similar to Shiny events
   entry <- data.frame(
-    session     = "", # Should we got this?
+    session     = "", # Should we use this?
     date        = format(Sys.time(), format = "%Y-%m-%d %H:%M:%OS6",
       tz = "GMT"),
     app         = paste0("learnr_", tutorial_id),
     version     = tutorial_version,
     user        = user_id,
     login       = user_name(),
-    email       = user_email(),
+    email       = tolower(user_email()),
     course      = "", # TODO: how to get this?
     institution = "", # TODO: idem
-    event       = event,
+    verb        = verb,
     correct     = correct,
+    score       = as.integer(correct),
+    grade       = as.integer(correct), # TODO: should be correct divided by the number of exercises!
     label       = label,
     value       = "",
     data        = as.character(toJSON(data, auto_unbox = TRUE)),
@@ -84,9 +102,14 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     if (file.exists(bds_file)) {
       dat <- readLines(bds_file)
       unlink(bds_file)
-      if (length(dat))
-        for (i in 1:length(dat))
+      n_pending_events <- length(dat)
+      if (n_pending_events) {
+        for (i in 1:n_pending_events)
           m$insert(unserialize(base64_dec(dat[i])))
+        if (debug)
+          message(n_pending_events,
+            " pending event(s) also inserted in the database")
+      }
     }
   }
   # Only get rid of the entry if it was actually injected in the database

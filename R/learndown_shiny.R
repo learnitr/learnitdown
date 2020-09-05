@@ -59,13 +59,13 @@ read_shinylogs <- function(file, version = "0",
     value = c(session$user, ""), # Complete user info only in the start event
     type = c("session.id", "session.id"),
     binding = c("", ""),
-    state = c("start", "stop"),
+    state = c("started", "stopped"),
     stringsAsFactors = FALSE)
 
   # Inputs
   if (length(logs$inputs)) {
     inputs <- logs[["inputs"]]
-    inputs$state <- "inputs"
+    inputs$state <- "interacted"
     inputs$value <-  as.character(inputs$value)
     events <- rbind(events, inputs)
   }
@@ -77,7 +77,7 @@ read_shinylogs <- function(file, version = "0",
     errors$error <- NULL
     errors$type <- "text"
     errors$binding <- ""
-    errors$state <- "errors"
+    errors$state <- "debugged"
     events <- rbind(events, errors)
   }
 
@@ -85,7 +85,7 @@ read_shinylogs <- function(file, version = "0",
   if (isTRUE(log.outputs) && length(logs$outputs)) {
     outputs <- logs[["outputs"]]
     outputs$value <- as.character(outputs$value)
-    outputs$state <- "outputs"
+    outputs$state <- "computed"
     outputs$type <- ""
     outputs <- outputs[, c("sessionid", "name", "timestamp", "value", "type",
       "binding", "state")]
@@ -104,30 +104,38 @@ read_shinylogs <- function(file, version = "0",
     email       = common_data$email,
     course      = common_data$course,
     institution = common_data$institution,
-    event       = events$state,
+    verb        = events$state,
     correct     = "", # We will rework this for results later on
+    score       = "", # Idem
+    grade       = "", # Idem
     label       = events$name,
     value       = events$value,
     data        = paste0('{"type":"', events$type, '","binding":"',
       events$binding, '"}'),
     stringsAsFactors = FALSE)
 
-  # Rework quit events
-  is_quit <- res$label == "quit"
+  # Rework submit and quit events
+  is_submit <- res$label == "learndown_submit_"
+  if (any(is_submit)) {
+    res$verb[is_submit] <- "submitted"
+    res$label[is_submit] <- ""
+  }
+  is_quit <- res$label == "learndown_quit_"
   if (any(is_quit)) {
-    res$event[is_quit] <- "quit"
+    res$verb[is_quit] <- "exited"
     res$label[is_quit] <- ""
   }
 
   # Rework result events
   is_result <- res$label == "learndown_result_"
   if (any(is_result)) {
-    res$event[is_result] <- "result"
+    res$verb[is_result] <- "evaluated"
     res$label[is_result] <- ""
     results <- res$value[is_result]
     # We strip correct (TRUE/FALSE) out and put it in the correct column
     values <- character(0)
     correct <- character(0)
+    score <- character(0)
     for (i in 1:length(results)) {
       # We want to protect here again st wrong entries!
       value <- try(fromJSON(results[i]), silent = TRUE)
@@ -135,12 +143,15 @@ read_shinylogs <- function(file, version = "0",
         correct[i] <- "NA"
         values[i] <- results[i]
       } else {
-        correct[i] <- as.character(value$correct)
+        correct[i] <- value$correct
+        score[i] <- if (value$correct) "1" else "0" # Simply OK or not
         value$correct <- NULL
         values[i] <- as.character(toJSON(value, auto_unbox = TRUE))
       }
     }
     res$correct[is_result] <- correct
+    res$score[is_result] <- score # OK or note => score is 0 or 1
+    res$grade[is_result] <- score # Only one exercise => grade == score
     res$value[is_result] <- values
   } else {
     # We want at least one result, so, we add one with correct == "NA" now
@@ -154,8 +165,10 @@ read_shinylogs <- function(file, version = "0",
       email       = common_data$email,
       course      = common_data$course,
       institution = common_data$institution,
-      event       = "result",
+      verb        = "evaluated",
       correct     = "NA",
+      score       = "NA",
+      grade       = "NA",
       label       = "",
       value       = "",
       data        = '{type":"","binding":"shiny.textInput"}',
@@ -276,8 +289,9 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' by default, it is the same as `title`. If `title = NULL`, no title is added.
 #' @param version The version number (in a string character format) of the Shiny
 #' application to use in the events logger.
-#' @param inputId The identifier of the button ("submit" or "quit").
-#' @param label The button text ("Submit Answer" or "Quit").
+#' @param inputId The identifier of the button ("learndown_submit_" or
+#' "learndown_quit_").
+#' @param label The button text ("Submit" or "Quit").
 #' @param class The bootstrap class of the button.
 #' @param ... Further arguments passed to [shiny::actionButton()].
 #'
@@ -311,13 +325,13 @@ learndownShinyVersion <- function(version)
 
 #' @export
 #' @rdname learndownShiny
-submitAnswerButton <- function(inputId = "submit", label = "Submit",
+submitAnswerButton <- function(inputId = "learndown_submit_", label = "Submit",
 class = "btn-primary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
 #' @export
 #' @rdname learndownShiny
-quitButton <- function(inputId = "quit", label = "Quit",
+quitButton <- function(inputId = "learndown_quit_", label = "Quit",
 class = "btn-secondary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
@@ -518,8 +532,8 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @rdname trackEvents
 trackSubmit <- function(session, input, output, solution = NULL, comment = "",
   message.success = "Correct", message.error = "Incorrect") {
-  observeEvent(input$submit, {
-    req(input$submit)
+  observeEvent(input$learndown_submit_, {
+    req(input$learndown_submit_)
 
     if (is.null(solution)) {
       # Always TRUE
@@ -549,8 +563,8 @@ trackSubmit <- function(session, input, output, solution = NULL, comment = "",
 #' @export
 #' @rdname trackEvents
 trackQuit <- function(session, input, output, delay = 60) {
-  observeEvent(input$quit, {
-    req(input$quit)
+  observeEvent(input$learndown_quit_, {
+    req(input$learndown_quit_)
     session$close()
     # Force closing the app after delay if there is no other opened session
     if (delay != -1)

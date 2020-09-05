@@ -13,13 +13,18 @@ learndownShiny(title, windowTitle = title)
 learndownShinyVersion(version)
 
 submitAnswerButton(
-  inputId = "submit",
+  inputId = "learndown_submit_",
   label = "Submit",
   class = "btn-primary",
   ...
 )
 
-quitButton(inputId = "quit", label = "Quit", class = "btn-secondary", ...)
+quitButton(
+  inputId = "learndown_quit_",
+  label = "Quit",
+  class = "btn-secondary",
+  ...
+)
 
 submitQuitButtons()
 }
@@ -32,9 +37,10 @@ by default, it is the same as \code{title}. If \code{title = NULL}, no title is 
 \item{version}{The version number (in a string character format) of the Shiny
 application to use in the events logger.}
 
-\item{inputId}{The identifier of the button ("submit" or "quit").}
+\item{inputId}{The identifier of the button ("learndown_submit_" or
+"learndown_quit_").}
 
-\item{label}{The button text ("Submit Answer" or "Quit").}
+\item{label}{The button text ("Submit" or "Quit").}
 
 \item{class}{The bootstrap class of the button.}
 
