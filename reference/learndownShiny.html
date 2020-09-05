@@ -179,13 +179,18 @@ by the user and to close the application cleanly.</p>
 <span class='fu'>learndownShinyVersion</span>(<span class='kw'>version</span>)
 
 <span class='fu'>submitAnswerButton</span>(
-  inputId = <span class='st'>"submit"</span>,
+  inputId = <span class='st'>"learndown_submit_"</span>,
   label = <span class='st'>"Submit"</span>,
   class = <span class='st'>"btn-primary"</span>,
   <span class='kw'>...</span>
 )
 
-<span class='fu'>quitButton</span>(inputId = <span class='st'>"quit"</span>, label = <span class='st'>"Quit"</span>, class = <span class='st'>"btn-secondary"</span>, <span class='kw'>...</span>)
+<span class='fu'>quitButton</span>(
+  inputId = <span class='st'>"learndown_quit_"</span>,
+  label = <span class='st'>"Quit"</span>,
+  class = <span class='st'>"btn-secondary"</span>,
+  <span class='kw'>...</span>
+)
 
 <span class='fu'>submitQuitButtons</span>()</pre>
 
@@ -208,11 +213,12 @@ application to use in the events logger.</p></td>
     </tr>
     <tr>
       <th>inputId</th>
-      <td><p>The identifier of the button ("submit" or "quit").</p></td>
+      <td><p>The identifier of the button ("learndown_submit_" or
+"learndown_quit_").</p></td>
     </tr>
     <tr>
       <th>label</th>
-      <td><p>The button text ("Submit Answer" or "Quit").</p></td>
+      <td><p>The button text ("Submit" or "Quit").</p></td>
     </tr>
     <tr>
       <th>class</th>
