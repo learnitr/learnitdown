@@ -5,8 +5,8 @@
 - Reworked database scheme, including course and institution
 - Use of LEARNDOWN_LOCAL_STORAGE and LEARNDOWN_DEBUG environment variables
 everywhere (Shiny and learnr applications).
-- Fields of entries to be added to the database are adapted to get the same ones
-between the differents applications.
+- Fields to be added to the database are adapted to get the same ones between
+the differents applications.
 - Events replaced by their equivalent xAPI verbs.
 
 # learndown 1.0.3
