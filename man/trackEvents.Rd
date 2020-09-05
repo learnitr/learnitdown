@@ -16,7 +16,7 @@ trackEvents(
   user = Sys.getenv("MONGO_USER"),
   password = Sys.getenv("MONGO_PASSWORD"),
   version = getOption("learndown.shiny.version"),
-  path = "shiny_logs",
+  path = Sys.getenv("LEARNDOWN_LOCAL_STORAGE", "shiny_logs"),
   log.errors = TRUE,
   log.outputs = FALSE,
   drop.dir = TRUE,
@@ -54,14 +54,15 @@ read from the \code{MONGO_BASE} environment variable.}
 \item{user}{The user login to the MongoDB database. By default, it is
 read from the \code{MONGO_USER} environment variable.}
 
-\item{password}{The password to access the MongoDB database. By default, it is
-read from the \code{MONGO_PASSWORD} environment variable.}
+\item{password}{The password to access the MongoDB database. By default, it
+is read from the \code{MONGO_PASSWORD} environment variable.}
 
 \item{version}{The version of the current Shiny application. By default, it
 is the \code{learndown.shiny.version} option, as set by \code{\link[=learndownShinyVersion]{learndownShinyVersion()}}.}
 
 \item{path}{The path where the temporary \code{shinylogs} log files are stored. By
-default, it is the \code{shiny_logs} subdirectory of the application,and if that
+default, it is set to the \code{LEARNDOWN_LOCAL_STORAGE} environment variable,
+or to \code{shiny_logs} subdirectory of the application if not defined. If that
 directory is not writable, a temporary directory is used instead.}
 
 \item{log.errors}{Do we log error events (yes by default)?}
@@ -72,7 +73,7 @@ directory is not writable, a temporary directory is used instead.}
 empty at the end of the process (yes by default).}
 
 \item{debug}{Do we debug recording of events using extra messages? By
-default, it is the value of the envirnoment variable \code{LEARNDOWN_DEBUG}, and
+default, it is the value of the environment variable \code{LEARNDOWN_DEBUG}, and
 debugging is activated when that value is different to \code{0}.}
 
 \item{solution}{The correct solution as a named list. Names are the
@@ -107,9 +108,6 @@ of a Shiny application to track events (start, stop, inputs, outputs, errors,
 result or quit), to check the answer when the user clicks on the submit
 button and to cleanly close the application when the user clicks on the quit
 button.
-}
-\examples{
-# TODO...
 }
 \seealso{
 \code{\link[=learndownShinyVersion]{learndownShinyVersion()}}

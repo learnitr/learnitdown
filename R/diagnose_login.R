@@ -1,10 +1,15 @@
-#' Insert code in an R Markdown document to diagnose personal data information (login, contextual data, ...)
+#' Insert code in an R Markdown document to diagnose personal data information
+#'
+#' This function is used, inside an R Markdown document, to dynamically
+#' elaborate a short report on the client-side (by using JavaScript code) that
+#' displays the login status of the user (login, contextual data, ...).
 #'
 #' @param block Should the diagnostic be included in a block construct
 #' (not if `NULL`)?
 #' @param lang The language to use for diagnostic output (only `'en'` or `'fr'` currently)
 #'
-#' @return Nothing, the function is used for its side-effect of adding diagnostic code in the document
+#' @return Nothing, the function is used for its side-effect of adding
+#' diagnostic code in the document
 #' @export
 #'
 #' @details

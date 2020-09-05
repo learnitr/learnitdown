@@ -2,7 +2,7 @@
 % Please edit documentation in R/diagnose_login.R
 \name{diagnose_login}
 \alias{diagnose_login}
-\title{Insert code in an R Markdown document to diagnose personal data information (login, contextual data, ...)}
+\title{Insert code in an R Markdown document to diagnose personal data information}
 \usage{
 diagnose_login(block = "info", lang = "en")
 }
@@ -13,10 +13,13 @@ diagnose_login(block = "info", lang = "en")
 \item{lang}{The language to use for diagnostic output (only \code{'en'} or \code{'fr'} currently)}
 }
 \value{
-Nothing, the function is used for its side-effect of adding diagnostic code in the document
+Nothing, the function is used for its side-effect of adding
+diagnostic code in the document
 }
 \description{
-Insert code in an R Markdown document to diagnose personal data information (login, contextual data, ...)
+This function is used, inside an R Markdown document, to dynamically
+elaborate a short report on the client-side (by using JavaScript code) that
+displays the login status of the user (login, contextual data, ...).
 }
 \details{
 Wherever you want to display this diagnostic report in your bookdown page,

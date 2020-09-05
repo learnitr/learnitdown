@@ -23,7 +23,8 @@ webshot_shiny_addin <- function() {
     args <- sub("^[^\\(]+(\\([^\\)]+\\)).*$", "\\1", sel)
 
     # Construct the code to take screenshot of the Shiny app and run it
-    message("Launching the Shiny application and taking the screenshot, please wait...")
+    message("Launching the Shiny application and taking the screenshot,",
+      " please wait...")
     img <- NULL
     code <- paste0("img <- learndown::webshot_shiny", args)
     res <- try(eval(parse(text = code)), silent = TRUE)
@@ -42,4 +43,3 @@ webshot_shiny_addin <- function() {
     }
   }
 }
-

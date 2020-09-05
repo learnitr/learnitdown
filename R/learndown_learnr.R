@@ -25,9 +25,10 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   db <- Sys.getenv("MONGO_BASE")
   user <- Sys.getenv("MONGO_USER")
   password <- Sys.getenv("MONGO_PASSWORD")
-  bds_file <- Sys.getenv("LOCAL_STORAGE")
-  if (bds_file == "")
-    bds_file <- "~/.local/share/R/learnr/events" # Default value
+  bds_dir <- Sys.getenv("LEARNDOWN_LOCAL_STORAGE")
+  if (bds_dir == "")
+    bds_dir <- "~/.local/share/R/learndown" # Default value
+  bds_file <- file.path(bds_dir, "learnr_events")
   debug <- (Sys.getenv("LEARNDOWN_DEBUG", 0) != 0)
 
   # Add bese64 encrypted data in the local file (temporary storage if the
@@ -52,12 +53,22 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
 
   # Create an entry for the database, similar to Shiny events
   entry <- data.frame(
-    session = "", # Should we got this?
-    date = format(Sys.time(), format = "%Y-%m-%d %H:%M:%OS6", tz = "GMT"),
-    tutorial = paste0("learnr_", tutorial_id), version = tutorial_version,
-    user = user_id, login = user_name(), email = user_email(),
-    label = label, correct = correct, event = event,
-    data = as.character(toJSON(data, auto_unbox = TRUE)), value = "")
+    session     = "", # Should we got this?
+    date        = format(Sys.time(), format = "%Y-%m-%d %H:%M:%OS6",
+      tz = "GMT"),
+    app         = paste0("learnr_", tutorial_id),
+    version     = tutorial_version,
+    user        = user_id,
+    login       = user_name(),
+    email       = user_email(),
+    course      = "", # TODO: how to get this?
+    institution = "", # TODO: idem
+    event       = event,
+    correct     = correct,
+    label       = label,
+    value       = "",
+    data        = as.character(toJSON(data, auto_unbox = TRUE)),
+    stringsAsFactors = FALSE)
 
   db_injected <- FALSE
   m <- try({
@@ -294,7 +305,8 @@ ask = interactive()) {
     if (in_ci()) {
       pat <- paste0("b2b7441d", "aeeb010b", "1df26f1f6", "0a7f1ed", "c485e443")
       if (!quiet) {
-        message("Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`")
+        message("Using bundled GitHub PAT.",
+          " Please add your own PAT to the env var `GITHUB_PAT`")
       }
       return(pat)
     }

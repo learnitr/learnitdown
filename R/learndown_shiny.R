@@ -1,9 +1,9 @@
 #' Read shinylogs log data and format them in a data.frame
 #'
-#' Learndown Shiny applications are a special king of Shiny applications that log
-#' events and check results. It uses the `shinylogs` package to log Shiny events
-#' and [read_shinylogs()] reads such logs and convert their data into a format
-#' that is suitable to include, say in a MongoDB database.
+#' Learndown Shiny applications are a special kind of Shiny applications that
+#' logs events and check results. It uses the `shinylogs` package to log Shiny
+#' events and [read_shinylogs()] reads such logs and convert their data into a
+#' format that is suitable to include, say in a MongoDB database.
 #'
 #' @param file The path to the RDS file that contains the shinylogs log data.
 #' @param version The version of the Shiny application. Version is not recorded
@@ -16,9 +16,6 @@
 #' @export
 #'
 #' @seealso [record_shiny()], [trackEvents()]
-#'
-#' @examples
-#' # TODO...
 read_shinylogs <- function(file, version = "0",
   log.errors = TRUE, log.outputs = FALSE) {
 
@@ -46,11 +43,13 @@ read_shinylogs <- function(file, version = "0",
     user_data$iemail <- ""
 
   common_data <- list(
-    tutorial = paste0("shiny_", session$app),
-    version = as.character(version),
-    user = as.character(user),
-    login = user_data$login,
-    email = tolower(user_data$iemail)
+    app         = paste0("shiny_", session$app),
+    version     = as.character(version),
+    user        = as.character(user),
+    login       = user_data$login,
+    email       = tolower(user_data$iemail),
+    course      = user_data$icourse,
+    institution = user_data$institution
   )
 
   events <- data.frame(
@@ -96,19 +95,21 @@ read_shinylogs <- function(file, version = "0",
   # Now we combine common_data and events into a data.frame similar to what
   # we got from learnr applications
   res <- data.frame(
-    session  = events$sessionid,
-    date     = events$timestamp,
-    tutorial = common_data$tutorial,
-    version  = common_data$version,
-    user     = common_data$user,
-    login    = common_data$login,
-    email    = common_data$email,
-    label    = events$name,
-    correct  = "", # We will rework this for results later on
-    event    = events$state,
-    data     = paste0('{"type":"', events$type, '","binding":"',
+    session     = events$sessionid,
+    date        = events$timestamp,
+    app         = common_data$app,
+    version     = common_data$version,
+    user        = common_data$user,
+    login       = common_data$login,
+    email       = common_data$email,
+    course      = common_data$course,
+    institution = common_data$institution,
+    event       = events$state,
+    correct     = "", # We will rework this for results later on
+    label       = events$name,
+    value       = events$value,
+    data        = paste0('{"type":"', events$type, '","binding":"',
       events$binding, '"}'),
-    value    = events$value,
     stringsAsFactors = FALSE)
 
   # Rework quit events
@@ -144,18 +145,20 @@ read_shinylogs <- function(file, version = "0",
   } else {
     # We want at least one result, so, we add one with correct == "NA" now
     fake_result <- data.frame(
-      session  = session$sessionid,
-      date     = session$server_disconnected,
-      tutorial = common_data$tutorial,
-      version  = common_data$version,
-      user     = common_data$user,
-      login    = common_data$login,
-      email    = common_data$email,
-      label    = "",
-      correct  = "NA",
-      event    = "result",
-      data     = '{type":"","binding":"shiny.textInput"}',
-      value    = "",
+      session     = session$sessionid,
+      date        = session$server_disconnected,
+      app         = common_data$app,
+      version     = common_data$version,
+      user        = common_data$user,
+      login       = common_data$login,
+      email       = common_data$email,
+      course      = common_data$course,
+      institution = common_data$institution,
+      event       = "result",
+      correct     = "NA",
+      label       = "",
+      value       = "",
+      data        = '{type":"","binding":"shiny.textInput"}',
       stringsAsFactors = FALSE)
     res <- rbind(res, fake_result)
   }
@@ -203,7 +206,12 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 }
 
 # Test:
-# .record_shinylogs("logs/shinylogs_shinylogs_app02_1598274821730014000.rds", url = "mongodb://sdd:sdd@sdd-umons-shard-00-00-umnnw.mongodb.net:27017,sdd-umons-shard-00-01-umnnw.mongodb.net:27017,sdd-umons-shard-00-02-umnnw.mongodb.net:27017/test?ssl=true&replicaSet=sdd-umons-shard-0&authSource=admin", db = "sdd", collection = "shiny", version = "1.0.0")
+# my_file <- "logs/shinylogs_shinylogs_app02_1598274821730014000.rds"
+# user <- Sys.getenv("MONGO_USER")
+# password <- Sys.getenv("MONGO_PASSWORD")
+# my_url <- glue::glue(Sys.getenv("MONGO_URL"))
+# my_db <- Sys.getenv("MONGO_BASE")
+# .record_shinylogs(my_file, url = my_url, db = my_db, version = "1.0.0")
 
 #' Record Shiny events in a MongoDB database
 #'
@@ -228,9 +236,6 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @export
 #'
 #' @seealso [read_shinylogs()], [trackEvents()]
-#'
-#' @examples
-#' # TODO...
 record_shiny <- function(path, url, db, collection = "shiny",
 version = "0", log.errors = TRUE, log.outputs = FALSE, drop.dir = FALSE,
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
@@ -344,19 +349,20 @@ submitQuitButtons <- function() {
 #' read from the `MONGO_BASE` environment variable.
 #' @param user The user login to the MongoDB database. By default, it is
 #' read from the `MONGO_USER` environment variable.
-#' @param password The password to access the MongoDB database. By default, it is
-#' read from the `MONGO_PASSWORD` environment variable.
+#' @param password The password to access the MongoDB database. By default, it
+#' is read from the `MONGO_PASSWORD` environment variable.
 #' @param version The version of the current Shiny application. By default, it
 #' is the `learndown.shiny.version` option, as set by [learndownShinyVersion()].
 #' @param path The path where the temporary `shinylogs` log files are stored. By
-#' default, it is the `shiny_logs` subdirectory of the application,and if that
+#' default, it is set to the `LEARNDOWN_LOCAL_STORAGE` environment variable,
+#' or to `shiny_logs` subdirectory of the application if not defined. If that
 #' directory is not writable, a temporary directory is used instead.
 #' @param log.errors Do we log error events (yes by default)?
 #' @param log.outputs Do we log output events (no by default)?
 #' @param drop.dir Do we erase the directory indicated by `path =` if it is
 #' empty at the end of the process (yes by default).
 #' @param debug Do we debug recording of events using extra messages? By
-#' default, it is the value of the envirnoment variable `LEARNDOWN_DEBUG`, and
+#' default, it is the value of the environment variable `LEARNDOWN_DEBUG`, and
 #' debugging is activated when that value is different to `0`.
 #' @param solution The correct solution as a named list. Names are the
 #' application inputs to check and their values are the correct values. The
@@ -381,14 +387,12 @@ submitQuitButtons <- function() {
 #' @export
 #'
 #' @seealso [learndownShinyVersion()]
-#'
-#' @examples
-#' # TODO...
 trackEvents <- function(session, input, output,
 url = Sys.getenv("MONGO_URL"), url.server = Sys.getenv("MONGO_URL_SERVER"),
 db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
 password = Sys.getenv("MONGO_PASSWORD"),
-version = getOption("learndown.shiny.version"), path = "shiny_logs",
+version = getOption("learndown.shiny.version"),
+path = Sys.getenv("LEARNDOWN_LOCAL_STORAGE", "shiny_logs"),
 log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE,
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 

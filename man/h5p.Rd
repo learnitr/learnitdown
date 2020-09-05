@@ -9,18 +9,25 @@ h5p(id, baseurl, width = 780, height = 500)
 \arguments{
 \item{id}{The ID of the H5P content in your Wordpress.}
 
-\item{baseurl}{The first part of the URL for your domain, usually something like \verb{https://my.site.com} \strong{without} the trailing \code{/}.}
+\item{baseurl}{The first part of the URL for your domain, usually something
+like \verb{https://my.site.com} \strong{without} the trailing \code{/}.}
 
 \item{width}{The width of the iframe where the H5P content is displayed.}
 
 \item{height}{The height of the iframe.}
 }
 \value{
-HTML code that generates the iframe. It is most conveniently used inside and R inline expression in your R Markdown document on its own line with one blank line above and bellow it.
+HTML code that generates the iframe. It is most conveniently used
+inside and R inline expression in your R Markdown document on its own line
+with one blank line above and bellow it.
 }
 \description{
 Insert H5P content in the document
 }
 \details{
-This function is designed to work inside a Wordpress site where the H5P plugin has been installed. You should also serve your bookdown pages as a subdirectory inside of the same Wordpress site to allow free communication between the parent (the bookdown page) and the child document in the iframe (the H5P content).
+This function is designed to work inside a Wordpress site where the H5P
+plugin has been installed. You should also serve your bookdown pages as a
+subdirectory inside of the same Wordpress site to allow free communication
+between the parent (the bookdown page) and the child document in the iframe
+(the H5P content).
 }

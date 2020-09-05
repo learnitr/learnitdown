@@ -46,9 +46,6 @@ debugging will be done if this value is different to \code{0}.}
 Given a path that contains \code{shinylogs} events in .rds format, read these
 events and transfer them into a MongoDB database.
 }
-\examples{
-# TODO...
-}
 \seealso{
 \code{\link[=read_shinylogs]{read_shinylogs()}}, \code{\link[=trackEvents]{trackEvents()}}
 }

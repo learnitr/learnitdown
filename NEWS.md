@@ -2,6 +2,9 @@
 
 - Functions for learndown learnr applications added.
 - `config()` function added.
+- Reworked database scheme, including course and institution
+- Use of LEARNDOWN_LOCAL_STORAGE and LEARNDOWN_DEBUG environment variables
+everywhere (Shiny and learnr applications).
 
 # learndown 1.0.3
 

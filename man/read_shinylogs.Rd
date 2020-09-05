@@ -21,13 +21,10 @@ with inputs)?}
 A data frame with the different events logged (one per line).
 }
 \description{
-Learndown Shiny applications are a special king of Shiny applications that log
-events and check results. It uses the \code{shinylogs} package to log Shiny events
-and \code{\link[=read_shinylogs]{read_shinylogs()}} reads such logs and convert their data into a format
-that is suitable to include, say in a MongoDB database.
-}
-\examples{
-# TODO...
+Learndown Shiny applications are a special kind of Shiny applications that
+logs events and check results. It uses the \code{shinylogs} package to log Shiny
+events and \code{\link[=read_shinylogs]{read_shinylogs()}} reads such logs and convert their data into a
+format that is suitable to include, say in a MongoDB database.
 }
 \seealso{
 \code{\link[=record_shiny]{record_shiny()}}, \code{\link[=trackEvents]{trackEvents()}}
