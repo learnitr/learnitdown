@@ -31,7 +31,8 @@ read_shinylogs <- function(file, version = "0",
   session <- logs[["session"]]
   user_data <- try(fromJSON(session$user), silent = TRUE)
   if (inherits(user_data, "try-error"))
-    user_data <- list(user = "", login = "", iemail = "")
+    user_data <- list(user = "", login = "", iemail = "",
+      icourse = "", institution = "")
   user <- user_data$user
   if (is.null(user) || !length(user) || user == "")
     user <- Sys.info()['user']
@@ -41,6 +42,10 @@ read_shinylogs <- function(file, version = "0",
     user_data$login <- ""
   if (is.null(user_data$iemail) || !length(user_data$iemail))
     user_data$iemail <- ""
+  if (is.null(user_data$icourse) || !length(user_data$icourse))
+    user_data$icourse <- ""
+  if (is.null(user_data$institution) || !length(user_data$institution))
+    user_data$institution <- ""
 
   common_data <- list(
     app         = paste0("shiny_", session$app),
@@ -96,7 +101,8 @@ read_shinylogs <- function(file, version = "0",
   # we got from learnr applications
   res <- data.frame(
     session     = events$sessionid,
-    date        = events$timestamp,
+    date        = format(events$timestamp, format = "%Y-%m-%d %H:%M:%OS6",
+      tz = "GMT"),
     app         = common_data$app,
     version     = common_data$version,
     user        = common_data$user,
@@ -144,7 +150,7 @@ read_shinylogs <- function(file, version = "0",
         values[i] <- results[i]
       } else {
         correct[i] <- value$correct
-        score[i] <- if (value$correct) "1" else "0" # Simply OK or not
+        score[i] <- if (value$correct) 1 else 0 # Simply OK or not
         value$correct <- NULL
         values[i] <- as.character(toJSON(value, auto_unbox = TRUE))
       }
@@ -450,7 +456,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
       message("Tracking events in ", path, " for user ", user_info$login)
       toastr_info(paste("Enregistrement actif pour", user_info$login),
         closeButton = TRUE, position = "top-right", showDuration = 5)
-      updateActionButton(session, "quit", label = "Save/Quit")
+      updateActionButton(session, "learndown_quit_", label = "Save & Quit")
 
       user_tracking <- function(session, query = user_info) {
         # This is the original shinylogs function to retrieve the user
@@ -571,6 +577,6 @@ trackQuit <- function(session, input, output, delay = 60) {
       later::later(function() {
         if (getOption("learndown.shiny.sessions", default = 2) < 1)
           stopApp()
-      }, delay = delay)
+       }, delay = delay)
   })
 }

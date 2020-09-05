@@ -39,15 +39,39 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     cat(str, "\n", file = file, append = TRUE)
   }
 
+  # We use the convention that tutorial_version is x.y.z/n
+  # where:
+  # - x.y.z is actually the version
+  # - n is the total number of exercices in the tutorial
+  if (grepl("/[0-9]+$", tutorial_version)) {
+    version <- sub("/[0-9]+$", "", tutorial_version)
+    n_ex <- as.integer(sub("^.*/([0-9]+)$", "\\1", tutorial_version))
+  } else {# No indication of the number of exercises
+    version <- tutorial_version
+    n_ex <- 1 # We indicate 1, so that grade and score will be the same
+  }
+
   # Extract label and correct from data
   label <- data$label
   if (is.null(label)) label <- ""
   data$label <- NULL
   correct <- data$correct
-  if (is.null(correct)) {
+  if (is.null(correct))
     correct <- data$feedback$correct
-    if (is.null(correct))
-      correct <- NA
+  if (is.null(correct)) {
+    score <- NA
+    grade <- NA
+    correct <- ""
+  } else {
+    # If label contains '_noscore', we don't score this item
+    if (grepl("_noscore$", label)) {
+      score <- NA
+      grade <- NA
+    } else {
+      score <- as.integer(correct)
+      grade <- score/n_ex
+    }
+    correct <- as.character(correct)
   }
   data$correct <- NULL
 
@@ -57,6 +81,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   verb <- switch(event,
     exercise_hint       = "assisted",
     exercise_submitted  = "submitted",
+    exercise_submission = "submitted", # Not clear which one is correct!
     exercise_result     = "evaluated",
     question_submission = "answered",
     video_progress      = "seeked",
@@ -65,15 +90,24 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     session_start       = "started",
     session_stop        = "stopped",
     event # Just in case there will be something not in the list
-    )
+  )
+  # If it was question_submission, but nothing in 'correct', then it means that
+  # the 'Try again' button was pressed -> verb is reassessed
+  if (verb == "answered" && correct == "")
+    verb <- "reassessed"
+
+  # If verb is submitted, but correct == "", then it iwas 'Run code'
+  # => change verb to
+  if (verb == "submitted" && correct == "")
+    verb <- "evaluated"
 
   # Create an entry for the database, similar to Shiny events
-  entry <- data.frame(
+  entry <- list(
     session     = "", # Should we use this?
     date        = format(Sys.time(), format = "%Y-%m-%d %H:%M:%OS6",
       tz = "GMT"),
     app         = paste0("learnr_", tutorial_id),
-    version     = tutorial_version,
+    version     = version,
     user        = user_id,
     login       = user_name(),
     email       = tolower(user_email()),
@@ -81,19 +115,21 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     institution = "", # TODO: idem
     verb        = verb,
     correct     = correct,
-    score       = as.integer(correct),
-    grade       = as.integer(correct), # TODO: should be correct divided by the number of exercises!
+    score       = score,
+    grade       = grade,
     label       = label,
     value       = "",
-    data        = as.character(toJSON(data, auto_unbox = TRUE)),
-    stringsAsFactors = FALSE)
+    # jsonlite::toJSON fails because no asJSON method for shiny.tag S3 objects
+    #data        = as.character(toJSON(data, auto_unbox = TRUE)),
+    data         = as.character(.listToJSON(data))
+  )
 
   db_injected <- FALSE
   m <- try({
     m <- mongo(collection = "learnr", db = db, url = glue(url))
-    m$insert(entry)
+    m$insert(toJSON(entry, auto_unbox = TRUE))
     if (debug)
-      message("Learnr event '", entry$event, "' inserted into database.")
+      message("Learnr event '", entry$verb, "' inserted into database.")
     m
   }, silent = TRUE)
   if (!inherits(m, "try-error")) {
@@ -105,7 +141,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
       n_pending_events <- length(dat)
       if (n_pending_events) {
         for (i in 1:n_pending_events)
-          m$insert(unserialize(base64_dec(dat[i])))
+          m$insert(toJSON(unserialize(base64_dec(dat[i]))), auto_unbox = TRUE)
         if (debug)
           message(n_pending_events,
             " pending event(s) also inserted in the database")
@@ -115,7 +151,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   # Only get rid of the entry if it was actually injected in the database
   if (!isTRUE(db_injected)) {
     if (debug)
-      message("Database not available, saving event '", entry$event,
+      message("Database not available, saving event '", entry$verb,
         "' locally.")
     add_file_base64(entry, file = bds_file)
   }
@@ -133,6 +169,23 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
 #    mdb$find()
 #}
 #my_data <- collect_learnr("user_name", "my_password"); View(my_data)
+
+# Equivalent to svMisc::listToJson, but avoiding dependance to svMisc
+.listToJSON <- function(x) {
+  if (!is.list(x) && length(x) == 1L)
+    return(encodeString(x, quote = "\""))
+  x <- lapply(x, .listToJSON)
+  x <- if (is.list(x) || length(x) > 1L) {
+    nms <- names(x)
+    if (is.null(nms)) {
+      paste0("[", paste(x, collapse = ","), "]")
+    } else {
+      paste0("{", paste(paste0(encodeString(make.unique(nms, sep = "#"),
+        quote = "\""), ":", x), collapse = ","), "}")
+    }
+  }
+  x
+}
 
 
 #' @export
