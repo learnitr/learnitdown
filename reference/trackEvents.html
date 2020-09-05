@@ -186,7 +186,7 @@ button.</p>
   user = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_USER"</span>),
   password = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_PASSWORD"</span>),
   version = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"learndown.shiny.version"</span>),
-  path = <span class='st'>"shiny_logs"</span>,
+  path = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_LOCAL_STORAGE"</span>, <span class='st'>"shiny_logs"</span>),
   log.errors = <span class='fl'>TRUE</span>,
   log.outputs = <span class='fl'>FALSE</span>,
   drop.dir = <span class='fl'>TRUE</span>,
@@ -242,8 +242,8 @@ read from the <code>MONGO_USER</code> environment variable.</p></td>
     </tr>
     <tr>
       <th>password</th>
-      <td><p>The password to access the MongoDB database. By default, it is
-read from the <code>MONGO_PASSWORD</code> environment variable.</p></td>
+      <td><p>The password to access the MongoDB database. By default, it
+is read from the <code>MONGO_PASSWORD</code> environment variable.</p></td>
     </tr>
     <tr>
       <th>version</th>
@@ -253,7 +253,8 @@ is the <code>learndown.shiny.version</code> option, as set by <code><a href='lea
     <tr>
       <th>path</th>
       <td><p>The path where the temporary <code>shinylogs</code> log files are stored. By
-default, it is the <code>shiny_logs</code> subdirectory of the application,and if that
+default, it is set to the <code>LEARNDOWN_LOCAL_STORAGE</code> environment variable,
+or to <code>shiny_logs</code> subdirectory of the application if not defined. If that
 directory is not writable, a temporary directory is used instead.</p></td>
     </tr>
     <tr>
@@ -272,7 +273,7 @@ empty at the end of the process (yes by default).</p></td>
     <tr>
       <th>debug</th>
       <td><p>Do we debug recording of events using extra messages? By
-default, it is the value of the envirnoment variable <code>LEARNDOWN_DEBUG</code>, and
+default, it is the value of the environment variable <code>LEARNDOWN_DEBUG</code>, and
 debugging is activated when that value is different to <code>0</code>.</p></td>
     </tr>
     <tr>
@@ -317,9 +318,6 @@ application in order to properly identify the user and record the events.</p>
 
     <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># TODO...</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
