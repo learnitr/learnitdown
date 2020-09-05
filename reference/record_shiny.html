@@ -179,7 +179,7 @@ events and transfer them into a MongoDB database.</p>
   log.errors = <span class='fl'>TRUE</span>,
   log.outputs = <span class='fl'>FALSE</span>,
   drop.dir = <span class='fl'>FALSE</span>,
-  debug = <span class='fl'>FALSE</span>
+  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -221,7 +221,9 @@ the logs directory.</p></td>
     </tr>
     <tr>
       <th>debug</th>
-      <td><p>Do we debug the events recording by issuing extra messages?</p></td>
+      <td><p>Do we debug the events recording by issuing extra messages? By
+Default the value in the environment variable <code>LEARNDOWN_DEBUG</code> is used and
+debugging will be done if this value is different to <code>0</code>.</p></td>
     </tr>
     </table>
 
