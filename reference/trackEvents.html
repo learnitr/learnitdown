@@ -148,7 +148,7 @@ button." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.4</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -198,9 +198,11 @@ button.</p>
   <span class='kw'>input</span>,
   <span class='kw'>output</span>,
   solution = <span class='kw'>NULL</span>,
+  max_score = <span class='kw'>NULL</span>,
   comment = <span class='st'>""</span>,
   message.success = <span class='st'>"Correct"</span>,
-  message.error = <span class='st'>"Incorrect"</span>
+  message.error = <span class='st'>"Incorrect"</span>,
+  score.txt = <span class='st'>"Score"</span>
 )
 
 <span class='fu'>trackQuit</span>(<span class='kw'>session</span>, <span class='kw'>input</span>, <span class='kw'>output</span>, delay = <span class='fl'>60</span>)</pre>
@@ -288,6 +290,12 @@ correct (use this if you just want to indicate that the user's answer is
 recorded in the database).</p></td>
     </tr>
     <tr>
+      <th>max_score</th>
+      <td><p>The highest score value that could be attributed if the
+exercise is correctly done. By default, it is <code>NULL</code> meaning that the higher
+score would be equal to the number of items to check in <code>solution</code>.</p></td>
+    </tr>
+    <tr>
       <th>comment</th>
       <td><p>A string with a comment to append to the value of the result
 event.</p></td>
@@ -301,6 +309,10 @@ event.</p></td>
       <th>message.error</th>
       <td><p>The message to display if the answer is wrong
 ("Incorrect" by default).</p></td>
+    </tr>
+    <tr>
+      <th>score.txt</th>
+      <td><p>The word to use for "score" ("Score" by default).</p></td>
     </tr>
     <tr>
       <th>delay</th>
