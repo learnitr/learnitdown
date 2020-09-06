@@ -45,10 +45,10 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   # - n is the total number of exercices in the tutorial
   if (grepl("/[0-9]+$", tutorial_version)) {
     version <- sub("/[0-9]+$", "", tutorial_version)
-    n_ex <- as.integer(sub("^.*/([0-9]+)$", "\\1", tutorial_version))
+    max <- as.integer(sub("^.*/([0-9]+)$", "\\1", tutorial_version))
   } else {# No indication of the number of exercises
     version <- tutorial_version
-    n_ex <- 1 # We indicate 1, so that grade and score will be the same
+    max <- 1 # We indicate 1 by default and score is by exercice only
   }
 
   # Extract label and correct from data
@@ -60,16 +60,18 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     correct <- data$feedback$correct
   if (is.null(correct)) {
     score <- NA
+    max <- 0
     grade <- NA
     correct <- ""
   } else {
     # If label contains '_noscore', we don't score this item
     if (grepl("_noscore$", label)) {
       score <- NA
+      max <- 0
       grade <- NA
     } else {
       score <- as.integer(correct)
-      grade <- score/n_ex
+      grade <- score/max
     }
     correct <- as.character(correct)
   }
@@ -79,33 +81,45 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   # see https://rstudio.github.io/learnr/publishing.html
   # and http://xapi.vocab.pub/verbs/index.html
   verb <- switch(event,
-    exercise_hint       = "assisted",
-    exercise_submitted  = "submitted",
-    exercise_submission = "submitted", # Not clear which one is correct!
-    exercise_result     = "evaluated",
-    question_submission = "answered",
-    video_progress      = "seeked",
-    section_skipped     = "progressed",
-    section_viewed      = "displayed",
-    session_start       = "started",
-    session_stop        = "stopped",
+    exercise_hint             = "assisted",
+    exercise_submitted        = "executed",
+    exercise_submission       = "executed", # Not clear which one is correct!
+    exercise_result           = "submitted",
+    question_submission       = "answered",
+    reset_question_submission = "reset",
+    video_progress            = "seeked",
+    section_skipped           = "progressed",
+    section_viewed            = "displayed",
+    session_start             = "started",
+    session_stop              = "stopped",
     event # Just in case there will be something not in the list
   )
   # If it was question_submission, but nothing in 'correct', then it means that
   # the 'Try again' button was pressed -> verb is reassessed
   if (verb == "answered" && correct == "")
-    verb <- "reassessed"
+    verb <- "reset"
 
-  # If verb is submitted, but correct == "", then it iwas 'Run code'
-  # => change verb to
+  # If verb is submitted, but correct == "", then it was 'Run code'
+  # => change verb to evaluated
   if (verb == "submitted" && correct == "")
     verb <- "evaluated"
+
+  # If verb is assisted but this is the solution, or a hint with the solution
+  # => change verb to revealed
+  if (verb == "assisted") {
+    if (data$type == "solution")
+      verb <- "revealed"
+    # If the name ends with _hX and this is hint x-1 (becausde counted from 0)
+    if (grepl("_h[1-9]$", label) && data$type == "hint" &&
+      as.integer(data$index) == as.integer(substring(label, nchar(label))) - 1)
+      verb <- "revealed"
+  }
 
   # Create an entry for the database, similar to Shiny events
   entry <- list(
     session     = "", # Should we use this?
-    date        = format(Sys.time(), format = "%Y-%m-%d %H:%M:%OS6",
-      tz = "GMT"),
+    date        = format(Sys.time(),
+      format = "%Y-%m-%d %H:%M:%OS6", tz = "GMT"),
     app         = tutorial_id,
     version     = version,
     user        = user_id,
@@ -116,6 +130,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     verb        = verb,
     correct     = correct,
     score       = score,
+    max         = max,
     grade       = grade,
     label       = label,
     value       = "",
@@ -141,7 +156,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
       n_pending_events <- length(dat)
       if (n_pending_events) {
         for (i in 1:n_pending_events)
-          m$insert(toJSON(unserialize(base64_dec(dat[i]))), auto_unbox = TRUE)
+          m$insert(toJSON(unserialize(base64_dec(dat[i])), auto_unbox = TRUE))
         if (debug)
           message(n_pending_events,
             " pending event(s) also inserted in the database")
@@ -492,7 +507,7 @@ ask = interactive()) {
     }
   }
 
-  if (missing(tutorial)|| is.null(tutorial) || tutorial == "") {
+  if (missing(tutorial) || is.null(tutorial) || tutorial == "") {
     tutos <- dir(system.file("tutorials", package = package))
     if (isTRUE(ask) && interactive()) {
       # Allow selecting from the list...
@@ -505,4 +520,63 @@ ask = interactive()) {
   }
   message("Hit ESC or Ctrl-c when done...")
   run_tutorial(tutorial, package = package, ...)
+}
+
+
+
+
+
+
+
+
+
+
+
+#' Get user information to properly record learnr events
+#'
+#' The server-side of a Shiny application to place in a learnr in order to
+#' properly identify the user, and if login is provided, recording is done,
+#' otherwise not.
+#'
+#' @param session The current Shiny `session`.
+#' @param input The Shiny `input` object.
+#' @param output The Shiny `output` object.
+#' @param path The path where a cached version of the user informations is
+#' stored.
+#' @param debug Do we debug recording of events using extra messages? By
+#' default, it is the value of the environment variable `LEARNDOWN_DEBUG`, and
+#' debugging is activated when that value is different to `0`.
+#'
+#' @return The code to be inserted in the server part of the learndown learnr
+#' application in order to properly identify the user and record the events.
+#' @export
+#'
+#' @seealso [learndownShinyVersion()]
+learnr_user_info <- function(session, input, output,
+path = Sys.getenv("LEARNDOWN_LOCAL_STORAGE", "~/.local/share/R"),
+debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+
+  # Indicate this is a learndown learnr application
+  debug <- isTRUE(debug)
+  if (debug)
+    message("Learnr application with learndown v. ",
+      packageVersion("learndown"))
+
+  observe({
+    # Get user information
+    user_info <- parseQueryString(session$clientData$url_search)
+    # If there is no login in user_info, we don't track events
+    if (is.null(user_info$login)) {
+      options(learndown.learnr.user = NULL)
+      message("No login: no events will be tracked")
+      toastr_warning("Utilisateur anonyme, aucun enregistrement.",
+        closeButton = TRUE, position = "top-right", showDuration = 5)
+    } else {
+      options(learndown.learnr.user = user_info)
+      message("Tracking events for user ", user_info$login)
+      toastr_info(paste("Enregistrement actif pour", user_info$login),
+        closeButton = TRUE, position = "top-right", showDuration = 5)
+      updateActionButton(session, "learndown_quit_", label = "Save & Quit")
+    }
+  })
 }
