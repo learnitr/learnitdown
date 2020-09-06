@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • learndown</title>
+<title>Get user information to properly record learnr events — learnr_user_info • learndown</title>
 
 
 <!-- jquery -->
@@ -52,7 +52,11 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Get user information to properly record learnr events — learnr_user_info" />
+<meta property="og:description" content="The server-side of a Shiny application to place in a learnr in order to
+properly identify the user, and if login is provided, recording is done,
+otherwise not." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -78,7 +82,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
 <div class="preloader">
@@ -155,126 +159,64 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Get user information to properly record learnr events</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
+    <div class="hidden name"><code>learnr_user_info.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>The server-side of a Shiny application to place in a learnr in order to
+properly identify the user, and if login is provided, recording is done,
+otherwise not.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>learnr_user_info</span>(
+  <span class='kw'>session</span>,
+  <span class='kw'>input</span>,
+  <span class='kw'>output</span>,
+  path = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_LOCAL_STORAGE"</span>, <span class='st'>"~/.local/share/R"</span>),
+  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
+)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="checker_ack_learnr.html">checker_ack_learnr()</a></code> </p>
-        </td>
-        <td><p>A default checker that just acknowledges submission</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="config.html">config()</a></code> <code><a href="config.html">encrypt()</a></code> <code><a href="config.html">decrypt()</a></code> </p>
-        </td>
-        <td><p>Configure the R environment for the course (including database information)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="diagnose_login.html">diagnose_login()</a></code> </p>
-        </td>
-        <td><p>Insert code in an R Markdown document to diagnose personal data information</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="h5p.html">h5p()</a></code> </p>
-        </td>
-        <td><p>Insert H5P content in the document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="launch_shiny.html">launch_shiny()</a></code> </p>
-        </td>
-        <td><p>Launch Shiny application by clicking on its screenshot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learndownShiny.html">learndownShiny()</a></code> <code><a href="learndownShiny.html">learndownShinyVersion()</a></code> <code><a href="learndownShiny.html">submitAnswerButton()</a></code> <code><a href="learndownShiny.html">quitButton()</a></code> <code><a href="learndownShiny.html">submitQuitButtons()</a></code> </p>
-        </td>
-        <td><p>Create and manage learndown Shiny applications</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learndown_init.html">learndown_init()</a></code> </p>
-        </td>
-        <td><p>Initialize learndown features in an R Markdown document</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="learnr_user_info.html">learnr_user_info()</a></code> </p>
-        </td>
-        <td><p>Get user information to properly record learnr events</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_shinylogs.html">read_shinylogs()</a></code> </p>
-        </td>
-        <td><p>Read shinylogs log data and format them in a data.frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="record_learnr.html">record_learnr()</a></code> <code><a href="record_learnr.html">user_name()</a></code> <code><a href="record_learnr.html">user_email()</a></code> </p>
-        </td>
-        <td><p>Record results of learnr exercises in a MongoDB database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="record_shiny.html">record_shiny()</a></code> </p>
-        </td>
-        <td><p>Record Shiny events in a MongoDB database</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="run.html">run()</a></code> </p>
-        </td>
-        <td><p>Run learndown learnr tutorials from a package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="send_mail_learnr.html">send_mail_learnr()</a></code> </p>
-        </td>
-        <td><p>Send your learnr submissions by email</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="trackEvents.html">trackEvents()</a></code> <code><a href="trackEvents.html">trackSubmit()</a></code> <code><a href="trackEvents.html">trackQuit()</a></code> </p>
-        </td>
-        <td><p>Track events, the submit or the quit buttons</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="webshot_shiny.html">webshot_shiny()</a></code> </p>
-        </td>
-        <td><p>Create the screenshot image of a Shiny application with a click icon</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>session</th>
+      <td><p>The current Shiny <code>session</code>.</p></td>
+    </tr>
+    <tr>
+      <th>input</th>
+      <td><p>The Shiny <code>input</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>output</th>
+      <td><p>The Shiny <code>output</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>The path where a cached version of the user informations is
+stored.</p></td>
+    </tr>
+    <tr>
+      <th>debug</th>
+      <td><p>Do we debug recording of events using extra messages? By
+default, it is the value of the environment variable <code>LEARNDOWN_DEBUG</code>, and
+debugging is activated when that value is different to <code>0</code>.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The code to be inserted in the server part of the learndown learnr
+application in order to properly identify the user and record the events.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code></p></div>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
