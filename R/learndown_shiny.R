@@ -48,7 +48,7 @@ read_shinylogs <- function(file, version = "0",
     user_data$institution <- ""
 
   common_data <- list(
-    app         = paste0("shiny_", session$app),
+    app         = session$app,
     version     = as.character(version),
     user        = as.character(user),
     login       = user_data$login,
@@ -112,8 +112,9 @@ read_shinylogs <- function(file, version = "0",
     institution = common_data$institution,
     verb        = events$state,
     correct     = "", # We will rework this for results later on
-    score       = "", # Idem
-    grade       = "", # Idem
+    score       = NA_integer_, # Idem
+    max         = 0L, # Idem
+    grade       = NA_integer_, # Idem
     label       = events$name,
     value       = events$value,
     data        = paste0('{"type":"', events$type, '","binding":"',
@@ -141,29 +142,37 @@ read_shinylogs <- function(file, version = "0",
     # We strip correct (TRUE/FALSE) out and put it in the correct column
     values <- character(0)
     correct <- character(0)
-    score <- character(0)
+    score <- numeric(0)
+    max <- numeric(0)
     for (i in 1:length(results)) {
-      # We want to protect here again st wrong entries!
+      # We want to protect here against wrong entries!
       value <- try(fromJSON(results[i]), silent = TRUE)
       if (inherits(value, "try-error")) {
         correct[i] <- "NA"
+        score[i] <- NA
+        max[i] <- 0
         values[i] <- results[i]
       } else {
         correct[i] <- value$correct
-        score[i] <- if (value$correct) 1 else 0 # Simply OK or not
         value$correct <- NULL
+        score[i] <- value$score
+        value$score <- NULL
+        max[i] <- value$max
+        value$max <- NULL
         values[i] <- as.character(toJSON(value, auto_unbox = TRUE))
       }
     }
     res$correct[is_result] <- correct
-    res$score[is_result] <- score # OK or note => score is 0 or 1
-    res$grade[is_result] <- score # Only one exercise => grade == score
+    res$score[is_result] <- score
+    res$max[is_result] <- max
+    res$grade[is_result] <- score/max
     res$value[is_result] <- values
   } else {
     # We want at least one result, so, we add one with correct == "NA" now
     fake_result <- data.frame(
       session     = session$sessionid,
-      date        = session$server_disconnected,
+      date        = format(session$server_disconnected,
+        format = "%Y-%m-%d %H:%M:%OS6", tz = "GMT"),
       app         = common_data$app,
       version     = common_data$version,
       user        = common_data$user,
@@ -173,8 +182,9 @@ read_shinylogs <- function(file, version = "0",
       institution = common_data$institution,
       verb        = "evaluated",
       correct     = "NA",
-      score       = "NA",
-      grade       = "NA",
+      score       = NA,
+      max         = 0,
+      grade       = NA,
       label       = "",
       value       = "",
       data        = '{type":"","binding":"shiny.textInput"}',
@@ -206,7 +216,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     m <- mongo(collection = collection, db = db, url = url)
     if (debug)
       message("Inserting events into the database...")
-    m$insert(dat)
+    m$insert(dat, na = "null", auto_unbox = TRUE, force = TRUE)
     if (debug)
       message("...done!")
   }, silent = TRUE)
@@ -392,6 +402,10 @@ submitQuitButtons <- function() {
 #' accordingly. If `solution = NULL`, then the answer is considered to be always
 #' correct (use this if you just want to indicate that the user's answer is
 #' recorded in the database).
+#' @param max_score The highest score value that could be attributed if the
+#' exercise is correctly done. By default, it is `NULL` meaning that the higher
+#' score would be equal to the number of items to check in `solution`.
+#' @param score.txt The word to use for "score" ("Score" by default).
 #' @param comment A string with a comment to append to the value of the result
 #' event.
 #' @param message.success The message to display is the answer is correct
@@ -536,29 +550,59 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
 #' @export
 #' @rdname trackEvents
-trackSubmit <- function(session, input, output, solution = NULL, comment = "",
-  message.success = "Correct", message.error = "Incorrect") {
+trackSubmit <- function(session, input, output, solution = NULL,
+max_score = NULL, comment = "",
+message.success = "Correct", message.error = "Incorrect", score.txt = "Score") {
+  if (!is.null(max_score))
+    max_score <- as.numeric(max_score[1]) # Make sure max_score is a number
+
   observeEvent(input$learndown_submit_, {
     req(input$learndown_submit_)
 
-    if (is.null(solution)) {
+    if (is.null(solution) || !length(names(solution))) {
       # Always TRUE
       res <- TRUE
+      if (!is.null(max_score)) {
+        score <- max_score
+      } else {
+        score <- 1L
+      }
+      max <- score
     } else {
+      # For each item, check if answer is correct (equal, or within range)
       items <- names(solution)
       answer <- list()
-      if (length(items))
-        for (item in items)
-          answer[[item]] <- isolate(input[[item]])
-      res <- isTRUE(all.equal(answer, solution, check.attributes = FALSE))
+      res <- logical(0)
+      for (item in items) {
+        answer[[item]] <- isolate(input[[item]])
+        sol_item <- solution[[item]]
+        if (is.character(sol_item)) {
+          res[item] <- answer[[item]] %in% sol_item
+        } else {
+          # Treat it as numeric (even if it is logical)
+          res[item] <- answer[[item]] >= min(sol_item) &
+            answer[[item]] <= max(sol_item)
+        }
+      }
+      max <- length(items) # Default max score
+      score <- sum(res)
+      # Do we need to rescale score (max_score provided) ?
+      if (!is.null(max_score)) {
+        score <- score / max * max_score
+        max <- max_score
+      }
     }
-    .shiny_feedback(res,
+    .shiny_feedback(all(res),
       message.success = message.success,
-      message.error = message.error)
+      message.error = paste0(message.error, "\n ", score.txt, " = ",
+        round(score, 2), "/", max))
     val <- list(
-      correct = res,
+      correct = all(res),
+      score = score,
+      max = max,
       answer = answer,
       solution = solution,
+      match = as.list(res),
       comment = comment
     )
     val_str <- as.character(toJSON(val, auto_unbox = TRUE))

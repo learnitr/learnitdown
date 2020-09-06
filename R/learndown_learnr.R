@@ -106,7 +106,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     session     = "", # Should we use this?
     date        = format(Sys.time(), format = "%Y-%m-%d %H:%M:%OS6",
       tz = "GMT"),
-    app         = paste0("learnr_", tutorial_id),
+    app         = tutorial_id,
     version     = version,
     user        = user_id,
     login       = user_name(),

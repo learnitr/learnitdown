@@ -28,9 +28,11 @@ trackSubmit(
   input,
   output,
   solution = NULL,
+  max_score = NULL,
   comment = "",
   message.success = "Correct",
-  message.error = "Incorrect"
+  message.error = "Incorrect",
+  score.txt = "Score"
 )
 
 trackQuit(session, input, output, delay = 60)
@@ -85,6 +87,10 @@ accordingly. If \code{solution = NULL}, then the answer is considered to be alwa
 correct (use this if you just want to indicate that the user's answer is
 recorded in the database).}
 
+\item{max_score}{The highest score value that could be attributed if the
+exercise is correctly done. By default, it is \code{NULL} meaning that the higher
+score would be equal to the number of items to check in \code{solution}.}
+
 \item{comment}{A string with a comment to append to the value of the result
 event.}
 
@@ -93,6 +99,8 @@ event.}
 
 \item{message.error}{The message to display if the answer is wrong
 ("Incorrect" by default).}
+
+\item{score.txt}{The word to use for "score" ("Score" by default).}
 
 \item{delay}{The time to wait before we close the Shiny application in sec
 (60 sec by default). If \code{delay = -1}, the application is \strong{not} closed, only
