@@ -375,6 +375,8 @@ submitQuitButtons <- function() {
 #' @param session The current Shiny `session`.
 #' @param input The Shiny `input` object.
 #' @param output The Shiny `output` object.
+#' @param fingerprint.fun The function that can get user info from the
+#' [fingerprint()], or `NULL` by default to disable using local user data.
 #' @param url The URL to reach the MongoDB database. By default, it is read from
 #' the `MONGO_URL` environment variable.
 #' @param url.server The URL to reach the MongoDB database. By default, it is
@@ -424,8 +426,8 @@ submitQuitButtons <- function() {
 #' application in order to properly identify the user and record the events.
 #' @export
 #'
-#' @seealso [learndownShinyVersion()]
-trackEvents <- function(session, input, output,
+#' @seealso [learndownShinyVersion()], [fingerprint()]
+trackEvents <- function(session, input, output, fingerprint.fun = NULL,
 url = Sys.getenv("MONGO_URL"), url.server = Sys.getenv("MONGO_URL_SERVER"),
 db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
 password = Sys.getenv("MONGO_PASSWORD"),
@@ -455,7 +457,13 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
     # Get user information
     user_info <- parseQueryString(session$clientData$url_search)
-    # If there is no login in user_info, we don't track events
+    # No login info? Check local fingerprint instead (Shiny app run locally?)
+    if (is.null(user_info$login) & !is.null(fingerprint.fun)) {
+      message("Getting user information from the fingerprint.")
+      user_info <- fingerprint.fun()
+    }
+
+    # If there is still no login in user_info, we don't track events
     if (is.null(user_info$login)) {
       message("No login: no events will be tracked")
       toastr_warning("Utilisateur anonyme, aucun enregistrement.",
@@ -501,9 +509,6 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
       track_usage(storage_mode = store_rds(path = path),
         get_user = user_tracking)
 
-      url <- glue(url) # User and password replaced in the URL
-      url.server <- glue(url.server)
-
       onSessionEnded(function() {
         # Read log events from .rds files and insert them in a MongoDB database
         # If MONGO_URL_SERVER exists and we are run from a server, we use it,
@@ -512,7 +517,8 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
           Sys.getenv('SHINY_PORT') == ""
 
         is_server_up <- function(url, db) {
-          res <- try(mongo(collection = "shiny", db = db), silent = TRUE)
+          res <- try(mongo(collection = "shiny", db = db, url = url),
+            silent = TRUE)
           !inherits(res, "try-error")
         }
 
@@ -523,12 +529,12 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
         } else {
           if (isTRUE(debug))
             message("Application runs from a server")
-          if (url.server != "" && is_server_up(url = url.server, db = db))
+          if (url.server != "" && is_server_up(url = glue(url.server), db = db))
             url <- url.server # Use server URL instead
         }
         if (isTRUE(debug))
           message("Database URL: ", url, ", base: ", db)
-        record_shiny(path, url = url, db = db,
+        record_shiny(path, url = glue(url), db = db,
           version = version, log.errors = log.errors, log.outputs = log.outputs,
           drop.dir = drop.dir, debug = debug)
       })

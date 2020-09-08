@@ -10,13 +10,15 @@ Shiny application.
 to fine-tune their work.
 - `fingerprint()` function added to identify users in local learnr and shiny
 applications.
+- New argument `fingerprint.fun =` in `trackEvents()` so that locally run Shiny
+applications can also use user data stored in the fingerpint cache.
 
 # learndown 1.0.4
 
 - Functions for learndown learnr applications added.
 - `config()` function added.
 - Reworked database scheme, including course and institution
-- Use of LEARNDOWN_LOCAL_STORAGE and LEARNDOWN_DEBUG environment variables
+- Use of `LEARNDOWN_LOCAL_STORAGE` and `LEARNDOWN_DEBUG` environment variables
 everywhere (Shiny and learnr applications).
 - Fields to be added to the database are adapted to get the same ones between
 the different applications.
