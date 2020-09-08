@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Configure the R environment for the course (including database information) — config • learndown</title>
+<title>Configure the R environment for the course (including database information)
+and provide (or cache) user information in ciphered form. — config • learndown</title>
 
 
 <!-- jquery -->
@@ -52,7 +53,8 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Configure the R environment for the course (including database information) — config" />
+<meta property="og:title" content="Configure the R environment for the course (including database information)
+and provide (or cache) user information in ciphered form. — config" />
 <meta property="og:description" content="Call this function every time you need to get environment variables set, like
 the URL, user and password of the MongoDB database used by the course." />
 <meta name="twitter:card" content="summary" />
@@ -160,7 +162,8 @@ the URL, user and password of the MongoDB database used by the course." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Configure the R environment for the course (including database information)</h1>
+    <h1>Configure the R environment for the course (including database information)
+and provide (or cache) user information in ciphered form.</h1>
     <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/config.R'><code>R/config.R</code></a></small>
     <div class="hidden name"><code>config.Rd</code></div>
     </div>
@@ -173,13 +176,38 @@ the URL, user and password of the MongoDB database used by the course.</p>
     <pre class="usage"><span class='fu'>config</span>(
   <span class='kw'>url</span>,
   <span class='kw'>password</span>,
-  cache = <span class='st'>".learndown_config"</span>,
+  cache = <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>".learndown_config"</span>),
   debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
 )
 
-<span class='fu'>encrypt</span>(<span class='kw'>object</span>, <span class='kw'>password</span>)
+<span class='fu'>fingerprint</span>(
+  <span class='kw'>data</span>,
+  <span class='kw'>password</span>,
+  cipher = <span class='st'>"aes-256-cbc"</span>,
+  iv = <span class='kw'>NULL</span>,
+  cache = <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>".learndown_user"</span>),
+  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
+)
 
-<span class='fu'>decrypt</span>(<span class='kw'>object</span>, <span class='kw'>password</span>)</pre>
+<span class='fu'>encrypt</span>(
+  <span class='kw'>object</span>,
+  <span class='kw'>password</span>,
+  cipher = <span class='st'>"aes-256-cbc"</span>,
+  iv = <span class='kw'>NULL</span>,
+  serialize = <span class='fl'>TRUE</span>,
+  base64 = <span class='fl'>FALSE</span>,
+  url.encode = <span class='fl'>FALSE</span>
+)
+
+<span class='fu'>decrypt</span>(
+  <span class='kw'>object</span>,
+  <span class='kw'>password</span>,
+  cipher = <span class='st'>"aes-256-cbc"</span>,
+  iv = <span class='kw'>NULL</span>,
+  unserialize = <span class='fl'>TRUE</span>,
+  base64 = <span class='fl'>FALSE</span>,
+  url.decode = <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,15 +234,52 @@ to the <code>LEARNDOWN_DEBUG</code> environment variable (yes, if this variable 
 <code>0</code>).</p></td>
     </tr>
     <tr>
+      <th>data</th>
+      <td><p>The fingerprint data in clear or ciphered form (in this case, the
+string must start with "fingerprint=").</p></td>
+    </tr>
+    <tr>
+      <th>cipher</th>
+      <td><p>The cryptography algorithm to use.</p></td>
+    </tr>
+    <tr>
+      <th>iv</th>
+      <td><p>The initialization vector for the cipher.</p></td>
+    </tr>
+    <tr>
       <th>object</th>
       <td><p>An object to be encrypted.</p></td>
+    </tr>
+    <tr>
+      <th>serialize</th>
+      <td><p>Do we serialize <code>object</code> before ciphering it (<code>TRUE</code> by
+default)?</p></td>
+    </tr>
+    <tr>
+      <th>base64</th>
+      <td><p>Do we encode/decode base64 the object (<code>FALSE</code> by default)?</p></td>
+    </tr>
+    <tr>
+      <th>url.encode</th>
+      <td><p>Do we encode for URL (query) use (<code>FALSE</code> by default) ?</p></td>
+    </tr>
+    <tr>
+      <th>unserialize</th>
+      <td><p>Do we unserialize the resulting object after deciphering
+it (<code>TRUE</code> by default)?</p></td>
+    </tr>
+    <tr>
+      <th>url.decode</th>
+      <td><p>Do we decode URL before deciphering it (<code>FALSE</code> by
+default)?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Invisibly returns <code>TRUE</code> if success, or <code>FALSE</code> otherwise for
-<code>config()</code>. The encrypted/decrypted object for <code>encrypt()</code> and <code>decrypt()</code>.</p>
+<code>config()</code>. The encrypted/decrypted object for <code>encrypt()</code> and <code>decrypt()</code>.
+The user information for <code>fingerprint()</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
