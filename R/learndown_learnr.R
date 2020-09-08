@@ -30,6 +30,9 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     bds_dir <- "~/.local/share/R/learndown" # Default value
   bds_file <- file.path(bds_dir, "learnr_events")
   debug <- (Sys.getenv("LEARNDOWN_DEBUG", 0) != 0)
+  user_info <- getOption("learndown_learnr_user")
+  if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
+    return()
 
   # Add base64 encrypted data in the local file (temporary storage if the
   # database is not available)
@@ -125,10 +128,11 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     app         = tutorial_id,
     version     = version,
     user        = user_id,
-    login       = user_name(),
-    email       = tolower(user_email()),
-    course      = "", # TODO: how to get this?
-    institution = "", # TODO: idem
+    login       = if (is.null(user_info$login)) "" else user_info$login, #user_name(),
+    email       = if (is.null(user_info$iemail)) "" else user_info$iemail, #tolower(user_email()),
+    course      = if (is.null(user_info$icourse)) "" else user_info$icourse,
+    institution = if (is.null(user_info$institution)) "" else
+      user_info$institution,
     verb        = verb,
     correct     = correct,
     score       = score,

@@ -1,9 +1,12 @@
 #' Configure the R environment for the course (including database information)
+#' and provide (or cache) user information in ciphered form.
 #'
 #' Call this function every time you need to get environment variables set, like
 #' the URL, user and password of the MongoDB database used by the course.
 #' @param url The URL of the encrypted file that contains the configuration
 #' information.
+#' @param data The fingerprint data in clear or ciphered form (in this case, the
+#' string must start with "fingerprint=").
 #' @param password The password to decrypt the data.
 #' @param cache The path to the file to use to store a cached version of these
 #' data. Access to the database will be checked, and if it fails, the
@@ -12,11 +15,23 @@
 #' to the `LEARNDOWN_DEBUG` environment variable (yes, if this variable is not
 #' `0`).
 #' @param object An object to be encrypted.
+#' @param cipher The cryptography algorithm to use.
+#' @param iv The initialization vector for the cipher.
+#' @param serialize Do we serialize `object` before ciphering it (`TRUE` by
+#' default)?
+#' @param unserialize Do we unserialize the resulting object after deciphering
+#' it (`TRUE` by default)?
+#' @param base64 Do we encode/decode base64 the object (`FALSE` by default)?
+#' @param url.encode Do we encode for URL (query) use (`FALSE` by default) ?
+#' @param url.decode Do we decode URL before deciphering it (`FALSE` by
+#' default)?
 #'
 #' @return Invisibly returns `TRUE` if success, or `FALSE` otherwise for
 #' [config()]. The encrypted/decrypted object for [encrypt()] and [decrypt()].
+#' The user information for [fingerprint()].
 #' @export
-config <- function(url, password, cache = ".learndown_config",
+config <- function(url, password,
+cache = file.path(tempdir(), ".learndown_config"),
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
   # Make sure the environment variable is set correctly for debug
@@ -42,7 +57,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
       mongo_url <- Sys.getenv("MONGO_URL")
       db <- Sys.getenv("MONGO_BASE")
       if (debug)
-        message("Database URL: ", url, ", base: ", db)
+        message("Database URL: ", mongo_url, ", base: ", db)
       mongo(collection = "learnr", db = db, url = glue(mongo_url))
       # Return conf_crypt
       conf_crypt
@@ -80,7 +95,82 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
 #' @rdname config
 #' @export
-encrypt <- function(object, password) {
+fingerprint <- function(data, password, cipher = "aes-256-cbc", iv = NULL,
+cache = file.path(tempdir(), ".learndown_user"),
+debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+  debug <- isTRUE(debug)
+  if (!missing(data)) {
+    # If data = NULL, we delete fingerprint data
+    if (is.null(data)) {
+      unlink(cache, force = TRUE)
+      if (debug)
+        message("User information deleted (fingerprint cache).")
+      return(invisible(NULL))
+    }
+    # We set or replace fingerprint cache file
+    data <- as.character(data)
+    # If data are already crypted, the string starts with "fingerprint="
+    if (substring(data, 1, 12) != "fingerprint=") {
+      # We encrypt these data
+      data <- encrypt(data, password = password, cipher = cipher, iv = iv,
+        serialize = FALSE, base64 = TRUE, url.encode = TRUE)
+      data <- paste0("fingerprint=", data)
+    }
+    writeBin(data, cache)
+    if (debug)
+      message("Fingerprint data cached.")
+  } else {
+    if (file.exists(cache)) {
+      data <- readBin(cache, "character")
+      if (debug)
+        message("Fingerprint retrieved from cache.")
+    } else {
+      # No data... nothing to do!
+      if (debug)
+        message("No fingerprint data.")
+      return(invisible(NULL))
+    }
+  }
+
+  # If password is provided, decrypt data
+  if (!missing(password)) {
+    data <- sub("^fingerprint=", "", data)
+    user_info_query <- try(decrypt(data, password = password, cipher = cipher,
+      iv = iv, unserialize = FALSE, base64 = TRUE, url.decode = TRUE),
+      silent = TRUE)
+    if (inherits(user_info_query, "try-error")) {
+      if (debug)
+        message("Error deciphering fingerprint: ", user_info_query)
+      return(invisible(NULL))
+    }
+    # Parse this query string
+   user_info <- parse_url(paste0("http://localhost?", user_info_query))$query
+   # Check: we must have a list with at least a login component
+   if (!is.list(user_info)) {
+     if (debug)
+       message("Expected a list for fingerprint data, got ", class(user_info))
+     return(invisible(NULL))
+   }
+   if (!"login" %in% names(user_info)) {
+     if (debug)
+       message("No 'login' in fingerprint user data")
+     return(invisible(NULL))
+   }
+   # Data should be OK
+   if (debug)
+     message("Successfully got user data from the fingerprint")
+   return(invisible(user_info))
+  } else {
+    return(invisible(data))
+  }
+}
+
+serialized <- NULL # To avoid a spurious warning in R CMD check
+
+#' @rdname config
+#' @export
+encrypt <- function(object, password, cipher = "aes-256-cbc", iv = NULL,
+serialize = TRUE, base64 = FALSE, url.encode = FALSE) {
   password <- as.character(password)
   if (length(password) != 1)
     stop("Use a single character string for the password")
@@ -90,17 +180,32 @@ encrypt <- function(object, password) {
   # Create a secure key from the password
   key <- PKI.digest(charToRaw(password), "SHA256")
 
+
+  if (isTRUE(serialize)) {
+    serialize_con <- textConnection("serialized", "w", local = TRUE)
+    dput(object, file = serialize_con, control = "all")
+    close(serialize_con)
+    object <- charToRaw(paste(serialized, collapse = "\n"))
+  } else {
+    object <- charToRaw(as.character(object))
+  }
+
   # Encrypt object
-  serialize <- textConnection("serialized", "w")
-  dput(object, file = serialize, control = "all")
-  close(serialize)
-  serialized <- charToRaw(paste(serialized, collapse = "\n"))
-  PKI.encrypt(serialized, key, "aes256")
+  encrypted <- PKI.encrypt(object, key, cipher = cipher, iv = iv)
+
+  if (isTRUE(base64))
+    encrypted <- gsub("\n", "", base64_enc(encrypted))
+
+  if (isTRUE(url.encode))
+    encrypted <- URLencode(encrypted, reserved = TRUE)
+
+  encrypted
 }
 
 #' @rdname config
 #' @export
-decrypt <- function(object, password) {
+decrypt <- function(object, password, cipher = "aes-256-cbc", iv = NULL,
+  unserialize = TRUE, base64 = FALSE, url.decode = FALSE) {
   password <- as.character(password)
   if (length(password) != 1)
     stop("Use a single character string for the password")
@@ -110,8 +215,22 @@ decrypt <- function(object, password) {
   # Create a secure key from the password
   key <- PKI.digest(charToRaw(password), "SHA256")
 
-  # Decrypt and deserialize the object
-  serialized <- PKI.decrypt(object, key, "aes256")
-  serialized <- rawToChar(serialized)
-  dget(textConnection(serialized))
+  # Decode URL
+  if (isTRUE(url.decode))
+    object <- URLdecode(object)
+
+  # Decode base 64
+  if (isTRUE(base64))
+    object <- base64_dec(object)
+
+  # Decrypt
+  decrypted <- PKI.decrypt(object, key, cipher = cipher, iv = iv)
+  decrypted <- rawToChar(decrypted)
+
+  # Possibly deserialize the object
+  if (isTRUE(unserialize)) {
+    decrypted <- dget(textConnection(decrypted))
+  }
+
+  decrypted
 }

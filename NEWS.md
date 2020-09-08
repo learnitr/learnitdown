@@ -6,6 +6,10 @@ numeric values and a series of correct solutions for text. Also a `max_score =`
 argument added to `trackSubmit()` allows to redefine the maximum score for a
 Shiny application.
 - fields type and id added to match what is issued by H5P.
+- `encrypt()` and `decrypt()` are now more versatile and accept more arguments
+to fine-tune their work.
+- `fingerprint()` function added to identify users in local learnr and shiny
+applications.
 
 # learndown 1.0.4
 

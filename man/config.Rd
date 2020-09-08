@@ -2,20 +2,47 @@
 % Please edit documentation in R/config.R
 \name{config}
 \alias{config}
+\alias{fingerprint}
 \alias{encrypt}
 \alias{decrypt}
-\title{Configure the R environment for the course (including database information)}
+\title{Configure the R environment for the course (including database information)
+and provide (or cache) user information in ciphered form.}
 \usage{
 config(
   url,
   password,
-  cache = ".learndown_config",
+  cache = file.path(tempdir(), ".learndown_config"),
   debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
 
-encrypt(object, password)
+fingerprint(
+  data,
+  password,
+  cipher = "aes-256-cbc",
+  iv = NULL,
+  cache = file.path(tempdir(), ".learndown_user"),
+  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
+)
 
-decrypt(object, password)
+encrypt(
+  object,
+  password,
+  cipher = "aes-256-cbc",
+  iv = NULL,
+  serialize = TRUE,
+  base64 = FALSE,
+  url.encode = FALSE
+)
+
+decrypt(
+  object,
+  password,
+  cipher = "aes-256-cbc",
+  iv = NULL,
+  unserialize = TRUE,
+  base64 = FALSE,
+  url.decode = FALSE
+)
 }
 \arguments{
 \item{url}{The URL of the encrypted file that contains the configuration
@@ -31,11 +58,32 @@ configuration data are refreshed from the URL.}
 to the \code{LEARNDOWN_DEBUG} environment variable (yes, if this variable is not
 \code{0}).}
 
+\item{data}{The fingerprint data in clear or ciphered form (in this case, the
+string must start with "fingerprint=").}
+
+\item{cipher}{The cryptography algorithm to use.}
+
+\item{iv}{The initialization vector for the cipher.}
+
 \item{object}{An object to be encrypted.}
+
+\item{serialize}{Do we serialize \code{object} before ciphering it (\code{TRUE} by
+default)?}
+
+\item{base64}{Do we encode/decode base64 the object (\code{FALSE} by default)?}
+
+\item{url.encode}{Do we encode for URL (query) use (\code{FALSE} by default) ?}
+
+\item{unserialize}{Do we unserialize the resulting object after deciphering
+it (\code{TRUE} by default)?}
+
+\item{url.decode}{Do we decode URL before deciphering it (\code{FALSE} by
+default)?}
 }
 \value{
 Invisibly returns \code{TRUE} if success, or \code{FALSE} otherwise for
 \code{\link[=config]{config()}}. The encrypted/decrypted object for \code{\link[=encrypt]{encrypt()}} and \code{\link[=decrypt]{decrypt()}}.
+The user information for \code{\link[=fingerprint]{fingerprint()}}.
 }
 \description{
 Call this function every time you need to get environment variables set, like
