@@ -5,6 +5,7 @@ grade = score/max. The solution for Shiny applications can now use a range for
 numeric values and a series of correct solutions for text. Also a `max_score =`
 argument added to `trackSubmit()` allows to redefine the maximum score for a
 Shiny application.
+- fields type and id added to match what is issued by H5P.
 
 # learndown 1.0.4
 
