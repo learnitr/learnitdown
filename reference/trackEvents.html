@@ -180,6 +180,7 @@ button.</p>
   <span class='kw'>session</span>,
   <span class='kw'>input</span>,
   <span class='kw'>output</span>,
+  fingerprint.fun = <span class='kw'>NULL</span>,
   url = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL"</span>),
   url.server = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL_SERVER"</span>),
   db = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_BASE"</span>),
@@ -221,6 +222,11 @@ button.</p>
     <tr>
       <th>output</th>
       <td><p>The Shiny <code>output</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>fingerprint.fun</th>
+      <td><p>The function that can get user info from the
+<code><a href='config.html'>fingerprint()</a></code>, or <code>NULL</code> by default to disable using local user data.</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -328,7 +334,7 @@ the session is closed when the user clicks on the quit button.</p></td>
 application in order to properly identify the user and record the events.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code>, <code><a href='config.html'>fingerprint()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
