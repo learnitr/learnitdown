@@ -6,7 +6,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-#' @importFrom learnr run_tutorial
+#' @importFrom learnr run_tutorial tutorial_options
 #' @importFrom remotes install_github
 #' @importFrom glue glue
 #' @importFrom webshot webshot

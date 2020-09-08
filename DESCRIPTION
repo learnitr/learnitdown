@@ -11,8 +11,9 @@ Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends: R (>= 3.0.0)
 Imports: glue, magick, webshot, rstudioapi, shiny, shinylogs, shinytoastr,
-  mongolite, jsonlite, later, utils, learnr, httr, remotes, PKI
-Suggests: covr, knitr, rmarkdown, testthat, spelling
+  mongolite, jsonlite, later, utils, learnr, gradethis, httr, remotes, PKI,
+  knitr, testthat
+Suggests: covr, rmarkdown, spelling
 License: MIT + file LICENSE
 URL: https://github.com/SciViews/learndown, https://www.sciviews.org/learndown/
 BugReports: https://github.com/SciViews/learndown/issues

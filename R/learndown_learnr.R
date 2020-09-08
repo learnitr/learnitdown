@@ -529,60 +529,89 @@ ask = interactive()) {
 }
 
 
-
-
-
-
-
-
-
-
-
-#' Get user information to properly record learnr events
+#' Set up a learndown Learnr application
 #'
-#' The server-side of a Shiny application to place in a learnr in order to
-#' properly identify the user, and if login is provided, recording is done,
-#' otherwise not.
+#' This function eases the configuration of the learnr document to get user and
+#' database info, record events, use grade this and parameterize learnr.
 #'
-#' @param session The current Shiny `session`.
-#' @param input The Shiny `input` object.
-#' @param output The Shiny `output` object.
-#' @param path The path where a cached version of the user informations is
-#' stored.
-#' @param debug Do we debug recording of events using extra messages? By
-#' default, it is the value of the environment variable `LEARNDOWN_DEBUG`, and
-#' debugging is activated when that value is different to `0`.
+#' @param config The `config()` command to use to get database info.
+#' @param fingerprint The `fingerprint()` command to use to get user info.
+#' @param time.limit The maximum time allowed to evaluate R code.
+#' @param cap The caption for R code widgets.
+#' @param echo Do we echo commands in R chunks?
+#' @param comment The prefix added before each line of R chunk output.
+#' @param use.gradethis Do we use {gradethis}?
+#' @param event.recorder The function to use as event recorder. you should
+#' probably not change the default value here.
+#' @param debug Do we issue additions debugging informations?
 #'
-#' @return The code to be inserted in the server part of the learndown learnr
-#' application in order to properly identify the user and record the events.
+#' @return Nothing. The function is used to setup the learnr environment.
 #' @export
 #'
-#' @seealso [learndownShinyVersion()]
-learnr_user_info <- function(session, input, output,
-path = Sys.getenv("LEARNDOWN_LOCAL_STORAGE", "~/.local/share/R"),
+learndownLearnrSetup <- function(config, fingerprint, time.limit = 60,
+cap = "R Code", echo = FALSE, comment = NA, use.gradethis = TRUE,
+event.recorder = learndown::record_learnr,
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+  Sys.setenv(LEARNDOWN_DEBUG = as.integer(isTRUE(debug)))
+  load_lib <- library
 
-  # Indicate this is a learndown learnr application
-  debug <- isTRUE(debug)
-  if (debug)
-    message("Learnr application with learndown v. ",
-      packageVersion("learndown"))
+  load_lib('learnr')
+  load_lib('learndown')
 
-  observe({
-    # Get user information
-    user_info <- parseQueryString(session$clientData$url_search)
-    # If there is no login in user_info, we don't track events
-    if (is.null(user_info$login)) {
-      options(learndown.learnr.user = NULL)
-      message("No login: no events will be tracked")
-      toastr_warning("Utilisateur anonyme, aucun enregistrement.",
-        closeButton = TRUE, position = "top-right", showDuration = 5)
-    } else {
-      options(learndown.learnr.user = user_info)
-      message("Tracking events for user ", user_info$login)
-      toastr_info(paste("Enregistrement actif pour", user_info$login),
-        closeButton = TRUE, position = "top-right", showDuration = 5)
-      updateActionButton(session, "learndown_quit_", label = "Save & Quit")
-    }
-  })
+  force(config) # Get configuration (database informations)
+  user <- fingerprint # Get user info
+  if (is.null(user$login)) {
+    message("No login, no records!")
+  } else {
+    message("Recording enabled for ", user$login)
+  }
+  options(learndown_learnr_user = user)
+
+  if (isTRUE(use.gradethis)) {
+    load_lib('gradethis')
+    load_lib('testthat')
+    gradethis::gradethis_setup()
+  }
+
+  # Configure learnr to record events
+  options(tutorial.event_recorder = event.recorder)
+  tutorial_options(exercise.timelimit = time.limit)
+  tutorial_options(exercise.cap = cap)
+
+  # Set general knitr parameters (lmore suitable ones for learnr)
+  load_lib('knitr')
+  knitr::opts_chunk$set(echo = echo, comment = comment)
 }
+
+#' @rdname learndownLearnrSetup
+#' @export
+#' @param title The Title for the banner.
+#' @param text Text to print beneath the title.
+#' @param image URL to an image to display in the banner.
+#' @param align How is the image aligned: "left" (default), "right", "middle",
+#' "top" or "bottom".
+learndownLearnrBanner <- function(title, text, image, align = "left") {
+  login <- getOption("learndown_learnr_user")$login
+
+  shiny::div(
+    if (is.null(login)) {
+      shiny::div('Utilisateur anonyme, aucun enregistrement !',
+        class = "alert alert-warning", style = "width: 100vw;")
+    } else {
+      shiny::div('Enregistrement actif pour ', shiny::strong(login), '.',
+        class = "alert alert-info", style = "width: 100vw;")
+    },
+
+    # Do we add an image?
+    if (!missing(image)) shiny::img(src = image, align = align) else "",
+
+    # Do we add a title?
+    if (!missing(title)) shiny::h1(title) else "",
+
+    # Do we add text?
+    if (!missing(text)) text else ""
+  )
+}
+
+
+

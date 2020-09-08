@@ -11,7 +11,8 @@ to fine-tune their work.
 - `fingerprint()` function added to identify users in local learnr and shiny
 applications.
 - New argument `fingerprint.fun =` in `trackEvents()` so that locally run Shiny
-applications can also use user data stored in the fingerpint cache.
+applications can also use user data stored in the fingerprint cache.
+- `learndownLearnrSetup()` to initialize easily learndown learnr apps.
 
 # learndown 1.0.4
 

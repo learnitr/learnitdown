@@ -480,7 +480,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
       unlink(test_file)
 
       message("Tracking events in ", path, " for user ", user_info$login)
-      toastr_info(paste("Enregistrement actif pour", user_info$login),
+      toastr_info(paste0("Enregistrement actif pour ", user_info$login), ".",
         closeButton = TRUE, position = "top-right", showDuration = 5)
       updateActionButton(session, "learndown_quit_", label = "Save & Quit")
 
