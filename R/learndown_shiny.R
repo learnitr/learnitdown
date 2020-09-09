@@ -32,7 +32,7 @@ read_shinylogs <- function(file, version = "0",
   user_data <- try(fromJSON(session$user), silent = TRUE)
   if (inherits(user_data, "try-error"))
     user_data <- list(user = "", login = "", iemail = "",
-      icourse = "", institution = "")
+      icourse = "", institution = "", pathname = session$app)
   user <- user_data$user
   if (is.null(user) || !length(user) || user == "")
     user <- Sys.info()['user']
@@ -47,8 +47,14 @@ read_shinylogs <- function(file, version = "0",
   if (is.null(user_data$institution) || !length(user_data$institution))
     user_data$institution <- ""
 
+  app_name <- session$app
+  # In the case of RStudio Connect, we just get "app", not very informative
+  # => in that case, try to get something more meaninful from url_pathname
+  if (app_name == "app")
+    app_name <- basename(user_data$pathname)
+
   common_data <- list(
-    app         = session$app,
+    app         = app_name,
     version     = as.character(version),
     user        = as.character(user),
     login       = user_data$login,
@@ -503,6 +509,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
         } else {
           query$user <- shiny_user
         }
+        query$pathname <- session$clientData$url_pathname
         as.character(toJSON(query, auto_unbox = TRUE))
       }
 

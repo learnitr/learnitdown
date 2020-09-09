@@ -1,4 +1,10 @@
-# learndown 1.0.4
+# learndown 1.0.6
+
+- The url_pathname is now integrated to the user information in Shiny
+applications, and it is used to get a more meaningful app name in the case of
+RStudio Server (otherwise, it is always 'app').
+
+# learndown 1.0.5
 
 - The fields score, max and grade are added in all events tables with
 grade = score/max. The solution for Shiny applications can now use a range for
