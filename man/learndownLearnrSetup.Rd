@@ -3,6 +3,7 @@
 \name{learndownLearnrSetup}
 \alias{learndownLearnrSetup}
 \alias{learndownLearnrBanner}
+\alias{learndownLearnrServer}
 \title{Set up a learndown Learnr application}
 \usage{
 learndownLearnrSetup(
@@ -17,7 +18,16 @@ learndownLearnrSetup(
   debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
 
-learndownLearnrBanner(title, text, image, align = "left")
+learndownLearnrBanner(
+  title,
+  text,
+  image,
+  align = "left",
+  msg.nologin = "Anonymous user, no record!",
+  msg.login = "Recording activated for "
+)
+
+learndownLearnrServer(input, output, session)
 }
 \arguments{
 \item{config}{The \code{config()} command to use to get database info.}
@@ -47,6 +57,17 @@ probably not change the default value here.}
 
 \item{align}{How is the image aligned: "left" (default), "right", "middle",
 "top" or "bottom".}
+
+\item{msg.nologin}{The message to display if no user is logged in.}
+
+\item{msg.login}{The message to display if a user is logged in (will be
+followed by the login).}
+
+\item{input}{The Shiny input.}
+
+\item{output}{The Shiny output.}
+
+\item{session}{The Shiny session.}
 }
 \value{
 Nothing. The function is used to setup the learnr environment.

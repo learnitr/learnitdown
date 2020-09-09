@@ -13,7 +13,7 @@
 #' @importFrom magick image_read image_write image_composite image_info image_crop
 #' @importFrom shinytoastr useToastr toastr_error toastr_info toastr_success toastr_warning
 #' @importFrom shinylogs read_rds_logs store_rds track_usage
-#' @importFrom shiny actionButton conditionalPanel fluidRow h4 isolate observe observeEvent onSessionEnded parseQueryString req tagList stopApp tags textInput updateActionButton updateTextInput
+#' @importFrom shiny actionButton conditionalPanel div fluidRow h1 h4 img isolate observe observeEvent onSessionEnded parseQueryString renderText req strong tagList stopApp tags textInput textOutput updateActionButton updateTextInput
 #' @importFrom mongolite mongo
 #' @importFrom httr authenticate content GET parse_url status_code
 #' @importFrom utils compareVersion create.post packageVersion select.list URLdecode URLencode

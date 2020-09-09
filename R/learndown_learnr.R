@@ -590,28 +590,39 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @param image URL to an image to display in the banner.
 #' @param align How is the image aligned: "left" (default), "right", "middle",
 #' "top" or "bottom".
-learndownLearnrBanner <- function(title, text, image, align = "left") {
-  login <- getOption("learndown_learnr_user")$login
-
-  shiny::div(
-    if (is.null(login)) {
-      shiny::div('Utilisateur anonyme, aucun enregistrement !',
-        class = "alert alert-warning", style = "width: 100vw;")
-    } else {
-      shiny::div('Enregistrement actif pour ', shiny::strong(login), '.',
-        class = "alert alert-info", style = "width: 100vw;")
-    },
+#' @param msg.nologin The message to display if no user is logged in.
+#' @param msg.login The message to display if a user is logged in (will be
+#' followed by the login).
+learndownLearnrBanner <- function(title, text, image, align = "left",
+  msg.nologin = "Anonymous user, no record!",
+  msg.login = "Recording activated for ") {
+  div(
+    conditionalPanel("output.login == ''",
+      div(msg.nologin,
+        class = "alert alert-warning", style = "width: 100%;")
+    ),
+    conditionalPanel("output.login != ''",
+      div(msg.login, strong(textOutput("login", inline = TRUE)),
+        class = "alert alert-info", style = "width: 100%;")
+    ),
 
     # Do we add an image?
-    if (!missing(image)) shiny::img(src = image, align = align) else "",
+    if (!missing(image)) img(src = image, align = align) else "",
 
     # Do we add a title?
-    if (!missing(title)) shiny::h1(title) else "",
+    if (!missing(title)) h1(title) else "",
 
     # Do we add text?
     if (!missing(text)) text else ""
   )
 }
 
-
+#' @rdname learndownLearnrSetup
+#' @export
+#' @param input The Shiny input.
+#' @param output The Shiny output.
+#' @param session The Shiny session.
+learndownLearnrServer <- function(input, output, session) {
+  output$login <- renderText(getOption("learndown_learnr_user")$login)
+}
 
