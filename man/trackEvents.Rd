@@ -10,7 +10,7 @@ trackEvents(
   session,
   input,
   output,
-  fingerprint.fun = NULL,
+  sign_in.fun = NULL,
   url = Sys.getenv("MONGO_URL"),
   url.server = Sys.getenv("MONGO_URL_SERVER"),
   db = Sys.getenv("MONGO_BASE"),
@@ -45,8 +45,8 @@ trackQuit(session, input, output, delay = 60)
 
 \item{output}{The Shiny \code{output} object.}
 
-\item{fingerprint.fun}{The function that can get user info from the
-\code{\link[=fingerprint]{fingerprint()}}, or \code{NULL} by default to disable using local user data.}
+\item{sign_in.fun}{The function that can get user info from the
+\code{\link[=sign_in]{sign_in()}}, or \code{NULL} by default to disable using local user data.}
 
 \item{url}{The URL to reach the MongoDB database. By default, it is read from
 the \code{MONGO_URL} environment variable.}
@@ -122,5 +122,5 @@ button and to cleanly close the application when the user clicks on the quit
 button.
 }
 \seealso{
-\code{\link[=learndownShinyVersion]{learndownShinyVersion()}}, \code{\link[=fingerprint]{fingerprint()}}
+\code{\link[=learndownShinyVersion]{learndownShinyVersion()}}, \code{\link[=sign_in]{sign_in()}}
 }

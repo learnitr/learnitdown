@@ -3,6 +3,7 @@
 - The url_pathname is now integrated to the user information in Shiny
 applications, and it is used to get a more meaningful app name in the case of
 RStudio Server (otherwise, it is always 'app').
+- `fingerprint()` is renames `sign_in()`: more explicit.
 
 # learndown 1.0.5
 

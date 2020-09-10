@@ -2,7 +2,7 @@
 % Please edit documentation in R/config.R
 \name{config}
 \alias{config}
-\alias{fingerprint}
+\alias{sign_in}
 \alias{encrypt}
 \alias{decrypt}
 \title{Configure the R environment for the course (including database information)
@@ -15,7 +15,7 @@ config(
   debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
 
-fingerprint(
+sign_in(
   data,
   password,
   cipher = "aes-256-cbc",
@@ -83,7 +83,7 @@ default)?}
 \value{
 Invisibly returns \code{TRUE} if success, or \code{FALSE} otherwise for
 \code{\link[=config]{config()}}. The encrypted/decrypted object for \code{\link[=encrypt]{encrypt()}} and \code{\link[=decrypt]{decrypt()}}.
-The user information for \code{\link[=fingerprint]{fingerprint()}}.
+The user information for \code{\link[=sign_in]{sign_in()}}.
 }
 \description{
 Call this function every time you need to get environment variables set, like

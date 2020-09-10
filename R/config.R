@@ -28,7 +28,7 @@
 #'
 #' @return Invisibly returns `TRUE` if success, or `FALSE` otherwise for
 #' [config()]. The encrypted/decrypted object for [encrypt()] and [decrypt()].
-#' The user information for [fingerprint()].
+#' The user information for [sign_in()].
 #' @export
 config <- function(url, password,
 cache = file.path(tempdir(), ".learndown_config"),
@@ -95,12 +95,12 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
 #' @rdname config
 #' @export
-fingerprint <- function(data, password, cipher = "aes-256-cbc", iv = NULL,
+sign_in <- function(data, password, cipher = "aes-256-cbc", iv = NULL,
 cache = file.path(tempdir(), ".learndown_user"),
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
   if (!missing(data)) {
-    # If data = NULL, we delete fingerprint data
+    # If data = NULL, we delete fingerprint data (that is, user is signed out).
     if (is.null(data)) {
       unlink(cache, force = TRUE)
       if (debug)

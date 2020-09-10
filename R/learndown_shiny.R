@@ -381,8 +381,8 @@ submitQuitButtons <- function() {
 #' @param session The current Shiny `session`.
 #' @param input The Shiny `input` object.
 #' @param output The Shiny `output` object.
-#' @param fingerprint.fun The function that can get user info from the
-#' [fingerprint()], or `NULL` by default to disable using local user data.
+#' @param sign_in.fun The function that can get user info from the
+#' [sign_in()], or `NULL` by default to disable using local user data.
 #' @param url The URL to reach the MongoDB database. By default, it is read from
 #' the `MONGO_URL` environment variable.
 #' @param url.server The URL to reach the MongoDB database. By default, it is
@@ -432,8 +432,8 @@ submitQuitButtons <- function() {
 #' application in order to properly identify the user and record the events.
 #' @export
 #'
-#' @seealso [learndownShinyVersion()], [fingerprint()]
-trackEvents <- function(session, input, output, fingerprint.fun = NULL,
+#' @seealso [learndownShinyVersion()], [sign_in()]
+trackEvents <- function(session, input, output, sign_in.fun = NULL,
 url = Sys.getenv("MONGO_URL"), url.server = Sys.getenv("MONGO_URL_SERVER"),
 db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
 password = Sys.getenv("MONGO_PASSWORD"),
@@ -464,9 +464,9 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     # Get user information
     user_info <- parseQueryString(session$clientData$url_search)
     # No login info? Check local fingerprint instead (Shiny app run locally?)
-    if (is.null(user_info$login) & !is.null(fingerprint.fun)) {
+    if (is.null(user_info$login) & !is.null(sign_in.fun)) {
       message("Getting user information from the fingerprint.")
-      user_info <- fingerprint.fun()
+      user_info <- sign_in.fun()
     }
 
     # If there is still no login in user_info, we don't track events
@@ -486,7 +486,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
       unlink(test_file)
 
       message("Tracking events in ", path, " for user ", user_info$login)
-      toastr_info(paste0("Enregistrement actif pour ", user_info$login), ".",
+      toastr_info(paste0("Enregistrement actif pour ", user_info$login),
         closeButton = TRUE, position = "top-right", showDuration = 5)
       updateActionButton(session, "learndown_quit_", label = "Save & Quit")
 

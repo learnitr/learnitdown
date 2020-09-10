@@ -535,7 +535,7 @@ ask = interactive()) {
 #' database info, record events, use grade this and parameterize learnr.
 #'
 #' @param config The `config()` command to use to get database info.
-#' @param fingerprint The `fingerprint()` command to use to get user info.
+#' @param sign_in The `sign_in()` command to use to get user info.
 #' @param time.limit The maximum time allowed to evaluate R code.
 #' @param cap The caption for R code widgets.
 #' @param echo Do we echo commands in R chunks?
@@ -548,18 +548,23 @@ ask = interactive()) {
 #' @return Nothing. The function is used to setup the learnr environment.
 #' @export
 #'
-learndownLearnrSetup <- function(config, fingerprint, time.limit = 60,
+learndownLearnrSetup <- function(config, sign_in, time.limit = 60,
 cap = "R Code", echo = FALSE, comment = NA, use.gradethis = TRUE,
 event.recorder = learndown::record_learnr,
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
-  Sys.setenv(LEARNDOWN_DEBUG = as.integer(isTRUE(debug)))
+  debug <- isTRUE(debug)
+  Sys.setenv(LEARNDOWN_DEBUG = as.integer(debug))
+  if (debug)
+    message("Learnr application with learndown v. ",
+      packageVersion("learndown"))
+
   load_lib <- library
 
   load_lib('learnr')
   load_lib('learndown')
 
   force(config) # Get configuration (database informations)
-  user <- fingerprint # Get user info
+  user <- sign_in # Get user info
   if (is.null(user$login)) {
     message("No login, no records!")
   } else {

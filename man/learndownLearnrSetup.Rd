@@ -8,7 +8,7 @@
 \usage{
 learndownLearnrSetup(
   config,
-  fingerprint,
+  sign_in,
   time.limit = 60,
   cap = "R Code",
   echo = FALSE,
@@ -32,7 +32,7 @@ learndownLearnrServer(input, output, session)
 \arguments{
 \item{config}{The \code{config()} command to use to get database info.}
 
-\item{fingerprint}{The \code{fingerprint()} command to use to get user info.}
+\item{sign_in}{The \code{sign_in()} command to use to get user info.}
 
 \item{time.limit}{The maximum time allowed to evaluate R code.}
 
