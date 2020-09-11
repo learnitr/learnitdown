@@ -1,3 +1,8 @@
+# learndown 1.0.7
+
+- The solution verification in `trackSubmit()` is now customizable, and a much
+more complete default is provided in `check_shiny_solution()`.
+
 # learndown 1.0.6
 
 - The url_pathname is now integrated to the user information in Shiny

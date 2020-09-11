@@ -4,6 +4,7 @@
 \alias{trackEvents}
 \alias{trackSubmit}
 \alias{trackQuit}
+\alias{check_shiny_solution}
 \title{Track events, the submit or the quit buttons}
 \usage{
 trackEvents(
@@ -33,10 +34,13 @@ trackSubmit(
   comment = "",
   message.success = "Correct",
   message.error = "Incorrect",
-  score.txt = "Score"
+  score.txt = "Score",
+  check.solution = check_shiny_solution
 )
 
 trackQuit(session, input, output, delay = 60)
+
+check_shiny_solution(answer, solution)
 }
 \arguments{
 \item{session}{The current Shiny \code{session}.}
@@ -89,7 +93,8 @@ current state of these inputs will be compared against the solution, and the
 event is triggered with the \code{correct} field set to \code{TRUE} or \code{FALSE}
 accordingly. If \code{solution = NULL}, then the answer is considered to be always
 correct (use this if you just want to indicate that the user's answer is
-recorded in the database).}
+recorded in the database). For numeric values, use `c(min = x, max = y) to
+check if values are within a range.}
 
 \item{max_score}{The highest score value that could be attributed if the
 exercise is correctly done. By default, it is \code{NULL} meaning that the higher
@@ -106,9 +111,16 @@ event.}
 
 \item{score.txt}{The word to use for "score" ("Score" by default).}
 
+\item{check.solution}{The function to use to check if solution provided by
+a Shiny application is correct or not. By default, it is
+\code{check_shiny_solution()}.}
+
 \item{delay}{The time to wait before we close the Shiny application in sec
 (60 sec by default). If \code{delay = -1}, the application is \strong{not} closed, only
 the session is closed when the user clicks on the quit button.}
+
+\item{answer}{A named list of the answer data to check against solution. This
+object is provided by \code{trackSubmit()}.}
 }
 \value{
 The code to be inserted in the server part of the learndown Shiny

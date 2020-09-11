@@ -1,6 +1,6 @@
 Package: learndown
 Type: Package
-Version: 1.0.6
+Version: 1.0.7
 Title: 'SciViews' - R Markdown and Bookdown Additions for Learning Material
 Description: Extension to R Markdown and Bookdown for building better learning
   and e-learning material: H5P integration, course-contextual divs, different

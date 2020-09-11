@@ -413,11 +413,17 @@ submitQuitButtons <- function() {
 #' event is triggered with the `correct` field set to `TRUE` or `FALSE`
 #' accordingly. If `solution = NULL`, then the answer is considered to be always
 #' correct (use this if you just want to indicate that the user's answer is
-#' recorded in the database).
+#' recorded in the database). For numeric values, use `c(min = x, max = y) to
+#' check if values are within a range.
+#' @param answer A named list of the answer data to check against solution. This
+#' object is provided by `trackSubmit()`.
 #' @param max_score The highest score value that could be attributed if the
 #' exercise is correctly done. By default, it is `NULL` meaning that the higher
 #' score would be equal to the number of items to check in `solution`.
 #' @param score.txt The word to use for "score" ("Score" by default).
+#' @param check.solution The function to use to check if solution provided by
+#' a Shiny application is correct or not. By default, it is
+#' `check_shiny_solution()`.
 #' @param comment A string with a comment to append to the value of the result
 #' event.
 #' @param message.success The message to display is the answer is correct
@@ -569,7 +575,8 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @rdname trackEvents
 trackSubmit <- function(session, input, output, solution = NULL,
 max_score = NULL, comment = "",
-message.success = "Correct", message.error = "Incorrect", score.txt = "Score") {
+message.success = "Correct", message.error = "Incorrect", score.txt = "Score",
+check.solution = check_shiny_solution) {
   if (!is.null(max_score))
     max_score <- as.numeric(max_score[1]) # Make sure max_score is a number
 
@@ -589,19 +596,10 @@ message.success = "Correct", message.error = "Incorrect", score.txt = "Score") {
       # For each item, check if answer is correct (equal, or within range)
       items <- names(solution)
       answer <- list()
-      res <- logical(0)
-      for (item in items) {
+      for (item in items)
         answer[[item]] <- isolate(input[[item]])
-        sol_item <- solution[[item]]
-        if (is.character(sol_item)) {
-          res[item] <- answer[[item]] %in% sol_item
-        } else {
-          # Treat it as numeric (even if it is logical)
-          res[item] <- answer[[item]] >= min(sol_item) &
-            answer[[item]] <= max(sol_item)
-        }
-      }
-      max <- length(items) # Default max score
+      res <- check.solution(answer, solution)
+      max <- length(res) # Default max score
       score <- sum(res)
       # Do we need to rescale score (max_score provided) ?
       if (!is.null(max_score)) {
@@ -640,4 +638,32 @@ trackQuit <- function(session, input, output, delay = 60) {
           stopApp()
        }, delay = delay)
   })
+}
+
+#' @export
+#' @rdname trackEvents
+check_shiny_solution <- function(answer, solution) {
+  # For each item, check if answer is correct (equal, or within range)
+  items <- names(solution)
+  for (item in items) {
+    sol_item <- solution[[item]]
+    if (is.character(sol_item)) { # Characters strings, is answer in solution?
+      res[item] <- all(answer[[item]] %in% sol_item)
+    } else {
+      # Treat it as numeric (even if it is logical)
+      # If there are two numbers and they are named min & max, use them as
+      # a range where values should be comprised
+      if (length(sol_item) == 2 && !is.null(names(sol_item)) &&
+          all(names(sol_item) == c("min", "max"))) {
+        res[item] <- min(answer[[item]]) >= sol_item["min"] &
+          max(answer[[item]]) <= sol_item["max"]
+      } else if (length(answer[[item]]) > 1) { # For sliders,
+        # check each value individually
+        res[item] <- all(answer[[item]] == sol_item)
+      } else {# Only one value returned, check in set
+        res[item] <- any(answer[[item]] == sol_item)
+      }
+    }
+  }
+  res
 }
