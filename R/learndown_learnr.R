@@ -524,7 +524,8 @@ ask = interactive()) {
       return(tutos)
     }
   }
-  run_tutorial_tab <- get0(".rs.tutorial.runTutorial", mode = "function")
+  run_tutorial_tab <- get0(".rs.tutorial.runTutorial", envir = .GlobalEnv,
+    mode = "function", inherits = TRUE)
   if (!is.null(run_tutorial_tab)) {
     # Run the tutorial in the Rstudio Tutorial tab
     run_tutorial_tab(tutorial, package = package, ...)

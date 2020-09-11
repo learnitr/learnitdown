@@ -585,6 +585,7 @@ check.solution = check_shiny_solution) {
 
     if (is.null(solution) || !length(names(solution))) {
       # Always TRUE
+      answer <- NULL
       res <- TRUE
       if (!is.null(max_score)) {
         score <- max_score
