@@ -645,6 +645,7 @@ trackQuit <- function(session, input, output, delay = 60) {
 check_shiny_solution <- function(answer, solution) {
   # For each item, check if answer is correct (equal, or within range)
   items <- names(solution)
+  res <- logical(0)
   for (item in items) {
     sol_item <- solution[[item]]
     if (is.character(sol_item)) { # Characters strings, is answer in solution?
