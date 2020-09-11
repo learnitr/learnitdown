@@ -524,8 +524,16 @@ ask = interactive()) {
       return(tutos)
     }
   }
-  message("Hit ESC or Ctrl-c when done...")
-  run_tutorial(tutorial, package = package, ...)
+  run_tutorial_tab <- get0(".rs.tutorial.runTutorial", mode = "function")
+  if (!is.null(run_tutorial_tab)) {
+    # Run the tutorial in the Rstudio Tutorial tab
+    run_tutorial_tab(tutorial, package = package, ...)
+  } else {
+    # This is the classical learnr function, but the tutorial does not run in
+    # the tutorial tab of RStudio in this case!
+    message("Hit ESC or Ctrl-c when done...")
+    run_tutorial(tutorial, package = package, ...)
+  }
 }
 
 

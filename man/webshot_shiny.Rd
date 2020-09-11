@@ -13,7 +13,7 @@ webshot_shiny(
   height = 500,
   offsetx = 30,
   offsety = 30,
-  delay = 5
+  delay = 10
 )
 }
 \arguments{

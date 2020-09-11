@@ -2,6 +2,9 @@
 
 - The solution verification in `trackSubmit()` is now customizable, and a much
 more complete default is provided in `check_shiny_solution()`.
+- Default `delay =` for `webshot_shiny()` now at 10 sec in order to catch more
+correct case with default value.
+- The `run()` function now runs a tutorial in the RStudio tab if possible.
 
 # learndown 1.0.6
 
