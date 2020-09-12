@@ -18,5 +18,5 @@
 #' between the parent (the bookdown page) and the child document in the iframe
 #' (the H5P content).
 h5p <- function(id, baseurl, width = 780, height = 500) {
-  glue::glue("\n<iframe src=\"{baseurl}/wp-admin/admin-ajax.php?action=h5p_embed&id={id}\" width=\"{width}\" height=\"{height}\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" class=\"h5p\"></iframe><script src=\"{baseurl}/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js\" charset=\"UTF-8\"></script>\n")
+  glue::glue("\n[]{{#h5p_{id}}}<iframe src=\"{baseurl}/wp-admin/admin-ajax.php?action=h5p_embed&id={id}\" width=\"{width}\" height=\"{height}\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" class=\"h5p\"></iframe><script src=\"{baseurl}/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js\" charset=\"UTF-8\"></script>\n")
 }

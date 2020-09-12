@@ -81,7 +81,7 @@ alt2 = "*Click to start or run `{fun}(\"{app}\")`.*", ...) {
   }
 
   # Construct the HTML code to be included
-  res <- glue("\n<img onclick=\"launchApp('{app}', '{url}');\" src=\"{img}\" width=\"{width}\" height=\"{height}\" class=\"shiny-img\" id=\"img{app}\"/>
+  res <- glue("\n[]{{#{app} }}<img onclick=\"launchApp('{app}', '{url}');\" src=\"{img}\" width=\"{width}\" height=\"{height}\" class=\"shiny-img\" id=\"img{app}\"/>
 <iframe width=\"{width}\" height=\"{height}\" frameborder=\"0\" scrolling=\"auto\" style=\"display:none\" class=\"shiny-app\" id=\"{app}\"></iframe>\n")
   if (!is.null(alt))
     res <- paste0(res, "\n", alt, "\n")
