@@ -21,7 +21,8 @@ run_app(
   github_repos = NULL,
   ...,
   update = ask,
-  ask = interactive()
+  ask = interactive(),
+  in.job = TRUE
 )
 
 update_pkg(package, github_repos)
@@ -46,6 +47,9 @@ in a list?}
 
 \item{app}{The name of the Shiny application to run. If not provided, a list
 of available apps is displayed.}
+
+\item{in.job}{Should the application be run in a Job in RStudio (\code{TRUE} by
+default)?}
 }
 \value{
 The result returned by \code{\link[=run_tutorial]{run_tutorial()}} for \code{\link[=run]{run()}}, or by

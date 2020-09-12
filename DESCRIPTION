@@ -12,7 +12,7 @@ Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends: R (>= 3.0.0)
 Imports: glue, magick, webshot, rstudioapi, shiny, shinylogs, shinytoastr,
   mongolite, jsonlite, later, utils, learnr, gradethis, httr, remotes, PKI,
-  knitr, testthat
+  knitr, testthat, httpuv
 Suggests: covr, rmarkdown, spelling
 License: MIT + file LICENSE
 URL: https://github.com/SciViews/learndown, https://www.sciviews.org/learndown/

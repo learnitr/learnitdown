@@ -19,6 +19,8 @@
 #' update the package automatically?
 #' @param ask In case `tutorial` or `app` is not provided, do we ask to select
 #' in a list?
+#' @param in.job Should the application be run in a Job in RStudio (`TRUE` by
+#' default)?
 #'
 #' @return The result returned by [run_tutorial()] for [run()], or by
 #' [runApp()] for [run_app()]. The [update()] function return `TRUE` or
@@ -47,7 +49,8 @@ run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
       # Allow selecting from the list...
       sel <- select.list(tutos, title = "Select a tutorial")
       if (sel != "")
-        run(sel, ..., update = FALSE, ask = FALSE)
+        return(run(sel, package = package, github_repos = github_repos, ...,
+          update = FALSE, ask = FALSE))
     } else {
       return(tutos)
     }
@@ -67,7 +70,7 @@ run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
 #' @rdname run
 #' @export
 run_app <- function(app, package, github_repos = NULL, ..., update = ask,
-  ask = interactive()) {
+  ask = interactive(), in.job = TRUE) {
 
   if (isTRUE(update) && !is.null(github_repos))
     updated <- update_pkg(package, github_repos)
@@ -78,13 +81,27 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
       # Allow selecting from the list...
       sel <- select.list(apps, title = "Select a Shiny application")
       if (sel != "")
-        run_app(sel, ..., update = FALSE, ask = FALSE)
+        return(run_app(sel, package = package, github_repos = github_repos,...,
+          update = FALSE, ask = FALSE, in.job = in.job))
     } else {
       return(apps)
     }
   }
   appDir <- system.file("shiny", app, package = package)
-  shiny::runApp(appDir, display.mode = "normal")
+  port <- httpuv::randomPort()
+
+  # Should we run the app in a job in RStudio?
+  if (!isTRUE(in.job) || !rstudioapi::isAvailable()) {
+    shiny::runApp(appDir, port = port, launch.browser = rstudioapi::viewer,
+      display.mode = "normal")
+  } else {
+    script <- tempfile(pattern = "shiny", fileext = ".R")
+    cat("shiny::runApp('", appDir, "', port = ", port,
+      ", launch.browser = rstudioapi::viewer, display.mode = 'normal')\n",
+      file = script, sep = "")
+    rstudioapi::jobRunScript(script, name = paste("Shiny:", app, sep = ' '))
+    later::later(function() unlink(script), delay = 10)
+  }
 }
 
 #' @rdname run
@@ -165,8 +182,6 @@ update_pkg <- function(package, github_repos) {
     if (file.exists("/etc/hostname"))
       hostname <- readLines("/etc/hostname")[1]
     if (!grepl("^box[0-9]{4}", hostname)) {
-      warning(paste("Not run from withing a SciViews Box:",
-        "no update and expect weird behavior of the tutorials"))
       # Get equivalent year, based on R version
       major <- as.integer(R.version$major)
       minor <- as.integer(R.version$minor)
@@ -183,9 +198,9 @@ update_pkg <- function(package, github_repos) {
     } else {# Get the version for the svbox
       # Get the year of the SciViews Box
       box_year <- substr(hostname, 4, 7)
-      # Pattern is v[box_year].x.y
-      v_pat <- paste0("^[vV]", box_year, "\\.[0-9]+\\.[0-9]+$")
     }
+    # Pattern is v[box_year].x.y
+    v_pat <- paste0("^[vV]", box_year, "\\.[0-9]+\\.[0-9]+$")
 
     # Get all tags for the repository
     good_tags <- character(0)
