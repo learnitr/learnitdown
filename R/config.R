@@ -25,6 +25,8 @@
 #' @param url.encode Do we encode for URL (query) use (`FALSE` by default) ?
 #' @param url.decode Do we decode URL before deciphering it (`FALSE` by
 #' default)?
+#' @param title The title of the dialog box prompting to sign out.
+#' @param message The message of the dialog box prompting to sign out.
 #'
 #' @return Invisibly returns `TRUE` if success, or `FALSE` otherwise for
 #' [config()]. The encrypted/decrypted object for [encrypt()] and [decrypt()].
@@ -163,6 +165,27 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   } else {
     return(invisible(data))
   }
+}
+
+#' @rdname config
+#' @export
+sign_out <- function(title = "Signing out",
+message = "Do you really want to sign out with learndown?",
+cache = file.path(tempdir(), ".learndown_user"),
+debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+  debug <- isTRUE(debug)
+
+  if (rstudioapi::isAvailable()) {
+    res <- rstudioapi::showQuestion(title, message)
+  } else {
+    res <- isTRUE(askYesNo(message))
+  }
+  if (res) {
+    unlink(cache, force = TRUE)
+    if (debug)
+    message("Signed out!")
+  }
+  res
 }
 
 serialized <- NULL # To avoid a spurious warning in R CMD check

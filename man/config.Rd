@@ -3,6 +3,7 @@
 \name{config}
 \alias{config}
 \alias{sign_in}
+\alias{sign_out}
 \alias{encrypt}
 \alias{decrypt}
 \title{Configure the R environment for the course (including database information)
@@ -20,6 +21,13 @@ sign_in(
   password,
   cipher = "aes-256-cbc",
   iv = NULL,
+  cache = file.path(tempdir(), ".learndown_user"),
+  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
+)
+
+sign_out(
+  title = "Signing out",
+  message = "Do you really want to sign out with learndown?",
   cache = file.path(tempdir(), ".learndown_user"),
   debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
@@ -64,6 +72,10 @@ string must start with "fingerprint=").}
 \item{cipher}{The cryptography algorithm to use.}
 
 \item{iv}{The initialization vector for the cipher.}
+
+\item{title}{The title of the dialog box prompting to sign out.}
+
+\item{message}{The message of the dialog box prompting to sign out.}
 
 \item{object}{An object to be encrypted.}
 

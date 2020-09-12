@@ -16,7 +16,7 @@
 #' @importFrom shiny actionButton conditionalPanel div fluidRow h1 h4 img isolate observe observeEvent onSessionEnded parseQueryString renderText req strong tagList stopApp tags textInput textOutput updateActionButton updateTextInput
 #' @importFrom mongolite mongo
 #' @importFrom httr authenticate content GET parse_url status_code
-#' @importFrom utils compareVersion create.post packageVersion select.list URLdecode URLencode
+#' @importFrom utils askYesNo compareVersion create.post packageVersion select.list URLdecode URLencode
 #' @importFrom jsonlite base64_dec base64_enc fromJSON toJSON
 #' @importFrom PKI PKI.digest PKI.decrypt PKI.encrypt
 # The following block is used by usethis to automatically manage
