@@ -1,3 +1,18 @@
+# learndown 1.1.0
+
+- Addition of `learnr()` and `assignation()` functions to create tutorial and
+GitHub assignation blocks. They use two new blocks: `tuto` and `assign` blocks
+with specific icons.
+
+- Addition of `toc` arguments in `h5p()`, `launch_shiny()`, `'learnr()` and
+`assignation()` and a function to generate the exercises table of content
+with `show_ex_toc()`. Anchors are added in the respective items, so that the
+toc can link to them. The four types of items are also associated with specific
+icons that link to help pages when the user clicks them.
+
+- Links to start Shiny applications and learnr tutorials directly in RStudio
+server in the SciViews Box are added.
+
 # learndown 1.0.7
 
 - The solution verification in `trackSubmit()` is now customizable, and a much

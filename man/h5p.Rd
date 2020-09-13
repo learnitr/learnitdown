@@ -4,7 +4,16 @@
 \alias{h5p}
 \title{Insert H5P content in the document}
 \usage{
-h5p(id, baseurl, width = 780, height = 500)
+h5p(
+  id,
+  baseurl,
+  width = 780,
+  height = 500,
+  toc = "",
+  toc.def = "H5P exercise {id}",
+  h5p.img = "images/list-h5p.png",
+  h5p.link = "h5p"
+)
 }
 \arguments{
 \item{id}{The ID of the H5P content in your Wordpress.}
@@ -15,6 +24,17 @@ like \verb{https://my.site.com} \strong{without} the trailing \code{/}.}
 \item{width}{The width of the iframe where the H5P content is displayed.}
 
 \item{height}{The height of the iframe.}
+
+\item{toc}{Entry to use in the exercises table of content (\code{NULL} if no
+entry, \code{""} for a default entry based on \verb{toc.def =}).}
+
+\item{toc.def}{Text for a default toc entry using \code{\link[=glue]{glue()}} syntax for
+replacement, e.g., \code{{var}}.}
+
+\item{h5p.img}{The image to display in front of the toc entry}
+
+\item{h5p.link}{The link when the image is clicked (sends to an help page
+about learnr tutorials).}
 }
 \value{
 HTML code that generates the iframe. It is most conveniently used

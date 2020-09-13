@@ -12,9 +12,16 @@ launch_shiny(
   createimg = TRUE,
   width = 780,
   height = 500,
-  fun,
+  fun = NULL,
   alt1 = "*Click to start the Shiny application.*",
-  alt2 = "*Click to start or run `{fun}(\\"{app}\\")`.*",
+  alt2 = "*Click to start or [run `{run.cmd}`]({run.url}{run.arg}).*",
+  toc = "",
+  toc.def = "Shiny application {app}",
+  run.url = "start_rstudio.html?runrcode=",
+  run.cmd = glue("{fun}(\\"{app}\\")"),
+  run.arg = URLencode(run.cmd, reserved = TRUE),
+  app.img = "images/list-app.png",
+  app.link = "shiny_app",
   ...
 )
 }
@@ -42,11 +49,31 @@ default image in \verb{imgdir =}, do we put it there (yes be default)?}
 locally. It is better to fully specify it (\verb{package::function}), and it
 should take one argument which is the application name in \verb{app =}.}
 
-\item{alt1}{Alternate text to display at the bottom of the screenshot. If
+\item{alt1}{Alternate text to display at the bottom of the screenshot when
+nothing is provided for \verb{fun =}. If
 \code{NULL}, nothing is displayed below the screenshot.}
 
 \item{alt2}{Alternate text to display at the bottom of the screenshot in case
 \verb{fun =} is provided.}
+
+\item{toc}{Entry to use in the exercises table of content (\code{NULL} if no
+entry, \code{""} for a default entry based on \verb{toc.def =}).}
+
+\item{toc.def}{Text for a default toc entry using \code{\link[=glue]{glue()}} syntax for
+replacement, e.g., \code{{app}}.}
+
+\item{run.url}{The URL to use to start the Shiny application in RStudio
+server in the SciViews Box. It should generally end with \verb{?runrcode=}, and
+the R code to execute will be appended to it from \verb{run.arg =}.}
+
+\item{run.cmd}{The command to use to launch the Shiny application in RStudio.}
+
+\item{run.arg}{The URL encoded version of \verb{run.cmd =}.}
+
+\item{app.img}{The image to display in front of the toc entry}
+
+\item{app.link}{The link when the image is clicked (sends to an help page
+about Shiny applications).}
 
 \item{...}{Not used here, but it allows to add more arguments used by the
 screenshot addin, like \verb{delay =}, \verb{offsetx =} or \verb{offsety =}, see

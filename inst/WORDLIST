@@ -22,6 +22,7 @@ learnr
 LRS
 MONGO
 mongodb
+Moodle
 ORCID
 PxAPIkatchu
 rds
@@ -29,7 +30,9 @@ retargeted
 RStudio
 SciViews
 shinylogs
+toc
 UI
 unserialize
 Wordpress
 xAPI
+YAML
