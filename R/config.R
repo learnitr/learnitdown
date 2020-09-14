@@ -86,7 +86,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     if (!res)
       stop("This computer does not seems to have access to the Internet, ", "
         impossible to record events in the database ",
-        "(but they are temporary saved on this computer).", call. = FALSE)
+        "(but they are saved on this computer for now).", call. = FALSE)
   }
   res <- try(check_internet_access(), silent = TRUE)
   if (inherits(res, "try-error")) {

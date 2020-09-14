@@ -38,6 +38,24 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   # Only test we can open the database... otherwise set the system to only
   # record locally (otherwise, it will be too slow to retest each time).
   if (is.null(data)) {
+    # First look of there is an internet connexion
+    check_internet_access <- function() {
+      cmd <- switch(.Platform$OS.type, "windows" = "ipconfig", "ifconfig")
+      res <- any(grep("(\\d+(\\.|$)){4}", system(cmd, intern = TRUE)))
+      if (!res)
+        stop("This computer does not seems to have access to the Internet, ", "
+        impossible to record events in the database ",
+          "(but they are saved on this computer for now).", call. = FALSE)
+    }
+    res <- try(check_internet_access(), silent = TRUE)
+    if (inherits(res, "try-error")) {
+      options(learndown_learnr_record = FALSE)
+      if (debug)
+        message("Testing Internet access failed: ", as.character(res))
+      return(res)
+    }
+
+    # Try to access the database
     m <- try(mongo(collection = "learnr", db = db, url = glue(url)),
       silent = TRUE)
     if (inherits(m, "try-error")) {
