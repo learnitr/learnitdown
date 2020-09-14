@@ -82,8 +82,8 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   res <- setenv(url(url), password = password, debug = debug)
   if (inherits(res, "try-error")) {
     if (debug)
-      message("Incorrect configuration or database not responding: ", res)
-    return(invisible(FALSE))
+      message("Inaccessible or incorrect configuration or database not responding: ", res)
+    return(invisible(structure(FALSE, error = res)))
   } else {
     if (debug) {
       message("Learndown configuration set from URL")

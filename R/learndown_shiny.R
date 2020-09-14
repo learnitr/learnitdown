@@ -448,6 +448,7 @@ submitQuitButtons <- function() {
 #' @param delay The time to wait before we close the Shiny application in sec
 #' (60 sec by default). If `delay = -1`, the application is **not** closed, only
 #' the session is closed when the user clicks on the quit button.
+#' @param config The result of the call to [config()], if done.
 #'
 #' @return The code to be inserted in the server part of the learndown Shiny
 #' application in order to properly identify the user and record the events.
@@ -460,7 +461,7 @@ db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
 password = Sys.getenv("MONGO_PASSWORD"),
 version = getOption("learndown.shiny.version"),
 path = Sys.getenv("LEARNDOWN_LOCAL_STORAGE", "shiny_logs"),
-log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE,
+log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, config = NULL,
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
   # Indicate this is a learndown Shiny application
@@ -494,7 +495,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     if (is.null(user_info$login)) {
       message("No login: no events will be tracked")
       toastr_warning("Utilisateur anonyme, aucun enregistrement.",
-        closeButton = TRUE, position = "top-right", showDuration = 5)
+        closeButton = TRUE, position = "top-right", timeOut = 5000)
     } else {
       # Check that 'path' exists and is writeable, or use a temporary directory
       if (!dir.exists(path))
@@ -506,9 +507,17 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
         path <- file.path(tempdir(check = TRUE), session$token)
       unlink(test_file)
 
+      # Check results of config, if provided
+      if (!is.null(config) && !isTRUE(config)) {
+        error.message <- paste("Problem during configuration!",
+          as.character(attr(config, "error")))
+        message(error.message)
+        toastr_error(error.message, closeButton = TRUE,
+          position = "top-right", timeOut = 60000)
+      }
       message("Tracking events in ", path, " for user ", user_info$login)
       toastr_info(paste0("Enregistrement actif pour ", user_info$login),
-        closeButton = TRUE, position = "top-right", showDuration = 5)
+        closeButton = TRUE, position = "top-right", timeOut = 5000)
       updateActionButton(session, "learndown_quit_", label = "Save & Quit")
 
       user_tracking <- function(session, query = user_info) {
@@ -590,10 +599,12 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
   if (isTRUE(success)) {
     #showToast("success", message.success, .options = myToastOptions)
-    toastr_success(message.success, closeButton = TRUE, position = position)
+    toastr_success(message.success, closeButton = TRUE, position = position,
+      timeOut = 5000)
   } else {
     #showToast("error", message.error, .options = myToastOptions)
-    toastr_error(message.error, closeButton = TRUE, position = position)
+    toastr_error(message.error, closeButton = TRUE, position = position,
+      timeOut = 5000)
   }
 }
 

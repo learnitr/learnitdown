@@ -22,6 +22,7 @@ trackEvents(
   log.errors = TRUE,
   log.outputs = FALSE,
   drop.dir = TRUE,
+  config = NULL,
   debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
 )
 
@@ -81,6 +82,8 @@ directory is not writable, a temporary directory is used instead.}
 
 \item{drop.dir}{Do we erase the directory indicated by \verb{path =} if it is
 empty at the end of the process (yes by default).}
+
+\item{config}{The result of the call to \code{\link[=config]{config()}}, if done.}
 
 \item{debug}{Do we debug recording of events using extra messages? By
 default, it is the value of the environment variable \code{LEARNDOWN_DEBUG}, and
