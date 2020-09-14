@@ -79,6 +79,21 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   }
 
   # If no file cache, or an error occurs, try getting the config file from url
+  # First check if Internet connexion is alive
+  check_internet_access <- function() {
+    cmd <- switch(.Platform$OS.type, "windows" = "ipconfig", "ifconfig")
+    res <- any(grep("(\\d+(\\.|$)){4}", system(cmd, intern = TRUE)))
+    if (!res)
+      stop("This computer does not seems to have access to the Internet, ", "
+        impossible to record events in the database ",
+        "(but they are temporary saved on this computer).", call. = FALSE)
+  }
+  res <- try(check_internet_access(), silent = TRUE)
+  if (inherits(res, "try-error")) {
+    if (debug)
+      message("No access to the Internet: ", res)
+    return(invisible(structure(FALSE, error = res)))
+  }
   res <- setenv(url(url), password = password, debug = debug)
   if (inherits(res, "try-error")) {
     if (debug)

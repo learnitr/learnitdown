@@ -13,6 +13,9 @@ if the database is not accessible.
 further attempt is done in this process in order to avoid too much slow down in
 systematically trying to connect to a non responding database for each event.
 
+- Internet access and configuration checking in Shiny applications, with a
+message displayed in case of error.
+
 # learndown 1.1.0
 
 - Addition of `learnr()` and `assignation()` functions to create tutorial and
