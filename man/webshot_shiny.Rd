@@ -13,7 +13,8 @@ webshot_shiny(
   height = 500,
   offsetx = 30,
   offsety = 30,
-  delay = 10
+  delay = 10,
+  ...
 )
 }
 \arguments{
@@ -41,6 +42,8 @@ Shiny application defines other (limit) values.}
 \item{delay}{Time to wait (in sec) after the Shiny application has started
 and before the screenshot is taken. If the screenshot does not contain the
 complete application UI, try increase this value.}
+
+\item{...}{Further arguments passed to \code{\link[=launch_shiny]{launch_shiny()}} but not used here.}
 }
 \value{
 The path to the created image, invisibly.

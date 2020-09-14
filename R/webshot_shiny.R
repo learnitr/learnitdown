@@ -23,6 +23,7 @@
 #' @param delay Time to wait (in sec) after the Shiny application has started
 #' and before the screenshot is taken. If the screenshot does not contain the
 #' complete application UI, try increase this value.
+#' @param ... Further arguments passed to [launch_shiny()] but not used here.
 #'
 #' @return The path to the created image, invisibly.
 #' @export
@@ -36,7 +37,7 @@
 #'}
 webshot_shiny <- function(url, app = basename(url),
 imgdir = "images/shinyapps", img = paste0(imgdir, "/", app, ".png"),
-width = 780, height = 500, offsetx = 30, offsety = 30, delay = 10) {
+width = 780, height = 500, offsetx = 30, offsety = 30, delay = 10, ...) {
   # Make sure imgdir directory exists
   dir.create(imgdir, showWarnings = FALSE, recursive = TRUE)
 

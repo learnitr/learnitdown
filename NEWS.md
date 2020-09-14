@@ -1,3 +1,7 @@
+# learndown 1.1.2
+
+- `webshot_shiny()` refused to work when it sees the `toc =` argument. Solved.
+
 # learndown 1.1.1
 
 - Anchors now include `part` for `assignation()`, so that different anchors are
