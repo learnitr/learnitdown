@@ -46,6 +46,15 @@ assignation <- function(name, url, course.urls = NULL, part = NULL,
 course.names = c(course1 = "Data Science"), toc = "",
 texts = assignation_en(), assign.img = "images/list-assign.png",
 assign.link = "github_assignation") {
+  if (is.null(part)) {
+    anchor <- name
+    part <- ""
+  } else {
+    # Anchor is a combination of name and part to separate different parts
+    anchor <- paste0(name, part)
+    part <- paste(",", texts$part.name, part)
+  }
+
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
     ex_toc <- getOption("learndown_ex_toc", "")
@@ -54,14 +63,8 @@ assign.link = "github_assignation") {
       toc <- glue::glue(texts$toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
-      glue::glue("- [![git]({assign.img})]({assign.link}) [{toc}](#{name})"))
+      glue::glue("- [![git]({assign.img})]({assign.link}) [{toc}](#{anchor})"))
     options(learndown_ex_toc = ex_toc)
-  }
-
-  if (is.null(part)) {
-    part <- ""
-  } else {
-    part <- paste(",", texts$part.name, part)
   }
 
   if (is.null(course.urls) || !length(course.urls)) {
@@ -83,7 +86,7 @@ assign.link = "github_assignation") {
   alt_text <- glue::glue(texts$alt)
 
   glue::glue("\n\\BeginKnitrBlock{{assign}}<div class=\"assign\">
-{texts$title} **[{name}]{{#{name} }}{part}**.
+{texts$title} **[{name}]{{#{anchor} }}{part}**.
 
 {course_text}
 

@@ -1,3 +1,18 @@
+# learndown 1.1.1
+
+- Anchors now include `part` for `assignation()`, so that different anchors are
+used if different parts of the same assignation are proposed in the same
+section/module of the bookdown.
+
+- Anchor now includes both the image and the iframe for `launch_shiny()`.
+
+- An error message is now displayed in Shiny applications and learnr tutorials
+if the database is not accessible.
+
+- In learnr tutorials, access to database is tested only once. If it fails, no
+further attempt is done in this process in order to avoid too much slow down in
+systematically trying to connect to a non responding database for each event.
+
 # learndown 1.1.0
 
 - Addition of `learnr()` and `assignation()` functions to create tutorial and

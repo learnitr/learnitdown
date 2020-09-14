@@ -5,7 +5,8 @@
 #' @param user_id The user identifier for this learnr process.
 #' @param event The event that triggers the record, like `exercise_submission`
 #' or `question_submission`
-#' @param data A JSON field with event-dependent data content.
+#' @param data A JSON field with event-dependent data content. If `NULL`, only
+#' a test to see if the database is responding is performed.
 #' @param value The new value for user name or email (if not provided, the
 #' current value is returned).
 #'
@@ -33,6 +34,22 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   user_info <- getOption("learndown_learnr_user")
   if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
+
+  # Only test we can open the database... otherwise set the system to only
+  # record locally (otherwise, it will be too slow to retest each time).
+  if (is.null(data)) {
+    m <- try(mongo(collection = "learnr", db = db, url = glue(url)),
+      silent = TRUE)
+    if (inherits(m, "try-error")) {
+      options(learndown_learnr_record = FALSE)
+      if (debug)
+        message("Testing database access gives an error: ", as.character(m))
+      return(m)
+    } else {# OK, we can access the database (no insert test, though)
+      options(learndown_learnr_record = TRUE)
+      return("")
+    }
+  }
 
   # Add base64 encrypted data in the local file (temporary storage if the
   # database is not available)
@@ -147,26 +164,29 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   )
 
   db_injected <- FALSE
-  m <- try({
-    m <- mongo(collection = "learnr", db = db, url = glue(url))
-    m$insert(toJSON(entry, auto_unbox = TRUE))
-    if (debug)
-      message("Learnr event '", entry$verb, "' inserted into database.")
-    m
-  }, silent = TRUE)
-  if (!inherits(m, "try-error")) {
-    db_injected <- TRUE
-    # Check if we also need to inject pending records
-    if (file.exists(bds_file)) {
-      dat <- readLines(bds_file)
-      unlink(bds_file)
-      n_pending_events <- length(dat)
-      if (n_pending_events) {
-        for (i in 1:n_pending_events)
-          m$insert(toJSON(unserialize(base64_dec(dat[i])), auto_unbox = TRUE))
-        if (debug)
-          message(n_pending_events,
-            " pending event(s) also inserted in the database")
+  use_db <- isTRUE(getOption("learndown_learnr_record", default = TRUE))
+  if (use_db) {
+    m <- try({
+      m <- mongo(collection = "learnr", db = db, url = glue(url))
+      m$insert(toJSON(entry, auto_unbox = TRUE))
+      if (debug)
+        message("Learnr event '", entry$verb, "' inserted into database.")
+      m
+    }, silent = TRUE)
+    if (!inherits(m, "try-error")) {
+      db_injected <- TRUE
+      # Check if we also need to inject pending records
+      if (file.exists(bds_file)) {
+        dat <- readLines(bds_file)
+        unlink(bds_file)
+        n_pending_events <- length(dat)
+        if (n_pending_events) {
+          for (i in 1:n_pending_events)
+            m$insert(toJSON(unserialize(base64_dec(dat[i])), auto_unbox = TRUE))
+          if (debug)
+            message(n_pending_events,
+              " pending event(s) also inserted in the database")
+        }
       }
     }
   }
@@ -425,18 +445,26 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @param msg.nologin The message to display if no user is logged in.
 #' @param msg.login The message to display if a user is logged in (will be
 #' followed by the login).
+#' @param msg.error The message when an error during recording of activity in
+#' the database occurs.
 learndownLearnrBanner <- function(title, text, image, align = "left",
   msg.nologin = "Anonymous user, no record!",
-  msg.login = "Recording activated for ") {
+  msg.login = "Recording activated for ",
+  msg.error = "Error recording activity! ") {
   div(
     conditionalPanel("output.login == ''",
       div(msg.nologin,
-        class = "alert alert-warning", style = "width: 100%;")
+        class = "alert alert-warning", role = "alert", style = "width: 100%;")
     ),
     conditionalPanel("output.login != ''",
       div(msg.login, strong(textOutput("login", inline = TRUE)),
-        class = "alert alert-info", style = "width: 100%;")
+        class = "alert alert-info", role = "alert", style = "width: 100%;")
     ),
+    conditionalPanel("output.error != ''",
+      div(msg.error, textOutput("error", inline = TRUE),
+        class = "alert alert-danger", role = "alert", style = "width: 100%;")
+    ),
+
 
     # Do we add an image?
     if (!missing(image)) img(src = image, align = align) else "",
@@ -456,5 +484,6 @@ learndownLearnrBanner <- function(title, text, image, align = "left",
 #' @param session The Shiny session.
 learndownLearnrServer <- function(input, output, session) {
   output$login <- renderText(getOption("learndown_learnr_user")$login)
+  output$error <- renderText(as.character(record_learnr(data = NULL)))
 }
 

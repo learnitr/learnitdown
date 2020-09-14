@@ -53,6 +53,7 @@ read_shinylogs <- function(file, version = "0",
   if (app_name == "app")
     app_name <- basename(user_data$pathname)
 
+  if (!length(version)) version <- "" # In case version is missing
   common_data <- list(
     app         = app_name,
     version     = as.character(version),
@@ -105,7 +106,7 @@ read_shinylogs <- function(file, version = "0",
 
   # Now we combine common_data and events into a data.frame similar to what
   # we got from learnr applications
-  res <- data.frame(
+  res <- try(data.frame(
     session     = events$sessionid,
     date        = format(events$timestamp, format = "%Y-%m-%d %H:%M:%OS6",
       tz = "GMT"),
@@ -127,7 +128,12 @@ read_shinylogs <- function(file, version = "0",
     value       = events$value,
     data        = paste0('{"type":"', events$type, '","binding":"',
       events$binding, '"}'),
-    stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE), silent = TRUE)
+  if (inherits(res, "try-error")) {
+    # Something was wrong with the collection of data (this happens, e.g., when
+    # the computer is not connected to the Internet)
+    return(res)
+  }
 
   # Rework submit and quit events
   is_submit <- res$label == "learndown_submit_"
@@ -212,11 +218,16 @@ version = "0", log.errors = TRUE, log.outputs = FALSE,
 debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 
   if (!file.exists(file))
-    return(FALSE)
+    return(TRUE)
 
   dat <- read_shinylogs(file, version = version,
     log.errors = log.errors, log.outputs = log.outputs)
 
+  if (inherits(dat, "try-error")) {
+    if (debug)
+      message("Error while reading log file ", file, ": ", dat)
+    return(structure(FALSE, error = dat))
+  }
   if (debug)
     message(NROW(dat), " events found in ", file)
 
@@ -240,7 +251,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   } else {
     if (debug)
       message("Error while transferring log file ", file, ": ", res)
-    FALSE
+    structure(FALSE, error = res)
   }
 }
 
@@ -283,14 +294,18 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   if (length(log_files)) {
     if (debug)
       message(".rds log file(s) found in ", path, ": ", length(log_files))
-    for (file in log_files)
-      .record_shinylogs(file, url = url, db = db, collection = collection,
+    answer <- TRUE
+    for (file in log_files) {
+      res <- .record_shinylogs(file, url = url, db = db, collection = collection,
         version = version, log.errors = log.errors, log.outputs = log.outputs,
         debug = debug)
+      if (!res && answer)# Return first error found
+        answer <- res
+    }
   } else {
     if (debug)
       message("No .rds log file found in ", path)
-    return(FALSE)
+    return(TRUE)
   }
   if (isTRUE(drop.dir)) {
     if (debug) {
@@ -300,7 +315,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     }
     suppressWarnings(file.remove(path)) # non-empty dir not deleted with warning
   }
-  TRUE
+  answer
 }
 
 #' Create and manage learndown Shiny applications
@@ -547,9 +562,20 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
         }
         if (isTRUE(debug))
           message("Database URL: ", url, ", base: ", db)
-        record_shiny(path, url = glue(url), db = db,
+        res <- record_shiny(path, url = glue(url), db = db,
           version = version, log.errors = log.errors, log.outputs = log.outputs,
           drop.dir = drop.dir, debug = debug)
+
+        if (!res) {# An error occurred!
+          # This does not work because the UI is already closed!
+          # So, we output a message instead
+
+          message.error <- paste("Error while recording data: ",
+            as.character(attr(res, "error")))
+          ##showToast("error", message.error, .options = myToastOptions)
+          #toastr_error(message.error, closeButton = TRUE)
+          message(message.error)
+        }
       })
     }
   })

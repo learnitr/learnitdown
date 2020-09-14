@@ -106,8 +106,8 @@ app.img = "images/list-app.png", app.link = "shiny_app", ...) {
   }
 
   # Construct the HTML code to be included
-  res <- glue("\n[]{{#{app} }}<img onclick=\"launchApp('{app}shiny', '{url}');\" src=\"{img}\" width=\"{width}\" height=\"{height}\" class=\"shiny-img\" id=\"img{app}shiny\"/>
-<iframe width=\"{width}\" height=\"{height}\" frameborder=\"0\" scrolling=\"auto\" style=\"display:none\" class=\"shiny-app\" id=\"{app}shiny\"></iframe>\n")
+  res <- glue("\n[<img onclick=\"launchApp('{app}shiny', '{url}');\" src=\"{img}\" width=\"{width}\" height=\"{height}\" class=\"shiny-img\" id=\"img{app}shiny\"/>
+<iframe width=\"{width}\" height=\"{height}\" frameborder=\"0\" scrolling=\"auto\" style=\"display:none\" class=\"shiny-app\" id=\"{app}shiny\"></iframe>]{{#{app} }}\n")
   if (!is.null(alt))
     res <- paste0(res, "\n", alt, "\n")
   res

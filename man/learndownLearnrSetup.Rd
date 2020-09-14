@@ -24,7 +24,8 @@ learndownLearnrBanner(
   image,
   align = "left",
   msg.nologin = "Anonymous user, no record!",
-  msg.login = "Recording activated for "
+  msg.login = "Recording activated for ",
+  msg.error = "Error recording activity! "
 )
 
 learndownLearnrServer(input, output, session)
@@ -62,6 +63,9 @@ probably not change the default value here.}
 
 \item{msg.login}{The message to display if a user is logged in (will be
 followed by the login).}
+
+\item{msg.error}{The message when an error during recording of activity in
+the database occurs.}
 
 \item{input}{The Shiny input.}
 

@@ -22,7 +22,8 @@ user_email(value)
 \item{event}{The event that triggers the record, like \code{exercise_submission}
 or \code{question_submission}}
 
-\item{data}{A JSON field with event-dependent data content.}
+\item{data}{A JSON field with event-dependent data content. If \code{NULL}, only
+a test to see if the database is responding is performed.}
 
 \item{value}{The new value for user name or email (if not provided, the
 current value is returned).}
