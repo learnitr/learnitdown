@@ -9,3 +9,4 @@
 - Content display with an expiration date (e.g., for Github Classroom assigments) with alternate text
 
 - Automatic light and dark theme
+

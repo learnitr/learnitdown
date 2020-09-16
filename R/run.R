@@ -48,9 +48,10 @@ run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
     if (isTRUE(ask) && interactive()) {
       # Allow selecting from the list...
       sel <- select.list(tutos, title = "Select a tutorial")
-      if (sel != "")
+      if (sel != "") {
         return(run(sel, package = package, github_repos = github_repos, ...,
           update = FALSE, ask = FALSE))
+      } else return()
     } else {
       return(tutos)
     }
@@ -80,9 +81,10 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
     if (isTRUE(ask) && interactive()) {
       # Allow selecting from the list...
       sel <- select.list(apps, title = "Select a Shiny application")
-      if (sel != "")
+      if (sel != "") {
         return(run_app(sel, package = package, github_repos = github_repos,...,
           update = FALSE, ask = FALSE, in.job = in.job))
+      } else return()
     } else {
       return(apps)
     }
