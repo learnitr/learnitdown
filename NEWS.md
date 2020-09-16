@@ -1,3 +1,7 @@
+# learndown 1.1.3
+
+- Gracefully exit in `run()` and `run_app()` when nothing is selectd in the list.
+
 # learndown 1.1.2
 
 - `webshot_shiny()` refused to work when it sees the `toc =` argument. Solved.
