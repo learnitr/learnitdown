@@ -1,6 +1,11 @@
+# learndown 1.1.4
+
+- `run()` now tries harder to display a tutorial in the Tutorial tab in RStudio.
+
 # learndown 1.1.3
 
-- Gracefully exit in `run()` and `run_app()` when nothing is selectd in the list.
+- Gracefully exit in `run()` and `run_app()` when nothing is selected in the
+list.
 
 # learndown 1.1.2
 
