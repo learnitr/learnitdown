@@ -62,19 +62,21 @@ run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
     # Run the tutorial in the Rstudio Tutorial tab
     run_tutorial_tab(tutorial, package = package, ...)
     # Make sure the tutorial is displayed in the Tutorial tab in RStudio
-    get_var <- get0(".rs.getVar", envir = .GlobalEnv,
-      mode = "function", inherits = TRUE)
-    if (!is.null(get_var) && !is.null(get_var("tutorial.pendingTutorial"))) {
       registry <- get0(".rs.tutorial.registry", envir = .GlobalEnv,
         mode = "function", inherits = TRUE)
       if (!is.null(registry)) {
-        url <- registry[[paste(package, tutorial, sep = "::")]]$shiny_url
-        launch_browser <- get0(".rs.tutorial.launchBrowser", envir = .GlobalEnv,
+        reg_tutorial <- registry[[paste(package, tutorial, sep = "::")]]
+        url <- reg_tutorial$shiny_url
+        scalar_lfl <- get0(".rs.scalarListFromList", envir = .GlobalEnv,
           mode = "function", inherits = TRUE)
-        if (!is.null(url) && !is.null(launch_browser))
-          launch_browser(url)
+        if (!is.null(scalar_lfl)) {
+          meta <- scalar_lfl(reg_tutorial)
+          launch <- get0(".rs.invokeShinyTutorialViewer", envir = .GlobalEnv,
+            mode = "function", inherits = TRUE)
+          if (!is.null(url) && !is.null(launch))
+            launch(url, meta)
+        }
       }
-    }
   } else {
     # This is the classical learnr function, but the tutorial does not run in
     # the tutorial tab of RStudio in this case!
