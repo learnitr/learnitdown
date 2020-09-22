@@ -115,7 +115,8 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
   } else {
     script <- tempfile(pattern = "shiny", fileext = ".R")
     cat("shiny::runApp('", appDir, "', port = ", port,
-      ", launch.browser = rstudioapi::viewer, display.mode = 'normal')\n",
+      ", launch.browser = TRUE, display.mode = 'normal')\n",
+      #", launch.browser = rstudioapi::viewer, display.mode = 'normal')\n",
       file = script, sep = "")
     rstudioapi::jobRunScript(script, name = paste("Shiny:", app, sep = ' '))
     later::later(function() unlink(script), delay = 10)

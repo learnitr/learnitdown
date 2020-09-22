@@ -1,3 +1,8 @@
+# learndown 1.1.5
+
+- `run_app()` now opens the Shiny application in the default browser (the
+RStudio viewer was previously used, but it was too small).
+
 # learndown 1.1.4
 
 - `run()` now tries harder to display a tutorial in the Tutorial tab in RStudio.
