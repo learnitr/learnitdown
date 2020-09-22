@@ -14,7 +14,8 @@ launch_shiny(
   height = 500,
   fun = NULL,
   alt1 = "*Click to start the Shiny application.*",
-  alt2 = "*Click to start or [run `{run.cmd}`]({run.url}{run.arg}).*",
+ 
+    alt2 = "*Click to start or [run `{run.cmd}`]({run.url}{run.arg}){{target=\\"_blank\\"}}.*",
   toc = "",
   toc.def = "Shiny application {app}",
   run.url = "start_rstudio.html?runrcode=",

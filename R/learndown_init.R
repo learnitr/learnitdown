@@ -252,7 +252,7 @@ function retargetLinks() {
   var links = document.getElementsByTagName('a');
   for (var i = 0; i < links.length; i++) {
     if (/^(https?:)?\\/\\//.test(links[i].getAttribute('href')) &&
-      links[i].target != null) {
+      links[i].target == null) {
       links[i].target = '_parent';
     }
   }

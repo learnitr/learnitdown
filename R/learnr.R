@@ -46,7 +46,7 @@ tuto.img = "images/list-tuto.png", tuto.link = "tutorial") {
     URLencode(id, reserved = TRUE), "%22%29")
 
   glue::glue("\n\n\\BeginKnitrBlock{{tuto}}<div class=\"tuto\">
-{text} **[]{{#{id} }[{title}]({url})**.
+{text} **[]{{#{id} }[{title}]({url}){{target=\"_blank\"}}**.
 
     {package}::run(\"{id}\")
 
