@@ -78,7 +78,7 @@ assign.link = "github_assignation") {
       course_url <- course.urls[i]
       course_name <- course_names[i]
       course_text <- paste0(course_text, "\n", glue::glue("\n::: {{ .{course_id} }}
-**[{texts$course} {course_name}]({course_url})**
+**[{texts$course} {course_name}]({course_url}){{target=\"_blank\"}}**
 \n:::\n\n"))
     }
   }
@@ -102,7 +102,7 @@ assignation_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Complete this assignation:",
     part.name = "part",
-    alt       = "If you are not a registered user, or if you work outside of a course, fork [this]({url}) repository.",
+    alt       = "If you are not a registered user, or if you work outside of a course, fork [this]({url}){{target=\"_blank\"}} repository.",
     sub      = "See the explanations in the `README.md`",
     course   = "Assignation for the students enrolled at the course",
     toc.def  = "Assignation {name}"
@@ -123,7 +123,7 @@ assignation_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "R\u00e9alisez l'assignation",
     part.name = "partie",
-    alt       = "Si vous \u00eates un utilisateur non enregistr\u00e9 ou que vous travaillez en dehors d'un cours, faites un \"fork\" de [ce]({url}) d\u00e9p\u00f4t.",
+    alt       = "Si vous \u00eates un utilisateur non enregistr\u00e9 ou que vous travaillez en dehors d'un cours, faites un \"fork\" de [ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t.",
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = "Assignation pour les \u00e9tudiants inscrits au cours de",
     toc.def   = "Assignation {name}"

@@ -1,12 +1,16 @@
+# learndown 1.1.6
+
+- For `assignation()`, links now have `target = "_blank"` so that these links are now functional, even inside an iframe.
+
 # learndown 1.1.5
 
 - `run_app()` now opens the Shiny application in the default browser (but it
 is still the Viewer pane in RStudio).
 
-- In `learndown_init()`, links with `target=` attributes were retargetted to `_parent`, but it is those without `target=` that had to be changed (corrected).
+- In `learndown_init()`, links with `target=` attributes were retargeted to `_parent`, but it is those without `target=` that had to be changed (corrected).
 
 - In `learn()` and `launch_shiny()`, the link now have `target="_blank"` meaning
-that Rstudio is opened in a different tab.
+that RStudio is opened in a different tab.
 
 # learndown 1.1.4
 
