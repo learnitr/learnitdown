@@ -1,3 +1,7 @@
+# learndown 1.1.7
+
+- Again a problem with bookdown links not correctly retargetted when the bookdown is displayed in an iframe. Corrected.
+
 # learndown 1.1.6
 
 - For `assignation()`, links now have `target = "_blank"` so that these links are now functional, even inside an iframe.
