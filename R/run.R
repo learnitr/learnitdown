@@ -19,6 +19,8 @@
 #' update the package automatically?
 #' @param ask In case `tutorial` or `app` is not provided, do we ask to select
 #' in a list?
+#' @param upgrade When a new version of the main package is found, do we also upgrade
+#' dependencies ? By default, never, but use `"ask"` to ask user.
 #' @param in.job Should the application be run in a Job in RStudio (`TRUE` by
 #' default)?
 #'
@@ -38,10 +40,10 @@
 #' run_app("my_shiny_app", package = "mypackage")
 #' }
 run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
-  ask = interactive()) {
+  ask = interactive(), upgrade = "never") {
 
   if (isTRUE(update) && !is.null(github_repos))
-    updated <- update_pkg(package, github_repos)
+    updated <- update_pkg(package, github_repos, upgrade = upgrade)
 
   if (missing(tutorial) || is.null(tutorial) || tutorial == "") {
     tutos <- dir(system.file("tutorials", package = package))
@@ -87,10 +89,10 @@ run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
 #' @rdname run
 #' @export
 run_app <- function(app, package, github_repos = NULL, ..., update = ask,
-  ask = interactive(), in.job = TRUE) {
+  ask = interactive(), upgrade = "never", in.job = TRUE) {
 
   if (isTRUE(update) && !is.null(github_repos))
-    updated <- update_pkg(package, github_repos)
+    updated <- update_pkg(package, github_repos, upgrade = upgrade)
 
   if (missing(app) || is.null(app) || app == "") {
     apps <- dir(system.file("shiny", package = package))
@@ -125,7 +127,7 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
 
 #' @rdname run
 #' @export
-update_pkg <- function(package, github_repos) {
+update_pkg <- function(package, github_repos, upgrade = "never") {
   if (is.null(github_repos))
     return(FALSE)
 
@@ -247,7 +249,7 @@ update_pkg <- function(package, github_repos) {
       if (status > 0) {
         # We need to update the package
         message("Updating the '", package, "' package... please, be patient")
-        install_github(paste0(github_repos, "@", last_tag))
+        install_github(paste0(github_repos, "@", last_tag), upgrade = upgrade)
         new_rel <- sub("^([0-9]+\\.[0-9]+)\\.([0-9]+)$", "\\1-\\2",
           packageVersion(package))
         try(updated <- compareVersion(new_rel, last_rel) == 0, silent = TRUE)

@@ -12,7 +12,8 @@ run(
   github_repos = NULL,
   ...,
   update = ask,
-  ask = interactive()
+  ask = interactive(),
+  upgrade = "never"
 )
 
 run_app(
@@ -22,10 +23,11 @@ run_app(
   ...,
   update = ask,
   ask = interactive(),
+  upgrade = "never",
   in.job = TRUE
 )
 
-update_pkg(package, github_repos)
+update_pkg(package, github_repos, upgrade = "never")
 }
 \arguments{
 \item{tutorial}{The name of the tutorial to use. If not provided, a list of
@@ -44,6 +46,9 @@ update the package automatically?}
 
 \item{ask}{In case \code{tutorial} or \code{app} is not provided, do we ask to select
 in a list?}
+
+\item{upgrade}{When a new version of the main package is found, do we also upgrade
+dependencies ? By default, never, but use \code{"ask"} to ask user.}
 
 \item{app}{The name of the Shiny application to run. If not provided, a list
 of available apps is displayed.}

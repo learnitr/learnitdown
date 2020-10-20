@@ -1,6 +1,10 @@
+# learndown 1.1.8
+
+- Argument `upgrade=` added to `run()`, `run_app()` and `update_pkg()`. By default, it is "never", which is a good value inside the SciViews Box, but "ask" may be more appropriate elsewhere.
+
 # learndown 1.1.7
 
-- Again a problem with bookdown links not correctly retargetted when the bookdown is displayed in an iframe. Corrected.
+- Again a problem with bookdown links not correctly retargeted when the bookdown is displayed in an iframe. Corrected.
 
 # learndown 1.1.6
 
