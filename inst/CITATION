@@ -6,13 +6,13 @@ citEntry(entry="Manual",
   organization = "UMONS",
   address      = "MONS, Belgium",
   year         = version$year,
-  url          = "https://www.sciviews.org/SciViews-R",
+  url          = "https://www.sciviews.org/SciViews-R/",
 
   textVersion =
     paste("Grosjean, Ph. (", version$year, "). ",
       "SciViews-R. ",
       "UMONS, Mons, Belgium. ",
-      "URL https://www.sciviews.org/SciViews-R.",
+      "URL https://www.sciviews.org/SciViews-R/.",
       sep = "")
 )
 
