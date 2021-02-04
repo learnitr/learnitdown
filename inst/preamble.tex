@@ -1,0 +1,98 @@
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\makeatletter
+\@ifundefined{Shaded}{
+}{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
+\makeatother
+
+\newenvironment{rmdblock}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{images/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{kframe}
+  \item
+  }
+  {
+  \end{kframe}
+  \end{itemize}
+  }
+\newenvironment{bdd}
+  {\begin{rmdblock}{block-bdd}}
+  {\end{rmdblock}}
+\newenvironment{tuto}
+  {\begin{rmdblock}{block-tuto}}
+  {\end{rmdblock}}
+\newenvironment{assign}
+  {\begin{rmdblock}{block-assign}}
+  {\end{rmdblock}}
+  \newenvironment{assign2}
+  {\begin{rmdblock}{block-assign2}}
+  {\end{rmdblock}}
+  \newenvironment{challenge}
+  {\begin{rmdblock}{block-challenge}}
+  {\end{rmdblock}}
+  \newenvironment{challenge2}
+  {\begin{rmdblock}{block-challenge2}}
+  {\end{rmdblock}}
+\newenvironment{error}
+  {\begin{rmdblock}{block-error}}
+  {\end{rmdblock}}
+\newenvironment{info}
+  {\begin{rmdblock}{block-info}}
+  {\end{rmdblock}}
+\newenvironment{linux}
+  {\begin{rmdblock}{block-linux}}
+  {\end{rmdblock}}
+\newenvironment{mac}
+  {\begin{rmdblock}{block-mac}}
+  {\end{rmdblock}}
+\newenvironment{note}
+  {\begin{rmdblock}{block-note}}
+  {\end{rmdblock}}
+\newenvironment{sv}
+  {\begin{rmdblock}{block-sv}}
+  {\end{rmdblock}}
+\newenvironment{svbox}
+  {\begin{rmdblock}{block-svbox}}
+  {\end{rmdblock}}
+\newenvironment{warning}
+  {\begin{rmdblock}{block-warning}}
+  {\end{rmdblock}}
+\newenvironment{win}
+  {\begin{rmdblock}{block-win}}
+  {\end{rmdblock}}
+
+\usepackage{geometry} % use to modify the margins
+\geometry{hmargin = 4cm, vmargin = 3cm}

@@ -1,3 +1,9 @@
+# learndown 1.2.0
+
+- There are now more GitHub assignation types : `assign2()` for group assignations and `challenge()`/`challenge2()` for assignations linked to challenges (individual or in groups).
+
+- Images related to exercise blocks and suggested `style0.css` and `preamble.tex`to be used for {learndown}-enabled {bookdown}s are also provided now.
+
 # learndown 1.1.8
 
 - Argument `upgrade=` added to `run()`, `run_app()` and `update_pkg()`. By default, it is "never", which is a good value inside the SciViews Box, but "ask" may be more appropriate elsewhere.

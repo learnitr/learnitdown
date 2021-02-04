@@ -2,9 +2,18 @@
 % Please edit documentation in R/assignation.R
 \name{assignation}
 \alias{assignation}
+\alias{assignation2}
+\alias{challenge}
+\alias{challenge2}
 \alias{assignation_en}
 \alias{assignation_fr}
-\title{Insert a GitHub assignation in the document}
+\alias{assignation2_en}
+\alias{assignation2_fr}
+\alias{challenge_en}
+\alias{challenge_fr}
+\alias{challenge2_en}
+\alias{challenge2_fr}
+\title{Insert a GitHub assignation or challenge in the document}
 \usage{
 assignation(
   name,
@@ -15,18 +24,70 @@ assignation(
   toc = "",
   texts = assignation_en(),
   assign.img = "images/list-assign.png",
-  assign.link = "github_assignation"
+  assign.link = "github_assignation",
+  block = "assign"
+)
+
+assignation2(
+  name,
+  url,
+  course.urls = NULL,
+  part = NULL,
+  course.names = c(course1 = "Data Science"),
+  toc = "",
+  texts = assignation2_en(),
+  assign.img = "images/list-assign2.png",
+  assign.link = "github_assignation",
+  block = "assign2"
+)
+
+challenge(
+  name,
+  url,
+  course.urls = NULL,
+  part = NULL,
+  course.names = c(course1 = "Data Science"),
+  toc = "",
+  texts = challenge_en(),
+  assign.img = "images/list-challenge.png",
+  assign.link = "github_assignation",
+  block = "challenge"
+)
+
+challenge2(
+  name,
+  url,
+  course.urls = NULL,
+  part = NULL,
+  course.names = c(course1 = "Data Science"),
+  toc = "",
+  texts = challenge2_en(),
+  assign.img = "images/list-challenge2.png",
+  assign.link = "github_assignation",
+  block = "challenge2"
 )
 
 assignation_en(title, part.name, alt, sub, course, toc.def)
 
 assignation_fr(title, part.name, alt, sub, course, toc.def)
+
+assignation2_en(title, part.name, alt, sub, course, toc.def)
+
+assignation2_fr(title, part.name, alt, sub, course, toc.def)
+
+challenge_en(title, part.name, alt, sub, course, toc.def)
+
+challenge_fr(title, part.name, alt, sub, course, toc.def)
+
+challenge2_en(title, part.name, alt, sub, course, toc.def)
+
+challenge2_fr(title, part.name, alt, sub, course, toc.def)
 }
 \arguments{
-\item{name}{The name of the assignation (usually the same as the name of the
+\item{name}{The name of the assignation or the challenge (usually the same as the name of the
 template GitHub repository).}
 
-\item{url}{The URL of the assignation (could be a named list for different
+\item{url}{The URL of the assignation or challenge (could be a named list for different
 versions depending on the course).}
 
 \item{course.urls}{Named vector with the Classroom URLS for each course.
@@ -54,6 +115,8 @@ the ex-toc.}
 \item{assign.link}{The link to the learnr help page (when the user clicks on
 the image in the ex-toc).}
 
+\item{block}{The class of the div, or the LaTeX environment to use for the assignment block.}
+
 \item{title}{The title of the block.}
 
 \item{part.name}{The word to use for "part".}
@@ -74,7 +137,7 @@ conveniently used inside and R inline expression in your R Markdown document
 on its own line with one blank line above and bellow it.
 }
 \description{
-Insert a block of class \code{assign} with data related to a GitHub (Classroom)
+Insert a block of class \code{assign}, \code{assign2}, \code{challenge} or \code{challenge2} with data related to a GitHub (Classroom)
 assignment.
 }
 \details{

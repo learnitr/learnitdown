@@ -1,0 +1,131 @@
+
+/* Bookdown formatting to slightly better match UMONS style */
+.book .book-body .page-wrapper .page-inner section.normal a {
+  color: #00abcc;
+}
+
+.book .book-summary ul.summary li a:hover, .book .book-summary ul.summary li.active>a {
+  color: #00abcc;
+}
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+/* Special boxes */
+.info {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-info.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.note {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-note.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.warning {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-warning.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.error {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-error.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.win {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-win.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.mac {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-mac.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.linux {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-linux.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.bdd {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-bdd.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.tuto {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-tuto.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.assign {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-assign.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.assign2 {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-assign2.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.challenge {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-challenge.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.challenge2 {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background:  #f5f5f5 url("images/block-challenge2.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.sv {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background: #f5f5f5 url("images/block-sv.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.svbox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 5px;
+  background: #f5f5f5 url("images/block-svbox.png") left center/3em no-repeat;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
