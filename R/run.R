@@ -181,7 +181,7 @@ update_pkg <- function(package, github_repos, upgrade = "never") {
     if (is.null(token)) {
       NULL
     } else {
-      authenticate(token, "x-oauth-basic", "basic")
+      httr::authenticate(token, "x-oauth-basic", "basic")
     }
   }
 
@@ -244,7 +244,7 @@ update_pkg <- function(package, github_repos, upgrade = "never") {
     last_rel <- sub("^[vV]([0-9]+\\.[0-9]+)\\.([0-9]+)$", "\\1-\\2", last_tag)
     curr_rel <- sub("^([0-9]+\\.[0-9]+)\\.([0-9]+)$", "\\1-\\2",
       packageVersion(package))
-    status <- try(compareVersion(last_rel, curr_rel) != 0, silent = TRUE)
+    status <- try(compareVersion(last_rel, curr_rel), silent = TRUE)
     if (!inherits(status, "try-error")) {
       if (status > 0) {
         # We need to update the package

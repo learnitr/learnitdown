@@ -1,3 +1,7 @@
+# learndown 1.2.1
+
+- Bug correction: when update_pkg() encountered a more recent version of the package, it upgraded it anyway.
+
 # learndown 1.2.0
 
 - There are now more GitHub assignation types : `assign2()` for group assignations and `challenge()`/`challenge2()` for assignations linked to challenges (individual or in groups).
