@@ -10,13 +10,13 @@
 #' @return The Markdown chunk with the exercises toc.
 #' @export
 show_ex_toc <- function(header = "", clear.it = TRUE) {
-  ex_toc <- getOption("learndown_ex_toc", NULL)
+  ex_toc <- getOption("learnitdown_ex_toc", NULL)
   if (is.null(ex_toc)) {
     toc <- ""
   } else {
     toc <- paste0("\n", header, '\n', ex_toc, "\n\n")
     if (isTRUE(clear.it))
-      options(learndown_ex_toc = NULL)
+      options(learnitdown_ex_toc = NULL)
   }
 
   toc

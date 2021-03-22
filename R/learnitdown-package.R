@@ -1,5 +1,5 @@
 #' @details
-#' The SciViews learndown package provides additional R Markdown tags to build
+#' The SciViews learnitdown package provides additional R Markdown tags to build
 #' richer learning material with interactivity.
 #'
 #' See [h5p()] or [launch_shiny()]

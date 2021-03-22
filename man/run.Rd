@@ -4,7 +4,7 @@
 \alias{run}
 \alias{run_app}
 \alias{update_pkg}
-\title{Run learndown learnr tutorials or Shiny apps from a package after update}
+\title{Run learnitdown learnr tutorials or Shiny apps from a package after update}
 \usage{
 run(
   tutorial,

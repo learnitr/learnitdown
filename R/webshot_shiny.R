@@ -44,7 +44,7 @@ width = 780, height = 500, offsetx = 30, offsety = 30, delay = 10, ...) {
   # Temporary screenshot and click icon images
   img_app_file <- paste0(imgdir, "/", app, "_temp.png")
   img_click_file <- system.file("images", "shinyapp_click.png",
-    package = "learndown")
+    package = "learnitdown")
 
   # Launch the Shiny app, wait delay and take screenshot
   webshot(url, delay = delay, vwidth = width, vheight = height,

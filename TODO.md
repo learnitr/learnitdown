@@ -1,4 +1,6 @@
-# learndown - To do list
+# learnitdown - To do list
+
+- JavaScript code for H5P should be version-independant
 
 - Tabulations in bookdown
 

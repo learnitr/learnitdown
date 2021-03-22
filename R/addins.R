@@ -26,7 +26,7 @@ webshot_shiny_addin <- function() {
     message("Launching the Shiny application and taking the screenshot,",
       " please wait...")
     img <- NULL
-    code <- paste0("img <- learndown::webshot_shiny", args)
+    code <- paste0("img <- learnitdown::webshot_shiny", args)
     res <- try(eval(parse(text = code)), silent = TRUE)
 
     # Is there an error?

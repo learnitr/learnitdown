@@ -26,14 +26,14 @@ toc.def = "Tutorial {id}", rstudio.url = "start_rstudio.html",
 tuto.img = "images/list-tuto.png", tuto.link = "tutorial") {
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
-    ex_toc <- getOption("learndown_ex_toc", "")
+    ex_toc <- getOption("learnitdown_ex_toc", "")
     if (toc == "") {
       # Use default text
       toc <- glue::glue(toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
       glue::glue("- [![tuto]({tuto.img})]({tuto.link}) [{toc}](#{id})"))
-    options(learndown_ex_toc = ex_toc)
+    options(learnitdown_ex_toc = ex_toc)
   }
 
   if (is.null(title)) {

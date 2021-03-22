@@ -65,14 +65,14 @@ run.arg = URLencode(run.cmd, reserved = TRUE),
 app.img = "images/list-app.png", app.link = "shiny_app", ...) {
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
-    ex_toc <- getOption("learndown_ex_toc", "")
+    ex_toc <- getOption("learnitdown_ex_toc", "")
     if (toc == "") {
       # Use default text
       toc <- glue::glue(toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
       glue::glue("- [![app]({app.img})]({app.link}) [{toc}](#{app})"))
-    options(learndown_ex_toc = ex_toc)
+    options(learnitdown_ex_toc = ex_toc)
   }
 
   # Use alt2 if fun is provided, otherwise, use alt1
@@ -91,9 +91,9 @@ app.img = "images/list-app.png", app.link = "shiny_app", ...) {
     if (!file.exists(img) & isTRUE(createimg)) {
       # Make sure imgdir directory exists
       dir.create(imgdir, showWarnings = FALSE, recursive = TRUE)
-      # Copy the default image from the learndown package
+      # Copy the default image from the learnitdown package
       file.copy(from = system.file("images", "shinyapp_default.png",
-        package = "learndown"), to = img)
+        package = "learnitdown"), to = img)
     }
   }
 

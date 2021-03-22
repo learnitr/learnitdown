@@ -1,4 +1,4 @@
-#' Initialize learndown features in an R Markdown document
+#' Initialize learnitdown features in an R Markdown document
 #'
 #' This function must be called in a script run by `before_chapter_script` entry
 #' in `_bookdown.yml` to create required `style.css` and `header.html` files.
@@ -46,7 +46,7 @@
 #' cat("\n/* Content from style0.css */\n", file = "style0.css")
 #' cat("\n<!-- Content from header0.html -->\n", file = "header0.html")
 #' # Create style.css and header.html files
-#' (learndown_init())
+#' (learnitdown_init())
 #' cat(readLines('style.css'), sep = "\n")
 #' cat(readLines('header.html'), sep = "\n")
 #' setwd("..")
@@ -54,7 +54,7 @@
 #' setwd(odir)
 #' rm(odir)
 #'
-learndown_init <- function(shiny = TRUE, h5p = TRUE, use.query = FALSE,
+learnitdown_init <- function(shiny = TRUE, h5p = TRUE, use.query = FALSE,
 iframe.links = TRUE, details.css = TRUE, baseurl = "https://example.org",
 institutions = c("institution1", "institution2"),
 courses = c("course1", "course2", "course3"),

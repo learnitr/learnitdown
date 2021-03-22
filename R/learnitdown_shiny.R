@@ -1,6 +1,6 @@
 #' Read shinylogs log data and format them in a data.frame
 #'
-#' Learndown Shiny applications are a special kind of Shiny applications that
+#' Learnitdown Shiny applications are a special kind of Shiny applications that
 #' logs events and check results. It uses the `shinylogs` package to log Shiny
 #' events and [read_shinylogs()] reads such logs and convert their data into a
 #' format that is suitable to include, say in a MongoDB database.
@@ -136,19 +136,19 @@ read_shinylogs <- function(file, version = "0",
   }
 
   # Rework submit and quit events
-  is_submit <- res$label == "learndown_submit_"
+  is_submit <- res$label == "learnitdown_submit_"
   if (any(is_submit)) {
     res$verb[is_submit] <- "submitted"
     res$label[is_submit] <- ""
   }
-  is_quit <- res$label == "learndown_quit_"
+  is_quit <- res$label == "learnitdown_quit_"
   if (any(is_quit)) {
     res$verb[is_quit] <- "exited"
     res$label[is_quit] <- ""
   }
 
   # Rework result events
-  is_result <- res$label == "learndown_result_"
+  is_result <- res$label == "learnitdown_result_"
   if (any(is_result)) {
     res$verb[is_result] <- "evaluated"
     res$label[is_result] <- ""
@@ -215,7 +215,7 @@ read_shinylogs <- function(file, version = "0",
 
 .record_shinylogs <- function(file, url, db, collection = "shiny",
 version = "0", log.errors = TRUE, log.outputs = FALSE,
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
 
   if (!file.exists(file))
     return(TRUE)
@@ -279,7 +279,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @param drop.dir If `TRUE` and path is empty at the end of the process, drop
 #' the logs directory.
 #' @param debug Do we debug the events recording by issuing extra messages? By
-#' Default the value in the environment variable `LEARNDOWN_DEBUG` is used and
+#' Default the value in the environment variable `LEARNITDOWN_DEBUG` is used and
 #' debugging will be done if this value is different to `0`.
 #'
 #' @return `TRUE`if there where log files to export, `FALSE` otherwise.
@@ -288,7 +288,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @seealso [read_shinylogs()], [trackEvents()]
 record_shiny <- function(path, url, db, collection = "shiny",
 version = "0", log.errors = TRUE, log.outputs = FALSE, drop.dir = FALSE,
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
   log_files <- dir(path, pattern = "\\.rds$", full.names = TRUE)
   if (length(log_files)) {
@@ -318,9 +318,9 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   answer
 }
 
-#' Create and manage learndown Shiny applications
+#' Create and manage learnitdown Shiny applications
 #'
-#' A learndown Shiny application is an application whose events (start, stop,
+#' A learnitdown Shiny application is an application whose events (start, stop,
 #' inputs, outputs, errors, result, quit) are recorded. It also provides a
 #' 'Submit Answer' and a 'Quit' buttons that manage to check the answer provided
 #' by the user and to close the application cleanly.
@@ -330,22 +330,22 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' by default, it is the same as `title`. If `title = NULL`, no title is added.
 #' @param version The version number (in a string character format) of the Shiny
 #' application to use in the events logger.
-#' @param inputId The identifier of the button ("learndown_submit_" or
-#' "learndown_quit_").
+#' @param inputId The identifier of the button ("learnitdown_submit_" or
+#' "learnitdown_quit_").
 #' @param label The button text ("Submit" or "Quit").
 #' @param class The bootstrap class of the button.
 #' @param ... Further arguments passed to [shiny::actionButton()].
 #'
 #' @return The code to be inserted at the beginning of the Shiny application UI
-#' for [learndownShiny()] or where the buttons should be located for the other
+#' for [learnitdownShiny()] or where the buttons should be located for the other
 #' function.
 #' @export
 #'
 #' @seealso [trackEvents()], [record_shiny()]
 #'
 #' @examples
-#' learndownShiny("My title")
-learndownShiny <- function(title, windowTitle = title) {
+#' learnitdownShiny("My title")
+learnitdownShiny <- function(title, windowTitle = title) {
   tagList(
     # Required initialisation
     useToastr(),
@@ -354,30 +354,30 @@ learndownShiny <- function(title, windowTitle = title) {
     if (is.null(title)) NULL else
       tagList(tags$head(tags$title(windowTitle)), h4(title)),
 
-    # Add an hidden input field to contain learndown result
-    conditionalPanel(condition = "false", textInput("learndown_result_", ""))
+    # Add an hidden input field to contain learnitdown result
+    conditionalPanel(condition = "false", textInput("learnitdown_result_", ""))
   )
 }
 
 #' @export
-#' @rdname learndownShiny
-learndownShinyVersion <- function(version)
-  options(learndown.shiny.version = as.character(version))
+#' @rdname learnitdownShiny
+learnitdownShinyVersion <- function(version)
+  options(learnitdown.shiny.version = as.character(version))
 
 #' @export
-#' @rdname learndownShiny
-submitAnswerButton <- function(inputId = "learndown_submit_", label = "Submit",
-class = "btn-primary", ...)
+#' @rdname learnitdownShiny
+submitAnswerButton <- function(inputId = "learnitdown_submit_",
+label = "Submit", class = "btn-primary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
 #' @export
-#' @rdname learndownShiny
-quitButton <- function(inputId = "learndown_quit_", label = "Quit",
+#' @rdname learnitdownShiny
+quitButton <- function(inputId = "learnitdown_quit_", label = "Quit",
 class = "btn-secondary", ...)
   actionButton(inputId, label = label, class = class, ...)
 
 #' @export
-#' @rdname learndownShiny
+#' @rdname learnitdownShiny
 submitQuitButtons <- function() {
   fluidRow(
     submitAnswerButton(),
@@ -409,9 +409,10 @@ submitQuitButtons <- function() {
 #' @param password The password to access the MongoDB database. By default, it
 #' is read from the `MONGO_PASSWORD` environment variable.
 #' @param version The version of the current Shiny application. By default, it
-#' is the `learndown.shiny.version` option, as set by [learndownShinyVersion()].
+#' is the `learnitdown.shiny.version` option, as set by
+#' [learnitdownShinyVersion()].
 #' @param path The path where the temporary `shinylogs` log files are stored. By
-#' default, it is set to the `LEARNDOWN_LOCAL_STORAGE` environment variable,
+#' default, it is set to the `LEARNITDOWN_LOCAL_STORAGE` environment variable,
 #' or to `shiny_logs` subdirectory of the application if not defined. If that
 #' directory is not writable, a temporary directory is used instead.
 #' @param log.errors Do we log error events (yes by default)?
@@ -419,7 +420,7 @@ submitQuitButtons <- function() {
 #' @param drop.dir Do we erase the directory indicated by `path =` if it is
 #' empty at the end of the process (yes by default).
 #' @param debug Do we debug recording of events using extra messages? By
-#' default, it is the value of the environment variable `LEARNDOWN_DEBUG`, and
+#' default, it is the value of the environment variable `LEARNITDOWN_DEBUG`, and
 #' debugging is activated when that value is different to `0`.
 #' @param solution The correct solution as a named list. Names are the
 #' application inputs to check and their values are the correct values. The
@@ -450,36 +451,37 @@ submitQuitButtons <- function() {
 #' the session is closed when the user clicks on the quit button.
 #' @param config The result of the call to [config()], if done.
 #'
-#' @return The code to be inserted in the server part of the learndown Shiny
+#' @return The code to be inserted in the server part of the learnitdown Shiny
 #' application in order to properly identify the user and record the events.
 #' @export
 #'
-#' @seealso [learndownShinyVersion()], [sign_in()]
+#' @seealso [learnitdownShinyVersion()], [sign_in()]
 trackEvents <- function(session, input, output, sign_in.fun = NULL,
 url = Sys.getenv("MONGO_URL"), url.server = Sys.getenv("MONGO_URL_SERVER"),
 db = Sys.getenv("MONGO_BASE"), user = Sys.getenv("MONGO_USER"),
 password = Sys.getenv("MONGO_PASSWORD"),
-version = getOption("learndown.shiny.version"),
-path = Sys.getenv("LEARNDOWN_LOCAL_STORAGE", "shiny_logs"),
+version = getOption("learnitdown.shiny.version"),
+path = Sys.getenv("LEARNITDOWN_LOCAL_STORAGE", "shiny_logs"),
 log.errors = TRUE, log.outputs = FALSE, drop.dir = TRUE, config = NULL,
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
 
-  # Indicate this is a learndown Shiny application
+  # Indicate this is a learnitdown Shiny application
   debug <- isTRUE(debug)
   if (debug)
-    message("Shiny application with learndown v. ", packageVersion("learndown"))
+    message("Shiny application with learnitdown v. ",
+      packageVersion("learnitdown"))
 
   # Increment a session counter
-  session_counter <- getOption("learndown.shiny.sessions", default = 0) + 1
-  options(learndown.shiny.sessions = session_counter)
+  session_counter <- getOption("learnitdown.shiny.sessions", default = 0) + 1
+  options(learnitdown.shiny.sessions = session_counter)
   message("Running sessions: ", session_counter)
 
   # Install callbacks on session close
   observe({
     # Decrement the number of opened sessions on session close
     onSessionEnded(function() {
-      session_counter <- getOption("learndown.shiny.sessions", default = 0) - 1
-      options(learndown.shiny.sessions = session_counter)
+      session_counter <- getOption("learnitdown.shiny.sessions", default = 0) - 1
+      options(learnitdown.shiny.sessions = session_counter)
       message("Running sessions: ", session_counter)
     })
 
@@ -518,7 +520,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
       message("Tracking events in ", path, " for user ", user_info$login)
       toastr_info(paste0("Enregistrement actif pour ", user_info$login),
         closeButton = TRUE, position = "top-right", timeOut = 5000)
-      updateActionButton(session, "learndown_quit_", label = "Save & Quit")
+      updateActionButton(session, "learnitdown_quit_", label = "Save & Quit")
 
       user_tracking <- function(session, query = user_info) {
         # This is the original shinylogs function to retrieve the user
@@ -617,8 +619,8 @@ check.solution = check_shiny_solution) {
   if (!is.null(max_score))
     max_score <- as.numeric(max_score[1]) # Make sure max_score is a number
 
-  observeEvent(input$learndown_submit_, {
-    req(input$learndown_submit_)
+  observeEvent(input$learnitdown_submit_, {
+    req(input$learnitdown_submit_)
 
     if (is.null(solution) || !length(names(solution))) {
       # Always TRUE
@@ -659,20 +661,20 @@ check.solution = check_shiny_solution) {
       comment = comment
     )
     val_str <- as.character(toJSON(val, auto_unbox = TRUE))
-    updateTextInput(session, "learndown_result_", value = val_str)
+    updateTextInput(session, "learnitdown_result_", value = val_str)
   })
 }
 
 #' @export
 #' @rdname trackEvents
 trackQuit <- function(session, input, output, delay = 60) {
-  observeEvent(input$learndown_quit_, {
-    req(input$learndown_quit_)
+  observeEvent(input$learnitdown_quit_, {
+    req(input$learnitdown_quit_)
     session$close()
     # Force closing the app after delay if there is no other opened session
     if (delay != -1)
       later::later(function() {
-        if (getOption("learndown.shiny.sessions", default = 2) < 1)
+        if (getOption("learnitdown.shiny.sessions", default = 2) < 1)
           stopApp()
        }, delay = delay)
   })

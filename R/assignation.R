@@ -58,14 +58,14 @@ assign.link = "github_assignation", block = "assign") {
 
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
-    ex_toc <- getOption("learndown_ex_toc", "")
+    ex_toc <- getOption("learnitdown_ex_toc", "")
     if (toc == "") {
       # Use default text
       toc <- glue::glue(texts$toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
       glue::glue("- [![git]({assign.img})]({assign.link}) [{toc}](#{anchor})"))
-    options(learndown_ex_toc = ex_toc)
+    options(learnitdown_ex_toc = ex_toc)
   }
 
   if (is.null(course.urls) || !length(course.urls)) {

@@ -1,4 +1,4 @@
-#' Run learndown learnr tutorials or Shiny apps from a package after update
+#' Run learnitdown learnr tutorials or Shiny apps from a package after update
 #'
 #' These functions are convenient in the framework of a course whose learnrs and
 #' Shiny applications may be updated during the course. The [update()] function

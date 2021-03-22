@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 
 ## ----setup--------------------------------------------------------------------
-library(learndown)
+library(learnitdown)
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #  h5p(1, "https://www.example.com", width = 780, height = 500)

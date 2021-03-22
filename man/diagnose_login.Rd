@@ -10,7 +10,8 @@ diagnose_login(block = "info", lang = "en")
 \item{block}{Should the diagnostic be included in a block construct
 (not if \code{NULL})?}
 
-\item{lang}{The language to use for diagnostic output (only \code{'en'} or \code{'fr'} currently)}
+\item{lang}{The language to use for diagnostic output (only \code{'en'} or \code{'fr'}
+currently)}
 }
 \value{
 Nothing, the function is used for its side-effect of adding
@@ -24,6 +25,6 @@ displays the login status of the user (login, contextual data, ...).
 \details{
 Wherever you want to display this diagnostic report in your bookdown page,
 add on its own line the following instruction:
-'r learndown::diagnose_login()' between backquotes (you can also change
+'r learnitdown::diagnose_login()' between backquotes (you can also change
 \code{lang}, if you want).
 }

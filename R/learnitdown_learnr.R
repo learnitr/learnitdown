@@ -11,7 +11,7 @@
 #' current value is returned).
 #'
 #' @description Record tutorial submissions in a MongoDB database. The
-#' function is used by learndown learnr tutorials and is not for end-users.
+#' function is used by learnitdown learnr tutorials and is not for end-users.
 #'
 #' @return Nothing. The function is used for its side-effects.
 #' @export
@@ -26,12 +26,12 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   db <- Sys.getenv("MONGO_BASE")
   user <- Sys.getenv("MONGO_USER")
   password <- Sys.getenv("MONGO_PASSWORD")
-  bds_dir <- Sys.getenv("LEARNDOWN_LOCAL_STORAGE")
+  bds_dir <- Sys.getenv("LEARNITDOWN_LOCAL_STORAGE")
   if (bds_dir == "")
-    bds_dir <- "~/.local/share/R/learndown" # Default value
+    bds_dir <- "~/.local/share/R/learnitdown" # Default value
   bds_file <- file.path(bds_dir, "learnr_events")
-  debug <- (Sys.getenv("LEARNDOWN_DEBUG", 0) != 0)
-  user_info <- getOption("learndown_learnr_user")
+  debug <- (Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0)
+  user_info <- getOption("learnitdown_learnr_user")
   if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
 
@@ -49,7 +49,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     }
     res <- try(check_internet_access(), silent = TRUE)
     if (inherits(res, "try-error")) {
-      options(learndown_learnr_record = FALSE)
+      options(learnitdown_learnr_record = FALSE)
       if (debug)
         message("Testing Internet access failed: ", as.character(res))
       return(res)
@@ -59,12 +59,12 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     m <- try(mongo(collection = "learnr", db = db, url = glue(url)),
       silent = TRUE)
     if (inherits(m, "try-error")) {
-      options(learndown_learnr_record = FALSE)
+      options(learnitdown_learnr_record = FALSE)
       if (debug)
         message("Testing database access gives an error: ", as.character(m))
       return(m)
     } else {# OK, we can access the database (no insert test, though)
-      options(learndown_learnr_record = TRUE)
+      options(learnitdown_learnr_record = TRUE)
       return("")
     }
   }
@@ -129,6 +129,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     video_progress            = "seeked",
     section_skipped           = "progressed",
     section_viewed            = "displayed",
+    section_viewed_first_time = "unlocked",
     session_start             = "started",
     session_stop              = "stopped",
     event # Just in case there will be something not in the list
@@ -182,7 +183,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   )
 
   db_injected <- FALSE
-  use_db <- isTRUE(getOption("learndown_learnr_record", default = TRUE))
+  use_db <- isTRUE(getOption("learnitdown_learnr_record", default = TRUE))
   if (use_db) {
     m <- try({
       m <- mongo(collection = "learnr", db = db, url = glue(url))
@@ -216,7 +217,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     add_file_base64(entry, file = bds_file)
   }
 }
-# Use: options(tutorial.event_recorder = learndown::record_learnr)
+# Use: options(tutorial.event_recorder = learnitdown::record_learnr)
 # To collect these data
 #collect_learnr <- function(user, password, server.db = FALSE) {
 #  db <- Sys.getenv("MONGO_BASE")
@@ -348,8 +349,8 @@ Thanks.
 
 #' A default checker that just acknowledges submission
 #'
-#' This is a simple checker function for learndown learnr applications that just
-#' indicates to the user that its answer is taken into account.
+#' This is a simple checker function for learnitdown learnr applications that
+#' just indicates to the user that its answer is taken into account.
 #'
 #' @param label The label for the learnr exercise.
 #' @param user_code The code submitted by the user.
@@ -394,7 +395,7 @@ checker_ack_learnr <- function(label, user_code, solution_code, check_code,
 #  result
 #}
 
-#' Set up a learndown Learnr application
+#' Set up a learnitdown Learnr application
 #'
 #' This function eases the configuration of the learnr document to get user and
 #' database info, record events, use grade this and parameterize learnr.
@@ -413,20 +414,20 @@ checker_ack_learnr <- function(label, user_code, solution_code, check_code,
 #' @return Nothing. The function is used to setup the learnr environment.
 #' @export
 #'
-learndownLearnrSetup <- function(config, sign_in, time.limit = 60,
+learnitdownLearnrSetup <- function(config, sign_in, time.limit = 60,
 cap = "R Code", echo = FALSE, comment = NA, use.gradethis = TRUE,
-event.recorder = learndown::record_learnr,
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+event.recorder = learnitdown::record_learnr,
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
-  Sys.setenv(LEARNDOWN_DEBUG = as.integer(debug))
+  Sys.setenv(LEARNITDOWN_DEBUG = as.integer(debug))
   if (debug)
-    message("Learnr application with learndown v. ",
-      packageVersion("learndown"))
+    message("Learnr application with learnitdown v. ",
+      packageVersion("learnitdown"))
 
   load_lib <- library
 
   load_lib('learnr')
-  load_lib('learndown')
+  load_lib('learnitdown')
 
   force(config) # Get configuration (database informations)
   user <- sign_in # Get user info
@@ -435,7 +436,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   } else {
     message("Recording enabled for ", user$login)
   }
-  options(learndown_learnr_user = user)
+  options(learnitdown_learnr_user = user)
 
   if (isTRUE(use.gradethis)) {
     load_lib('gradethis')
@@ -453,7 +454,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
   knitr::opts_chunk$set(echo = echo, comment = comment)
 }
 
-#' @rdname learndownLearnrSetup
+#' @rdname learnitdownLearnrSetup
 #' @export
 #' @param title The Title for the banner.
 #' @param text Text to print beneath the title.
@@ -465,7 +466,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' followed by the login).
 #' @param msg.error The message when an error during recording of activity in
 #' the database occurs.
-learndownLearnrBanner <- function(title, text, image, align = "left",
+learnitdownLearnrBanner <- function(title, text, image, align = "left",
   msg.nologin = "Anonymous user, no record!",
   msg.login = "Recording activated for ",
   msg.error = "Error recording activity! ") {
@@ -495,13 +496,12 @@ learndownLearnrBanner <- function(title, text, image, align = "left",
   )
 }
 
-#' @rdname learndownLearnrSetup
+#' @rdname learnitdownLearnrSetup
 #' @export
 #' @param input The Shiny input.
 #' @param output The Shiny output.
 #' @param session The Shiny session.
-learndownLearnrServer <- function(input, output, session) {
-  output$login <- renderText(getOption("learndown_learnr_user")$login)
+learnitdownLearnrServer <- function(input, output, session) {
+  output$login <- renderText(getOption("learnitdown_learnr_user")$login)
   output$error <- renderText(as.character(record_learnr(data = NULL)))
 }
-

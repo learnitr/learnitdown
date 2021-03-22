@@ -12,8 +12,8 @@ and provide (or cache) user information in ciphered form.}
 config(
   url,
   password,
-  cache = file.path(tempdir(), ".learndown_config"),
-  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
+  cache = file.path(tempdir(), ".learnitdown_config"),
+  debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0
 )
 
 sign_in(
@@ -21,15 +21,15 @@ sign_in(
   password,
   cipher = "aes-256-cbc",
   iv = NULL,
-  cache = file.path(tempdir(), ".learndown_user"),
-  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
+  cache = file.path(tempdir(), ".learnitdown_user"),
+  debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0
 )
 
 sign_out(
   title = "Signing out",
-  message = "Do you really want to sign out with learndown?",
-  cache = file.path(tempdir(), ".learndown_user"),
-  debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0
+  message = "Do you really want to sign out with learnitdown?",
+  cache = file.path(tempdir(), ".learnitdown_user"),
+  debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0
 )
 
 encrypt(
@@ -63,7 +63,7 @@ data. Access to the database will be checked, and if it fails, the
 configuration data are refreshed from the URL.}
 
 \item{debug}{Do we issue debugging messages? By default, it is set according
-to the \code{LEARNDOWN_DEBUG} environment variable (yes, if this variable is not
+to the \code{LEARNITDOWN_DEBUG} environment variable (yes, if this variable is not
 \code{0}).}
 
 \item{data}{The fingerprint data in clear or ciphered form (in this case, the

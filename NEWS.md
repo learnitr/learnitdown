@@ -1,3 +1,7 @@
+# learnitdown 1.3.0
+
+- Package renamed {learnitdown} to avoid conflicts with http://learndown.com.
+
 # learndown 1.2.1
 
 - Bug correction: when update_pkg() encountered a more recent version of the package, it upgraded it anyway.

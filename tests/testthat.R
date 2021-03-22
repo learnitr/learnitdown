@@ -1,3 +1,3 @@
 library("testthat")
 
-test_check("learndown")
+test_check("learnitdown")

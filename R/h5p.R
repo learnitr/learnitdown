@@ -29,14 +29,14 @@ toc.def = "H5P exercise {id}", h5p.img = "images/list-h5p.png",
 h5p.link = "h5p") {
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
-    ex_toc <- getOption("learndown_ex_toc", "")
+    ex_toc <- getOption("learnitdown_ex_toc", "")
     if (toc == "") {
       # Use default text
       toc <- glue::glue(toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
       glue::glue("- [![h5p]({h5p.img})]({h5p.link}) [{toc}](#h5p_{id})"))
-    options(learndown_ex_toc = ex_toc)
+    options(learnitdown_ex_toc = ex_toc)
   }
 
   glue::glue("\n[]{{#h5p_{id}}}[![h5p]({h5p.img})]({h5p.link})\n<iframe src=\"{baseurl}/wp-admin/admin-ajax.php?action=h5p_embed&id={id}\" width=\"{width}\" height=\"{height}\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" class=\"h5p\"></iframe><script src=\"{baseurl}/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js\" charset=\"UTF-8\"></script>\n")

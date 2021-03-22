@@ -12,7 +12,7 @@
 #' data. Access to the database will be checked, and if it fails, the
 #' configuration data are refreshed from the URL.
 #' @param debug Do we issue debugging messages? By default, it is set according
-#' to the `LEARNDOWN_DEBUG` environment variable (yes, if this variable is not
+#' to the `LEARNITDOWN_DEBUG` environment variable (yes, if this variable is not
 #' `0`).
 #' @param object An object to be encrypted.
 #' @param cipher The cryptography algorithm to use.
@@ -33,11 +33,11 @@
 #' The user information for [sign_in()].
 #' @export
 config <- function(url, password,
-cache = file.path(tempdir(), ".learndown_config"),
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+cache = file.path(tempdir(), ".learnitdown_config"),
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
   # Make sure the environment variable is set correctly for debug
-  Sys.setenv(LEARNDOWN_DEBUG = as.integer(debug))
+  Sys.setenv(LEARNITDOWN_DEBUG = as.integer(debug))
 
   # Set environment variables according to entries in a crypted configuration
   # file, and return the crypted data, if it succeeds (test database access)
@@ -71,7 +71,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     res <- setenv(cache, password = password, debug = debug)
     if (!inherits(res, "try-error")) {
       if (debug) {
-        message("Learndown configuration set from cache")
+        message("Learnitdown configuration set from cache")
         message("Database is responding")
       }
       return(invisible(TRUE))
@@ -101,7 +101,7 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
     return(invisible(structure(FALSE, error = res)))
   } else {
     if (debug) {
-      message("Learndown configuration set from URL")
+      message("Learnitdown configuration set from URL")
       message("Database is responding")
     }
     # Save these data into the cache file
@@ -113,8 +113,8 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @rdname config
 #' @export
 sign_in <- function(data, password, cipher = "aes-256-cbc", iv = NULL,
-cache = file.path(tempdir(), ".learndown_user"),
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+cache = file.path(tempdir(), ".learnitdown_user"),
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
   if (!missing(data)) {
     # If data = NULL, we delete fingerprint data (that is, user is signed out).
@@ -185,9 +185,9 @@ debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
 #' @rdname config
 #' @export
 sign_out <- function(title = "Signing out",
-message = "Do you really want to sign out with learndown?",
-cache = file.path(tempdir(), ".learndown_user"),
-debug = Sys.getenv("LEARNDOWN_DEBUG", 0) != 0) {
+message = "Do you really want to sign out with learnitdown?",
+cache = file.path(tempdir(), ".learnitdown_user"),
+debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
 
   if (rstudioapi::isAvailable()) {

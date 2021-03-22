@@ -6,7 +6,8 @@
 #'
 #' @param block Should the diagnostic be included in a block construct
 #' (not if `NULL`)?
-#' @param lang The language to use for diagnostic output (only `'en'` or `'fr'` currently)
+#' @param lang The language to use for diagnostic output (only `'en'` or `'fr'`
+#' currently)
 #'
 #' @return Nothing, the function is used for its side-effect of adding
 #' diagnostic code in the document
@@ -15,7 +16,7 @@
 #' @details
 #' Wherever you want to display this diagnostic report in your bookdown page,
 #' add on its own line the following instruction:
-#' 'r learndown::diagnose_login()' between backquotes (you can also change
+#' 'r learnitdown::diagnose_login()' between backquotes (you can also change
 #' `lang`, if you want).
 diagnose_login <- function(block = "info", lang = "en") {
   switch(lang,
