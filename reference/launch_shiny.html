@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Launch Shiny application by clicking on its screenshot. — launch_shiny • learndown</title>
+<title>Launch Shiny application by clicking on its screenshot. — launch_shiny • learnitdown</title>
 
 
 <!-- jquery -->
@@ -82,9 +82,15 @@ page)." />
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
@@ -126,13 +132,7 @@ page)." />
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -141,15 +141,15 @@ page)." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -165,7 +165,7 @@ page)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Launch Shiny application by clicking on its screenshot.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/launch_shiny.R'><code>R/launch_shiny.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/launch_shiny.R'><code>R/launch_shiny.R</code></a></small>
     <div class="hidden name"><code>launch_shiny.Rd</code></div>
     </div>
 
@@ -178,19 +178,27 @@ on it to actually launch the application (that replaces the screenshot on the
 page).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>launch_shiny</span>(
-  <span class='kw'>url</span>,
-  app = <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='kw'>url</span>),
-  imgdir = <span class='st'>"images/shinyapps"</span>,
-  img = <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='kw'>imgdir</span>, <span class='st'>"/"</span>, <span class='kw'>app</span>, <span class='st'>".png"</span>),
-  createimg = <span class='fl'>TRUE</span>,
-  width = <span class='fl'>780</span>,
-  height = <span class='fl'>500</span>,
-  <span class='kw'>fun</span>,
-  alt1 = <span class='st'>"*Click to start the Shiny application.*"</span>,
-  alt2 = <span class='st'>"*Click to start or run `{fun}(\"{app}\")`.*"</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>launch_shiny</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  app <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span>,
+  imgdir <span class='op'>=</span> <span class='st'>"images/shinyapps"</span>,
+  img <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>imgdir</span>, <span class='st'>"/"</span>, <span class='va'>app</span>, <span class='st'>".png"</span><span class='op'>)</span>,
+  createimg <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  width <span class='op'>=</span> <span class='fl'>780</span>,
+  height <span class='op'>=</span> <span class='fl'>500</span>,
+  fun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alt1 <span class='op'>=</span> <span class='st'>"*Click to start the Shiny application.*"</span>,
+  alt2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"*Click to start"</span>,
+    <span class='st'>"or [run `{run.cmd}`]({run.url}{run.arg}){{target=\"_blank\"}}.*"</span><span class='op'>)</span>,
+  toc <span class='op'>=</span> <span class='st'>""</span>,
+  toc.def <span class='op'>=</span> <span class='st'>"Shiny application {app}"</span>,
+  run.url <span class='op'>=</span> <span class='st'>"start_rstudio.html?runrcode="</span>,
+  run.cmd <span class='op'>=</span> <span class='fu'>glue</span><span class='op'>(</span><span class='st'>"{fun}(\"{app}\")"</span><span class='op'>)</span>,
+  run.arg <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/URLencode.html'>URLencode</a></span><span class='op'>(</span><span class='va'>run.cmd</span>, reserved <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+  app.img <span class='op'>=</span> <span class='st'>"images/list-app.png"</span>,
+  app.link <span class='op'>=</span> <span class='st'>"shiny_app"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,13 +244,47 @@ should take one argument which is the application name in <code>app =</code>.</p
     </tr>
     <tr>
       <th>alt1</th>
-      <td><p>Alternate text to display at the bottom of the screenshot. If
+      <td><p>Alternate text to display at the bottom of the screenshot when
+nothing is provided for <code>fun =</code>. If
 <code>NULL</code>, nothing is displayed below the screenshot.</p></td>
     </tr>
     <tr>
       <th>alt2</th>
       <td><p>Alternate text to display at the bottom of the screenshot in case
 <code>fun =</code> is provided.</p></td>
+    </tr>
+    <tr>
+      <th>toc</th>
+      <td><p>Entry to use in the exercises table of content (<code>NULL</code> if no
+entry, <code>""</code> for a default entry based on <code>toc.def =</code>).</p></td>
+    </tr>
+    <tr>
+      <th>toc.def</th>
+      <td><p>Text for a default toc entry using <code>glue()</code> syntax for
+replacement, e.g., <code>{app}</code>.</p></td>
+    </tr>
+    <tr>
+      <th>run.url</th>
+      <td><p>The URL to use to start the Shiny application in RStudio
+server in the SciViews Box. It should generally end with <code>?runrcode=</code>, and
+the R code to execute will be appended to it from <code>run.arg =</code>.</p></td>
+    </tr>
+    <tr>
+      <th>run.cmd</th>
+      <td><p>The command to use to launch the Shiny application in RStudio.</p></td>
+    </tr>
+    <tr>
+      <th>run.arg</th>
+      <td><p>The URL encoded version of <code>run.cmd =</code>.</p></td>
+    </tr>
+    <tr>
+      <th>app.img</th>
+      <td><p>The image to display in front of the toc entry</p></td>
+    </tr>
+    <tr>
+      <th>app.link</th>
+      <td><p>The link when the image is clicked (sends to an help page
+about Shiny applications).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -408,6 +450,8 @@ get the correct result.</p>
 
   
 
+
+  
 
   </body>
 </html>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Track events, the submit or the quit buttons — trackEvents • learndown</title>
+<title>Track events, the submit or the quit buttons — trackEvents • learnitdown</title>
 
 
 <!-- jquery -->
@@ -81,9 +81,15 @@ button." />
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
@@ -125,13 +131,7 @@ button." />
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -140,15 +140,15 @@ button." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -164,7 +164,7 @@ button." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Track events, the submit or the quit buttons</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_shiny.R'><code>R/learndown_shiny.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/learnitdown_shiny.R'><code>R/learnitdown_shiny.R</code></a></small>
     <div class="hidden name"><code>trackEvents.Rd</code></div>
     </div>
 
@@ -176,37 +176,41 @@ button and to cleanly close the application when the user clicks on the quit
 button.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>trackEvents</span>(
-  <span class='kw'>session</span>,
-  <span class='kw'>input</span>,
-  <span class='kw'>output</span>,
-  fingerprint.fun = <span class='kw'>NULL</span>,
-  url = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL"</span>),
-  url.server = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_URL_SERVER"</span>),
-  db = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_BASE"</span>),
-  user = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_USER"</span>),
-  password = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"MONGO_PASSWORD"</span>),
-  version = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"learndown.shiny.version"</span>),
-  path = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_LOCAL_STORAGE"</span>, <span class='st'>"shiny_logs"</span>),
-  log.errors = <span class='fl'>TRUE</span>,
-  log.outputs = <span class='fl'>FALSE</span>,
-  drop.dir = <span class='fl'>TRUE</span>,
-  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
-)
+    <pre class="usage"><span class='fu'>trackEvents</span><span class='op'>(</span>
+  <span class='va'>session</span>,
+  <span class='va'>input</span>,
+  <span class='va'>output</span>,
+  sign_in.fun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  url <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"MONGO_URL"</span><span class='op'>)</span>,
+  url.server <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"MONGO_URL_SERVER"</span><span class='op'>)</span>,
+  db <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"MONGO_BASE"</span><span class='op'>)</span>,
+  user <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"MONGO_USER"</span><span class='op'>)</span>,
+  password <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"MONGO_PASSWORD"</span><span class='op'>)</span>,
+  version <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"learnitdown.shiny.version"</span><span class='op'>)</span>,
+  path <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"LEARNITDOWN_LOCAL_STORAGE"</span>, <span class='st'>"shiny_logs"</span><span class='op'>)</span>,
+  log.errors <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  log.outputs <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  drop.dir <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  config <span class='op'>=</span> <span class='cn'>NULL</span>,
+  debug <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"LEARNITDOWN_DEBUG"</span>, <span class='fl'>0</span><span class='op'>)</span> <span class='op'>!=</span> <span class='fl'>0</span>
+<span class='op'>)</span>
 
-<span class='fu'>trackSubmit</span>(
-  <span class='kw'>session</span>,
-  <span class='kw'>input</span>,
-  <span class='kw'>output</span>,
-  solution = <span class='kw'>NULL</span>,
-  max_score = <span class='kw'>NULL</span>,
-  comment = <span class='st'>""</span>,
-  message.success = <span class='st'>"Correct"</span>,
-  message.error = <span class='st'>"Incorrect"</span>,
-  score.txt = <span class='st'>"Score"</span>
-)
+<span class='fu'>trackSubmit</span><span class='op'>(</span>
+  <span class='va'>session</span>,
+  <span class='va'>input</span>,
+  <span class='va'>output</span>,
+  solution <span class='op'>=</span> <span class='cn'>NULL</span>,
+  max_score <span class='op'>=</span> <span class='cn'>NULL</span>,
+  comment <span class='op'>=</span> <span class='st'>""</span>,
+  message.success <span class='op'>=</span> <span class='st'>"Correct"</span>,
+  message.error <span class='op'>=</span> <span class='st'>"Incorrect"</span>,
+  score.txt <span class='op'>=</span> <span class='st'>"Score"</span>,
+  check.solution <span class='op'>=</span> <span class='va'>check_shiny_solution</span>
+<span class='op'>)</span>
 
-<span class='fu'>trackQuit</span>(<span class='kw'>session</span>, <span class='kw'>input</span>, <span class='kw'>output</span>, delay = <span class='fl'>60</span>)</pre>
+<span class='fu'>trackQuit</span><span class='op'>(</span><span class='va'>session</span>, <span class='va'>input</span>, <span class='va'>output</span>, delay <span class='op'>=</span> <span class='fl'>60</span><span class='op'>)</span>
+
+<span class='fu'>check_shiny_solution</span><span class='op'>(</span><span class='va'>answer</span>, <span class='va'>solution</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -224,9 +228,9 @@ button.</p>
       <td><p>The Shiny <code>output</code> object.</p></td>
     </tr>
     <tr>
-      <th>fingerprint.fun</th>
+      <th>sign_in.fun</th>
       <td><p>The function that can get user info from the
-<code><a href='config.html'>fingerprint()</a></code>, or <code>NULL</code> by default to disable using local user data.</p></td>
+<code><a href='config.html'>sign_in()</a></code>, or <code>NULL</code> by default to disable using local user data.</p></td>
     </tr>
     <tr>
       <th>url</th>
@@ -256,12 +260,13 @@ is read from the <code>MONGO_PASSWORD</code> environment variable.</p></td>
     <tr>
       <th>version</th>
       <td><p>The version of the current Shiny application. By default, it
-is the <code>learndown.shiny.version</code> option, as set by <code><a href='learndownShiny.html'>learndownShinyVersion()</a></code>.</p></td>
+is the <code>learnitdown.shiny.version</code> option, as set by
+<code><a href='learnitdownShiny.html'>learnitdownShinyVersion()</a></code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
       <td><p>The path where the temporary <code>shinylogs</code> log files are stored. By
-default, it is set to the <code>LEARNDOWN_LOCAL_STORAGE</code> environment variable,
+default, it is set to the <code>LEARNITDOWN_LOCAL_STORAGE</code> environment variable,
 or to <code>shiny_logs</code> subdirectory of the application if not defined. If that
 directory is not writable, a temporary directory is used instead.</p></td>
     </tr>
@@ -279,9 +284,13 @@ directory is not writable, a temporary directory is used instead.</p></td>
 empty at the end of the process (yes by default).</p></td>
     </tr>
     <tr>
+      <th>config</th>
+      <td><p>The result of the call to <code><a href='config.html'>config()</a></code>, if done.</p></td>
+    </tr>
+    <tr>
       <th>debug</th>
       <td><p>Do we debug recording of events using extra messages? By
-default, it is the value of the environment variable <code>LEARNDOWN_DEBUG</code>, and
+default, it is the value of the environment variable <code>LEARNITDOWN_DEBUG</code>, and
 debugging is activated when that value is different to <code>0</code>.</p></td>
     </tr>
     <tr>
@@ -293,7 +302,8 @@ current state of these inputs will be compared against the solution, and the
 event is triggered with the <code>correct</code> field set to <code>TRUE</code> or <code>FALSE</code>
 accordingly. If <code>solution = NULL</code>, then the answer is considered to be always
 correct (use this if you just want to indicate that the user's answer is
-recorded in the database).</p></td>
+recorded in the database). For numeric values, use `c(min = x, max = y) to
+check if values are within a range.</p></td>
     </tr>
     <tr>
       <th>max_score</th>
@@ -321,20 +331,31 @@ event.</p></td>
       <td><p>The word to use for "score" ("Score" by default).</p></td>
     </tr>
     <tr>
+      <th>check.solution</th>
+      <td><p>The function to use to check if solution provided by
+a Shiny application is correct or not. By default, it is
+<code>check_shiny_solution()</code>.</p></td>
+    </tr>
+    <tr>
       <th>delay</th>
       <td><p>The time to wait before we close the Shiny application in sec
 (60 sec by default). If <code>delay = -1</code>, the application is <strong>not</strong> closed, only
 the session is closed when the user clicks on the quit button.</p></td>
     </tr>
+    <tr>
+      <th>answer</th>
+      <td><p>A named list of the answer data to check against solution. This
+object is provided by <code>trackSubmit()</code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The code to be inserted in the server part of the learndown Shiny
+    <p>The code to be inserted in the server part of the learnitdown Shiny
 application in order to properly identify the user and record the events.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code>, <code><a href='config.html'>fingerprint()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='learnitdownShiny.html'>learnitdownShinyVersion()</a></code>, <code><a href='config.html'>sign_in()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -479,6 +500,8 @@ application in order to properly identify the user and record the events.</p>
 
   
 
+
+  
 
   </body>
 </html>

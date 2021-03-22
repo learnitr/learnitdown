@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • learnitdown</title>
+<title>Insert a GitHub assignation or challenge in the document — assignation • learnitdown</title>
 
 
 <!-- jquery -->
@@ -52,7 +52,10 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Insert a GitHub assignation or challenge in the document — assignation" />
+<meta property="og:description" content="Insert a block of class assign, assign2, challenge or challenge2 with data related to a GitHub (Classroom)
+assignment." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -84,7 +87,7 @@
   <body data-spy="scroll" data-target="#toc">
     
 
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
 <div class="preloader">
@@ -157,25 +160,184 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/SciViews/learnitdown/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Insert a GitHub assignation or challenge in the document</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/assignation.R'><code>R/assignation.R</code></a></small>
+    <div class="hidden name"><code>assignation.Rd</code></div>
     </div>
 
-    <div id="learnitdown-130" class="section level1">
-<h1 class="page-header" data-toc-text="1.3.0">
-<a href="#learnitdown-130" class="anchor"></a>learnitdown 1.3.0</h1>
-<ul>
-<li>Package renamed {learnitdown} to avoid conflicts with http://learndown.com.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Insert a block of class <code>assign</code>, <code>assign2</code>, <code>challenge</code> or <code>challenge2</code> with data related to a GitHub (Classroom)
+assignment.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>assignation</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  <span class='va'>url</span>,
+  course.urls <span class='op'>=</span> <span class='cn'>NULL</span>,
+  part <span class='op'>=</span> <span class='cn'>NULL</span>,
+  course.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>course1 <span class='op'>=</span> <span class='st'>"Data Science"</span><span class='op'>)</span>,
+  toc <span class='op'>=</span> <span class='st'>""</span>,
+  texts <span class='op'>=</span> <span class='fu'>assignation_en</span><span class='op'>(</span><span class='op'>)</span>,
+  assign.img <span class='op'>=</span> <span class='st'>"images/list-assign.png"</span>,
+  assign.link <span class='op'>=</span> <span class='st'>"github_assignation"</span>,
+  block <span class='op'>=</span> <span class='st'>"assign"</span>
+<span class='op'>)</span>
+
+<span class='fu'>assignation2</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  <span class='va'>url</span>,
+  course.urls <span class='op'>=</span> <span class='cn'>NULL</span>,
+  part <span class='op'>=</span> <span class='cn'>NULL</span>,
+  course.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>course1 <span class='op'>=</span> <span class='st'>"Data Science"</span><span class='op'>)</span>,
+  toc <span class='op'>=</span> <span class='st'>""</span>,
+  texts <span class='op'>=</span> <span class='fu'>assignation2_en</span><span class='op'>(</span><span class='op'>)</span>,
+  assign.img <span class='op'>=</span> <span class='st'>"images/list-assign2.png"</span>,
+  assign.link <span class='op'>=</span> <span class='st'>"github_assignation"</span>,
+  block <span class='op'>=</span> <span class='st'>"assign2"</span>
+<span class='op'>)</span>
+
+<span class='fu'>challenge</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  <span class='va'>url</span>,
+  course.urls <span class='op'>=</span> <span class='cn'>NULL</span>,
+  part <span class='op'>=</span> <span class='cn'>NULL</span>,
+  course.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>course1 <span class='op'>=</span> <span class='st'>"Data Science"</span><span class='op'>)</span>,
+  toc <span class='op'>=</span> <span class='st'>""</span>,
+  texts <span class='op'>=</span> <span class='fu'>challenge_en</span><span class='op'>(</span><span class='op'>)</span>,
+  assign.img <span class='op'>=</span> <span class='st'>"images/list-challenge.png"</span>,
+  assign.link <span class='op'>=</span> <span class='st'>"github_assignation"</span>,
+  block <span class='op'>=</span> <span class='st'>"challenge"</span>
+<span class='op'>)</span>
+
+<span class='fu'>challenge2</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  <span class='va'>url</span>,
+  course.urls <span class='op'>=</span> <span class='cn'>NULL</span>,
+  part <span class='op'>=</span> <span class='cn'>NULL</span>,
+  course.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>course1 <span class='op'>=</span> <span class='st'>"Data Science"</span><span class='op'>)</span>,
+  toc <span class='op'>=</span> <span class='st'>""</span>,
+  texts <span class='op'>=</span> <span class='fu'>challenge2_en</span><span class='op'>(</span><span class='op'>)</span>,
+  assign.img <span class='op'>=</span> <span class='st'>"images/list-challenge2.png"</span>,
+  assign.link <span class='op'>=</span> <span class='st'>"github_assignation"</span>,
+  block <span class='op'>=</span> <span class='st'>"challenge2"</span>
+<span class='op'>)</span>
+
+<span class='fu'>assignation_en</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>assignation_fr</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>assignation2_en</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>assignation2_fr</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>challenge_en</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>challenge_fr</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>challenge2_en</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span>
+
+<span class='fu'>challenge2_fr</span><span class='op'>(</span><span class='va'>title</span>, <span class='va'>part.name</span>, <span class='va'>alt</span>, <span class='va'>sub</span>, <span class='va'>course</span>, <span class='va'>toc.def</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>The name of the assignation or the challenge (usually the same as the name of the
+template GitHub repository).</p></td>
+    </tr>
+    <tr>
+      <th>url</th>
+      <td><p>The URL of the assignation or challenge (could be a named list for different
+versions depending on the course).</p></td>
+    </tr>
+    <tr>
+      <th>course.urls</th>
+      <td><p>Named vector with the Classroom URLS for each course.
+Names are the course identifiers in Moodle. If <code>NULL</code>, no course-specific
+sections are added.</p></td>
+    </tr>
+    <tr>
+      <th>part</th>
+      <td><p>If the assignation presents several parts in the <code>README.md</code> file
+(because the same assignation serves at different places), indicate the part
+here. Otherwise, leave the default value <code>NULL</code> if there are no parts.</p></td>
+    </tr>
+    <tr>
+      <th>course.names</th>
+      <td><p>A named character vector with the name of the course.
+Names used must be the same as for <code>course.urls</code>, but there may be more here,
+and not necessarily in the same order.</p></td>
+    </tr>
+    <tr>
+      <th>toc</th>
+      <td><p>The exercise table of content (ex-toc) label. If <code>toc = ""</code>
+(default), a generic label is calculated using <code>toc.def</code> from <code>texts</code>.</p></td>
+    </tr>
+    <tr>
+      <th>texts</th>
+      <td><p>Various sentences used to construct the assignation bloc. You
+can make a call to <code>assignation_en()</code> or <code>assignation_fr()</code> as a basis
+and modify only the sentence you want.</p></td>
+    </tr>
+    <tr>
+      <th>assign.img</th>
+      <td><p>The relative path to the image to use before the label in
+the ex-toc.</p></td>
+    </tr>
+    <tr>
+      <th>assign.link</th>
+      <td><p>The link to the learnr help page (when the user clicks on
+the image in the ex-toc).</p></td>
+    </tr>
+    <tr>
+      <th>block</th>
+      <td><p>The class of the div, or the LaTeX environment to use for the assignment block.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>The title of the block.</p></td>
+    </tr>
+    <tr>
+      <th>part.name</th>
+      <td><p>The word to use for "part".</p></td>
+    </tr>
+    <tr>
+      <th>alt</th>
+      <td><p>The text to display for alternate access to the repository (for
+non-registered users). Use a string following the <code>glue()</code> syntax to replace
+variables.</p></td>
+    </tr>
+    <tr>
+      <th>sub</th>
+      <td><p>The text that appears at the bottom of the assignation block.</p></td>
+    </tr>
+    <tr>
+      <th>course</th>
+      <td><p>The text for items corresponding to courses.</p></td>
+    </tr>
+    <tr>
+      <th>toc.def</th>
+      <td><p>The default ex-toc label (using <code>glue()</code> syntax).</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Markdown code that generates the GitHub assignation block. It is most
+conveniently used inside and R inline expression in your R Markdown document
+on its own line with one blank line above and bellow it.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If the URL contains several entries, names are used to create show/hide divs
+according to the <code>icourse</code> user information.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 

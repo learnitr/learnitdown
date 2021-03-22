@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Configure the R environment for the course (including database information)
-and provide (or cache) user information in ciphered form. — config • learndown</title>
+and provide (or cache) user information in ciphered form. — config • learnitdown</title>
 
 
 <!-- jquery -->
@@ -80,9 +80,15 @@ the URL, user and password of the MongoDB database used by the course." />
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
@@ -124,13 +130,7 @@ the URL, user and password of the MongoDB database used by the course." />
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -139,15 +139,15 @@ the URL, user and password of the MongoDB database used by the course." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -164,7 +164,7 @@ the URL, user and password of the MongoDB database used by the course." />
     <div class="page-header">
     <h1>Configure the R environment for the course (including database information)
 and provide (or cache) user information in ciphered form.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/config.R'><code>R/config.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/config.R'><code>R/config.R</code></a></small>
     <div class="hidden name"><code>config.Rd</code></div>
     </div>
 
@@ -173,41 +173,48 @@ and provide (or cache) user information in ciphered form.</h1>
 the URL, user and password of the MongoDB database used by the course.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>config</span>(
-  <span class='kw'>url</span>,
-  <span class='kw'>password</span>,
-  cache = <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>".learndown_config"</span>),
-  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
-)
+    <pre class="usage"><span class='fu'>config</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  <span class='va'>password</span>,
+  cache <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>".learnitdown_config"</span><span class='op'>)</span>,
+  debug <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"LEARNITDOWN_DEBUG"</span>, <span class='fl'>0</span><span class='op'>)</span> <span class='op'>!=</span> <span class='fl'>0</span>
+<span class='op'>)</span>
 
-<span class='fu'>fingerprint</span>(
-  <span class='kw'>data</span>,
-  <span class='kw'>password</span>,
-  cipher = <span class='st'>"aes-256-cbc"</span>,
-  iv = <span class='kw'>NULL</span>,
-  cache = <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='st'>".learndown_user"</span>),
-  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
-)
+<span class='fu'>sign_in</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>password</span>,
+  cipher <span class='op'>=</span> <span class='st'>"aes-256-cbc"</span>,
+  iv <span class='op'>=</span> <span class='cn'>NULL</span>,
+  cache <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>".learnitdown_user"</span><span class='op'>)</span>,
+  debug <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"LEARNITDOWN_DEBUG"</span>, <span class='fl'>0</span><span class='op'>)</span> <span class='op'>!=</span> <span class='fl'>0</span>
+<span class='op'>)</span>
 
-<span class='fu'>encrypt</span>(
-  <span class='kw'>object</span>,
-  <span class='kw'>password</span>,
-  cipher = <span class='st'>"aes-256-cbc"</span>,
-  iv = <span class='kw'>NULL</span>,
-  serialize = <span class='fl'>TRUE</span>,
-  base64 = <span class='fl'>FALSE</span>,
-  url.encode = <span class='fl'>FALSE</span>
-)
+<span class='fu'>sign_out</span><span class='op'>(</span>
+  title <span class='op'>=</span> <span class='st'>"Signing out"</span>,
+  message <span class='op'>=</span> <span class='st'>"Do you really want to sign out with learnitdown?"</span>,
+  cache <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>".learnitdown_user"</span><span class='op'>)</span>,
+  debug <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"LEARNITDOWN_DEBUG"</span>, <span class='fl'>0</span><span class='op'>)</span> <span class='op'>!=</span> <span class='fl'>0</span>
+<span class='op'>)</span>
 
-<span class='fu'>decrypt</span>(
-  <span class='kw'>object</span>,
-  <span class='kw'>password</span>,
-  cipher = <span class='st'>"aes-256-cbc"</span>,
-  iv = <span class='kw'>NULL</span>,
-  unserialize = <span class='fl'>TRUE</span>,
-  base64 = <span class='fl'>FALSE</span>,
-  url.decode = <span class='fl'>FALSE</span>
-)</pre>
+<span class='fu'>encrypt</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>password</span>,
+  cipher <span class='op'>=</span> <span class='st'>"aes-256-cbc"</span>,
+  iv <span class='op'>=</span> <span class='cn'>NULL</span>,
+  serialize <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  base64 <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  url.encode <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
+
+<span class='fu'>decrypt</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>password</span>,
+  cipher <span class='op'>=</span> <span class='st'>"aes-256-cbc"</span>,
+  iv <span class='op'>=</span> <span class='cn'>NULL</span>,
+  unserialize <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  base64 <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  url.decode <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,7 +237,7 @@ configuration data are refreshed from the URL.</p></td>
     <tr>
       <th>debug</th>
       <td><p>Do we issue debugging messages? By default, it is set according
-to the <code>LEARNDOWN_DEBUG</code> environment variable (yes, if this variable is not
+to the <code>LEARNITDOWN_DEBUG</code> environment variable (yes, if this variable is not
 <code>0</code>).</p></td>
     </tr>
     <tr>
@@ -245,6 +252,14 @@ string must start with "fingerprint=").</p></td>
     <tr>
       <th>iv</th>
       <td><p>The initialization vector for the cipher.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>The title of the dialog box prompting to sign out.</p></td>
+    </tr>
+    <tr>
+      <th>message</th>
+      <td><p>The message of the dialog box prompting to sign out.</p></td>
     </tr>
     <tr>
       <th>object</th>
@@ -279,7 +294,7 @@ default)?</p></td>
 
     <p>Invisibly returns <code>TRUE</code> if success, or <code>FALSE</code> otherwise for
 <code>config()</code>. The encrypted/decrypted object for <code>encrypt()</code> and <code>decrypt()</code>.
-The user information for <code>fingerprint()</code>.</p>
+The user information for <code>sign_in()</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -424,6 +439,8 @@ The user information for <code>fingerprint()</code>.</p>
 
   
 
+
+  
 
   </body>
 </html>

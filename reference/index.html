@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • learndown</title>
+<title>Function reference • learnitdown</title>
 
 
 <!-- jquery -->
@@ -75,9 +75,15 @@
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-index">
       <header>
       <!-- preloader start -->
@@ -119,13 +125,7 @@
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -134,15 +134,15 @@
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -183,13 +183,19 @@
       <tr>
         
         <td>
+          <p><code><a href="assignation.html">assignation()</a></code> <code><a href="assignation.html">assignation2()</a></code> <code><a href="assignation.html">challenge()</a></code> <code><a href="assignation.html">challenge2()</a></code> <code><a href="assignation.html">assignation_en()</a></code> <code><a href="assignation.html">assignation_fr()</a></code> <code><a href="assignation.html">assignation2_en()</a></code> <code><a href="assignation.html">assignation2_fr()</a></code> <code><a href="assignation.html">challenge_en()</a></code> <code><a href="assignation.html">challenge_fr()</a></code> <code><a href="assignation.html">challenge2_en()</a></code> <code><a href="assignation.html">challenge2_fr()</a></code> </p>
+        </td>
+        <td><p>Insert a GitHub assignation or challenge in the document</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="checker_ack_learnr.html">checker_ack_learnr()</a></code> </p>
         </td>
         <td><p>A default checker that just acknowledges submission</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="config.html">config()</a></code> <code><a href="config.html">fingerprint()</a></code> <code><a href="config.html">encrypt()</a></code> <code><a href="config.html">decrypt()</a></code> </p>
+          <p><code><a href="config.html">config()</a></code> <code><a href="config.html">sign_in()</a></code> <code><a href="config.html">sign_out()</a></code> <code><a href="config.html">encrypt()</a></code> <code><a href="config.html">decrypt()</a></code> </p>
         </td>
         <td><p>Configure the R environment for the course (including database information)
 and provide (or cache) user information in ciphered form.</p></td>
@@ -214,21 +220,27 @@ and provide (or cache) user information in ciphered form.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="learndownShiny.html">learndownShiny()</a></code> <code><a href="learndownShiny.html">learndownShinyVersion()</a></code> <code><a href="learndownShiny.html">submitAnswerButton()</a></code> <code><a href="learndownShiny.html">quitButton()</a></code> <code><a href="learndownShiny.html">submitQuitButtons()</a></code> </p>
+          <p><code><a href="learnitdownLearnrSetup.html">learnitdownLearnrSetup()</a></code> <code><a href="learnitdownLearnrSetup.html">learnitdownLearnrBanner()</a></code> <code><a href="learnitdownLearnrSetup.html">learnitdownLearnrServer()</a></code> </p>
         </td>
-        <td><p>Create and manage learndown Shiny applications</p></td>
+        <td><p>Set up a learnitdown Learnr application</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="learndown_init.html">learndown_init()</a></code> </p>
+          <p><code><a href="learnitdownShiny.html">learnitdownShiny()</a></code> <code><a href="learnitdownShiny.html">learnitdownShinyVersion()</a></code> <code><a href="learnitdownShiny.html">submitAnswerButton()</a></code> <code><a href="learnitdownShiny.html">quitButton()</a></code> <code><a href="learnitdownShiny.html">submitQuitButtons()</a></code> </p>
         </td>
-        <td><p>Initialize learndown features in an R Markdown document</p></td>
+        <td><p>Create and manage learnitdown Shiny applications</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="learnr_user_info.html">learnr_user_info()</a></code> </p>
+          <p><code><a href="learnitdown_init.html">learnitdown_init()</a></code> </p>
         </td>
-        <td><p>Get user information to properly record learnr events</p></td>
+        <td><p>Initialize learnitdown features in an R Markdown document</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="learnr.html">learnr()</a></code> </p>
+        </td>
+        <td><p>Insert a block for a learnr tutorial</p></td>
       </tr><tr>
         
         <td>
@@ -250,9 +262,9 @@ and provide (or cache) user information in ciphered form.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="run.html">run()</a></code> </p>
+          <p><code><a href="run.html">run()</a></code> <code><a href="run.html">run_app()</a></code> <code><a href="run.html">update_pkg()</a></code> </p>
         </td>
-        <td><p>Run learndown learnr tutorials from a package</p></td>
+        <td><p>Run learnitdown learnr tutorials or Shiny apps from a package after update</p></td>
       </tr><tr>
         
         <td>
@@ -262,7 +274,13 @@ and provide (or cache) user information in ciphered form.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="trackEvents.html">trackEvents()</a></code> <code><a href="trackEvents.html">trackSubmit()</a></code> <code><a href="trackEvents.html">trackQuit()</a></code> </p>
+          <p><code><a href="show_ex_toc.html">show_ex_toc()</a></code> </p>
+        </td>
+        <td><p>Insert a table of content for the exercises</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="trackEvents.html">trackEvents()</a></code> <code><a href="trackEvents.html">trackSubmit()</a></code> <code><a href="trackEvents.html">trackQuit()</a></code> <code><a href="trackEvents.html">check_shiny_solution()</a></code> </p>
         </td>
         <td><p>Track events, the submit or the quit buttons</p></td>
       </tr><tr>
@@ -418,6 +436,8 @@ and provide (or cache) user information in ciphered form.</p></td>
 
   
 
+
+  
 
   </body>
 </html>

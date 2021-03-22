@@ -1,9 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 1.6.0.9000
-pkgdown_sha: f3d5e4141b7893df4f0a122983f89a440d187625
-articles: []
-last_built: 2020-09-08T20:14Z
+pkgdown: 1.6.1.9000
+pkgdown_sha: 39071eea1bc3e40e88e5f4e474e5441e3add2b0b
+articles:
+  learnitdown: learnitdown.html
+last_built: 2021-03-22T20:39Z
 urls:
-  reference: https://www.sciviews.org/learndown/reference
-  article: https://www.sciviews.org/learndown/articles
+  reference: https://www.sciviews.org/learnitdown/reference
+  article: https://www.sciviews.org/learnitdown/articles
 

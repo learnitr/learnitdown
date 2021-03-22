@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.sciviews.org/learndown/index.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/index.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/checker_ack_learnr.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/assignation.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/config.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/checker_ack_learnr.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/diagnose_login.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/config.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/h5p.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/diagnose_login.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/launch_shiny.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/h5p.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/learndown-package.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/launch_shiny.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/learndownShiny.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/learnitdown-package.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/learndown_init.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/learnitdownLearnrSetup.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/learnr_user_info.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/learnitdownShiny.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/read_shinylogs.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/learnitdown_init.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/record_learnr.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/learnr.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/record_shiny.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/read_shinylogs.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/run.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/record_learnr.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/send_mail_learnr.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/record_shiny.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/trackEvents.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/run.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/reference/webshot_shiny.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/send_mail_learnr.html</loc>
   </url>
   <url>
-    <loc>https://www.sciviews.org/learndown/articles/learndown.html</loc>
+    <loc>https://www.sciviews.org/learnitdown/reference/show_ex_toc.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/reference/trackEvents.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/reference/webshot_shiny.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/articles/learnitdown.html</loc>
   </url>
 </urlset>

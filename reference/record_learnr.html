@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Record results of learnr exercises in a MongoDB database — record_learnr • learndown</title>
+<title>Record results of learnr exercises in a MongoDB database — record_learnr • learnitdown</title>
 
 
 <!-- jquery -->
@@ -54,7 +54,7 @@
 
 <meta property="og:title" content="Record results of learnr exercises in a MongoDB database — record_learnr" />
 <meta property="og:description" content="Record tutorial submissions in a MongoDB database. The
-function is used by learndown learnr tutorials and is not for end-users." />
+function is used by learnitdown learnr tutorials and is not for end-users." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -78,9 +78,15 @@ function is used by learndown learnr tutorials and is not for end-users." />
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
@@ -122,13 +128,7 @@ function is used by learndown learnr tutorials and is not for end-users." />
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -137,15 +137,15 @@ function is used by learndown learnr tutorials and is not for end-users." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -161,20 +161,20 @@ function is used by learndown learnr tutorials and is not for end-users." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Record results of learnr exercises in a MongoDB database</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/learnitdown_learnr.R'><code>R/learnitdown_learnr.R</code></a></small>
     <div class="hidden name"><code>record_learnr.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Record tutorial submissions in a MongoDB database. The
-function is used by learndown learnr tutorials and is not for end-users.</p>
+function is used by learnitdown learnr tutorials and is not for end-users.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>record_learnr</span>(<span class='kw'>tutorial_id</span>, <span class='kw'>tutorial_version</span>, <span class='kw'>user_id</span>, <span class='kw'>event</span>, <span class='kw'>data</span>)
+    <pre class="usage"><span class='fu'>record_learnr</span><span class='op'>(</span><span class='va'>tutorial_id</span>, <span class='va'>tutorial_version</span>, <span class='va'>user_id</span>, <span class='va'>event</span>, <span class='va'>data</span><span class='op'>)</span>
 
-<span class='fu'>user_name</span>(<span class='kw'>value</span>)
+<span class='fu'>user_name</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span>
 
-<span class='fu'>user_email</span>(<span class='kw'>value</span>)</pre>
+<span class='fu'>user_email</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,7 +198,8 @@ or <code>question_submission</code></p></td>
     </tr>
     <tr>
       <th>data</th>
-      <td><p>A JSON field with event-dependent data content.</p></td>
+      <td><p>A JSON field with event-dependent data content. If <code>NULL</code>, only
+a test to see if the database is responding is performed.</p></td>
     </tr>
     <tr>
       <th>value</th>
@@ -357,6 +358,8 @@ current value is returned).</p></td>
 
   
 
+
+  
 
   </body>
 </html>

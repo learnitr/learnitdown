@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A default checker that just acknowledges submission — checker_ack_learnr • learndown</title>
+<title>A default checker that just acknowledges submission — checker_ack_learnr • learnitdown</title>
 
 
 <!-- jquery -->
@@ -79,9 +79,15 @@ by the tutorials and is not intended for the end-user." />
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
@@ -123,13 +129,7 @@ by the tutorials and is not intended for the end-user." />
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -138,15 +138,15 @@ by the tutorials and is not intended for the end-user." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -162,7 +162,7 @@ by the tutorials and is not intended for the end-user." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>A default checker that just acknowledges submission</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/learnitdown_learnr.R'><code>R/learnitdown_learnr.R</code></a></small>
     <div class="hidden name"><code>checker_ack_learnr.Rd</code></div>
     </div>
 
@@ -172,15 +172,15 @@ acknowledges reception of the submission. This function is used internally
 by the tutorials and is not intended for the end-user.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>checker_ack_learnr</span>(
-  <span class='kw'>label</span>,
-  <span class='kw'>user_code</span>,
-  <span class='kw'>solution_code</span>,
-  <span class='kw'>check_code</span>,
-  <span class='kw'>envir_result</span>,
-  <span class='kw'>evaluate_result</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>checker_ack_learnr</span><span class='op'>(</span>
+  <span class='va'>label</span>,
+  <span class='va'>user_code</span>,
+  <span class='va'>solution_code</span>,
+  <span class='va'>check_code</span>,
+  <span class='va'>envir_result</span>,
+  <span class='va'>evaluate_result</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,8 +220,8 @@ by the tutorials and is not intended for the end-user.</p>
     <p>A list with components <code>message</code>, <code>correct</code> and <code>location</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This is a simple checker function for learndown learnr applications that just
-indicates to the user that its answer is taken into account.</p>
+    <p>This is a simple checker function for learnitdown learnr applications that
+just indicates to the user that its answer is taken into account.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='record_learnr.html'>record_learnr()</a></code></p></div>
@@ -369,6 +369,8 @@ indicates to the user that its answer is taken into account.</p>
 
   
 
+
+  
 
   </body>
 </html>
