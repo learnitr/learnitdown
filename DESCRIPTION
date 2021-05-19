@@ -14,13 +14,12 @@ Imports: glue, magick, webshot, rstudioapi, shiny, shinylogs, shinytoastr,
   mongolite, jsonlite, later, utils, learnr, gradethis, httr, remotes, PKI,
   knitr, testthat, httpuv
 Suggests: covr, rmarkdown, spelling
-Remotes: rstudio-education/gradethis
+Remotes: rstudio/gradethis
 License: MIT + file LICENSE
 URL: https://github.com/SciViews/learnitdown, https://www.sciviews.org/learnitdown/
 BugReports: https://github.com/SciViews/learnitdown/issues
-LazyData: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US
