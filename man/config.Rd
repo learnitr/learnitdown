@@ -59,7 +59,9 @@ lock(
   password,
   key = "",
   message = "Password for learnitdown:",
-  reset = FALSE
+  reset = FALSE,
+  ref1 = NULL,
+  ref2 = NULL
 )
 
 unlock(
@@ -67,7 +69,9 @@ unlock(
   password,
   key = "",
   message = "Password for learnitdown:",
-  reset = FALSE
+  reset = FALSE,
+  ref1 = NULL,
+  ref2 = NULL
 )
 }
 \arguments{
@@ -119,6 +123,10 @@ also that the name of an environment variable could be used too for the key.
 This is convenient on a server like RStudio Connect, for instance.}
 
 \item{reset}{Should we reset the password (\code{FALSE} by default)?}
+
+\item{ref1}{Code to check the validity of the password}
+
+\item{ref2}{Second code to check password validity.}
 }
 \value{
 Invisibly returns \code{TRUE} if success, or \code{FALSE} otherwise for

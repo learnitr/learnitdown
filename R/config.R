@@ -35,6 +35,8 @@
 #' also that the name of an environment variable could be used too for the key.
 #' This is convenient on a server like RStudio Connect, for instance.
 #' @param reset Should we reset the password (`FALSE` by default)?
+#' @param ref1 Code to check the validity of the password
+#' @param ref2 Second code to check password validity.
 #'
 #' @return Invisibly returns `TRUE` if success, or `FALSE` otherwise for
 #' [config()]. The encrypted/decrypted object for [encrypt()] and [decrypt()],
@@ -286,9 +288,11 @@ decrypt <- function(object, password, cipher = "aes-256-cbc", iv = NULL,
 #' @rdname config
 #' @export
 lock <- function(object, password, key = "",
-message = "Password for learnitdown:", reset = FALSE) {
+message = "Password for learnitdown:", reset = FALSE,
+ref1 = NULL, ref2 = NULL) {
   if (missing(password))
-    password <- .get_password(key, message = message, reset = reset)
+    password <- .get_password(key, message = message, reset = reset,
+      ref1 = ref1, ref2 = ref2)
   if (!nchar(password))
     stop("Password unknown or not provided, cannot lock object")
 
@@ -298,9 +302,11 @@ message = "Password for learnitdown:", reset = FALSE) {
 #' @rdname config
 #' @export
 unlock <- function(object, password, key = "",
-message = "Password for learnitdown:", reset = FALSE) {
+message = "Password for learnitdown:", reset = FALSE,
+ref1 = NULL, ref2 = NULL) {
   if (missing(password))
-    password <- .get_password(key, message = message, reset = reset)
+    password <- .get_password(key, message = message, reset = reset,
+      ref1 = ref1, ref2 = ref2)
   if (!nchar(password))
     stop("Password unknown or not provided, cannot unlock object")
 
