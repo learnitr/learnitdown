@@ -296,9 +296,9 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
       message(".rds log file(s) found in ", path, ": ", length(log_files))
     answer <- TRUE
     for (file in log_files) {
-      res <- .record_shinylogs(file, url = url, db = db, collection = collection,
-        version = version, log.errors = log.errors, log.outputs = log.outputs,
-        debug = debug)
+      res <- .record_shinylogs(file, url = url, db = db,
+        collection = collection, version = version, log.errors = log.errors,
+        log.outputs = log.outputs, debug = debug)
       if (!res && answer)# Return first error found
         answer <- res
     }
@@ -480,7 +480,8 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   observe({
     # Decrement the number of opened sessions on session close
     onSessionEnded(function() {
-      session_counter <- getOption("learnitdown.shiny.sessions", default = 0) - 1
+      session_counter <-
+        getOption("learnitdown.shiny.sessions", default = 0) - 1
       options(learnitdown.shiny.sessions = session_counter)
       message("Running sessions: ", session_counter)
     })

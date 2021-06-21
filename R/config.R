@@ -1,20 +1,20 @@
 #' Configure the R environment for the course (including database information)
 #' and provide (or cache) user information in ciphered form.
 #'
-#' Call this function every time you need to get environment variables set, like
-#' the URL, user and password of the MongoDB database used by the course.
+#' Call these functions every time you need to get environment variables set,
+#' like the URL, user and password of the MongoDB database used by the course.
 #' @param url The URL of the encrypted file that contains the configuration
 #' information.
 #' @param data The fingerprint data in clear or ciphered form (in this case, the
 #' string must start with "fingerprint=").
-#' @param password The password to decrypt the data.
+#' @param password The password to crypt, decrypt, lock or unlock the data.
 #' @param cache The path to the file to use to store a cached version of these
 #' data. Access to the database will be checked, and if it fails, the
 #' configuration data are refreshed from the URL.
 #' @param debug Do we issue debugging messages? By default, it is set according
 #' to the `LEARNITDOWN_DEBUG` environment variable (yes, if this variable is not
 #' `0`).
-#' @param object An object to be encrypted.
+#' @param object An object to be encrypted, decrypted, locked or unlocked.
 #' @param cipher The cryptography algorithm to use.
 #' @param iv The initialization vector for the cipher.
 #' @param serialize Do we serialize `object` before ciphering it (`TRUE` by
@@ -26,10 +26,19 @@
 #' @param url.decode Do we decode URL before deciphering it (`FALSE` by
 #' default)?
 #' @param title The title of the dialog box prompting to sign out.
-#' @param message The message of the dialog box prompting to sign out.
+#' @param message The message of the dialog box prompting to sign out, or asking
+#' for a password.
+#' @param key The key that stores the password. It is advised to use something
+#' like `course_year`, so that you can manage different passwords for the same
+#' course given at different academic years. Using a key, the course password
+#' must be entered only once. If not provided, the password is not stored. Note
+#' also that the name of an environment variable could be used too for the key.
+#' This is convenient on a server like RStudio Connect, for instance.
+#' @param reset Should we reset the password (`FALSE` by default)?
 #'
 #' @return Invisibly returns `TRUE` if success, or `FALSE` otherwise for
-#' [config()]. The encrypted/decrypted object for [encrypt()] and [decrypt()].
+#' [config()]. The encrypted/decrypted object for [encrypt()] and [decrypt()],
+#' or the locked/unlocked object for [lock()] and [unlock()].
 #' The user information for [sign_in()].
 #' @export
 config <- function(url, password,
@@ -39,8 +48,8 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   # Make sure the environment variable is set correctly for debug
   Sys.setenv(LEARNITDOWN_DEBUG = as.integer(debug))
 
-  # Set environment variables according to entries in a crypted configuration
-  # file, and return the crypted data, if it succeeds (test database access)
+  # Set environment variables according to entries in an encrypted configuration
+  # file, and return the encrypted data, if it succeeds (test database access)
   setenv <- function(file, password, debug) {
     try({
       conf_crypt <- readRDS(file)
@@ -97,7 +106,8 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   res <- setenv(url(url), password = password, debug = debug)
   if (inherits(res, "try-error")) {
     if (debug)
-      message("Inaccessible or incorrect configuration or database not responding: ", res)
+      message("Inaccessible or incorrect configuration or ",
+        "database not responding: ", res)
     return(invisible(structure(FALSE, error = res)))
   } else {
     if (debug) {
@@ -126,7 +136,7 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
     }
     # We set or replace fingerprint cache file
     data <- as.character(data)
-    # If data are already crypted, the string starts with "fingerprint="
+    # If data are already encrypted, the string starts with "fingerprint="
     if (substring(data, 1, 12) != "fingerprint=") {
       # We encrypt these data
       data <- encrypt(data, password = password, cipher = cipher, iv = iv,
@@ -271,4 +281,78 @@ decrypt <- function(object, password, cipher = "aes-256-cbc", iv = NULL,
   }
 
   decrypted
+}
+
+#' @rdname config
+#' @export
+lock <- function(object, password, key = "",
+message = "Password for learnitdown:", reset = FALSE) {
+  if (missing(password))
+    password <- .get_password(key, message = message, reset = reset)
+  if (!nchar(password))
+    stop("Password unknown or not provided, cannot lock object")
+
+  encrypt(object, password = password, base64 = TRUE)
+}
+
+#' @rdname config
+#' @export
+unlock <- function(object, password, key = "",
+message = "Password for learnitdown:", reset = FALSE) {
+  if (missing(password))
+    password <- .get_password(key, message = message, reset = reset)
+  if (!nchar(password))
+    stop("Password unknown or not provided, cannot unlock object")
+
+  decrypt(object, password = password, base64 = TRUE)
+}
+
+# Get the password for lock()/unlock()
+.get_password <- function(key, message = "Password for learnitdown:",
+  store = TRUE, reset = FALSE, ref1 = NULL, ref2 = NULL) {
+  # First try to get it from environment variables (e.g., RStudio Connect)
+  if (nchar(key)) {
+    pass <- Sys.getenv(key)
+  } else {
+    pass <- ""
+  }
+  if (nchar(pass))
+    return(pass)
+
+  # Otherwise, try getting it from keyring
+  if (!isTRUE(reset) && nchar(key)) {
+    pass <- try(key_get(service = "org.sciviews.learnitdown",
+      username = key), silent = TRUE)
+    if (!inherits(pass, "try-error"))
+      return(pass)
+  }
+
+  # Ultimately, ask for it... (only in interactive mode)
+  if (interactive())
+    pass <- getPass(message)
+  if (is.null(pass))
+    pass <- ""
+  # If the password is not blank and ref1/ref2 provided, check it now
+  if (nchar(pass) && !is.null(ref1)) {
+    if (!is.null(ref2)) {
+      if (unlock(ref1, ref2) != pass)
+        stop("Incorrect password!")
+    } else {
+      if (unlock(ref1, pass) != "correct")
+        stop("Incorrect password!")
+    }
+  }
+
+  # If the password and key are not blank, store it in keyring
+  if (nchar(pass) && nchar(key)) {
+    res <- try(key_set_with_value(service = "org.sciviews.learnitdown",
+      username = key, password = pass), silent = TRUE) # We prefer no error
+    # message in case it does not work (then we just will have to provide the
+    # password every time we need it)
+    if (inherits(res, "try-error")) {
+      warning("The password cannot be stored in the keyring backend")
+      attr(pass, "error") <- res
+    }
+  }
+  pass
 }

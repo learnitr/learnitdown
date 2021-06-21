@@ -6,6 +6,8 @@
 \alias{sign_out}
 \alias{encrypt}
 \alias{decrypt}
+\alias{lock}
+\alias{unlock}
 \title{Configure the R environment for the course (including database information)
 and provide (or cache) user information in ciphered form.}
 \usage{
@@ -51,12 +53,28 @@ decrypt(
   base64 = FALSE,
   url.decode = FALSE
 )
+
+lock(
+  object,
+  password,
+  key = "",
+  message = "Password for learnitdown:",
+  reset = FALSE
+)
+
+unlock(
+  object,
+  password,
+  key = "",
+  message = "Password for learnitdown:",
+  reset = FALSE
+)
 }
 \arguments{
 \item{url}{The URL of the encrypted file that contains the configuration
 information.}
 
-\item{password}{The password to decrypt the data.}
+\item{password}{The password to crypt, decrypt, lock or unlock the data.}
 
 \item{cache}{The path to the file to use to store a cached version of these
 data. Access to the database will be checked, and if it fails, the
@@ -75,9 +93,10 @@ string must start with "fingerprint=").}
 
 \item{title}{The title of the dialog box prompting to sign out.}
 
-\item{message}{The message of the dialog box prompting to sign out.}
+\item{message}{The message of the dialog box prompting to sign out, or asking
+for a password.}
 
-\item{object}{An object to be encrypted.}
+\item{object}{An object to be encrypted, decrypted, locked or unlocked.}
 
 \item{serialize}{Do we serialize \code{object} before ciphering it (\code{TRUE} by
 default)?}
@@ -91,13 +110,23 @@ it (\code{TRUE} by default)?}
 
 \item{url.decode}{Do we decode URL before deciphering it (\code{FALSE} by
 default)?}
+
+\item{key}{The key that stores the password. It is advised to use something
+like \code{course_year}, so that you can manage different passwords for the same
+course given at different academic years. Using a key, the course password
+must be entered only once. If not provided, the password is not stored. Note
+also that the name of an environment variable could be used too for the key.
+This is convenient on a server like RStudio Connect, for instance.}
+
+\item{reset}{Should we reset the password (\code{FALSE} by default)?}
 }
 \value{
 Invisibly returns \code{TRUE} if success, or \code{FALSE} otherwise for
-\code{\link[=config]{config()}}. The encrypted/decrypted object for \code{\link[=encrypt]{encrypt()}} and \code{\link[=decrypt]{decrypt()}}.
+\code{\link[=config]{config()}}. The encrypted/decrypted object for \code{\link[=encrypt]{encrypt()}} and \code{\link[=decrypt]{decrypt()}},
+or the locked/unlocked object for \code{\link[=lock]{lock()}} and \code{\link[=unlock]{unlock()}}.
 The user information for \code{\link[=sign_in]{sign_in()}}.
 }
 \description{
-Call this function every time you need to get environment variables set, like
-the URL, user and password of the MongoDB database used by the course.
+Call these functions every time you need to get environment variables set,
+like the URL, user and password of the MongoDB database used by the course.
 }

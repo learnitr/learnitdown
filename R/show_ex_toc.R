@@ -1,4 +1,4 @@
-#' Insert a table of content for the exercises
+#' Insert a table of content for the exercises at the end of a bookdown chapter
 #'
 #' For the various exercise types (h5p, shiny apps, learnrs & GitHub
 #' assignations) we add toc entries with [h5p()], [launch_shiny()], [learnr()],

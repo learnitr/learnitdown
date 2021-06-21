@@ -47,8 +47,8 @@ update the package automatically?}
 \item{ask}{In case \code{tutorial} or \code{app} is not provided, do we ask to select
 in a list?}
 
-\item{upgrade}{When a new version of the main package is found, do we also upgrade
-dependencies ? By default, never, but use \code{"ask"} to ask user.}
+\item{upgrade}{When a new version of the main package is found, do we also
+upgrade dependencies ? By default, never, but use \code{"ask"} to ask user.}
 
 \item{app}{The name of the Shiny application to run. If not provided, a list
 of available apps is displayed.}
@@ -80,5 +80,5 @@ run_app("my_shiny_app", package = "mypackage")
 \seealso{
 \code{\link[=run_tutorial]{run_tutorial()}}, \code{\link[=runApp]{runApp()}}
 }
-\concept{run interactive learnr documents from the BioDataScience package}
+\concept{run interactive learnr documents}
 \keyword{utilities}

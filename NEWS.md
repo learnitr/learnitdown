@@ -2,6 +2,10 @@
 
 - Package renamed {learnitdown} to avoid conflicts with http://learndown.com.
 
+- New functions `lock()`/`unlock()`, using an application (e.g., course) password to lock or unlock sensitive data like students' personal information, or database password.
+
+- New obfuscation functions `obfuscate()`, `._()` and `O()` to hide {learnr} answers in the original .Rmd file. The function `ans()` could be used to replace `learnr::answer()` for a cleaner obfuscation mechanism for quizzes.
+
 # learndown 1.2.1
 
 - Bug correction: when update_pkg() encountered a more recent version of the package, it upgraded it anyway.

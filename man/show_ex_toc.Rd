@@ -2,7 +2,7 @@
 % Please edit documentation in R/show_ex_toc.R
 \name{show_ex_toc}
 \alias{show_ex_toc}
-\title{Insert a table of content for the exercises}
+\title{Insert a table of content for the exercises at the end of a bookdown chapter}
 \usage{
 show_ex_toc(header = "", clear.it = TRUE)
 }

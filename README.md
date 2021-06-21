@@ -17,31 +17,31 @@ cycle stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](ht
 
 ## Installation
 
-(Not yet! The latest stable version of **learnitdown** can simply be installed from [CRAN](http://cran.r-project.org):)
+(Not yet! The latest stable version of {learnitdown} can simply be installed from [CRAN](http://cran.r-project.org):)
 
 ```r
 install.packages("learnitdown")
 ```
 
-You can also install the latest developement version. Make sure you have the **remotes** R package installed:
+You can also install the latest development version. Make sure you have the {remotes} R package installed:
 
 ```r
 install.packages("remotes")
 ```
 
-Use `install_github()` to install the **learnitdown** package from GitHub (source from **master** branch will be recompiled on your machine):
+Use `install_github()` to install the {learnitdown} package from GitHub (source from **master** branch will be recompiled on your machine):
 
 ```r
 remotes::install_github("SciViews/learnitdown")
 ```
 
-R should install all required dependencies automatically, and then it should compile and install **learnitdown**.
+R should install all required dependencies automatically, and then it should compile and install {learnitdown}.
 
-Latest development version of **learnitdown** (source + Windows binaires for the latest stable version of R at the time of compilation) is also available from [appveyor](https://ci.appveyor.com/project/phgrosjean/learnitdown/build/artifacts).
+Latest development version of {learnitdown} (source + Windows binaries for the latest stable version of R at the time of compilation) is also available from [appveyor](https://ci.appveyor.com/project/phgrosjean/learnitdown/build/artifacts).
 
 ## Further explore learnitdown
 
-You can get further help about this package this way: Make the **learnitdown** package available in your R session:
+You can get further help about this package this way. Make the {learnitdown} package available in your R session:
 
 ```r
 library("learnitdown")
@@ -59,4 +59,4 @@ For further instructions, please, refer to these help pages at https://www.scivi
 
 ## Code of Conduct
 
-Please note that the **learnitdown** project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the **learnitdown** project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

@@ -4,7 +4,7 @@
 # Shiny Application Webshot -----------------------------------------------
 
 webshot_shiny_addin <- function() {
-  # Gets The active Document
+  # Get the active document
   ctx <- rstudioapi::getActiveDocumentContext()
 
   # Checks that a document is active
@@ -13,7 +13,7 @@ webshot_shiny_addin <- function() {
     # Extracts selection as a string
     sel <- ctx$selection[[1]]$text
 
-    # Check that the selection contains someting like a call to a function
+    # Check that the selection contains something like a call to a function
     if (!grepl("^[^\\(]+(\\([^\\)]+\\)).*$", sel)) {
       message("You must select a construct like 'launch_shiny(url, ...)' first")
       return()

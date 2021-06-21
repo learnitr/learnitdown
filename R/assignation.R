@@ -78,7 +78,8 @@ assign.link = "github_assignation", block = "assign") {
       course_id <- course_ids[i]
       course_url <- course.urls[i]
       course_name <- course_names[i]
-      course_text <- paste0(course_text, "\n", glue::glue("\n::: {{ .{course_id} }}
+      course_text <- paste0(course_text, "\n",
+        glue::glue("\n::: {{ .{course_id} }}
 **[{texts$course} {course_name}]({course_url}){{target=\"_blank\"}}**
 \n:::\n\n"))
     }
@@ -133,7 +134,9 @@ assignation_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Complete this assignation:",
     part.name = "part",
-    alt       = "If you are not a registered user, or if you work outside of a course, fork [this]({url}){{target=\"_blank\"}} repository.",
+    alt       = paste("If you are not a registered user, or if you work",
+      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
+      "repository."),
     sub      = "See the explanations in the `README.md`",
     course   = "Assignation for the students enrolled at the course",
     toc.def  = "Assignation {name}"
@@ -154,7 +157,9 @@ assignation_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "R\u00e9alisez l'assignation",
     part.name = "partie",
-    alt       = "Si vous \u00eates un utilisateur non enregistr\u00e9 ou que vous travaillez en dehors d'un cours, faites un \"fork\" de [ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t.",
+    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
+      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
+      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = "Assignation pour les \u00e9tudiants inscrits au cours de",
     toc.def   = "Assignation {name}"
@@ -175,7 +180,9 @@ assignation2_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Complete this group assignation:",
     part.name = "part",
-    alt       = "If you are not a registered user, or if you work outside of a course, fork [this]({url}){{target=\"_blank\"}} repository.",
+    alt       = paste("If you are not a registered user, or if you work",
+      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
+      "repository."),
     sub      = "See the explanations in the `README.md`",
     course   = "Group assignation for the students enrolled at the course",
     toc.def  = "Group assignation {name}"
@@ -196,9 +203,12 @@ assignation2_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "R\u00e9alisez en groupe l'assignation",
     part.name = "partie",
-    alt       = "Si vous \u00eates un utilisateur non enregistr\u00e9 ou que vous travaillez en dehors d'un cours, faites un \"fork\" de [ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t.",
+    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
+      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
+      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
     sub       = "Voyez les explications dans le fichier `README.md`",
-    course    = "Assignation en groupe pour les \u00e9tudiants inscrits au cours de",
+    course    = paste("Assignation en groupe pour les \u00e9tudiants",
+      "inscrits au cours de"),
     toc.def   = "Assignation en groupe {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -217,7 +227,9 @@ challenge_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Accept this challenge:",
     part.name = "part",
-    alt       = "If you are not a registered user, or if you work outside of a course, fork [this]({url}){{target=\"_blank\"}} repository.",
+    alt       = paste("If you are not a registered user, or if you work",
+      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
+      "repository."),
     sub      = "See the explanations in the `README.md`",
     course   = "Challenge for the students enrolled at the course",
     toc.def  = "Challenge {name}"
@@ -238,7 +250,9 @@ challenge_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Relevez le challenge",
     part.name = "partie",
-    alt       = "Si vous \u00eates un utilisateur non enregistr\u00e9 ou que vous travaillez en dehors d'un cours, faites un \"fork\" de [ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t.",
+    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
+      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
+      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = "Challenge pour les \u00e9tudiants inscrits au cours de",
     toc.def   = "Challenge {name}"
@@ -259,7 +273,9 @@ challenge2_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Accept this group challenge:",
     part.name = "part",
-    alt       = "If you are not a registered user, or if you work outside of a course, fork [this]({url}){{target=\"_blank\"}} repository.",
+    alt       = paste("If you are not a registered user, or if you work",
+      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
+      "repository."),
     sub      = "See the explanations in the `README.md`",
     course   = "Group challenge for the students enrolled at the course",
     toc.def  = "Group challenge {name}"
@@ -280,9 +296,12 @@ challenge2_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Relevez ce challenge par groupe:",
     part.name = "partie",
-    alt       = "Si vous \u00eates un utilisateur non enregistr\u00e9 ou que vous travaillez en dehors d'un cours, faites un \"fork\" de [ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t.",
+    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
+      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
+      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
     sub       = "Voyez les explications dans le fichier `README.md`",
-    course    = "Challenge en groupe pour les \u00e9tudiants inscrits au cours de",
+    course    = paste("Challenge en groupe pour les \u00e9tudiants",
+      "inscrits au cours de"),
     toc.def   = "Challenge en groupe {name}"
   )
   if (!missing(title)) texts$title <- title

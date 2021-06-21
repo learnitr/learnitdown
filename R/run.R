@@ -19,8 +19,8 @@
 #' update the package automatically?
 #' @param ask In case `tutorial` or `app` is not provided, do we ask to select
 #' in a list?
-#' @param upgrade When a new version of the main package is found, do we also upgrade
-#' dependencies ? By default, never, but use `"ask"` to ask user.
+#' @param upgrade When a new version of the main package is found, do we also
+#' upgrade dependencies ? By default, never, but use `"ask"` to ask user.
 #' @param in.job Should the application be run in a Job in RStudio (`TRUE` by
 #' default)?
 #'
@@ -30,7 +30,7 @@
 #' @export
 #' @seealso [run_tutorial()], [runApp()]
 #' @keywords utilities
-#' @concept run interactive learnr documents from the BioDataScience package
+#' @concept run interactive learnr documents
 #' @examples
 #' \dontrun{
 #' #' # To start from a list of available tutorials:
@@ -40,7 +40,7 @@
 #' run_app("my_shiny_app", package = "mypackage")
 #' }
 run <- function(tutorial, package, github_repos = NULL, ..., update = ask,
-  ask = interactive(), upgrade = "never") {
+ask = interactive(), upgrade = "never") {
 
   if (isTRUE(update) && !is.null(github_repos))
     updated <- update_pkg(package, github_repos, upgrade = upgrade)

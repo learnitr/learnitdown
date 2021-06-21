@@ -38,6 +38,6 @@ h5p.link = "h5p") {
       glue::glue("- [![h5p]({h5p.img})]({h5p.link}) [{toc}](#h5p_{id})"))
     options(learnitdown_ex_toc = ex_toc)
   }
-
+  # In H5P wordpress plugin 1.15.2, there is title="' . $title . '" inside the iframe attributes that is added
   glue::glue("\n[]{{#h5p_{id}}}[![h5p]({h5p.img})]({h5p.link})\n<iframe src=\"{baseurl}/wp-admin/admin-ajax.php?action=h5p_embed&id={id}\" width=\"{width}\" height=\"{height}\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" class=\"h5p\"></iframe><script src=\"{baseurl}/wp-content/plugins/h5p/h5p-php-library/js/h5p-resizer.js\" charset=\"UTF-8\"></script>\n")
 }
