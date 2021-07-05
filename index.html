@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SciViews - R Markdown and Bookdown Additions for Learning Material • learnitdown</title>
+<title>SciViews - R Markdown, Bookdown and Learnr Additions for Learning Material • learnitdown</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
@@ -14,10 +14,10 @@
 <script src="pkgdown.js"></script><!-- svPkgdown --><script src="script.js"></script><!-- themify icon --><link rel="stylesheet" href="themify-icons.css?nocache=123">
 <!--<link rel="stylesheet" href="style.css?nocache=123">--><!-- bootstrat v4.1.1, required CSS from more recent version --><link rel="stylesheet" href="bootstrap.more.css?nocache=123">
 <link href="style.css?nocache=123" rel="stylesheet">
-<!-- end of addition for svPkgdown --><meta property="og:title" content="SciViews - R Markdown and Bookdown Additions for Learning Material">
-<meta property="og:description" content="Extension to R Markdown and Bookdown for building better learning
-  and e-learning material: H5P integration, course-contextual divs, different
-  loading of Shiny and learnr applications, and much more ...">
+<!-- end of addition for svPkgdown --><meta property="og:title" content="SciViews - R Markdown, Bookdown and Learnr Additions for Learning Material">
+<meta property="og:description" content="Extension to R Markdown, Bookdown and Learnr for building better
+  learning and e-learning material: H5P integration, course-contextual divs,
+  differed loading of Shiny and learnr applications, and much more ...">
 <meta name="twitter:card" content="summary">
 <!-- Mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js" async integrity="sha256-nlrDrBTHxJJlDDX22AS33xYI1OJHnGMDhiYMSe2U0e0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/config/TeX-AMS-MML_HTMLorMML.js" async integrity="sha256-4zys9A4hMQmtq2EUL+JRoXc0NZi8jVJMzb8onewOaSQ=" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-462421-8"></script>
 <script>
@@ -83,7 +83,7 @@
 </li>
       </ul>
 <div class="navbar-title">
-        <a class="navbar-brand" href="index.html"><p class="h2">learnitdown <small>v1.3.0</small></p></a>
+        <a class="navbar-brand" href="index.html"><p class="h2">learnitdown <small>v1.3.1</small></p></a>
       </div>
     </div>
 <!--/.nav-collapse -->
@@ -101,29 +101,29 @@
 <div id="learnitdown" class="section level1">
 
 <!-- badges: start -->
-<p><a href="https://travis-ci.com/SciViews/learnitdown" class="external-link"><img src="https://travis-ci.com/SciViews/learnitdown.svg" alt="Linux Build Status"></a> <a href="https://ci.appveyor.com/project/phgrosjean/learnitdown" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/SciViews/learnitdown?branch=master&amp;svg=true" alt="Win Build Status"></a> <a href="https://codecov.io/github/SciViews/learnitdown?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/SciViews/learnitdown/master.svg" alt="Coverage Status"></a> <a href="https://cran.r-project.org/package=learnitdown" class="external-link"><img src="https://www.r-pkg.org/badges/version/learnitdown" alt="CRAN Status"></a> <a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a> <a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle stable"></a> <!-- badges: end --></p>
+
 <blockquote>
 <p>Use R markdown and bookdown for e-learning with h5p, differed loading of Shiny and learnr applications, course-specific content, and much more…</p>
 </blockquote>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>(Not yet! The latest stable version of <strong>learnitdown</strong> can simply be installed from <a href="http://cran.r-project.org" class="external-link">CRAN</a>:)</p>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<p>(Not yet! The latest stable version of {learnitdown} can simply be installed from <a href="http://cran.r-project.org" class="external-link">CRAN</a>:)</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"learnitdown"</span><span class="op">)</span></code></pre></div>
-<p>You can also install the latest developement version. Make sure you have the <strong>remotes</strong> R package installed:</p>
+<p>You can also install the latest development version. Make sure you have the {remotes} R package installed:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></code></pre></div>
-<p>Use <code>install_github()</code> to install the <strong>learnitdown</strong> package from GitHub (source from <strong>master</strong> branch will be recompiled on your machine):</p>
+<p>Use <code>install_github()</code> to install the {learnitdown} package from GitHub (source from <strong>master</strong> branch will be recompiled on your machine):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SciViews/learnitdown"</span><span class="op">)</span></code></pre></div>
-<p>R should install all required dependencies automatically, and then it should compile and install <strong>learnitdown</strong>.</p>
-<p>Latest development version of <strong>learnitdown</strong> (source + Windows binaires for the latest stable version of R at the time of compilation) is also available from <a href="https://ci.appveyor.com/project/phgrosjean/learnitdown/build/artifacts" class="external-link">appveyor</a>.</p>
+<p>R should install all required dependencies automatically, and then it should compile and install {learnitdown}.</p>
+<p>Latest development version of {learnitdown} (source + Windows binaries for the latest stable version of R at the time of compilation) is also available from <a href="https://ci.appveyor.com/project/phgrosjean/learnitdown/build/artifacts" class="external-link">appveyor</a>.</p>
 </div>
 <div id="further-explore-learnitdown" class="section level2">
 <h2 class="hasAnchor">
-<a href="#further-explore-learnitdown" class="anchor"></a>Further explore learnitdown</h2>
-<p>You can get further help about this package this way: Make the <strong>learnitdown</strong> package available in your R session:</p>
+<a href="#further-explore-learnitdown" class="anchor" aria-hidden="true"></a>Further explore learnitdown</h2>
+<p>You can get further help about this package this way. Make the {learnitdown} package available in your R session:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/SciViews/learnitdown" class="external-link">"learnitdown"</a></span><span class="op">)</span></code></pre></div>
 <p>Get help about this package:</p>
@@ -131,12 +131,12 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span>help <span class="op">=</span> <span class="st">"learnitdown"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/help.html" class="external-link">help</a></span><span class="op">(</span><span class="st">"learnitdown-package"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"learnitdown"</span><span class="op">)</span> <span class="co"># None is installed with install_github()</span></code></pre></div>
-<p>For further instructions, please, refer to these help pages at https://www.sciviews.org/learnitdown/.</p>
+<p>For further instructions, please, refer to these help pages at <a href="https://www.sciviews.org/learnitdown/" class="uri">https://www.sciviews.org/learnitdown/</a>.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Please note that the <strong>learnitdown</strong> project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
+<p>Please note that the <strong>learnitdown</strong> project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -182,7 +182,17 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.com/SciViews/learnitdown" class="external-link"><img src="https://travis-ci.com/SciViews/learnitdown.svg" alt="Linux Build Status"></a></li>
+<li><a href="https://ci.appveyor.com/project/phgrosjean/learnitdown" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/github/SciViews/learnitdown?branch=master&amp;svg=true" alt="Win Build Status"></a></li>
+<li><a href="https://codecov.io/github/SciViews/learnitdown?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/SciViews/learnitdown/master.svg" alt="Coverage Status"></a></li>
+<li><a href="https://cran.r-project.org/package=learnitdown" class="external-link"><img src="https://www.r-pkg.org/badges/version/learnitdown" alt="CRAN Status"></a></li>
+<li><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle stable"></a></li>
+</ul>
+</div>
 
   </div>
 </div>

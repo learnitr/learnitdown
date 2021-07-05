@@ -148,7 +148,7 @@ run the item in a friendly way." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.1</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -176,7 +176,7 @@ checks if an update is available (respecting the version of R), and the
 run the item in a friendly way.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>run</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>run</span><span class='op'>(</span>
   <span class='va'>tutorial</span>,
   <span class='va'>package</span>,
   github_repos <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -197,7 +197,7 @@ run the item in a friendly way.</p>
   in.job <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 
-<span class='fu'>update_pkg</span><span class='op'>(</span><span class='va'>package</span>, <span class='va'>github_repos</span>, upgrade <span class='op'>=</span> <span class='st'>"never"</span><span class='op'>)</span></pre>
+<span class='fu'>update_pkg</span><span class='op'>(</span><span class='va'>package</span>, <span class='va'>github_repos</span>, upgrade <span class='op'>=</span> <span class='st'>"never"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -233,8 +233,8 @@ in a list?</p></td>
     </tr>
     <tr>
       <th>upgrade</th>
-      <td><p>When a new version of the main package is found, do we also upgrade
-dependencies ? By default, never, but use <code>"ask"</code> to ask user.</p></td>
+      <td><p>When a new version of the main package is found, do we also
+upgrade dependencies ? By default, never, but use <code>"ask"</code> to ask user.</p></td>
     </tr>
     <tr>
       <th>app</th>
@@ -258,14 +258,14 @@ default)?</p></td>
     <div class='dont-index'><p><code>run_tutorial()</code>, <code>runApp()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>#' # To start from a list of available tutorials:</span>
-<span class='fu'>run</span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"my_package"</span><span class='op'>)</span>
-<span class='fu'>run</span><span class='op'>(</span><span class='st'>"my_tutorial"</span>, package <span class='op'>=</span> <span class='st'>"my_package"</span><span class='op'>)</span>
-<span class='fu'>run_app</span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"mypackage"</span><span class='op'>)</span>
-<span class='fu'>run_app</span><span class='op'>(</span><span class='st'>"my_shiny_app"</span>, package <span class='op'>=</span> <span class='st'>"mypackage"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'>#' # To start from a list of available tutorials:</span></span>
+<span class='r-in'><span class='fu'>run</span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"my_package"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>run</span><span class='op'>(</span><span class='st'>"my_tutorial"</span>, package <span class='op'>=</span> <span class='st'>"my_package"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>run_app</span><span class='op'>(</span>package <span class='op'>=</span> <span class='st'>"mypackage"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>run_app</span><span class='op'>(</span><span class='st'>"my_shiny_app"</span>, package <span class='op'>=</span> <span class='st'>"mypackage"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

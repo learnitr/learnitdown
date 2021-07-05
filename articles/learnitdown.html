@@ -81,7 +81,7 @@
 </li>
       </ul>
 <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.3.0</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.3.1</small></p></a>
       </div>
     </div>
 <!--/.nav-collapse -->
@@ -100,7 +100,7 @@
       <h1 data-toc-skip>learnitdown - R Markdown and Bookdown Additions for Learning Material</h1>
                         <h4 data-toc-skip class="author">Philippe Grosjean (<a href="mailto:phgrosjean@sciviews.org" class="email">phgrosjean@sciviews.org</a>)</h4>
             
-            <h4 data-toc-skip class="date">2021-03-22</h4>
+            <h4 data-toc-skip class="date">2021-07-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/vignettes/learnitdown.Rmd" class="external-link"><code>vignettes/learnitdown.Rmd</code></a></small>
       <div class="hidden name"><code>learnitdown.Rmd</code></div>
@@ -113,31 +113,31 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SciViews/learnitdown" class="external-link">learnitdown</a></span><span class="op">)</span></code></pre></div>
 <div id="make-better-learning-inline-material-with-learnitdown" class="section level1">
 <h1 class="hasAnchor">
-<a href="#make-better-learning-inline-material-with-learnitdown" class="anchor"></a>Make better learning inline material with learnitdown</h1>
+<a href="#make-better-learning-inline-material-with-learnitdown" class="anchor" aria-hidden="true"></a>Make better learning inline material with learnitdown</h1>
 <blockquote>
 <p>R Markdown, and especially bookdown with the gitbook format are extensively used by the R community for textbook documentation. The {learnitdown} package aims to transform bookdown/gitbook into an interactive learning environment with a rich set of functions like <a href="https://h5p.org" class="external-link">H5P</a> content, differed Shiny and learnr app starting, course-specific areas, etc.</p>
 </blockquote>
 <div id="include-h5p-content" class="section level2">
 <h2 class="hasAnchor">
-<a href="#include-h5p-content" class="anchor"></a>Include H5P content</h2>
+<a href="#include-h5p-content" class="anchor" aria-hidden="true"></a>Include H5P content</h2>
 <p>H5P content is rich interactive content for e-learning. It is written in HTML5 (HTML + CSS + Javascript). The H5P content is displayed in an iframe inside your document, and it sends xAPI events (a standard to pass “experience API” event to LRS -Learning Record Store-). The parent page is responsible of handling these events. Here, the parent is our R Markdown or bookdown pages. With {learnitdown}, you can make it work by incorporating your {bookdown} material within a Wordpress site that also manages the H5P exercises.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/h5p.html">h5p</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"https://www.example.com"</span>, width <span class="op">=</span> <span class="fl">780</span>, height <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="differ-shinylearnr-app-loading" class="section level2">
 <h2 class="hasAnchor">
-<a href="#differ-shinylearnr-app-loading" class="anchor"></a>Differ Shiny/learnr app loading</h2>
+<a href="#differ-shinylearnr-app-loading" class="anchor" aria-hidden="true"></a>Differ Shiny/learnr app loading</h2>
 <p>When a page with Shiny apps or learnr tutorials is loaded, the applications are automatically started. While it may seen nice, it slows down page loading and it uses unnecessary resources on the Shiny server if the application is <strong>not</strong> used. In {learnitdown}, a mechanism is provided to display only a screenshot image of the application, and to load the actual Shiny application only if the image is clicked (and then, the image is replaced by the Shiny application). This trick is done by coupling an image and a Shiny app and with a little bit of CSS and Javascript on the client-side. All this is hidden in a function that you call in an R Markdown document in an isolated R inline expression (expression on its own line, surrounded by blank lines above and below it).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">launch_shiny</span>(<span class="st">"app1"</span>, <span class="dt">url =</span> <span class="st">"https://phgrosjean.shinyapps.io/url-parameters/"</span>, <span class="dt">img =</span> <span class="st">"images/sdd1_01/app1.png"</span>, <span class="dt">height=</span><span class="dv">700</span>, <span class="dt">alt =</span> <span class="st">"*Cliquez pour lancer ou exécutez `BioDataScience1::run_app("</span>url<span class="op">-</span>parameters<span class="st">")` dans la svbox2019.*"</span>)</span></code></pre></div>
 </div>
 <div id="selectively-show-details" class="section level2">
 <h2 class="hasAnchor">
-<a href="#selectively-show-details" class="anchor"></a>Selectively show details</h2>
+<a href="#selectively-show-details" class="anchor" aria-hidden="true"></a>Selectively show details</h2>
 <p>A long, monotonously linear textual development, a.k.a., textbook has proven useful for software documentation. Organization in chapters and sections with an easily available table of content is enough to find and read the sections of interest in the document. In a learning context, the same document appears boringly long. More diversification and interactivity brings live to the learning material.</p>
 <p>An easy way to break with the linear monotony of a textbook is to show or hide details in the text. Four complimentary mechanisms are provided: details, tabs, contextual sections, and show/hide code. We will demonstrate them here.</p>
 <div id="details" class="section level3">
 <h3 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h3>
+<a href="#details" class="anchor" aria-hidden="true"></a>Details</h3>
 <p>If you want to hide details, but allow the reader to reveal them at will in your page, you can use the <code>&lt;details&gt;...&lt;/details&gt;</code> tag. Everything that is enclosed inside these tags will be hidden by default, with a “Details” marked inviting to open the details section. Using <code>&lt;summary&gt;...&lt;/summary&gt;</code> at the very beginning of the <code>&lt;details&gt;</code> section allows for custom text in collapsed mode. Here is an example:</p>
 <details><p><summary>For more details, unfold me…</summary> Here are the details, possibly with multiple paragraphs and other formattings:</p>
 <ul>
@@ -150,17 +150,17 @@
 </div>
 <div id="tabs" class="section level3">
 <h3 class="hasAnchor">
-<a href="#tabs" class="anchor"></a>Tabs</h3>
+<a href="#tabs" class="anchor" aria-hidden="true"></a>Tabs</h3>
 <p>With a little bit of CSS, it is possible to transform titles into tabs or ‘pills’ that display or portion of the page. Since it uses bootstrap CSS, it is not available in bookdown’s gitbook format, except if the corresponding code is injected oi your document. TODO: example + injection of that code in bookdown.</p>
 </div>
 <div id="contextual-divs" class="section level3">
 <h3 class="hasAnchor">
-<a href="#contextual-divs" class="anchor"></a>Contextual divs</h3>
+<a href="#contextual-divs" class="anchor" aria-hidden="true"></a>Contextual divs</h3>
 <p>Given a context set with Javascript variables, one can show or hide whole divs or spans. TODO: example + code.</p>
 </div>
 <div id="showhide-code" class="section level3">
 <h3 class="hasAnchor">
-<a href="#showhide-code" class="anchor"></a>Show/hide code</h3>
+<a href="#showhide-code" class="anchor" aria-hidden="true"></a>Show/hide code</h3>
 <p>The show/hide code was introduced with the R Notebook document, and it is usable also in the R Markdown formats, but not in bookdown. TODO: example + code for making it work in bookdown.</p>
 </div>
 </div>

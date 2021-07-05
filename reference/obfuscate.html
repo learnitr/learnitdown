@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get user information to properly record learnr events — learnr_user_info • learndown</title>
+<title>Obfuscate answers in learnr documents — obfuscate • learnitdown</title>
 
 
 <!-- jquery -->
@@ -52,10 +52,8 @@
 <!-- end of addition for svPkgdown -->
 
 
-<meta property="og:title" content="Get user information to properly record learnr events — learnr_user_info" />
-<meta property="og:description" content="The server-side of a Shiny application to place in a learnr in order to
-properly identify the user, and if login is provided, recording is done,
-otherwise not." />
+<meta property="og:title" content="Obfuscate answers in learnr documents — obfuscate" />
+<meta property="og:description" content="Obfuscate answers in learnr documents" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -79,9 +77,15 @@ otherwise not." />
   gtag('config', 'UA-462421-8');
 </script>-->
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <!-- preloader start -->
@@ -123,13 +127,7 @@ otherwise not." />
       <!-- end svPkgdown global site search with Google -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="../articles/learndown.html">Get started</a>
+  <a href="../articles/learnitdown.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -138,15 +136,15 @@ otherwise not." />
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learndown/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/SciViews/learnitdown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learndown <small>v1.0.5</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.1</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -161,61 +159,70 @@ otherwise not." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get user information to properly record learnr events</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SciViews/learndown/blob/master/R/learndown_learnr.R'><code>R/learndown_learnr.R</code></a></small>
-    <div class="hidden name"><code>learnr_user_info.Rd</code></div>
+    <h1>Obfuscate answers in learnr documents</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SciViews/learnitdown/blob/master/R/obfuscate.R'><code>R/obfuscate.R</code></a></small>
+    <div class="hidden name"><code>obfuscate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The server-side of a Shiny application to place in a learnr in order to
-properly identify the user, and if login is provided, recording is done,
-otherwise not.</p>
+    <p>Obfuscate answers in learnr documents</p>
     </div>
 
-    <pre class="usage"><span class='fu'>learnr_user_info</span>(
-  <span class='kw'>session</span>,
-  <span class='kw'>input</span>,
-  <span class='kw'>output</span>,
-  path = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_LOCAL_STORAGE"</span>, <span class='st'>"~/.local/share/R"</span>),
-  debug = <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"LEARNDOWN_DEBUG"</span>, <span class='fl'>0</span>) != <span class='fl'>0</span>
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>obfuscate</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>password</span><span class='op'>)</span>
+
+<span class='fu'>._</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='fu'>obfuscate_logical</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, r <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+
+<span class='fu'>ans</span><span class='op'>(</span><span class='va'>correct</span>, <span class='va'>text</span>, message <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>session</th>
-      <td><p>The current Shiny <code>session</code>.</p></td>
+      <th>object</th>
+      <td><p>An R object to obfuscate, or Obfuscation string to decrypt.</p></td>
     </tr>
     <tr>
-      <th>input</th>
-      <td><p>The Shiny <code>input</code> object.</p></td>
+      <th>password</th>
+      <td><p>The password to use (otherwise, the password defined by the
+application is used)</p></td>
     </tr>
     <tr>
-      <th>output</th>
-      <td><p>The Shiny <code>output</code> object.</p></td>
+      <th>x</th>
+      <td><p>A logical value or an integer.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>The path where a cached version of the user informations is
-stored.</p></td>
+      <th>y</th>
+      <td><p>Obfuscation parameter.</p></td>
     </tr>
     <tr>
-      <th>debug</th>
-      <td><p>Do we debug recording of events using extra messages? By
-default, it is the value of the environment variable <code>LEARNDOWN_DEBUG</code>, and
-debugging is activated when that value is different to <code>0</code>.</p></td>
+      <th>r</th>
+      <td><p>Reset obfuscation (not intended for end-user)?</p></td>
+    </tr>
+    <tr>
+      <th>correct</th>
+      <td><p>Is the answer is correct or not (either a logical value, or
+an integer that obfuscates the results).</p></td>
+    </tr>
+    <tr>
+      <th>text</th>
+      <td><p>Text of the option.</p></td>
+    </tr>
+    <tr>
+      <th>message</th>
+      <td><p>Message displayed if the item is selected</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The code to be inserted in the server part of the learndown learnr
-application in order to properly identify the user and record the events.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>The encrypted or decrypted object.</p>
 
-    <div class='dont-index'><p><code><a href='learndownShiny.html'>learndownShinyVersion()</a></code></p></div>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>obfuscate</span><span class='op'>(</span><span class='st'>"test"</span>, <span class='st'>"password"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "tHP4+QGa3/Z242t54Weo2A=="</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -359,6 +366,8 @@ application in order to properly identify the user and record the events.</p>
 
   
 
+
+  
 
   </body>
 </html>

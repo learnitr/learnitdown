@@ -55,8 +55,8 @@ and provide (or cache) user information in ciphered form. — config • learnit
 
 <meta property="og:title" content="Configure the R environment for the course (including database information)
 and provide (or cache) user information in ciphered form. — config" />
-<meta property="og:description" content="Call this function every time you need to get environment variables set, like
-the URL, user and password of the MongoDB database used by the course." />
+<meta property="og:description" content="Call these functions every time you need to get environment variables set,
+like the URL, user and password of the MongoDB database used by the course." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -147,7 +147,7 @@ the URL, user and password of the MongoDB database used by the course." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.1</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -169,11 +169,11 @@ and provide (or cache) user information in ciphered form.</h1>
     </div>
 
     <div class="ref-description">
-    <p>Call this function every time you need to get environment variables set, like
-the URL, user and password of the MongoDB database used by the course.</p>
+    <p>Call these functions every time you need to get environment variables set,
+like the URL, user and password of the MongoDB database used by the course.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>config</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>config</span><span class='op'>(</span>
   <span class='va'>url</span>,
   <span class='va'>password</span>,
   cache <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>".learnitdown_config"</span><span class='op'>)</span>,
@@ -214,7 +214,27 @@ the URL, user and password of the MongoDB database used by the course.</p>
   unserialize <span class='op'>=</span> <span class='cn'>TRUE</span>,
   base64 <span class='op'>=</span> <span class='cn'>FALSE</span>,
   url.decode <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span>
+
+<span class='fu'>lock</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>password</span>,
+  key <span class='op'>=</span> <span class='st'>""</span>,
+  message <span class='op'>=</span> <span class='st'>"Password for learnitdown:"</span>,
+  reset <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ref1 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ref2 <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span>
+
+<span class='fu'>unlock</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  <span class='va'>password</span>,
+  key <span class='op'>=</span> <span class='st'>""</span>,
+  message <span class='op'>=</span> <span class='st'>"Password for learnitdown:"</span>,
+  reset <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ref1 <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ref2 <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,7 +246,7 @@ information.</p></td>
     </tr>
     <tr>
       <th>password</th>
-      <td><p>The password to decrypt the data.</p></td>
+      <td><p>The password to crypt, decrypt, lock or unlock the data.</p></td>
     </tr>
     <tr>
       <th>cache</th>
@@ -259,11 +279,12 @@ string must start with "fingerprint=").</p></td>
     </tr>
     <tr>
       <th>message</th>
-      <td><p>The message of the dialog box prompting to sign out.</p></td>
+      <td><p>The message of the dialog box prompting to sign out, or asking
+for a password.</p></td>
     </tr>
     <tr>
       <th>object</th>
-      <td><p>An object to be encrypted.</p></td>
+      <td><p>An object to be encrypted, decrypted, locked or unlocked.</p></td>
     </tr>
     <tr>
       <th>serialize</th>
@@ -288,12 +309,34 @@ it (<code>TRUE</code> by default)?</p></td>
       <td><p>Do we decode URL before deciphering it (<code>FALSE</code> by
 default)?</p></td>
     </tr>
+    <tr>
+      <th>key</th>
+      <td><p>The key that stores the password. It is advised to use something
+like <code>course_year</code>, so that you can manage different passwords for the same
+course given at different academic years. Using a key, the course password
+must be entered only once. If not provided, the password is not stored. Note
+also that the name of an environment variable could be used too for the key.
+This is convenient on a server like RStudio Connect, for instance.</p></td>
+    </tr>
+    <tr>
+      <th>reset</th>
+      <td><p>Should we reset the password (<code>FALSE</code> by default)?</p></td>
+    </tr>
+    <tr>
+      <th>ref1</th>
+      <td><p>Code to check the validity of the password</p></td>
+    </tr>
+    <tr>
+      <th>ref2</th>
+      <td><p>Second code to check password validity.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Invisibly returns <code>TRUE</code> if success, or <code>FALSE</code> otherwise for
-<code>config()</code>. The encrypted/decrypted object for <code>encrypt()</code> and <code>decrypt()</code>.
+<code>config()</code>. The encrypted/decrypted object for <code>encrypt()</code> and <code>decrypt()</code>,
+or the locked/unlocked object for <code>lock()</code> and <code>unlock()</code>.
 The user information for <code>sign_in()</code>.</p>
 
   </div>

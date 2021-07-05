@@ -147,7 +147,7 @@ by the user and to close the application cleanly." />
       </ul>
       
       <div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.0</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class = "h2">learnitdown <small>v1.3.1</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -174,7 +174,7 @@ inputs, outputs, errors, result, quit) are recorded. It also provides a
 by the user and to close the application cleanly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>learnitdownShiny</span><span class='op'>(</span><span class='va'>title</span>, windowTitle <span class='op'>=</span> <span class='va'>title</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>learnitdownShiny</span><span class='op'>(</span><span class='va'>title</span>, windowTitle <span class='op'>=</span> <span class='va'>title</span><span class='op'>)</span>
 
 <span class='fu'>learnitdownShinyVersion</span><span class='op'>(</span><span class='va'>version</span><span class='op'>)</span>
 
@@ -192,7 +192,7 @@ by the user and to close the application cleanly.</p>
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='fu'>submitQuitButtons</span><span class='op'>(</span><span class='op'>)</span></pre>
+<span class='fu'>submitQuitButtons</span><span class='op'>(</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,14 +240,15 @@ function.</p>
     <div class='dont-index'><p><code><a href='trackEvents.html'>trackEvents()</a></code>, <code><a href='record_shiny.html'>record_shiny()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>learnitdownShiny</span><span class='op'>(</span><span class='st'>"My title"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;h4&gt;My title&lt;/h4&gt;
-#&gt; &lt;div data-display-if="false" data-ns-prefix=""&gt;
-#&gt;   &lt;div class="form-group shiny-input-container"&gt;
-#&gt;     &lt;label class="control-label" id="learnitdown_result_-label" for="learnitdown_result_"&gt;&lt;/label&gt;
-#&gt;     &lt;input id="learnitdown_result_" type="text" class="form-control" value=""/&gt;
-#&gt;   &lt;/div&gt;
-#&gt; &lt;/div&gt;</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>learnitdownShiny</span><span class='op'>(</span><span class='st'>"My title"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;h4&gt;My title&lt;/h4&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;div data-display-if="false" data-ns-prefix=""&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   &lt;div class="form-group shiny-input-container"&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     &lt;label class="control-label" id="learnitdown_result_-label" for="learnitdown_result_"&gt;&lt;/label&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     &lt;input id="learnitdown_result_" type="text" class="form-control" value=""/&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   &lt;/div&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;/div&gt;</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

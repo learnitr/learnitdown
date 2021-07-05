@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://www.sciviews.org/learnitdown/404.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/TODO.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/articles/learnitdown.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/authors.html</loc>
+  </url>
+  <url>
     <loc>https://www.sciviews.org/learnitdown/index.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/news/index.html</loc>
   </url>
   <url>
     <loc>https://www.sciviews.org/learnitdown/reference/assignation.html</loc>
@@ -17,6 +44,9 @@
   </url>
   <url>
     <loc>https://www.sciviews.org/learnitdown/reference/h5p.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/reference/index.html</loc>
   </url>
   <url>
     <loc>https://www.sciviews.org/learnitdown/reference/launch_shiny.html</loc>
@@ -35,6 +65,9 @@
   </url>
   <url>
     <loc>https://www.sciviews.org/learnitdown/reference/learnr.html</loc>
+  </url>
+  <url>
+    <loc>https://www.sciviews.org/learnitdown/reference/obfuscate.html</loc>
   </url>
   <url>
     <loc>https://www.sciviews.org/learnitdown/reference/read_shinylogs.html</loc>
@@ -59,8 +92,5 @@
   </url>
   <url>
     <loc>https://www.sciviews.org/learnitdown/reference/webshot_shiny.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/articles/learnitdown.html</loc>
   </url>
 </urlset>
