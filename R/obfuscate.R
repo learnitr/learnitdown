@@ -66,17 +66,17 @@ obfuscate_logical <- function(x, y, r = FALSE) {
 #' @rdname obfuscate
 #' @export
 ans <- function(correct, text, message = NULL) {
-  #if (!is.logical(correct))
-  #  correct <- obfuscate_logical(correct)
-  if (interactive()) {
-    if (is.null(message)) {
-      message("answer(", text, ", correct = ", correct, ")")
-    } else {
-      message("answer(", text, ", correct = ", correct,
-        ", message = ", message, ")")
-    }
-
-  }
+  if (!is.logical(correct))
+    correct <- obfuscate_logical(correct)
+  # Not needed, because printing the object gives the correct response too
+  #if (interactive()) {
+  #  if (is.null(message)) {
+  #    message("answer(", text, ", correct = ", correct, ")")
+  #  } else {
+  #    message("answer(", text, ", correct = ", correct,
+  #      ", message = ", message, ")")
+  #  }
+  #}
   # This is learnr::answer()
   answer(text = text, correct = correct, message = message)
 }
