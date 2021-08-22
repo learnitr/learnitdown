@@ -1,3 +1,7 @@
+# learnitdown 1.3.1
+
+- Experimental learnr obfuscation functions.
+
 # learnitdown 1.3.0
 
 - Package renamed {learnitdown} to avoid conflicts with http://learndown.com.
