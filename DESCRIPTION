@@ -1,6 +1,6 @@
 Package: learnitdown
 Type: Package
-Version: 1.3.1
+Version: 1.3.3
 Title: 'SciViews' - R Markdown, Bookdown and Learnr Additions for Learning Material
 Description: Extension to R Markdown, Bookdown and Learnr for building better
   learning and e-learning material: H5P integration, course-contextual divs,
@@ -12,7 +12,7 @@ Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends: R (>= 3.0.0)
 Imports: glue, magick, webshot, rstudioapi, shiny, shinylogs, shinytoastr,
   mongolite, jsonlite, later, utils, learnr, gradethis, httr, remotes, PKI,
-  knitr, testthat, httpuv, keyring, getPass, stats
+  knitr, testthat, httpuv, getPass, stats
 Suggests: covr, rmarkdown, spelling
 Remotes: r-lib/rlang, rstudio/learnr, rstudio/gradethis
 License: MIT + file LICENSE

@@ -21,9 +21,9 @@
 #' @importFrom utils askYesNo compareVersion create.post packageVersion select.list URLdecode URLencode
 #' @importFrom jsonlite base64_dec base64_enc fromJSON toJSON
 #' @importFrom PKI PKI.digest PKI.decrypt PKI.encrypt
-#' @importFrom keyring key_set_with_value key_get
 #' @importFrom getPass getPass
 #' @importFrom stats runif
+#importFrom keyring key_set_with_value key_get
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start

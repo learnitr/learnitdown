@@ -40,13 +40,22 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   if (is.null(data)) {
     # First look of there is an internet connexion
     check_internet_access <- function() {
-      cmd <- switch(.Platform$OS.type, "windows" = "ipconfig", "ifconfig")
-      res <- any(grep("(\\d+(\\.|$)){4}", system(cmd, intern = TRUE)))
+      # IANA's test website
+      is_online <- function(site="http://example.com/") {
+        tryCatch({
+          readLines(site, n = 1)
+          TRUE
+        },
+          warning = function(w) invokeRestart("muffleWarning"),
+          error = function(e) FALSE)
+      }
+      res <- is_online()
       if (!res)
         stop("This computer does not seems to have access to the Internet, ", "
         impossible to record events in the database ",
           "(but they are saved on this computer for now).", call. = FALSE)
     }
+
     res <- try(check_internet_access(), silent = TRUE)
     if (inherits(res, "try-error")) {
       options(learnitdown_learnr_record = FALSE)
