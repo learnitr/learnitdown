@@ -53,7 +53,7 @@
 #' @seealso [webshot_shiny()]
 #' @examples
 #' # TODO...
-launch_shiny <- function(url, app = basename(url),
+launch_shiny <- function(url, app = sub("\\?.+$", "", basename(url)),
 imgdir = "images/shinyapps", img = paste0(imgdir, "/", app, ".png"),
 createimg = TRUE, width = 780, height = 500, fun = NULL,
 alt1 = "*Click to start the Shiny application.*",

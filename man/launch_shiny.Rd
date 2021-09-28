@@ -6,7 +6,7 @@
 \usage{
 launch_shiny(
   url,
-  app = basename(url),
+  app = sub("\\\\?.+$", "", basename(url)),
   imgdir = "images/shinyapps",
   img = paste0(imgdir, "/", app, ".png"),
   createimg = TRUE,
