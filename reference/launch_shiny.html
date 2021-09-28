@@ -180,7 +180,7 @@ page).</p>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>launch_shiny</span><span class='op'>(</span>
   <span class='va'>url</span>,
-  app <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span>,
+  app <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>sub</a></span><span class='op'>(</span><span class='st'>"\\?.+$"</span>, <span class='st'>""</span>, <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span><span class='op'>)</span>,
   imgdir <span class='op'>=</span> <span class='st'>"images/shinyapps"</span>,
   img <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>imgdir</span>, <span class='st'>"/"</span>, <span class='va'>app</span>, <span class='st'>".png"</span><span class='op'>)</span>,
   createimg <span class='op'>=</span> <span class='cn'>TRUE</span>,
