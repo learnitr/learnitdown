@@ -1,3 +1,7 @@
+# learnitdown 1.4.0
+
+-   For `launch_shiny()`, allow to include a search string in the url.
+
 # learnitdown 1.3.3
 
 -   Better checking of Internet availability in `config()` and `record_learnr()`.

@@ -333,7 +333,13 @@ launchApp = function(id, src) {
   //var params = window.location.toString().split('?')[1];
   var params = encodeQueryString();
   if (params !== undefined && params != '') {
-    src = src + '?' + params;
+    if (src.includes('?')) {
+      // There is already a search string => append parameters to it
+      src = src + '&' + params;
+    } else {
+      // Add a search string
+      src = src + '?' + params;
+    }
   }
   var img = document.getElementById('img' + id);
   var app = document.getElementById(id);
