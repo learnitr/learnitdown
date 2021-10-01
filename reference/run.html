@@ -194,7 +194,8 @@ run the item in a friendly way.</p>
   update <span class='op'>=</span> <span class='va'>ask</span>,
   ask <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>,
   upgrade <span class='op'>=</span> <span class='st'>"never"</span>,
-  in.job <span class='op'>=</span> <span class='cn'>TRUE</span>
+  in.job <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  max.wait <span class='op'>=</span> <span class='fl'>60</span>
 <span class='op'>)</span>
 
 <span class='fu'>update_pkg</span><span class='op'>(</span><span class='va'>package</span>, <span class='va'>github_repos</span>, upgrade <span class='op'>=</span> <span class='st'>"never"</span><span class='op'>)</span></code></pre></div>
@@ -245,6 +246,11 @@ of available apps is displayed.</p></td>
       <th>in.job</th>
       <td><p>Should the application be run in a Job in RStudio (<code>TRUE</code> by
 default)?</p></td>
+    </tr>
+    <tr>
+      <th>max.wait</th>
+      <td><p>How many seconds do we wait for the Shiny app to start (60
+sec by default)?</p></td>
     </tr>
     </table>
 
