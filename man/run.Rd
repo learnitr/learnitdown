@@ -24,7 +24,8 @@ run_app(
   update = ask,
   ask = interactive(),
   upgrade = "never",
-  in.job = TRUE
+  in.job = TRUE,
+  max.wait = 60
 )
 
 update_pkg(package, github_repos, upgrade = "never")
@@ -55,6 +56,9 @@ of available apps is displayed.}
 
 \item{in.job}{Should the application be run in a Job in RStudio (\code{TRUE} by
 default)?}
+
+\item{max.wait}{How many seconds do we wait for the Shiny app to start (60
+sec by default)?}
 }
 \value{
 The result returned by \code{\link[=run_tutorial]{run_tutorial()}} for \code{\link[=run]{run()}}, or by

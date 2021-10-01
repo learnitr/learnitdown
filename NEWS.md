@@ -2,6 +2,8 @@
 
 - While recording learnr events, the procedure to check if the computer is connected to the Internet sometimes failed without good reasons. Now, check the access to two sites that should be more reliable.
 
+- For `run_app()`, a better code is now used to display the app running in a job inside the RStudio viewer pane. A new argument `max.wait =` indicates the number of seconds to wait for the Shiny app to start.
+
 # learnitdown 1.4.0
 
 -   For `launch_shiny()`, allow to include a search string in the url.

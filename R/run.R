@@ -23,6 +23,8 @@
 #' upgrade dependencies ? By default, never, but use `"ask"` to ask user.
 #' @param in.job Should the application be run in a Job in RStudio (`TRUE` by
 #' default)?
+#' @param max.wait How many seconds do we wait for the Shiny app to start (60
+#' sec by default)?
 #'
 #' @return The result returned by [run_tutorial()] for [run()], or by
 #' [runApp()] for [run_app()]. The [update()] function return `TRUE` or
@@ -89,7 +91,7 @@ ask = interactive(), upgrade = "never") {
 #' @rdname run
 #' @export
 run_app <- function(app, package, github_repos = NULL, ..., update = ask,
-  ask = interactive(), upgrade = "never", in.job = TRUE) {
+  ask = interactive(), upgrade = "never", in.job = TRUE, max.wait = 60) {
 
   if (isTRUE(update) && !is.null(github_repos))
     updated <- update_pkg(package, github_repos, upgrade = upgrade)
@@ -117,12 +119,30 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
   } else {
     script <- tempfile(pattern = "shiny", fileext = ".R")
     cat("shiny::runApp('", appDir, "', port = ", port,
-      ", display.mode = 'normal')\n",
-      #" launch.browser = TRUE
-      #", launch.browser = rstudioapi::viewer, display.mode = 'normal')\n",
+      ", launch.browser = FALSE, display.mode = 'normal')\n",
       file = script, sep = "")
     rstudioapi::jobRunScript(script, name = paste("Shiny:", app, sep = ' '))
-    later::later(function() unlink(script), delay = 10)
+    message("Waiting for the Shiny application...")
+    url <- paste0("http://", getOption("shiny.host", "127.0.0.1"), ":", port)
+    is_ready <- function(url) {
+      tryCatch({
+        readLines(url, n = 1)
+        TRUE
+      },
+        warning = function(w) invokeRestart("muffleWarning"),
+        error = function(e) FALSE)
+    }
+    n_sec <- 0
+    while (n_sec < max.wait && !is_ready(url)) {
+      n_sec <- n_sec + 1
+      Sys.sleep(1)
+    }
+    unlink(script)
+    if (!is_ready(url)) {
+      stop("The Shiny application does not seems to be available on ", url)
+    } else {
+      rstudioapi::viewer(url)
+    }
   }
 }
 
