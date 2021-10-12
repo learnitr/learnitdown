@@ -1,3 +1,7 @@
+# learnitdown 1.4.2
+
+- Better checking of internet access during system configuration.
+
 # learnitdown 1.4.1
 
 - While recording learnr events, the procedure to check if the computer is connected to the Internet sometimes failed without good reasons. Now, check the access to two sites that should be more reliable.

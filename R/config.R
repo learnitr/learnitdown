@@ -101,12 +101,16 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
         warning = function(w) invokeRestart("muffleWarning"),
         error = function(e) FALSE)
     }
-    res <- is_online()
+    # We test two different sites successively
+    res <- is_online("http://www.google.com")
+    if (!res)
+      res <- is_online("http://www.github.com")
     if (!res)
       stop("This computer does not seems to have access to the Internet, ", "
         impossible to record events in the database ",
         "(but they are saved on this computer for now).", call. = FALSE)
   }
+
   res <- try(check_internet_access(), silent = TRUE)
   if (inherits(res, "try-error")) {
     if (debug)
