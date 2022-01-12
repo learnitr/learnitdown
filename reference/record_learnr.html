@@ -26,7 +26,7 @@ function is used by learnitdown learnr tutorials and is not for end-users."><met
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -52,13 +52,13 @@ function is used by learnitdown learnr tutorials and is not for end-users."><met
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -72,7 +72,7 @@ function is used by learnitdown learnr tutorials and is not for end-users."><met
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Record results of learnr exercises in a MongoDB database</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/learnitdown_learnr.R"><code>R/learnitdown_learnr.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/learnitdown_learnr.R" class="external-link"><code>R/learnitdown_learnr.R</code></a></small>
     <div class="hidden name"><code>record_learnr.Rd</code></div>
     </div>
 
@@ -81,34 +81,40 @@ function is used by learnitdown learnr tutorials and is not for end-users."><met
 function is used by learnitdown learnr tutorials and is not for end-users.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">record_learnr</span><span class="op">(</span><span class="va">tutorial_id</span>, <span class="va">tutorial_version</span>, <span class="va">user_id</span>, <span class="va">event</span>, <span class="va">data</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">record_learnr</span><span class="op">(</span><span class="va">tutorial_id</span>, <span class="va">tutorial_version</span>, <span class="va">user_id</span>, <span class="va">event</span>, <span class="va">data</span><span class="op">)</span>
 
 <span class="fu">user_name</span><span class="op">(</span><span class="va">value</span><span class="op">)</span>
 
 <span class="fu">user_email</span><span class="op">(</span><span class="va">value</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>tutorial_id</th>
-      <td><p>The identifier of the tutorial.</p></td>
-    </tr><tr><th>tutorial_version</th>
-      <td><p>The version of the tutorial.</p></td>
-    </tr><tr><th>user_id</th>
-      <td><p>The user identifier for this learnr process.</p></td>
-    </tr><tr><th>event</th>
-      <td><p>The event that triggers the record, like <code>exercise_submission</code>
-or <code>question_submission</code></p></td>
-    </tr><tr><th>data</th>
-      <td><p>A JSON field with event-dependent data content. If <code>NULL</code>, only
-a test to see if the database is responding is performed.</p></td>
-    </tr><tr><th>value</th>
-      <td><p>The new value for user name or email (if not provided, the
-current value is returned).</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>tutorial_id</dt>
+<dd><p>The identifier of the tutorial.</p></dd>
+<dt>tutorial_version</dt>
+<dd><p>The version of the tutorial.</p></dd>
+<dt>user_id</dt>
+<dd><p>The user identifier for this learnr process.</p></dd>
+<dt>event</dt>
+<dd><p>The event that triggers the record, like <code>exercise_submission</code>
+or <code>question_submission</code></p></dd>
+<dt>data</dt>
+<dd><p>A JSON field with event-dependent data content. If <code>NULL</code>, only
+a test to see if the database is responding is performed.</p></dd>
+<dt>value</dt>
+<dd><p>The new value for user name or email (if not provided, the
+current value is returned).</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>Nothing. The function is used for its side-effects.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="send_mail_learnr.html">send_mail_learnr()</a></code></p></div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -127,19 +133,19 @@ current value is returned).</p></td>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -150,23 +156,23 @@ current value is returned).</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -174,23 +180,23 @@ current value is returned).</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -215,7 +221,7 @@ current value is returned).</p></td>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

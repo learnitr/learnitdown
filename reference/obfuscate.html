@@ -25,7 +25,7 @@
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -51,13 +51,13 @@
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -71,7 +71,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Obfuscate answers in learnr documents</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/obfuscate.R"><code>R/obfuscate.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/obfuscate.R" class="external-link"><code>R/obfuscate.R</code></a></small>
     <div class="hidden name"><code>obfuscate.Rd</code></div>
     </div>
 
@@ -79,41 +79,48 @@
     <p>Obfuscate answers in learnr documents</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">obfuscate</span><span class="op">(</span><span class="va">object</span>, <span class="va">password</span><span class="op">)</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">obfuscate</span><span class="op">(</span><span class="va">object</span>, <span class="va">password</span><span class="op">)</span>
 
 <span class="fu">._</span><span class="op">(</span><span class="va">object</span><span class="op">)</span>
 
 <span class="fu">obfuscate_logical</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, r <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="fu">ans</span><span class="op">(</span><span class="va">correct</span>, <span class="va">text</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>object</th>
-      <td><p>An R object to obfuscate, or Obfuscation string to decrypt.</p></td>
-    </tr><tr><th>password</th>
-      <td><p>The password to use (otherwise, the password defined by the
-application is used)</p></td>
-    </tr><tr><th>x</th>
-      <td><p>A logical value or an integer.</p></td>
-    </tr><tr><th>y</th>
-      <td><p>Obfuscation parameter.</p></td>
-    </tr><tr><th>r</th>
-      <td><p>Reset obfuscation (not intended for end-user)?</p></td>
-    </tr><tr><th>correct</th>
-      <td><p>Is the answer is correct or not (either a logical value, or
-an integer that obfuscates the results).</p></td>
-    </tr><tr><th>text</th>
-      <td><p>Text of the option.</p></td>
-    </tr><tr><th>message</th>
-      <td><p>Message displayed if the item is selected</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>object</dt>
+<dd><p>An R object to obfuscate, or Obfuscation string to decrypt.</p></dd>
+<dt>password</dt>
+<dd><p>The password to use (otherwise, the password defined by the
+application is used)</p></dd>
+<dt>x</dt>
+<dd><p>A logical value or an integer.</p></dd>
+<dt>y</dt>
+<dd><p>Obfuscation parameter.</p></dd>
+<dt>r</dt>
+<dd><p>Reset obfuscation (not intended for end-user)?</p></dd>
+<dt>correct</dt>
+<dd><p>Is the answer is correct or not (either a logical value, or
+an integer that obfuscates the results).</p></dd>
+<dt>text</dt>
+<dd><p>Text of the option.</p></dd>
+<dt>message</dt>
+<dd><p>Message displayed if the item is selected</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>The encrypted or decrypted object.</p>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">obfuscate</span><span class="op">(</span><span class="st">"test"</span>, <span class="st">"password"</span><span class="op">)</span></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">obfuscate</span><span class="op">(</span><span class="st">"test"</span>, <span class="st">"password"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tHP4+QGa3/Z242t54Weo2A=="</span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -131,19 +138,19 @@ an integer that obfuscates the results).</p></td>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -154,23 +161,23 @@ an integer that obfuscates the results).</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -178,23 +185,23 @@ an integer that obfuscates the results).</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -219,7 +226,7 @@ an integer that obfuscates the results).</p></td>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

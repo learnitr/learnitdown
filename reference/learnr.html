@@ -25,7 +25,7 @@
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -51,13 +51,13 @@
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -71,7 +71,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Insert a block for a learnr tutorial</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/learnr.R"><code>R/learnr.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/learnr.R" class="external-link"><code>R/learnr.R</code></a></small>
     <div class="hidden name"><code>learnr.Rd</code></div>
     </div>
 
@@ -79,7 +79,8 @@
     <p>Insert Markdown text to link to a learnr tutorial.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">learnr</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">learnr</span><span class="op">(</span>
   <span class="va">id</span>,
   title <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">package</span>,
@@ -90,35 +91,39 @@
   tuto.img <span class="op">=</span> <span class="st">"images/list-tuto.png"</span>,
   tuto.link <span class="op">=</span> <span class="st">"tutorial"</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>id</th>
-      <td><p>Identifier of the learnr tutorial (as <code>tutorial:id</code> in the YAML
-section).</p></td>
-    </tr><tr><th>title</th>
-      <td><p>The title of the tutorial (<code>title</code> in the YAML section). If
-<code>NULL</code>, the <code>id</code> is used instead.</p></td>
-    </tr><tr><th>package</th>
-      <td><p>Package where the learnr tutorial is defined.</p></td>
-    </tr><tr><th>toc</th>
-      <td><p>Entry to use in the exercises table of content (<code>NULL</code> if no
-entry, <code>""</code> for a default entry based on <code>toc.def =</code>).</p></td>
-    </tr><tr><th>text</th>
-      <td><p>The text to display in the learnr block.</p></td>
-    </tr><tr><th>toc.def</th>
-      <td><p>Text for a default toc entry using <code>glue()</code> syntax for
-replacement, e.g., <code>{id}</code>.</p></td>
-    </tr><tr><th>rstudio.url</th>
-      <td><p>The URL to open a page in RStudio server in the SciViews
-box.</p></td>
-    </tr><tr><th>tuto.img</th>
-      <td><p>The image to display in front of the toc entry</p></td>
-    </tr><tr><th>tuto.link</th>
-      <td><p>The link when the image is clicked (sends to an help page
-about learnr tutorials).</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>id</dt>
+<dd><p>Identifier of the learnr tutorial (as <code>tutorial:id</code> in the YAML
+section).</p></dd>
+<dt>title</dt>
+<dd><p>The title of the tutorial (<code>title</code> in the YAML section). If
+<code>NULL</code>, the <code>id</code> is used instead.</p></dd>
+<dt>package</dt>
+<dd><p>Package where the learnr tutorial is defined.</p></dd>
+<dt>toc</dt>
+<dd><p>Entry to use in the exercises table of content (<code>NULL</code> if no
+entry, <code>""</code> for a default entry based on <code>toc.def =</code>).</p></dd>
+<dt>text</dt>
+<dd><p>The text to display in the learnr block.</p></dd>
+<dt>toc.def</dt>
+<dd><p>Text for a default toc entry using <code>glue()</code> syntax for
+replacement, e.g., <code>{id}</code>.</p></dd>
+<dt>rstudio.url</dt>
+<dd><p>The URL to open a page in RStudio server in the SciViews
+box.</p></dd>
+<dt>tuto.img</dt>
+<dd><p>The image to display in front of the toc entry</p></dd>
+<dt>tuto.link</dt>
+<dd><p>The link when the image is clicked (sends to an help page
+about learnr tutorials).</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>The Markdown chunk to insert a learnr tutorial block in the document.</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -137,19 +142,19 @@ about learnr tutorials).</p></td>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -160,23 +165,23 @@ about learnr tutorials).</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -184,23 +189,23 @@ about learnr tutorials).</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -225,7 +230,7 @@ about learnr tutorials).</p></td>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

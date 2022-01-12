@@ -28,7 +28,7 @@ like the URL, user and password of the MongoDB database used by the course."><me
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -54,13 +54,13 @@ like the URL, user and password of the MongoDB database used by the course."><me
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -75,7 +75,7 @@ like the URL, user and password of the MongoDB database used by the course."><me
     <div class="page-header">
     <h1>Configure the R environment for the course (including database information)
 and provide (or cache) user information in ciphered form.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/config.R"><code>R/config.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/config.R" class="external-link"><code>R/config.R</code></a></small>
     <div class="hidden name"><code>config.Rd</code></div>
     </div>
 
@@ -84,11 +84,12 @@ and provide (or cache) user information in ciphered form.</h1>
 like the URL, user and password of the MongoDB database used by the course.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">config</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">config</span><span class="op">(</span>
   <span class="va">url</span>,
   <span class="va">password</span>,
-  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".learnitdown_config"</span><span class="op">)</span>,
-  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
+  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".learnitdown_config"</span><span class="op">)</span>,
+  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
 <span class="op">)</span>
 
 <span class="fu">sign_in</span><span class="op">(</span>
@@ -96,15 +97,15 @@ like the URL, user and password of the MongoDB database used by the course.</p>
   <span class="va">password</span>,
   cipher <span class="op">=</span> <span class="st">"aes-256-cbc"</span>,
   iv <span class="op">=</span> <span class="cn">NULL</span>,
-  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".learnitdown_user"</span><span class="op">)</span>,
-  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
+  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".learnitdown_user"</span><span class="op">)</span>,
+  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
 <span class="op">)</span>
 
 <span class="fu">sign_out</span><span class="op">(</span>
   title <span class="op">=</span> <span class="st">"Signing out"</span>,
   message <span class="op">=</span> <span class="st">"Do you really want to sign out with learnitdown?"</span>,
-  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".learnitdown_user"</span><span class="op">)</span>,
-  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
+  cache <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">".learnitdown_user"</span><span class="op">)</span>,
+  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
 <span class="op">)</span>
 
 <span class="fu">encrypt</span><span class="op">(</span>
@@ -146,67 +147,71 @@ like the URL, user and password of the MongoDB database used by the course.</p>
   ref1 <span class="op">=</span> <span class="cn">NULL</span>,
   ref2 <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>url</th>
-      <td><p>The URL of the encrypted file that contains the configuration
-information.</p></td>
-    </tr><tr><th>password</th>
-      <td><p>The password to crypt, decrypt, lock or unlock the data.</p></td>
-    </tr><tr><th>cache</th>
-      <td><p>The path to the file to use to store a cached version of these
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>url</dt>
+<dd><p>The URL of the encrypted file that contains the configuration
+information.</p></dd>
+<dt>password</dt>
+<dd><p>The password to crypt, decrypt, lock or unlock the data.</p></dd>
+<dt>cache</dt>
+<dd><p>The path to the file to use to store a cached version of these
 data. Access to the database will be checked, and if it fails, the
-configuration data are refreshed from the URL.</p></td>
-    </tr><tr><th>debug</th>
-      <td><p>Do we issue debugging messages? By default, it is set according
+configuration data are refreshed from the URL.</p></dd>
+<dt>debug</dt>
+<dd><p>Do we issue debugging messages? By default, it is set according
 to the <code>LEARNITDOWN_DEBUG</code> environment variable (yes, if this variable is not
-<code>0</code>).</p></td>
-    </tr><tr><th>data</th>
-      <td><p>The fingerprint data in clear or ciphered form (in this case, the
-string must start with "fingerprint=").</p></td>
-    </tr><tr><th>cipher</th>
-      <td><p>The cryptography algorithm to use.</p></td>
-    </tr><tr><th>iv</th>
-      <td><p>The initialization vector for the cipher.</p></td>
-    </tr><tr><th>title</th>
-      <td><p>The title of the dialog box prompting to sign out.</p></td>
-    </tr><tr><th>message</th>
-      <td><p>The message of the dialog box prompting to sign out, or asking
-for a password.</p></td>
-    </tr><tr><th>object</th>
-      <td><p>An object to be encrypted, decrypted, locked or unlocked.</p></td>
-    </tr><tr><th>serialize</th>
-      <td><p>Do we serialize <code>object</code> before ciphering it (<code>TRUE</code> by
-default)?</p></td>
-    </tr><tr><th>base64</th>
-      <td><p>Do we encode/decode base64 the object (<code>FALSE</code> by default)?</p></td>
-    </tr><tr><th>url.encode</th>
-      <td><p>Do we encode for URL (query) use (<code>FALSE</code> by default) ?</p></td>
-    </tr><tr><th>unserialize</th>
-      <td><p>Do we unserialize the resulting object after deciphering
-it (<code>TRUE</code> by default)?</p></td>
-    </tr><tr><th>url.decode</th>
-      <td><p>Do we decode URL before deciphering it (<code>FALSE</code> by
-default)?</p></td>
-    </tr><tr><th>key</th>
-      <td><p>The key that stores the password. It is advised to use something
+<code>0</code>).</p></dd>
+<dt>data</dt>
+<dd><p>The fingerprint data in clear or ciphered form (in this case, the
+string must start with "fingerprint=").</p></dd>
+<dt>cipher</dt>
+<dd><p>The cryptography algorithm to use.</p></dd>
+<dt>iv</dt>
+<dd><p>The initialization vector for the cipher.</p></dd>
+<dt>title</dt>
+<dd><p>The title of the dialog box prompting to sign out.</p></dd>
+<dt>message</dt>
+<dd><p>The message of the dialog box prompting to sign out, or asking
+for a password.</p></dd>
+<dt>object</dt>
+<dd><p>An object to be encrypted, decrypted, locked or unlocked.</p></dd>
+<dt>serialize</dt>
+<dd><p>Do we serialize <code>object</code> before ciphering it (<code>TRUE</code> by
+default)?</p></dd>
+<dt>base64</dt>
+<dd><p>Do we encode/decode base64 the object (<code>FALSE</code> by default)?</p></dd>
+<dt>url.encode</dt>
+<dd><p>Do we encode for URL (query) use (<code>FALSE</code> by default) ?</p></dd>
+<dt>unserialize</dt>
+<dd><p>Do we unserialize the resulting object after deciphering
+it (<code>TRUE</code> by default)?</p></dd>
+<dt>url.decode</dt>
+<dd><p>Do we decode URL before deciphering it (<code>FALSE</code> by
+default)?</p></dd>
+<dt>key</dt>
+<dd><p>The key that stores the password. It is advised to use something
 like <code>course_year</code>, so that you can manage different passwords for the same
 course given at different academic years. Using a key, the course password
 must be entered only once. If not provided, the password is not stored. Note
 also that the name of an environment variable could be used too for the key.
-This is convenient on a server like RStudio Connect, for instance.</p></td>
-    </tr><tr><th>reset</th>
-      <td><p>Should we reset the password (<code>FALSE</code> by default)?</p></td>
-    </tr><tr><th>ref1</th>
-      <td><p>Code to check the validity of the password</p></td>
-    </tr><tr><th>ref2</th>
-      <td><p>Second code to check password validity.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+This is convenient on a server like RStudio Connect, for instance.</p></dd>
+<dt>reset</dt>
+<dd><p>Should we reset the password (<code>FALSE</code> by default)?</p></dd>
+<dt>ref1</dt>
+<dd><p>Code to check the validity of the password</p></dd>
+<dt>ref2</dt>
+<dd><p>Second code to check password validity.</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>Invisibly returns <code>TRUE</code> if success, or <code>FALSE</code> otherwise for
 <code>config()</code>. The encrypted/decrypted object for <code>encrypt()</code> and <code>decrypt()</code>,
 or the locked/unlocked object for <code>lock()</code> and <code>unlock()</code>.
 The user information for <code>sign_in()</code>.</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -225,19 +230,19 @@ The user information for <code>sign_in()</code>.</p>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -248,23 +253,23 @@ The user information for <code>sign_in()</code>.</p>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -272,23 +277,23 @@ The user information for <code>sign_in()</code>.</p>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -313,7 +318,7 @@ The user information for <code>sign_in()</code>.</p>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

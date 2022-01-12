@@ -30,7 +30,7 @@ started)."><meta name="twitter:card" content="summary"><!-- Mathjax --><script s
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -56,13 +56,13 @@ started)."><meta name="twitter:card" content="summary"><!-- Mathjax --><script s
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -76,7 +76,7 @@ started)."><meta name="twitter:card" content="summary"><!-- Mathjax --><script s
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create the screenshot image of a Shiny application with a click icon</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/webshot_shiny.R"><code>R/webshot_shiny.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/webshot_shiny.R" class="external-link"><code>R/webshot_shiny.R</code></a></small>
     <div class="hidden name"><code>webshot_shiny.Rd</code></div>
     </div>
 
@@ -89,11 +89,12 @@ information to the user (how the Shiny application would look like if it was
 started).</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">webshot_shiny</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">webshot_shiny</span><span class="op">(</span>
   <span class="va">url</span>,
-  app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>,
+  app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span>,
   imgdir <span class="op">=</span> <span class="st">"images/shinyapps"</span>,
-  img <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">imgdir</span>, <span class="st">"/"</span>, <span class="va">app</span>, <span class="st">".png"</span><span class="op">)</span>,
+  img <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">imgdir</span>, <span class="st">"/"</span>, <span class="va">app</span>, <span class="st">".png"</span><span class="op">)</span>,
   width <span class="op">=</span> <span class="fl">780</span>,
   height <span class="op">=</span> <span class="fl">500</span>,
   offsetx <span class="op">=</span> <span class="fl">30</span>,
@@ -101,49 +102,56 @@ started).</p>
   delay <span class="op">=</span> <span class="fl">10</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>url</th>
-      <td><p>The URL to launch the Shiny app. If both <code>app =</code> and <code>baseurl =</code></p></td>
-    </tr><tr><th>app</th>
-      <td><p>The name of the Shiny application.
-are provided, you don't need to specify it.</p></td>
-    </tr><tr><th>imgdir</th>
-      <td><p>The directory without trailing "/" where images relative
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>url</dt>
+<dd><p>The URL to launch the Shiny app. If both <code>app =</code> and <code>baseurl =</code></p></dd>
+<dt>app</dt>
+<dd><p>The name of the Shiny application.
+are provided, you don't need to specify it.</p></dd>
+<dt>imgdir</dt>
+<dd><p>The directory without trailing "/" where images relative
 to Shiny applications are stored. By default, it is relative to current
-directory, in <code>images/shinyapps</code> subdirectories.</p></td>
-    </tr><tr><th>img</th>
-      <td><p>The path to the image that is created. Not needed if <code>app =</code> and
-<code>imgdir =</code> are provided.</p></td>
-    </tr><tr><th>width</th>
-      <td><p>The requested weight of the screenshot (it may differ if the
-Shiny application defines other (limit) values.</p></td>
-    </tr><tr><th>height</th>
-      <td><p>The requested height of the screenshot (idem).</p></td>
-    </tr><tr><th>offsetx</th>
-      <td><p>The offset from left where to place the click icon in pixels.</p></td>
-    </tr><tr><th>offsety</th>
-      <td><p>The offset to bottom where to place the click icon in pixels.</p></td>
-    </tr><tr><th>delay</th>
-      <td><p>Time to wait (in sec) after the Shiny application has started
+directory, in <code>images/shinyapps</code> subdirectories.</p></dd>
+<dt>img</dt>
+<dd><p>The path to the image that is created. Not needed if <code>app =</code> and
+<code>imgdir =</code> are provided.</p></dd>
+<dt>width</dt>
+<dd><p>The requested weight of the screenshot (it may differ if the
+Shiny application defines other (limit) values.</p></dd>
+<dt>height</dt>
+<dd><p>The requested height of the screenshot (idem).</p></dd>
+<dt>offsetx</dt>
+<dd><p>The offset from left where to place the click icon in pixels.</p></dd>
+<dt>offsety</dt>
+<dd><p>The offset to bottom where to place the click icon in pixels.</p></dd>
+<dt>delay</dt>
+<dd><p>Time to wait (in sec) after the Shiny application has started
 and before the screenshot is taken. If the screenshot does not contain the
-complete application UI, try increase this value.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Further arguments passed to <code><a href="launch_shiny.html">launch_shiny()</a></code> but not used here.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+complete application UI, try increase this value.</p></dd>
+<dt>...</dt>
+<dd><p>Further arguments passed to <code><a href="launch_shiny.html">launch_shiny()</a></code> but not used here.</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>The path to the created image, invisibly.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="launch_shiny.html">launch_shiny()</a></code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># We wait 10 sec to make sure it is loaded when the screenshot is taken</span></span>
 <span class="r-in"><span class="op">(</span><span class="fu">webshot_shiny</span><span class="op">(</span><span class="st">"https://phgrosjean.shinyapps.io/histogram/"</span>, delay <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"> <span class="co"># Now, look at this image. You can use it with launch_shiny()</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -161,19 +169,19 @@ complete application UI, try increase this value.</p></td>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -184,23 +192,23 @@ complete application UI, try increase this value.</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -208,23 +216,23 @@ complete application UI, try increase this value.</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -249,7 +257,7 @@ complete application UI, try increase this value.</p></td>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

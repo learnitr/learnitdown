@@ -29,7 +29,7 @@ run the item in a friendly way."><meta name="twitter:card" content="summary"><!-
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -55,13 +55,13 @@ run the item in a friendly way."><meta name="twitter:card" content="summary"><!-
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -75,25 +75,26 @@ run the item in a friendly way."><meta name="twitter:card" content="summary"><!-
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Run learnitdown learnr tutorials or Shiny apps from a package after update</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/run.R"><code>R/run.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/run.R" class="external-link"><code>R/run.R</code></a></small>
     <div class="hidden name"><code>run.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>These functions are convenient in the framework of a course whose learnrs and
-Shiny applications may be updated during the course. The <code><a href="https://rdrr.io/r/stats/update.html">update()</a></code> function
+Shiny applications may be updated during the course. The <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> function
 checks if an update is available (respecting the version of R), and the
 <code>run()</code> (for learnrs), or <code>runApp()</code> (for Shiny applications) manage to
 run the item in a friendly way.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">run</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">run</span><span class="op">(</span>
   <span class="va">tutorial</span>,
   <span class="va">package</span>,
   github_repos <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">...</span>,
   update <span class="op">=</span> <span class="va">ask</span>,
-  ask <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>,
+  ask <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,
   upgrade <span class="op">=</span> <span class="st">"never"</span>
 <span class="op">)</span>
 
@@ -103,55 +104,61 @@ run the item in a friendly way.</p>
   github_repos <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">...</span>,
   update <span class="op">=</span> <span class="va">ask</span>,
-  ask <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html">interactive</a></span><span class="op">(</span><span class="op">)</span>,
+  ask <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,
   upgrade <span class="op">=</span> <span class="st">"never"</span>,
   in.job <span class="op">=</span> <span class="cn">TRUE</span>,
   max.wait <span class="op">=</span> <span class="fl">60</span>
 <span class="op">)</span>
 
 <span class="fu">update_pkg</span><span class="op">(</span><span class="va">package</span>, <span class="va">github_repos</span>, upgrade <span class="op">=</span> <span class="st">"never"</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>tutorial</th>
-      <td><p>The name of the tutorial to use. If not provided, a list of
-available tutorials is displayed.</p></td>
-    </tr><tr><th>package</th>
-      <td><p>The package from where to run the tutorial.</p></td>
-    </tr><tr><th>github_repos</th>
-      <td><p>The GitHub repository where the package is developed (for
-updates), use <code>NULL</code> to prevent any updates.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Further arguments passed to <code>run_tutorial()</code> (for learnrs), or to
-<code>runApp()</code> (for Shiny applications).</p></td>
-    </tr><tr><th>update</th>
-      <td><p>Do we check for an updated version first, and if it is found,
-update the package automatically?</p></td>
-    </tr><tr><th>ask</th>
-      <td><p>In case <code>tutorial</code> or <code>app</code> is not provided, do we ask to select
-in a list?</p></td>
-    </tr><tr><th>upgrade</th>
-      <td><p>When a new version of the main package is found, do we also
-upgrade dependencies ? By default, never, but use <code>"ask"</code> to ask user.</p></td>
-    </tr><tr><th>app</th>
-      <td><p>The name of the Shiny application to run. If not provided, a list
-of available apps is displayed.</p></td>
-    </tr><tr><th>in.job</th>
-      <td><p>Should the application be run in a Job in RStudio (<code>TRUE</code> by
-default)?</p></td>
-    </tr><tr><th>max.wait</th>
-      <td><p>How many seconds do we wait for the Shiny app to start (60
-sec by default)?</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>tutorial</dt>
+<dd><p>The name of the tutorial to use. If not provided, a list of
+available tutorials is displayed.</p></dd>
+<dt>package</dt>
+<dd><p>The package from where to run the tutorial.</p></dd>
+<dt>github_repos</dt>
+<dd><p>The GitHub repository where the package is developed (for
+updates), use <code>NULL</code> to prevent any updates.</p></dd>
+<dt>...</dt>
+<dd><p>Further arguments passed to <code>run_tutorial()</code> (for learnrs), or to
+<code>runApp()</code> (for Shiny applications).</p></dd>
+<dt>update</dt>
+<dd><p>Do we check for an updated version first, and if it is found,
+update the package automatically?</p></dd>
+<dt>ask</dt>
+<dd><p>In case <code>tutorial</code> or <code>app</code> is not provided, do we ask to select
+in a list?</p></dd>
+<dt>upgrade</dt>
+<dd><p>When a new version of the main package is found, do we also
+upgrade dependencies ? By default, never, but use <code>"ask"</code> to ask user.</p></dd>
+<dt>app</dt>
+<dd><p>The name of the Shiny application to run. If not provided, a list
+of available apps is displayed.</p></dd>
+<dt>in.job</dt>
+<dd><p>Should the application be run in a Job in RStudio (<code>TRUE</code> by
+default)?</p></dd>
+<dt>max.wait</dt>
+<dd><p>How many seconds do we wait for the Shiny app to start (60
+sec by default)?</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>The result returned by <code>run_tutorial()</code> for <code>run()</code>, or by
-<code>runApp()</code> for <code>run_app()</code>. The <code><a href="https://rdrr.io/r/stats/update.html">update()</a></code> function return <code>TRUE</code> or
+<code>runApp()</code> for <code>run_app()</code>. The <code><a href="https://rdrr.io/r/stats/update.html" class="external-link">update()</a></code> function return <code>TRUE</code> or
 <code>FALSE</code>, depending if the package is updated or not.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code>run_tutorial()</code>, <code>runApp()</code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co">#' # To start from a list of available tutorials:</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span>package <span class="op">=</span> <span class="st">"my_package"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">run</span><span class="op">(</span><span class="st">"my_tutorial"</span>, package <span class="op">=</span> <span class="st">"my_package"</span><span class="op">)</span></span>
@@ -159,6 +166,7 @@ sec by default)?</p></td>
 <span class="r-in"><span class="fu">run_app</span><span class="op">(</span><span class="st">"my_shiny_app"</span>, package <span class="op">=</span> <span class="st">"mypackage"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -176,19 +184,19 @@ sec by default)?</p></td>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -199,23 +207,23 @@ sec by default)?</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -223,23 +231,23 @@ sec by default)?</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -264,7 +272,7 @@ sec by default)?</p></td>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

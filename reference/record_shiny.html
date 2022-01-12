@@ -26,7 +26,7 @@ events and transfer them into a MongoDB database."><meta name="twitter:card" con
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -52,13 +52,13 @@ events and transfer them into a MongoDB database."><meta name="twitter:card" con
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -72,7 +72,7 @@ events and transfer them into a MongoDB database."><meta name="twitter:card" con
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Record Shiny events in a MongoDB database</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/learnitdown_shiny.R"><code>R/learnitdown_shiny.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/learnitdown_shiny.R" class="external-link"><code>R/learnitdown_shiny.R</code></a></small>
     <div class="hidden name"><code>record_shiny.Rd</code></div>
     </div>
 
@@ -81,7 +81,8 @@ events and transfer them into a MongoDB database."><meta name="twitter:card" con
 events and transfer them into a MongoDB database.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">record_shiny</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">record_shiny</span><span class="op">(</span>
   <span class="va">path</span>,
   <span class="va">url</span>,
   <span class="va">db</span>,
@@ -90,38 +91,43 @@ events and transfer them into a MongoDB database.</p>
   log.errors <span class="op">=</span> <span class="cn">TRUE</span>,
   log.outputs <span class="op">=</span> <span class="cn">FALSE</span>,
   drop.dir <span class="op">=</span> <span class="cn">FALSE</span>,
-  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
+  debug <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"LEARNITDOWN_DEBUG"</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>path</th>
-      <td><p>The directory that contains shinylogs .rds files</p></td>
-    </tr><tr><th>url</th>
-      <td><p>The mongodb url.</p></td>
-    </tr><tr><th>db</th>
-      <td><p>The database name.</p></td>
-    </tr><tr><th>collection</th>
-      <td><p>The name of the collection where to insert the documents.</p></td>
-    </tr><tr><th>version</th>
-      <td><p>The version of the running Shiny application.</p></td>
-    </tr><tr><th>log.errors</th>
-      <td><p>Do we record errors too?</p></td>
-    </tr><tr><th>log.outputs</th>
-      <td><p>Do we record outputs too (note that results are recorded
-with inputs)?</p></td>
-    </tr><tr><th>drop.dir</th>
-      <td><p>If <code>TRUE</code> and path is empty at the end of the process, drop
-the logs directory.</p></td>
-    </tr><tr><th>debug</th>
-      <td><p>Do we debug the events recording by issuing extra messages? By
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>path</dt>
+<dd><p>The directory that contains shinylogs .rds files</p></dd>
+<dt>url</dt>
+<dd><p>The mongodb url.</p></dd>
+<dt>db</dt>
+<dd><p>The database name.</p></dd>
+<dt>collection</dt>
+<dd><p>The name of the collection where to insert the documents.</p></dd>
+<dt>version</dt>
+<dd><p>The version of the running Shiny application.</p></dd>
+<dt>log.errors</dt>
+<dd><p>Do we record errors too?</p></dd>
+<dt>log.outputs</dt>
+<dd><p>Do we record outputs too (note that results are recorded
+with inputs)?</p></dd>
+<dt>drop.dir</dt>
+<dd><p>If <code>TRUE</code> and path is empty at the end of the process, drop
+the logs directory.</p></dd>
+<dt>debug</dt>
+<dd><p>Do we debug the events recording by issuing extra messages? By
 Default the value in the environment variable <code>LEARNITDOWN_DEBUG</code> is used and
-debugging will be done if this value is different to <code>0</code>.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+debugging will be done if this value is different to <code>0</code>.</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p><code>TRUE</code>if there where log files to export, <code>FALSE</code> otherwise.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="read_shinylogs.html">read_shinylogs()</a></code>, <code><a href="trackEvents.html">trackEvents()</a></code></p></div>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -140,19 +146,19 @@ debugging will be done if this value is different to <code>0</code>.</p></td>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -163,23 +169,23 @@ debugging will be done if this value is different to <code>0</code>.</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -187,23 +193,23 @@ debugging will be done if this value is different to <code>0</code>.</p></td>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -228,7 +234,7 @@ debugging will be done if this value is different to <code>0</code>.</p></td>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>

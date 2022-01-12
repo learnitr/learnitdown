@@ -30,7 +30,7 @@ page)."><meta name="twitter:card" content="summary"><!-- Mathjax --><script src=
       </button>
       <div class="navbar-brand-container">
        <div class="navbar-brand-logo">
-         <a class="navbar-brand" href="https://www.sciviews.org">
+         <a class="external-link navbar-brand" href="https://www.sciviews.org">
           <img src="../logo_full.png" alt="SciViews"></a>
        </div>
        <div class="navbar-brand-package">
@@ -56,13 +56,13 @@ page)."><meta name="twitter:card" content="summary"><!-- Mathjax --><script src=
   <a href="../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/SciViews/learnitdown/">
+  <a href="https://github.com/SciViews/learnitdown/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.4.2</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -76,7 +76,7 @@ page)."><meta name="twitter:card" content="summary"><!-- Mathjax --><script src=
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Launch Shiny application by clicking on its screenshot.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/master/R/launch_shiny.R"><code>R/launch_shiny.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/SciViews/learnitdown/blob/HEAD/R/launch_shiny.R" class="external-link"><code>R/launch_shiny.R</code></a></small>
     <div class="hidden name"><code>launch_shiny.Rd</code></div>
     </div>
 
@@ -89,96 +89,104 @@ on it to actually launch the application (that replaces the screenshot on the
 page).</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">launch_shiny</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">launch_shiny</span><span class="op">(</span>
   <span class="va">url</span>,
-  app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"\\?.+$"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">)</span>,
+  app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"\\?.+$"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">)</span>,
   imgdir <span class="op">=</span> <span class="st">"images/shinyapps"</span>,
-  img <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">imgdir</span>, <span class="st">"/"</span>, <span class="va">app</span>, <span class="st">".png"</span><span class="op">)</span>,
+  img <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">imgdir</span>, <span class="st">"/"</span>, <span class="va">app</span>, <span class="st">".png"</span><span class="op">)</span>,
   createimg <span class="op">=</span> <span class="cn">TRUE</span>,
   width <span class="op">=</span> <span class="fl">780</span>,
   height <span class="op">=</span> <span class="fl">500</span>,
   fun <span class="op">=</span> <span class="cn">NULL</span>,
   alt1 <span class="op">=</span> <span class="st">"*Click to start the Shiny application.*"</span>,
-  alt2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"*Click to start"</span>,
+  alt2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"*Click to start"</span>,
     <span class="st">"or [run `{run.cmd}`]({run.url}{run.arg}){{target=\"_blank\"}}.*"</span><span class="op">)</span>,
   toc <span class="op">=</span> <span class="st">""</span>,
   toc.def <span class="op">=</span> <span class="st">"Shiny application {app}"</span>,
   run.url <span class="op">=</span> <span class="st">"start_rstudio.html?runrcode="</span>,
   run.cmd <span class="op">=</span> <span class="fu">glue</span><span class="op">(</span><span class="st">"{fun}(\"{app}\")"</span><span class="op">)</span>,
-  run.arg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/URLencode.html">URLencode</a></span><span class="op">(</span><span class="va">run.cmd</span>, reserved <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+  run.arg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/URLencode.html" class="external-link">URLencode</a></span><span class="op">(</span><span class="va">run.cmd</span>, reserved <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
   app.img <span class="op">=</span> <span class="st">"images/list-app.png"</span>,
   app.link <span class="op">=</span> <span class="st">"shiny_app"</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>url</th>
-      <td><p>The URL of the Shiny application. If both <code>app =</code> and <code>baseurl =</code>
-are provided, you don't need to specify it.</p></td>
-    </tr><tr><th>app</th>
-      <td><p>Name of the shiny application (cannot be duplicated on a page).</p></td>
-    </tr><tr><th>imgdir</th>
-      <td><p>The directory without trailing "/" where images relative
+    <div id="arguments">
+    <h2>Arguments</h2>
+    <dl><dt>url</dt>
+<dd><p>The URL of the Shiny application. If both <code>app =</code> and <code>baseurl =</code>
+are provided, you don't need to specify it.</p></dd>
+<dt>app</dt>
+<dd><p>Name of the shiny application (cannot be duplicated on a page).</p></dd>
+<dt>imgdir</dt>
+<dd><p>The directory without trailing "/" where images relative
 to Shiny applications are stored. By default, it is relative to current
-directory, in <code>images/shinyapps</code> subdirectories.</p></td>
-    </tr><tr><th>img</th>
-      <td><p>The relative or absolute path to the image with a screenshot of
-the Shiny application, as produced by <code><a href="webshot_shiny.html">webshot_shiny()</a></code>.</p></td>
-    </tr><tr><th>createimg</th>
-      <td><p>If the app image (<code>img</code>) is not found, and there is no
-default image in <code>imgdir =</code>, do we put it there (yes be default)?</p></td>
-    </tr><tr><th>width</th>
-      <td><p>The width of the image and iframe for the app.</p></td>
-    </tr><tr><th>height</th>
-      <td><p>The height of image and iframe.</p></td>
-    </tr><tr><th>fun</th>
-      <td><p>The function to run as alternative to start the Shiny application
+directory, in <code>images/shinyapps</code> subdirectories.</p></dd>
+<dt>img</dt>
+<dd><p>The relative or absolute path to the image with a screenshot of
+the Shiny application, as produced by <code><a href="webshot_shiny.html">webshot_shiny()</a></code>.</p></dd>
+<dt>createimg</dt>
+<dd><p>If the app image (<code>img</code>) is not found, and there is no
+default image in <code>imgdir =</code>, do we put it there (yes be default)?</p></dd>
+<dt>width</dt>
+<dd><p>The width of the image and iframe for the app.</p></dd>
+<dt>height</dt>
+<dd><p>The height of image and iframe.</p></dd>
+<dt>fun</dt>
+<dd><p>The function to run as alternative to start the Shiny application
 locally. It is better to fully specify it (<code>package::function</code>), and it
-should take one argument which is the application name in <code>app =</code>.</p></td>
-    </tr><tr><th>alt1</th>
-      <td><p>Alternate text to display at the bottom of the screenshot when
+should take one argument which is the application name in <code>app =</code>.</p></dd>
+<dt>alt1</dt>
+<dd><p>Alternate text to display at the bottom of the screenshot when
 nothing is provided for <code>fun =</code>. If
-<code>NULL</code>, nothing is displayed below the screenshot.</p></td>
-    </tr><tr><th>alt2</th>
-      <td><p>Alternate text to display at the bottom of the screenshot in case
-<code>fun =</code> is provided.</p></td>
-    </tr><tr><th>toc</th>
-      <td><p>Entry to use in the exercises table of content (<code>NULL</code> if no
-entry, <code>""</code> for a default entry based on <code>toc.def =</code>).</p></td>
-    </tr><tr><th>toc.def</th>
-      <td><p>Text for a default toc entry using <code>glue()</code> syntax for
-replacement, e.g., <code>{app}</code>.</p></td>
-    </tr><tr><th>run.url</th>
-      <td><p>The URL to use to start the Shiny application in RStudio
+<code>NULL</code>, nothing is displayed below the screenshot.</p></dd>
+<dt>alt2</dt>
+<dd><p>Alternate text to display at the bottom of the screenshot in case
+<code>fun =</code> is provided.</p></dd>
+<dt>toc</dt>
+<dd><p>Entry to use in the exercises table of content (<code>NULL</code> if no
+entry, <code>""</code> for a default entry based on <code>toc.def =</code>).</p></dd>
+<dt>toc.def</dt>
+<dd><p>Text for a default toc entry using <code>glue()</code> syntax for
+replacement, e.g., <code>{app}</code>.</p></dd>
+<dt>run.url</dt>
+<dd><p>The URL to use to start the Shiny application in RStudio
 server in the SciViews Box. It should generally end with <code>?runrcode=</code>, and
-the R code to execute will be appended to it from <code>run.arg =</code>.</p></td>
-    </tr><tr><th>run.cmd</th>
-      <td><p>The command to use to launch the Shiny application in RStudio.</p></td>
-    </tr><tr><th>run.arg</th>
-      <td><p>The URL encoded version of <code>run.cmd =</code>.</p></td>
-    </tr><tr><th>app.img</th>
-      <td><p>The image to display in front of the toc entry</p></td>
-    </tr><tr><th>app.link</th>
-      <td><p>The link when the image is clicked (sends to an help page
-about Shiny applications).</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Not used here, but it allows to add more arguments used by the
+the R code to execute will be appended to it from <code>run.arg =</code>.</p></dd>
+<dt>run.cmd</dt>
+<dd><p>The command to use to launch the Shiny application in RStudio.</p></dd>
+<dt>run.arg</dt>
+<dd><p>The URL encoded version of <code>run.cmd =</code>.</p></dd>
+<dt>app.img</dt>
+<dd><p>The image to display in front of the toc entry</p></dd>
+<dt>app.link</dt>
+<dd><p>The link when the image is clicked (sends to an help page
+about Shiny applications).</p></dd>
+<dt>...</dt>
+<dd><p>Not used here, but it allows to add more arguments used by the
 screenshot addin, like <code>delay =</code>, <code>offsetx =</code> or <code>offsety =</code>, see
-<code><a href="webshot_shiny.html">webshot_shiny()</a></code>.</p></td>
-    </tr></table><h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
+<code><a href="webshot_shiny.html">webshot_shiny()</a></code>.</p></dd>
+</dl></div>
+    <div id="value">
+    <h2>Value</h2>
     <p>The HTML content that creates the image and the iframe. The function
 must be called from within an R inline expression or from an R chunk with
 <code>results='asis'</code> in an HTML-rendered version of the R Markdown document to
 get the correct result.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
+    </div>
+    <div id="see-also">
+    <h2>See also</h2>
     <div class="dont-index"><p><code><a href="webshot_shiny.html">webshot_shiny()</a></code></p></div>
+    </div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># TODO...</span></span>
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># TODO...</span></span>
 <span class="r-in"></span>
 </code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -196,19 +204,19 @@ get the correct result.</p>
                         <img class="mb-30" src="https://www.sciviews.org/images/logo-footer.png" alt="logo"><p class="text-white mb-30"> We build software for reproducible research with R</p>
                         <!-- social icon -->
                         <ul class="list-inline"><li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://github.com/SciViews">
+                                <a class="external-link social-icon-outline" href="https://github.com/SciViews">
                                     <i class="ti-github"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://twitter.com/PhilGrosjean">
+                                <a class="external-link social-icon-outline" href="https://twitter.com/PhilGrosjean">
                                     <i class="ti-twitter-alt"></i>
                                 </a>
                             </li>
 
                             <li class="list-inline-item">
-                                <a class="social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
+                                <a class="external-link social-icon-outline" href="https://www.linkedin.com/in/philippe-grosjean-5b6b29a2/">
                                     <i class="ti-linkedin"></i>
                                 </a>
                             </li>
@@ -219,23 +227,23 @@ get the correct result.</p>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Related</p>
                     <ul class="footer-links"><li>
-                            <a href="http://econum.umons.ac.be">Our Lab</a>
+                            <a href="http://econum.umons.ac.be" class="external-link">Our Lab</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/fs/en/">Our Faculty</a>
+                            <a href="https://web.umons.ac.be/fs/en/" class="external-link">Our Faculty</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/complexys/en/">Complexys</a>
+                            <a href="https://web.umons.ac.be/complexys/en/" class="external-link">Complexys</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/infortech/en/">InforTech</a>
+                            <a href="https://web.umons.ac.be/infortech/en/" class="external-link">InforTech</a>
                         </li>
 
                         <li>
-                            <a href="https://web.umons.ac.be/en/">UMONS</a>
+                            <a href="https://web.umons.ac.be/en/" class="external-link">UMONS</a>
                         </li>
 
                     </ul></div>
@@ -243,23 +251,23 @@ get the correct result.</p>
                 <div class="col-lg-2 col-md-4 col-6">
                     <p class="h4 text-white mb-4">Quick Link</p>
                     <ul class="footer-links"><li>
-                            <a href="https://www.sciviews.org/software/svbox">SciViews Box</a>
+                            <a href="https://www.sciviews.org/software/svbox" class="external-link">SciViews Box</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/sciviews-r">SciViews::R</a>
+                            <a href="https://www.sciviews.org/software/sciviews-r" class="external-link">SciViews::R</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/software/zooimage">Zoo/PhytoImage</a>
+                            <a href="https://www.sciviews.org/software/zooimage" class="external-link">Zoo/PhytoImage</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/blog">Blog</a>
+                            <a href="https://www.sciviews.org/blog" class="external-link">Blog</a>
                         </li>
 
                         <li>
-                            <a href="https://www.sciviews.org/about">About</a>
+                            <a href="https://www.sciviews.org/about" class="external-link">About</a>
                         </li>
 
                     </ul></div>
@@ -284,7 +292,7 @@ get the correct result.</p>
                 </div>
                 <div class="col-lg-6 col-md-7">
                     <ul class="list-inline text-center text-md-right"><li class="list-inline-item mx-lg-3 my-lg-0 mx-2 my-2">
-                            <a class="font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
+                            <a class="external-link font-secondary text-white" href="https://creativecommons.org/licenses/by/4.0/">Site content under CC-BY 4.0 license</a>
                         </li>
 
                     </ul></div>
