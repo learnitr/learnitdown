@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{name}}</title>
+    <base target="_parent">
+    <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+  </head>
+  <body>
+    <img src="github_classroom.jpg" align="left">
+
+    <h3>{{name}}</h5>
+
+    <div id="message">Searching the link for your GitHub Classroom project. Please wait...</div>
+
+    <script>
+      const defurl = "{{url}}";
+      const assigns = {
+        {{course_params}}
+      };
+      var params = {
+        url: defurl,
+        start: null,
+        end: null
+      };
+      var login = '';
+      var course = '';
+      var group = '';
+      if (window.localStorage) {
+        login = localStorage.getItem('login');
+        course = localStorage.getItem('icourse');
+        group = localStorage.getItem('group');
+      }
+      // Get params from course
+      if (login != null && login != '' && course != null && course != '' &&
+        assigns.hasOwnProperty(course)) {
+        params = assigns[course];
+      }
+      // Possibly override for a group
+      if (login != null && login != '' && group != null && group != '' &&
+        assigns.hasOwnProperty(group)) {
+        params = assigns[group];
+      }
+      // Reroute according to params
+      if (params["url"] == defurl) { // The URL to the template
+        document.getElementById('message').innerHTML = 'You do not seem to be enrolled in a course linked to this assignment. If this is an error, go back to the <a href="{{baseurl}}">main page</a> and check you login. If <b>and only if</b> you are not a student enrolled in this course, you can make this exercise by <b>forking</b> <a href="' + defurl + '">this template</a> into your own GitHub account.';
+      } else { // Presumably a GitHub Classroom assignment
+        // Check if current time is inside the accepted time range
+        const now = new Date();
+        if (params["start"] != null && now < params["start"]) {
+          // Too early message
+          document.getElementById('message').innerHTML = "This GitHub Classroom assignment is not available before " + params["start"].toLocaleString('en-GB');
+        } else if (params["end"] != null && now > params["end"]) {
+          document.getElementById('message').innerHTML = "Sorry, this GitHub Classroom assignment is not available any more. It was due to " + params["end"].toLocaleString('en-GB');
+        } else {
+          // Redirect to the GitHub Classroom assignment
+          window.parent.location.replace(params["url"]);
+        }
+      }
+    </script>
+  </body>
+</html>

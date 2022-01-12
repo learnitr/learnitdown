@@ -2,20 +2,24 @@
 % Please edit documentation in R/show_ex_toc.R
 \name{show_ex_toc}
 \alias{show_ex_toc}
+\alias{clean_ex_toc}
 \title{Insert a table of content for the exercises at the end of a bookdown chapter}
 \usage{
 show_ex_toc(header = "", clear.it = TRUE)
+
+clean_ex_toc()
 }
 \arguments{
 \item{header}{A Markdown text to place as header of the exercises toc.}
 
-\item{clear.it}{Do we clear the toc list (\code{TRUE} by default)}
+\item{clear.it}{Do we clear the toc list (\code{TRUE} by default)?}
 }
 \value{
 The Markdown chunk with the exercises toc.
 }
 \description{
 For the various exercise types (h5p, shiny apps, learnrs & GitHub
-assignations) we add toc entries with \code{\link[=h5p]{h5p()}}, \code{\link[=launch_shiny]{launch_shiny()}}, \code{\link[=learnr]{learnr()}},
-and \code{\link[=assignation]{assignation()}}, respectively. This function create the exercises toc.
+assignments/challenges) we add toc entries with \code{\link[=h5p]{h5p()}}, \code{\link[=launch_shiny]{launch_shiny()}},
+\code{\link[=learnr]{learnr()}}, \code{\link[=assignment]{assignment()}}, and \code{\link[=challenge]{challenge()}} respectively. This function
+creates the table of content for all these exercises.
 }

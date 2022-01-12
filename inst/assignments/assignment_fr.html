@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>{{name}}</title>
+    <base target="_parent">
+    <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+  </head>
+  <body>
+    <img src="github_classroom.jpg" align="left">
+
+    <h3>{{name}}</h5>
+
+    <div id="message">Recherche du lien pour votre projet GitHub Classroom. Veuillez patienter...</div>
+
+    <script>
+      const defurl = "{{url}}";
+      const assigns = {
+        {{course_params}}
+      };
+      var params = {
+        url: defurl,
+        start: null,
+        end: null
+      };
+      var login = '';
+      var course = '';
+      var group = '';
+      if (window.localStorage) {
+        login = localStorage.getItem('login');
+        course = localStorage.getItem('icourse');
+        group = localStorage.getItem('group');
+      }
+      // Get params from course
+      if (login != null && login != '' && course != null && course != '' &&
+        assigns.hasOwnProperty(course)) {
+        params = assigns[course];
+      }
+      // Possibly override for a group
+      if (login != null && login != '' && group != null && group != '' &&
+        assigns.hasOwnProperty(group)) {
+        params = assigns[group];
+      }
+      // Reroute according to params
+      if (params["url"] == defurl) { // The URL to the template
+        document.getElementById('message').innerHTML = 'Vous ne semblez pas être inscrit dans un cours lié à ce travail. Si cela est une erreur, revenez à la <a href="{{baseurl}}">page principale</a> et vérifiez votre identification. Si <b>et seulement si</b> vous n\'êtes pas un étudiant inscrit à ce cours, vous pouvez réaliser quand même cet exercice en <b>effectuant un "fork"</b> sur votre propre compte GitHub de <a href="' + defurl + '">ce template</a>.';
+      } else { // Presumably a GitHub Classroom assignment
+        // Check if current time is inside the accepted time range
+        const now = new Date();
+        if (params["start"] != null && now < params["start"]) {
+          // Too early message
+          document.getElementById('message').innerHTML = "Ce projet GitHub Classroom n'est pas disponible avant le " + params["start"].toLocaleString('fr-FR');
+        } else if (params["end"] != null && now > params["end"]) {
+          document.getElementById('message').innerHTML = "Désolé, ce projet GitHub Classroom n'est plus accessible. Il devait être terminé avant le " + params["end"].toLocaleString('fr-FR');
+        } else {
+          // Redirect to the GitHub Classroom assignment
+          window.parent.location.replace(params["url"]);
+        }
+      }
+    </script>
+  </body>
+</html>

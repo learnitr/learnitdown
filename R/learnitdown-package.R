@@ -18,7 +18,7 @@
 #' @importFrom shiny actionButton conditionalPanel div fluidRow h1 h4 img isolate observe observeEvent onSessionEnded parseQueryString renderText req strong tagList stopApp tags textInput textOutput updateActionButton updateTextInput
 #' @importFrom mongolite mongo
 #' @importFrom httr authenticate content GET parse_url status_code
-#' @importFrom utils askYesNo compareVersion create.post packageVersion select.list URLdecode URLencode
+#' @importFrom utils askYesNo compareVersion create.post packageVersion select.list URLdecode URLencode read.csv write.csv
 #' @importFrom jsonlite base64_dec base64_enc fromJSON toJSON
 #' @importFrom PKI PKI.digest PKI.decrypt PKI.encrypt
 #' @importFrom getPass getPass
