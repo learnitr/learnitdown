@@ -18,6 +18,7 @@
 assignment(
   name,
   url,
+  alturl = url,
   course.ids = NULL,
   course.urls = NULL,
   course.starts = NULL,
@@ -26,7 +27,11 @@ assignment(
   course.names = c(course1 = "Data Science"),
   toc = "",
   clone = TRUE,
+  level = 3,
   n = 1,
+  type = if (n == 1) "ind. github" else "group github",
+  acad_year = "",
+  term = "",
   texts = assignment_en(),
   assign.img = "images/list-assign.png",
   assign.link = "github_assignment",
@@ -38,6 +43,7 @@ assignment(
 assignment2(
   name,
   url,
+  alturl = url,
   course.ids = NULL,
   course.urls = NULL,
   course.starts = NULL,
@@ -46,7 +52,11 @@ assignment2(
   course.names = c(course1 = "Data Science"),
   toc = "",
   clone = TRUE,
-  n = 2,
+  level = 3,
+  n = 1,
+  type = if (n == 1) "ind. github" else "group github",
+  acad_year = "",
+  term = "",
   texts = assignment2_en(),
   assign.img = "images/list-assign2.png",
   assign.link = "github_assignment",
@@ -58,6 +68,7 @@ assignment2(
 challenge(
   name,
   url,
+  alturl = url,
   course.ids = NULL,
   course.urls = NULL,
   course.starts = NULL,
@@ -66,7 +77,11 @@ challenge(
   course.names = c(course1 = "Data Science"),
   toc = "",
   clone = TRUE,
+  level = 3,
   n = 1,
+  type = if (n == 1) "ind. challenge" else "group challenge",
+  acad_year = "",
+  term = "",
   texts = challenge_en(),
   assign.img = "images/list-challenge.png",
   assign.link = "github_challenge",
@@ -78,6 +93,7 @@ challenge(
 challenge2(
   name,
   url,
+  alturl = url,
   course.ids = NULL,
   course.urls = NULL,
   course.starts = NULL,
@@ -86,7 +102,11 @@ challenge2(
   course.names = c(course1 = "Data Science"),
   toc = "",
   clone = TRUE,
-  n = 2,
+  level = 3,
+  n = 1,
+  type = if (n == 1) "ind. challenge" else "group challenge",
+  acad_year = "",
+  term = "",
   texts = challenge2_en(),
   assign.img = "images/list-challenge2.png",
   assign.link = "github_challenge",
@@ -113,10 +133,13 @@ challenge2_fr(title, part.name, alt, sub, course, toc.def)
 }
 \arguments{
 \item{name}{The name of the assignment or the challenge (usually the same as
-the name as the GitHub Classroom item).}
+the name as the GitHub Classroom assignment).}
 
 \item{url}{The URL of the assignment or challenge (could be a named list for
 different courses).}
+
+\item{alturl}{An alternate URL to propose to external users not registered in
+a course. If not provided, it is the same as \verb{url=}.}
 
 \item{course.ids}{Named vector with the Classroom identifiers for the
 assignments for each course and also possibly, for each group.}
@@ -150,8 +173,18 @@ display the exercise in the table of content, use \code{toc = NULL}.}
 (\code{TRUE} by default)? If \code{TRUE}, an entry is added in the list of assignments
 whose repositories should be cloned.}
 
+\item{level}{The difficulty level (1 = easiest, 2 = more difficult, ...)}
+
 \item{n}{The number of students per project (by default, n = 1 for individual
 assignments and 2 for group assignments).}
+
+\item{type}{The type of exercise. By default, it is \code{"ind. github"} or
+\code{"ind. challenge"} if n = 1, or \code{"group github"}/\code{"group challenge"}
+otherwise.}
+
+\item{acad_year}{The academic year (e.g., 2021-2022).}
+
+\item{term}{The term (e.g., Q1, Q2, Q3).}
 
 \item{texts}{Various sentences used to construct the assignment bloc. You
 can make a call to \code{assignment_en()} or \code{assignment_fr()} as a basis

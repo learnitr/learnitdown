@@ -2,7 +2,7 @@
 
 - `assignation()` and `assignation2()` are renamed `assignment()` and `assignment2()` which are more correct names.
 
-- Assignments and challenge functions get new arguments `clone=` that indicate if we want to generate an entry in a file to clone corresponding repositories automatically. Also, `n=` indicates the number of students per assignment (default to 1 for individual assignments/challenges and to 2 for group assignments/challenges). The arguments `course.starts=` and `course.ends=` indicate starting and ending dates for the exercises for each course (or students groups).
+- Assignments and challenge functions get new arguments. `clone=` indicates if we want to generate an entry in a file to clone corresponding repositories automatically. `level=` indicates the difficulty level, `n=` indicates the number of students per assignment (default to 1 for individual assignments/challenges and to 2 for group assignments/challenges). `type=` indicates the type of exercise. `acad_year=` is the academic year, and `term=` is the term where the exercise has to be done. `course.starts=` and `course.ends=` indicate starting and ending dates for the exercises for each course (or students groups).
 
 - Assignments now create two additional files. An HTML file routes to the correct URL given the context (GitHub Classroom assignment, template GitHub repository if the user is not logged in, or pages indicating it is too soon or too late for these assignments). A CSV file collects assignments information that can be used to clone corresponding repositories and to grade more easily these assignments.
 

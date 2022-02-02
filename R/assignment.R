@@ -4,9 +4,11 @@
 #' data related to a GitHub (Classroom) assignment.
 #'
 #' @param name The name of the assignment or the challenge (usually the same as
-#' the name as the GitHub Classroom item).
+#' the name as the GitHub Classroom assignment).
 #' @param url The URL of the assignment or challenge (could be a named list for
 #' different courses).
+#' @param alturl An alternate URL to propose to external users not registered in
+#' a course. If not provided, it is the same as `url=`.
 #' @param course.ids Named vector with the Classroom identifiers for the
 #' assignments for each course and also possibly, for each group.
 #' @param course.urls Named vector with the Classroom URLS for each course, and
@@ -31,8 +33,14 @@
 #' @param clone Should the exercise be listed for cloning the repositories
 #' (`TRUE` by default)? If `TRUE`, an entry is added in the list of assignments
 #' whose repositories should be cloned.
+#' @param level The difficulty level (1 = easiest, 2 = more difficult, ...)
 #' @param n The number of students per project (by default, n = 1 for individual
 #' assignments and 2 for group assignments).
+#' @param type The type of exercise. By default, it is `"ind. github"` or
+#' `"ind. challenge"` if n = 1, or `"group github"`/`"group challenge"`
+#' otherwise.
+#' @param acad_year The academic year (e.g., 2021-2022).
+#' @param term The term (e.g., Q1, Q2, Q3).
 #' @param texts Various sentences used to construct the assignment bloc. You
 #' can make a call to `assignment_en()` or `assignment_fr()` as a basis
 #' and modify only the sentences you want.
@@ -63,9 +71,11 @@
 #' @details
 #' If the URL contains several entries, names are used to create show/hide divs
 #' according to the `icourse` user information.
-assignment <- function(name, url, course.ids = NULL, course.urls = NULL,
-course.starts = NULL, course.ends = NULL, part = NULL,
-course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, n = 1,
+assignment <- function(name, url, alturl = url, course.ids = NULL,
+course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
+course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
+n = 1, type = if (n == 1) "ind. github" else "group github",
+acad_year = "", term = "",
 texts = assignment_en(), assign.img = "images/list-assign.png",
 assign.link = "github_assignment", block = "assign",
 template = "assignment_en.html", baseurl = "/") {
@@ -88,6 +98,7 @@ template = "assignment_en.html", baseurl = "/") {
 
   # Create an HTML page that redirects the URLs given the context
   # (logged user at the right course, and in the right time range)
+  # Also populate a CSV table with data about the assignment
   output_dir <- .get_output_dir()
   ex_dir <- file.path(output_dir, "ex")
   dir.create(ex_dir, showWarnings = FALSE)
@@ -101,14 +112,27 @@ template = "assignment_en.html", baseurl = "/") {
   urls <- if (is.null(course.urls)) NA else course.urls
   starts <- if (is.null(course.starts)) NA else course.starts
   ends <- if (is.null(course.ends)) NA else course.ends
-  ex_data <- data.frame(app = name, template = url, icourse = names(urls),
+  ex_data <- data.frame(
+    app = name,
+    type = type,
+    icourse = names(urls),
+    course = substring(name, 1, 1),
+    acad_year = acad_year,
+    term = term,
+    module = substring(name, 1, 3),
     assignment = as.character(ids),
+    template = url,
     url = as.character(urls[names(ids)]),
+    alt_url = alturl,
     start = as.character(starts[names(ids)]),
     end = as.character(ends[names(ids)]),
-    part = part2, toc = !is.null(toc), clone = as.logical(clone), n = n)
+    part = part2,
+    toc = !is.null(toc),
+    clone = as.logical(clone),
+    n = n,
+    level = level)
   # Write this file in ex_dir
-  write.csv(ex_data, file_csv)
+  write.csv(ex_data, file_csv, row.names = FALSE)
 
   # Copy the GitHub Classroom image there
   ghc_image <- file.path(ex_dir, "github_classroom.jpg")
@@ -169,7 +193,7 @@ template = "assignment_en.html", baseurl = "/") {
   }
 
   # Compute the Markdown block for this assignment
-  # TODO: use course-specific sections only to indicate normal starting and
+  # Use course-specific sections to indicate normal starting and
   # ending dates for the assignment
   if (is.null(course.urls) || !length(course.urls)) {
     course_text <- ""
@@ -179,13 +203,19 @@ template = "assignment_en.html", baseurl = "/") {
     course_text <- ""
     for (i in 1:length(course_ids)) {
       course_id <- course_ids[i]
-      course_url <- course.urls[i]
+      course_url <- course.urls[course_id]
       course_name <- course_names[i]
-      course_desc <- glue::glue(texts$course)
-      course_text <- paste0(course_text, "\n",
-        glue::glue("\n::: {{ .{course_id} }}
-**[{course_desc} {course_name}]({course_url}){{target=\"_blank\"}}**
+      course_end <- course.ends[course_id]
+      if (is.null(course_end) || is.na(course_end) || course_end == "" ||
+        is.na(course_name)) {# No final date, or not a course (= student group)
+        course_desc <- ""
+      } else {
+        course_desc <- glue::glue(texts$course)
+        course_text <- paste0(course_text, "\n",
+          glue::glue("\n::: {{ .{course_id} }}
+**{course_desc}**
 \n:::\n\n"))
+      }
     }
   }
 
@@ -207,43 +237,52 @@ template = "assignment_en.html", baseurl = "/") {
 
 #' @rdname assignment
 #' @export
-assignment2 <- function(name, url, course.ids = NULL, course.urls = NULL,
-course.starts = NULL, course.ends = NULL, part = NULL,
-course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, n = 2,
+assignment2 <- function(name, url, alturl = url, course.ids = NULL,
+course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
+course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
+n = 1, type = if (n == 1) "ind. github" else "group github",
+acad_year = "", term = "",
 texts = assignment2_en(), assign.img = "images/list-assign2.png",
 assign.link = "github_assignment", block = "assign2",
 template = "assignment_en.html", baseurl = "/")
   assignment(name, url, course.ids = course.ids, course.urls = course.urls,
     course.starts = course.starts, course.ends = course.ends, part = part,
-    course.names = course.names, toc = toc, clone = clone, n = n, texts = texts,
+    course.names = course.names, toc = toc, clone = clone, level = level, n = n,
+    type = type, acad_year = acad_year, term = term, texts = texts,
     assign.img = assign.img, assign.link = assign.link, block = block,
     template = template, baseurl = baseurl)
 
 #' @rdname assignment
 #' @export
-challenge <- function(name, url, course.ids = NULL, course.urls = NULL,
-course.starts = NULL, course.ends = NULL, part = NULL,
-course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, n = 1,
+challenge <- function(name, url, alturl = url, course.ids = NULL,
+course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
+course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
+n = 1, type = if (n == 1) "ind. challenge" else "group challenge",
+acad_year = "", term = "",
 texts = challenge_en(), assign.img = "images/list-challenge.png",
 assign.link = "github_challenge", block = "challenge",
 template = "assignment_en.html", baseurl = "/")
   assignment(name, url, course.ids = course.ids, course.urls = course.urls,
     course.starts = course.starts, course.ends = course.ends, part = part,
-    course.names = course.names, toc = toc, clone = clone, n = n, texts = texts,
+    course.names = course.names, toc = toc, clone = clone, level = level, n = n,
+    type = type, acad_year = acad_year, term = term, texts = texts,
     assign.img = assign.img, assign.link = assign.link, block = block,
     template = template, baseurl = baseurl)
 
 #' @rdname assignment
 #' @export
-challenge2 <- function(name, url, course.ids = NULL, course.urls = NULL,
-course.starts = NULL, course.ends = NULL, part = NULL,
-course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, n = 2,
+challenge2 <- function(name, url, alturl = url, course.ids = NULL,
+course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
+course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
+  n = 1, type = if (n == 1) "ind. challenge" else "group challenge",
+acad_year = "", term = "",
 texts = challenge2_en(), assign.img = "images/list-challenge2.png",
 assign.link = "github_challenge", block = "challenge2",
 template = "assignment_en.html", baseurl = "/")
   assignment(name, url, course.ids = course.ids, course.urls = course.urls,
     course.starts = course.starts, course.ends = course.ends, part = part,
-    course.names = course.names, toc = toc, clone = clone, n = n, texts = texts,
+    course.names = course.names, toc = toc, clone = clone, level = level, n = n,
+    type = type, acad_year = acad_year, term = term, texts = texts,
     assign.img = assign.img, assign.link = assign.link, block = block,
     template = template, baseurl = baseurl)
 
@@ -253,11 +292,10 @@ assignment_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Complete this assignment:",
     part.name = "part",
-    alt       = paste("If you are not a registered user, or if you work",
-      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
-      "repository."),
+    alt       = "**[Start it in GitHub Classroom]({url}){{target=\"_blank\"}}**",
     sub      = "See the explanations in the `README.md`",
-    course   = "Individual assignment for the students enrolled at the course",
+    course   = paste("Individual assignment for students enrolled in",
+      "{course_name} that must be completed before {course_end}."),
     toc.def  = "Individual assignment {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -276,12 +314,11 @@ assignment_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "R\u00e9alisez le travail",
     part.name = "partie",
-    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
-      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
-      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
+    alt       = paste0("**[Initiez votre projet GitHub Classroom]",
+      "({url}){{target=\"_blank\"}}**"),
     sub       = "Voyez les explications dans le fichier `README.md`",
-    course    = paste("Travail individuel pour les \u00e9tudiants",
-      "inscrits au cours de"),
+    course    = paste("Travail individuel pour les \u00e9tudiants inscrits au",
+      "cours {course_name} \u00e0 terminer avant le {course_end}."),
     toc.def   = "Travail individuel {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -300,12 +337,11 @@ assignment2_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Complete this group assignment:",
     part.name = "part",
-    alt       = paste("If you are not a registered user, or if you work",
-      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
-      "repository."),
+    alt       = "**[Start it in GitHub Classroom]({url}){{target=\"_blank\"}}**",
     sub      = "See the explanations in the `README.md`",
     course   = paste("Assignment in group of {n} for the students",
-      "enrolled at the course"),
+      "enrolled in the course {course_name} that must be completed before",
+      "{course_end}."),
     toc.def  = "Group assignment {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -324,12 +360,11 @@ assignment2_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "R\u00e9alisez en groupe le travail",
     part.name = "partie",
-    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
-      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
-      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
+    alt       = paste0("**[Initiez votre projet GitHub Classroom]",
+      "({url}){{target=\"_blank\"}}**"),
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = paste("Travail en groupe de {n} pour les \u00e9tudiants",
-      "inscrits au cours de"),
+      "inscrits au cours de {course_name} \u00e0 terminer avant le {course_end}."),
     toc.def   = "Travail de groupe {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -348,11 +383,10 @@ challenge_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Accept this challenge:",
     part.name = "part",
-    alt       = paste("If you are not a registered user, or if you work",
-      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
-      "repository."),
+    alt       = "**[Start it in GitHub Classroom]({url}){{target=\"_blank\"}}**",
     sub      = "See the explanations in the `README.md`",
-    course   = "Individual challenge for the students enrolled at the course",
+    course   = paste("Individual challenge for the students enrolled in the",
+      "course {course_name} to be completed before {course_end}."),
     toc.def  = "Individual challenge {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -371,12 +405,11 @@ challenge_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Relevez le challenge",
     part.name = "partie",
-    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
-      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
-      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
+    alt       = paste0("**[Initiez le projet GitHub Classroom de ce challenge]",
+      "({url}){{target=\"_blank\"}}**"),
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = paste("Challenge individuel pour les \u00e9tudiants",
-      "inscrits au cours de"),
+      "inscrits au cours de {course_name} \u00e0 terminer avant le {course_end}."),
     toc.def   = "Challenge individuel {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -395,12 +428,10 @@ challenge2_en <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Accept this group challenge:",
     part.name = "part",
-    alt       = paste("If you are not a registered user, or if you work",
-      "outside of a course, fork [this]({url}){{target=\"_blank\"}}",
-      "repository."),
+    alt       = "**[Start it in GitHub Classroom]({url}){{target=\"_blank\"}}**",
     sub      = "See the explanations in the `README.md`",
-    course   = paste("Challenge in group of (n) for the students",
-      "enrolled at the course"),
+    course   = paste("Challenge in group of (n) for the students enrolled",
+      "in the course {course_name} to be completed before {course_end}."),
     toc.def  = "Group challenge {name}"
   )
   if (!missing(title)) texts$title <- title
@@ -419,12 +450,11 @@ challenge2_fr <- function(title, part.name, alt, sub, course, toc.def) {
   texts <- list(
     title     = "Relevez ce challenge par groupe:",
     part.name = "partie",
-    alt       = paste("Si vous \u00eates un utilisateur non enregistr\u00e9 ou",
-      "que vous travaillez en dehors d'un cours, faites un \"fork\" de",
-      "[ce]({url}){{target=\"_blank\"}} d\u00e9p\u00f4t."),
+    alt       = paste0("**[Initiez le projet GitHub Classroom de ce challenge]",
+      "({url}){{target=\"_blank\"}}**"),
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = paste("Challenge en groupe de {n} pour les \u00e9tudiants",
-      "inscrits au cours de"),
+      "inscrits au cours de {course_name} \u00e0 terminer avant le {course_end}."),
     toc.def   = "Challenge en groupe {name}"
   )
   if (!missing(title)) texts$title <- title
