@@ -294,7 +294,7 @@ assignment_en <- function(title, part.name, alt, sub, course, toc.def) {
     part.name = "part",
     alt       = "**[Start it in GitHub Classroom]({url}){{target=\"_blank\"}}**",
     sub      = "See the explanations in the `README.md`",
-    course   = paste("Individual assignment for students enrolled in",
+    course   = paste("Individual assignment for students enrolled in the course",
       "{course_name} that must be completed before {course_end}."),
     toc.def  = "Individual assignment {name}"
   )
@@ -318,7 +318,7 @@ assignment_fr <- function(title, part.name, alt, sub, course, toc.def) {
       "({url}){{target=\"_blank\"}}**"),
     sub       = "Voyez les explications dans le fichier `README.md`",
     course    = paste("Travail individuel pour les \u00e9tudiants inscrits au",
-      "cours {course_name} \u00e0 terminer avant le {course_end}."),
+      "cours de {course_name} \u00e0 terminer avant le {course_end}."),
     toc.def   = "Travail individuel {name}"
   )
   if (!missing(title)) texts$title <- title
