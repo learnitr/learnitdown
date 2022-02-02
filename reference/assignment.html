@@ -85,6 +85,7 @@ data related to a GitHub (Classroom) assignment.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">assignment</span><span class="op">(</span>
   <span class="va">name</span>,
   <span class="va">url</span>,
+  alturl <span class="op">=</span> <span class="va">url</span>,
   course.ids <span class="op">=</span> <span class="cn">NULL</span>,
   course.urls <span class="op">=</span> <span class="cn">NULL</span>,
   course.starts <span class="op">=</span> <span class="cn">NULL</span>,
@@ -93,7 +94,11 @@ data related to a GitHub (Classroom) assignment.</p>
   course.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>course1 <span class="op">=</span> <span class="st">"Data Science"</span><span class="op">)</span>,
   toc <span class="op">=</span> <span class="st">""</span>,
   clone <span class="op">=</span> <span class="cn">TRUE</span>,
+  level <span class="op">=</span> <span class="fl">3</span>,
   n <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. github"</span> <span class="kw">else</span> <span class="st">"group github"</span>,
+  acad_year <span class="op">=</span> <span class="st">""</span>,
+  term <span class="op">=</span> <span class="st">""</span>,
   texts <span class="op">=</span> <span class="fu">assignment_en</span><span class="op">(</span><span class="op">)</span>,
   assign.img <span class="op">=</span> <span class="st">"images/list-assign.png"</span>,
   assign.link <span class="op">=</span> <span class="st">"github_assignment"</span>,
@@ -105,6 +110,7 @@ data related to a GitHub (Classroom) assignment.</p>
 <span class="fu">assignment2</span><span class="op">(</span>
   <span class="va">name</span>,
   <span class="va">url</span>,
+  alturl <span class="op">=</span> <span class="va">url</span>,
   course.ids <span class="op">=</span> <span class="cn">NULL</span>,
   course.urls <span class="op">=</span> <span class="cn">NULL</span>,
   course.starts <span class="op">=</span> <span class="cn">NULL</span>,
@@ -113,7 +119,11 @@ data related to a GitHub (Classroom) assignment.</p>
   course.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>course1 <span class="op">=</span> <span class="st">"Data Science"</span><span class="op">)</span>,
   toc <span class="op">=</span> <span class="st">""</span>,
   clone <span class="op">=</span> <span class="cn">TRUE</span>,
-  n <span class="op">=</span> <span class="fl">2</span>,
+  level <span class="op">=</span> <span class="fl">3</span>,
+  n <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. github"</span> <span class="kw">else</span> <span class="st">"group github"</span>,
+  acad_year <span class="op">=</span> <span class="st">""</span>,
+  term <span class="op">=</span> <span class="st">""</span>,
   texts <span class="op">=</span> <span class="fu">assignment2_en</span><span class="op">(</span><span class="op">)</span>,
   assign.img <span class="op">=</span> <span class="st">"images/list-assign2.png"</span>,
   assign.link <span class="op">=</span> <span class="st">"github_assignment"</span>,
@@ -125,6 +135,7 @@ data related to a GitHub (Classroom) assignment.</p>
 <span class="fu">challenge</span><span class="op">(</span>
   <span class="va">name</span>,
   <span class="va">url</span>,
+  alturl <span class="op">=</span> <span class="va">url</span>,
   course.ids <span class="op">=</span> <span class="cn">NULL</span>,
   course.urls <span class="op">=</span> <span class="cn">NULL</span>,
   course.starts <span class="op">=</span> <span class="cn">NULL</span>,
@@ -133,7 +144,11 @@ data related to a GitHub (Classroom) assignment.</p>
   course.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>course1 <span class="op">=</span> <span class="st">"Data Science"</span><span class="op">)</span>,
   toc <span class="op">=</span> <span class="st">""</span>,
   clone <span class="op">=</span> <span class="cn">TRUE</span>,
+  level <span class="op">=</span> <span class="fl">3</span>,
   n <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. challenge"</span> <span class="kw">else</span> <span class="st">"group challenge"</span>,
+  acad_year <span class="op">=</span> <span class="st">""</span>,
+  term <span class="op">=</span> <span class="st">""</span>,
   texts <span class="op">=</span> <span class="fu">challenge_en</span><span class="op">(</span><span class="op">)</span>,
   assign.img <span class="op">=</span> <span class="st">"images/list-challenge.png"</span>,
   assign.link <span class="op">=</span> <span class="st">"github_challenge"</span>,
@@ -145,6 +160,7 @@ data related to a GitHub (Classroom) assignment.</p>
 <span class="fu">challenge2</span><span class="op">(</span>
   <span class="va">name</span>,
   <span class="va">url</span>,
+  alturl <span class="op">=</span> <span class="va">url</span>,
   course.ids <span class="op">=</span> <span class="cn">NULL</span>,
   course.urls <span class="op">=</span> <span class="cn">NULL</span>,
   course.starts <span class="op">=</span> <span class="cn">NULL</span>,
@@ -153,7 +169,11 @@ data related to a GitHub (Classroom) assignment.</p>
   course.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>course1 <span class="op">=</span> <span class="st">"Data Science"</span><span class="op">)</span>,
   toc <span class="op">=</span> <span class="st">""</span>,
   clone <span class="op">=</span> <span class="cn">TRUE</span>,
-  n <span class="op">=</span> <span class="fl">2</span>,
+  level <span class="op">=</span> <span class="fl">3</span>,
+  n <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. challenge"</span> <span class="kw">else</span> <span class="st">"group challenge"</span>,
+  acad_year <span class="op">=</span> <span class="st">""</span>,
+  term <span class="op">=</span> <span class="st">""</span>,
   texts <span class="op">=</span> <span class="fu">challenge2_en</span><span class="op">(</span><span class="op">)</span>,
   assign.img <span class="op">=</span> <span class="st">"images/list-challenge2.png"</span>,
   assign.link <span class="op">=</span> <span class="st">"github_challenge"</span>,
@@ -183,10 +203,13 @@ data related to a GitHub (Classroom) assignment.</p>
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>The name of the assignment or the challenge (usually the same as
-the name as the GitHub Classroom item).</p></dd>
+the name as the GitHub Classroom assignment).</p></dd>
 <dt>url</dt>
 <dd><p>The URL of the assignment or challenge (could be a named list for
 different courses).</p></dd>
+<dt>alturl</dt>
+<dd><p>An alternate URL to propose to external users not registered in
+a course. If not provided, it is the same as <code>url=</code>.</p></dd>
 <dt>course.ids</dt>
 <dd><p>Named vector with the Classroom identifiers for the
 assignments for each course and also possibly, for each group.</p></dd>
@@ -219,9 +242,19 @@ display the exercise in the table of content, use <code>toc = NULL</code>.</p></
 <dd><p>Should the exercise be listed for cloning the repositories
 (<code>TRUE</code> by default)? If <code>TRUE</code>, an entry is added in the list of assignments
 whose repositories should be cloned.</p></dd>
+<dt>level</dt>
+<dd><p>The difficulty level (1 = easiest, 2 = more difficult, ...)</p></dd>
 <dt>n</dt>
 <dd><p>The number of students per project (by default, n = 1 for individual
 assignments and 2 for group assignments).</p></dd>
+<dt>type</dt>
+<dd><p>The type of exercise. By default, it is <code>"ind. github"</code> or
+<code>"ind. challenge"</code> if n = 1, or <code>"group github"</code>/<code>"group challenge"</code>
+otherwise.</p></dd>
+<dt>acad_year</dt>
+<dd><p>The academic year (e.g., 2021-2022).</p></dd>
+<dt>term</dt>
+<dd><p>The term (e.g., Q1, Q2, Q3).</p></dd>
 <dt>texts</dt>
 <dd><p>Various sentences used to construct the assignment bloc. You
 can make a call to <code>assignment_en()</code> or <code>assignment_fr()</code> as a basis
