@@ -14,7 +14,7 @@ Imports: glue, magick, webshot, rstudioapi, shiny, shinylogs, shinytoastr,
   mongolite, jsonlite, later, utils, learnr, gradethis, httr, remotes, PKI,
   knitr, testthat, httpuv, getPass, stats
 Suggests: covr, rmarkdown, spelling
-Remotes: r-lib/rlang, rstudio/learnr, rstudio/gradethis
+Remotes: r-lib/rlang, rstudio/learnr@07473563, rstudio/gradethis@6dfaecf
 License: MIT + file LICENSE
 URL: https://github.com/SciViews/learnitdown, https://www.sciviews.org/learnitdown/
 BugReports: https://github.com/SciViews/learnitdown/issues
