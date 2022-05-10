@@ -57,7 +57,7 @@
   </a>
 </li>
       </ul><div class="navbar-title">
-        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.0</small></p></a>
+        <a class="navbar-brand" href="../index.html"><p class="h2">learnitdown <small>v1.5.1</small></p></a>
       </div>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -75,6 +75,9 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.1" id="learnitdown-151">learnitdown 1.5.1<a class="anchor" aria-label="anchor" href="#learnitdown-151"></a></h2>
+<ul><li>{learnr} and {gradethis} upgraded to higher versions.</li></ul></div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="learnitdown-150">learnitdown 1.5.0<a class="anchor" aria-label="anchor" href="#learnitdown-150"></a></h2>
 <ul><li><p><code>assignation()</code> and <code>assignation2()</code> are renamed <code><a href="../reference/assignment.html">assignment()</a></code> and <code><a href="../reference/assignment.html">assignment2()</a></code> which are more correct names.</p></li>
 <li><p>Assignments and challenge functions get new arguments. <code>clone=</code> indicates if we want to generate an entry in a file to clone corresponding repositories automatically. <code>level=</code> indicates the difficulty level, <code>n=</code> indicates the number of students per assignment (default to 1 for individual assignments/challenges and to 2 for group assignments/challenges). <code>type=</code> indicates the type of exercise. <code>acad_year=</code> is the academic year, and <code>term=</code> is the term where the exercise has to be done. <code>course.starts=</code> and <code>course.ends=</code> indicate starting and ending dates for the exercises for each course (or students groups).</p></li>
@@ -82,8 +85,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.2" id="learnitdown-142">learnitdown 1.4.2<a class="anchor" aria-label="anchor" href="#learnitdown-142"></a></h2>
-<ul><li>Better checking of internet access during system configuration.</li>
-</ul></div>
+<ul><li>Better checking of internet access during system configuration.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.1" id="learnitdown-141">learnitdown 1.4.1<a class="anchor" aria-label="anchor" href="#learnitdown-141"></a></h2>
 <ul><li><p>While recording learnr events, the procedure to check if the computer is connected to the Internet sometimes failed without good reasons. Now, check the access to two sites that should be more reliable.</p></li>
@@ -91,25 +93,21 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.0" id="learnitdown-140">learnitdown 1.4.0<a class="anchor" aria-label="anchor" href="#learnitdown-140"></a></h2>
-<ul><li>For <code><a href="../reference/launch_shiny.html">launch_shiny()</a></code>, allow to include a search string in the url.</li>
-</ul></div>
+<ul><li>For <code><a href="../reference/launch_shiny.html">launch_shiny()</a></code>, allow to include a search string in the url.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.3" id="learnitdown-133">learnitdown 1.3.3<a class="anchor" aria-label="anchor" href="#learnitdown-133"></a></h2>
-<ul><li>Better checking of Internet availability in <code><a href="../reference/config.html">config()</a></code> and <code><a href="../reference/record_learnr.html">record_learnr()</a></code>.</li>
-</ul></div>
+<ul><li>Better checking of Internet availability in <code><a href="../reference/config.html">config()</a></code> and <code><a href="../reference/record_learnr.html">record_learnr()</a></code>.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.2" id="learnitdown-132">learnitdown 1.3.2<a class="anchor" aria-label="anchor" href="#learnitdown-132"></a></h2>
-<ul><li>Dependency to keyring eliminated.</li>
-</ul></div>
+<ul><li>Dependency to keyring eliminated.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.1" id="learnitdown-131">learnitdown 1.3.1<a class="anchor" aria-label="anchor" href="#learnitdown-131"></a></h2>
-<ul><li>Experimental learnr obfuscation functions.</li>
-</ul></div>
+<ul><li>Experimental learnr obfuscation functions.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.0" id="learnitdown-130">learnitdown 1.3.0<a class="anchor" aria-label="anchor" href="#learnitdown-130"></a></h2>
 <ul><li><p>Package renamed {learnitdown} to avoid conflicts with <a href="http://learndown.com" class="external-link uri">http://learndown.com</a>.</p></li>
 <li><p>New functions <code><a href="../reference/config.html">lock()</a></code>/<code><a href="../reference/config.html">unlock()</a></code>, using an application (e.g., course) password to lock or unlock sensitive data like students’ personal information, or database password.</p></li>
-<li><p>New obfuscation functions <code><a href="../reference/obfuscate.html">obfuscate()</a></code>, <code><a href="../reference/obfuscate.html">._()</a></code> and <code>O()</code> to hide {learnr} answers in the original .Rmd file. The function <code><a href="../reference/obfuscate.html">ans()</a></code> could be used to replace <code><a href="https://pkgs.rstudio.com/learnr/reference/quiz.html" class="external-link">learnr::answer()</a></code> for a cleaner obfuscation mechanism for quizzes.</p></li>
+<li><p>New obfuscation functions <code><a href="../reference/obfuscate.html">obfuscate()</a></code>, <code><a href="../reference/obfuscate.html">._()</a></code> and <code>O()</code> to hide {learnr} answers in the original .Rmd file. The function <code><a href="../reference/obfuscate.html">ans()</a></code> could be used to replace <code><a href="https://pkgs.rstudio.com/learnr/reference/answer.html" class="external-link">learnr::answer()</a></code> for a cleaner obfuscation mechanism for quizzes.</p></li>
 </ul></div>
   </div>
 
