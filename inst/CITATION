@@ -1,22 +1,23 @@
-citHeader("To cite learnitdown in publications, please use:")
+citHeader("To cite SciViews-R in publications use:")
 
-citEntry(entry="Manual",
-  title = "learnitdown",
-  author = personList(as.person("Philippe Grosjean")),
+citEntry(
+  entry        = "Manual",
+  title        = "SciViews::R",
+  author       = personList(as.person("Philippe Grosjean")),
   organization = "UMONS",
   address      = "MONS, Belgium",
   year         = version$year,
-  url          = "https://www.sciviews.org/learnitdown/",
+  url          = "https://sciviews.r-universe.dev/",
 
   textVersion =
     paste("Grosjean, Ph. (", version$year, "). ",
-      "learnitdown. ",
+      "SciViews::R. ",
       "UMONS, Mons, Belgium. ",
-      "URL https://www.sciviews.org/learnitdown/.",
+      "URL https://sciviews.r-universe.dev/.",
       sep = "")
 )
 
-citFooter("We have invested a lot of time and effort in creating learnitdown,",
+citFooter("We have invested a lot of time and effort in creating SciViews-R,",
   "please cite it when using it together with R.",
   "See also", sQuote("citation()"),
   "for citing R.")

@@ -1,20 +1,20 @@
 # learnitdown 1.5.0
 
-- `assignation()` and `assignation2()` are renamed `assignment()` and `assignment2()` which are more correct names.
+-   `assignation()` and `assignation2()` are renamed `assignment()` and `assignment2()` which are more correct names.
 
-- Assignments and challenge functions get new arguments. `clone=` indicates if we want to generate an entry in a file to clone corresponding repositories automatically. `level=` indicates the difficulty level, `n=` indicates the number of students per assignment (default to 1 for individual assignments/challenges and to 2 for group assignments/challenges). `type=` indicates the type of exercise. `acad_year=` is the academic year, and `term=` is the term where the exercise has to be done. `course.starts=` and `course.ends=` indicate starting and ending dates for the exercises for each course (or students groups).
+-   Assignments and challenge functions get new arguments. `clone=` indicates if we want to generate an entry in a file to clone corresponding repositories automatically. `level=` indicates the difficulty level, `n=` indicates the number of students per assignment (default to 1 for individual assignments/challenges and to 2 for group assignments/challenges). `type=` indicates the type of exercise. `acad_year=` is the academic year, and `term=` is the term where the exercise has to be done. `course.starts=` and `course.ends=` indicate starting and ending dates for the exercises for each course (or students groups).
 
-- Assignments now create two additional files. An HTML file routes to the correct URL given the context (GitHub Classroom assignment, template GitHub repository if the user is not logged in, or pages indicating it is too soon or too late for these assignments). A CSV file collects assignments information that can be used to clone corresponding repositories and to grade more easily these assignments.
+-   Assignments now create two additional files. An HTML file routes to the correct URL given the context (GitHub Classroom assignment, template GitHub repository if the user is not logged in, or pages indicating it is too soon or too late for these assignments). A CSV file collects assignments information that can be used to clone corresponding repositories and to grade more easily these assignments.
 
 # learnitdown 1.4.2
 
-- Better checking of internet access during system configuration.
+-   Better checking of internet access during system configuration.
 
 # learnitdown 1.4.1
 
-- While recording learnr events, the procedure to check if the computer is connected to the Internet sometimes failed without good reasons. Now, check the access to two sites that should be more reliable.
+-   While recording learnr events, the procedure to check if the computer is connected to the Internet sometimes failed without good reasons. Now, check the access to two sites that should be more reliable.
 
-- For `run_app()`, a better code is now used to display the app running in a job inside the RStudio viewer pane. A new argument `max.wait =` indicates the number of seconds to wait for the Shiny app to start.
+-   For `run_app()`, a better code is now used to display the app running in a job inside the RStudio viewer pane. A new argument `max.wait =` indicates the number of seconds to wait for the Shiny app to start.
 
 # learnitdown 1.4.0
 

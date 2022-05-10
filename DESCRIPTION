@@ -15,7 +15,7 @@ Imports: glue, magick, webshot, rstudioapi, shiny, shinylogs, shinytoastr,
   knitr, testthat, httpuv, getPass, stats
 Suggests: covr, rmarkdown, spelling
 Remotes: r-lib/rlang, rstudio/learnr@07473563, rstudio/gradethis@6dfaecf
-License: MIT + file LICENSE
+License: GPL (>=2)
 URL: https://github.com/SciViews/learnitdown, https://www.sciviews.org/learnitdown/
 BugReports: https://github.com/SciViews/learnitdown/issues
 Roxygen: list(markdown = TRUE)
