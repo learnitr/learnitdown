@@ -1,3 +1,7 @@
+# learnitdown 1.5.1
+
+-   {learnr} and {gradethis} upgraded to higher versions.
+
 # learnitdown 1.5.0
 
 -   `assignation()` and `assignation2()` are renamed `assignment()` and `assignment2()` which are more correct names.
