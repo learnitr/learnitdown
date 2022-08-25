@@ -6,9 +6,7 @@
 \alias{learnitdown-package}
 \title{learnitdown: 'SciViews' - R Markdown, Bookdown and Learnr Additions for Learning Material}
 \description{
-Extension to R Markdown, Bookdown and Learnr for building better
-  learning and e-learning material: H5P integration, course-contextual divs,
-  differed loading of Shiny and learnr applications, and much more ...
+Extension to R Markdown, Bookdown and Learnr for building better learning and e-learning material: H5P integration, course-contextual divs, differed loading of Shiny and learnr applications, and much more ...
 }
 \details{
 The SciViews learnitdown package provides additional R Markdown tags to build
