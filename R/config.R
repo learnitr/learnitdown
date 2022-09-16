@@ -338,12 +338,12 @@ ref1 = NULL, ref2 = NULL) {
     return(pass)
 
   # Otherwise, try getting it from keyring
-#  if (!isTRUE(reset) && nchar(key)) {
-#    pass <- try(key_get(service = "org.sciviews.learnitdown",
-#      username = key), silent = TRUE)
-#    if (!inherits(pass, "try-error"))
-#      return(pass)
-#  }
+  if (!isTRUE(reset) && nchar(key)) {
+    pass <- try(key_get(service = "org.sciviews.learnitdown",
+      username = key), silent = TRUE)
+    if (!inherits(pass, "try-error"))
+      return(pass)
+  }
 
   # Ultimately, ask for it... (only in interactive mode)
   if (interactive())
@@ -362,15 +362,15 @@ ref1 = NULL, ref2 = NULL) {
   }
 
   # If the password and key are not blank, store it in keyring
-#  if (nchar(pass) && nchar(key)) {
-#    res <- try(key_set_with_value(service = "org.sciviews.learnitdown",
-#      username = key, password = pass), silent = TRUE) # We prefer no error
-#    # message in case it does not work (then we just will have to provide the
-#    # password every time we need it)
-#    if (inherits(res, "try-error")) {
-#      warning("The password cannot be stored in the keyring backend")
-#      attr(pass, "error") <- res
-#    }
-#  }
+  if (nchar(pass) && nchar(key)) {
+    res <- try(key_set_with_value(service = "org.sciviews.learnitdown",
+      username = key, password = pass), silent = TRUE) # We prefer no error
+    # message in case it does not work (then we just will have to provide the
+    # password every time we need it)
+    if (inherits(res, "try-error")) {
+      warning("The password cannot be stored in the keyring backend")
+      attr(pass, "error") <- res
+    }
+  }
   pass
 }

@@ -23,7 +23,7 @@
 #' @importFrom PKI PKI.digest PKI.decrypt PKI.encrypt
 #' @importFrom getPass getPass
 #' @importFrom stats runif
-#importFrom keyring key_set_with_value key_get
+#' @importFrom keyring key_set_with_value key_get
 # The following block is used by usethis to automatically manage
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
