@@ -1,8 +1,8 @@
-# learnitdown
+# learnitdown- R markdown, bookdown and learnr additions for learning material
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/Sciviews/learnitdown/workflows/R-CMD-check/badge.svg)](https://github.com/Sciviews/learnitdown/actions) [![Win Build Status](https://ci.appveyor.com/api/projects/status/github/SciViews/learnitdown?branch=master&svg=true)](https://ci.appveyor.com/project/phgrosjean/learnitdown) [![Coverage Status](https://img.shields.io/codecov/c/github/SciViews/learnitdown/master.svg)](https://codecov.io/github/SciViews/learnitdown?branch=master) [![CRAN Status](https://www.r-pkg.org/badges/version/learnitdown)](https://cran.r-project.org/package=learnitdown) [![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![Lifecycle stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![R-CMD-check](https://github.com/Sciviews/learnitdown/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Sciviews/learnitdown/actions/workflows/R-CMD-check.yaml) [![Coverage Status](https://img.shields.io/codecov/c/github/SciViews/learnitdown/master.svg)](https://codecov.io/github/SciViews/learnitdown?branch=master) [![CRAN Status](https://www.r-pkg.org/badges/version/learnitdown)](https://cran.r-project.org/package=learnitdown) [![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![Lifecycle stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 
 <!-- badges: end -->
 
@@ -29,8 +29,6 @@ remotes::install_github("SciViews/learnitdown")
 ```
 
 R should install all required dependencies automatically, and then it should compile and install {learnitdown}.
-
-Latest development version of {learnitdown} (source + Windows binaries for the latest stable version of R at the time of compilation) is also available from [appveyor](https://ci.appveyor.com/project/phgrosjean/learnitdown/build/artifacts).
 
 ## Further explore {learnitdown}
 
