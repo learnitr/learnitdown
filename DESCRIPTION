@@ -38,8 +38,8 @@ Suggests:
     spelling,
     testthat
 Remotes:
-    rstudio/gradethis@v0.2.8.9000,
-    rstudio/learnr@v0.10.5.9000
+    rstudio/learnr@v0.10.5.9000,
+    rstudio/gradethis@v0.2.8.9000
 License: GPL (>=2)
 URL: https://github.com/SciViews/learnitdown, https://www.sciviews.org/learnitdown/
 BugReports: https://github.com/SciViews/learnitdown/issues
