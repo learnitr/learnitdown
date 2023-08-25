@@ -30,6 +30,7 @@ MONGO
 mongodb
 Moodle
 ORCID
+pkgdown
 POSIXct
 PxAPIkatchu
 rds

@@ -331,6 +331,9 @@ ref1 = NULL, ref2 = NULL) {
   # First try to get it from environment variables (e.g., RStudio Connect)
   if (nchar(key)) {
     pass <- Sys.getenv(key)
+    token <- Sys.getenv("SATURN_TOKEN", unset = "")
+    if (nchar(token))
+      pass <- decrypt(pass, token, base64 = TRUE)
   } else {
     pass <- ""
   }

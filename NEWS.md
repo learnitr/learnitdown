@@ -1,3 +1,7 @@
+# learnitdown 1.5.3
+
+-   pkgdown icons added.
+
 # learnitdown 1.5.2
 
 -   The dependency to {keyring} is added again. It allows to store the password
