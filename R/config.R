@@ -333,7 +333,7 @@ ref1 = NULL, ref2 = NULL) {
     pass <- Sys.getenv(key)
     token <- Sys.getenv("SATURN_TOKEN", unset = "")
     if (nchar(token))
-      pass <- decrypt(pass, token, base64 = TRUE)
+      pass <- decrypt(pass, token, base64 = TRUE, url.decode = TRUE)
   } else {
     pass <- ""
   }
