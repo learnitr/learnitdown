@@ -377,7 +377,9 @@ var h5pContentTypes = [''];
 <script src='", baseurl, "/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
 -->
 
+<!--
 <script src='", baseurl, "/wp-content/plugins/h5pxapikatchu/js/h5pxapikatchu-variables.js'></script>
+-->
 <script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/jquery.js'></script>
 <script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p.js'></script>
 <script src='", baseurl, "/wp-content/plugins/h5p/h5p-php-library/js/h5p-event-dispatcher.js'></script>

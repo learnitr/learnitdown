@@ -2,6 +2,8 @@
 
 -   pkgdown icons added.
 
+- In `learnitdown_init()` an h5pxapikatchu js file is not need any more (commented out).
+
 # learnitdown 1.5.2
 
 -   The dependency to {keyring} is added again. It allows to store the password
