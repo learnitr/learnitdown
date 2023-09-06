@@ -1,6 +1,6 @@
 Package: learnitdown
 Type: Package
-Version: 1.5.3
+Version: 1.5.4
 Title: R Markdown, Bookdown and Learnr Additions for Learning Material
 Description: Extension to R Markdown, Bookdown and Learnr for building better
   learning and e-learning material: H5P integration, course-contextual divs,
