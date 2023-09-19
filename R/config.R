@@ -337,7 +337,7 @@ ref1 = NULL, ref2 = NULL) {
   } else {
     pass <- ""
   }
-  if (nchar(pass))
+  if (!is.null(pass) && length(pass) && nchar(pass))
     return(pass)
 
   # Otherwise, try getting it from keyring
@@ -354,12 +354,19 @@ ref1 = NULL, ref2 = NULL) {
   if (is.null(pass))
     pass <- ""
   # If the password is not blank and ref1/ref2 provided, check it now
-  if (nchar(pass) && !is.null(ref1)) {
+  if (!is.null(pass) && length(pass) && nchar(pass) &&
+    !is.null(ref1) && length(ref1) && nchar(ref1)) {
     if (!is.null(ref2)) {
-      if (unlock(ref1, ref2) != pass)
+      res <- try(unlock(ref1, ref2) != pass, silent = TRUE)
+      if (inherits(res, "try-error"))
+        stop("Error while checking if password is correct!")
+      if (res)
         stop("Incorrect password!")
     } else {
-      if (unlock(ref1, pass) != "correct")
+      res <- try(unlock(ref1, pass) != "correct", silent = TRUE)
+      if (inherits(res, "try-error"))
+        stop("Error while checking if password is correct!")
+      if (res)
         stop("Incorrect password!")
     }
   }

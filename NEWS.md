@@ -1,6 +1,10 @@
+# learnitdown 1.5.5
+
+-   More robust checking of password.
+
 # learnitdown 1.5.4
 
-- In `learnitdown_init()` an h5pxapikatchu js file is not need any more (commented out).
+- In   `learnitdown_init()` an h5pxapikatchu js file is not need any more (commented out).
 
 # learnitdown 1.5.3
 
