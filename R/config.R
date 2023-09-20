@@ -286,8 +286,13 @@ decrypt <- function(object, password, cipher = "aes-256-cbc", iv = NULL,
     object <- base64_dec(object)
 
   # Decrypt
-  decrypted <- PKI.decrypt(object, key, cipher = cipher, iv = iv)
-  decrypted <- rawToChar(decrypted)
+  decrypted <- try(PKI.decrypt(object, key, cipher = cipher, iv = iv),
+    silent = TRUE)
+  if (inherits(decrypted, "try-error"))
+    return(NULL)
+  decrypted <- try(rawToChar(decrypted), silent = TRUE)
+  if (inherits(decrypted, "try-error"))
+    return(NULL)
 
   # Possibly deserialize the object
   if (isTRUE(unserialize)) {
