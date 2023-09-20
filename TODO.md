@@ -1,5 +1,7 @@
 # learnitdown - To do list
 
+-   Revoir .get_password() in config.R
+
 -   JavaScript code for H5P should be version-independant
 
 -   Tabulations in bookdown
