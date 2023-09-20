@@ -135,6 +135,10 @@ read_shinylogs <- function(file, version = "0",
     return(res)
   }
 
+  # Filter out .clientdata_output_... labels we don't want to keep
+  keep_event <- substring(res$label, 1L, 19L) != ".clientdata_output_"
+  res <- res[keep_event, ]
+
   # Rework submit and quit events
   is_submit <- res$label == "learnitdown_submit_"
   if (any(is_submit)) {

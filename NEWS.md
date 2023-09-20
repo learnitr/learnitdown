@@ -2,6 +2,10 @@
 
 -   More robust checking of password.
 
+-   Do not drop Shinylogs records dir, only eliminate each file when it is processed. This allows for recording of several simultaneous sessions.
+
+-   Do not record Shinylogs events whose label starts with ".clientdata_output_".
+
 -   In `launch_shiny()` and `webshot_shiny()`, default width is increased from 780 to 790, otherwise `shiny::sidepanelLayout()`wrap the side panel on the top of the Shiny app.
 
 # learnitdown 1.5.4
