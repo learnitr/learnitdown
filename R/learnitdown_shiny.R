@@ -301,6 +301,8 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
         log.outputs = log.outputs, debug = debug)
       if (!res && answer)# Return first error found
         answer <- res
+      # Delete the file
+      file.remove(file)
     }
   } else {
     if (debug)
@@ -313,7 +315,8 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
       message("Remaining log files after transfer to MongoDB: ",
         length(log_files_remaining))
     }
-    suppressWarnings(file.remove(path)) # non-empty dir not deleted with warning
+    # Do not do this: delete instead each file that is processed one by one above
+    #suppressWarnings(file.remove(path)) # non-empty dir not deleted with warning
   }
   answer
 }

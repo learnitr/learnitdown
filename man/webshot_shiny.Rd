@@ -9,7 +9,7 @@ webshot_shiny(
   app = basename(url),
   imgdir = "images/shinyapps",
   img = paste0(imgdir, "/", app, ".png"),
-  width = 780,
+  width = 790,
   height = 500,
   offsetx = 30,
   offsety = 30,

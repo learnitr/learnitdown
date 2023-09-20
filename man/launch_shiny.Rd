@@ -10,7 +10,7 @@ launch_shiny(
   imgdir = "images/shinyapps",
   img = paste0(imgdir, "/", app, ".png"),
   createimg = TRUE,
-  width = 780,
+  width = 790,
   height = 500,
   fun = NULL,
   alt1 = "*Click to start the Shiny application.*",
