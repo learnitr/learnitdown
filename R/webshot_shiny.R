@@ -37,7 +37,7 @@
 #'}
 webshot_shiny <- function(url, app = basename(url),
 imgdir = "images/shinyapps", img = paste0(imgdir, "/", app, ".png"),
-width = 780, height = 500, offsetx = 30, offsety = 30, delay = 10, ...) {
+width = 790, height = 500, offsetx = 30, offsety = 30, delay = 10, ...) {
   # Make sure imgdir directory exists
   dir.create(imgdir, showWarnings = FALSE, recursive = TRUE)
 

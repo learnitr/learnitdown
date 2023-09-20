@@ -55,7 +55,7 @@
 #' # TODO...
 launch_shiny <- function(url, app = sub("\\?.+$", "", basename(url)),
 imgdir = "images/shinyapps", img = paste0(imgdir, "/", app, ".png"),
-createimg = TRUE, width = 780, height = 500, fun = NULL,
+createimg = TRUE, width = 790, height = 500, fun = NULL,
 alt1 = "*Click to start the Shiny application.*",
 alt2 = paste0("*Click to start",
   "or [run `{run.cmd}`]({run.url}{run.arg}){{target=\"_blank\"}}.*"),

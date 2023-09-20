@@ -360,13 +360,13 @@ ref1 = NULL, ref2 = NULL) {
       res <- try(unlock(ref1, ref2) != pass, silent = TRUE)
       if (inherits(res, "try-error"))
         stop("Error while checking if password is correct!")
-      if (res)
+      if (!is.null(res) && length(res) && res)
         stop("Incorrect password!")
     } else {
       res <- try(unlock(ref1, pass) != "correct", silent = TRUE)
       if (inherits(res, "try-error"))
         stop("Error while checking if password is correct!")
-      if (res)
+      if (!is.null(res) && length(res) && res)
         stop("Incorrect password!")
     }
   }
