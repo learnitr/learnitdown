@@ -37,7 +37,7 @@ Suggests:
     knitr,
     rmarkdown,
     spelling,
-    testthat
+    testthat (>= 3.0.0)
 Remotes:
     rstudio/learnr@v0.10.5.9000,
     rstudio/gradethis@v0.2.8.9000

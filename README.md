@@ -2,7 +2,12 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/Sciviews/learnitdown/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Sciviews/learnitdown/actions/workflows/R-CMD-check.yaml) [![Coverage Status](https://img.shields.io/codecov/c/github/SciViews/learnitdown/master.svg)](https://codecov.io/github/SciViews/learnitdown?branch=master) [![CRAN Status](https://www.r-pkg.org/badges/version/learnitdown)](https://cran.r-project.org/package=learnitdown) [![License](https://img.shields.io/badge/license-GPL-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![Lifecycle stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![R-CMD-check](https://github.com/learnitr/learnitdown/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/learnitr/learnitdown/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://img.shields.io/codecov/c/github/learnitr/learnitdown/master.svg)](https://codecov.io/github/learnitr/learnitdown?branch=master)
+[![CRAN Status](https://www.r-pkg.org/badges/version/learnitdown)](https://cran.r-project.org/package=learnitdown)
+[![r-universe status](https://learnitr.r-universe.dev/badges/learnitdown)](https://learnitr.r-universe.dev/learnitdown)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Lifecycle stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
 <!-- badges: end -->
 
