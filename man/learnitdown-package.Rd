@@ -9,19 +9,19 @@
 Extension to R Markdown, Bookdown and Learnr for building better learning and e-learning material: H5P integration, course-contextual divs, differed loading of Shiny and learnr applications, and much more ...
 }
 \details{
-The SciViews learnitdown package provides additional R Markdown tags to build
-richer learning material with interactivity and to manage H5P exercises,
-learnr tutorials and Shiny interactive applications with user identification
-and activity tracking in a MongoDB database.
+The learnitdown package provides additional R Markdown tags to build richer
+learning material with interactivity and to manage H5P exercises, learnr
+tutorials and Shiny interactive applications with user identification and
+activity tracking in a MongoDB database.
 
 See \code{\link[=h5p]{h5p()}} or \code{\link[=launch_shiny]{launch_shiny()}}
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/SciViews/learnitdown}
-  \item \url{https://www.sciviews.org/learnitdown/}
-  \item Report bugs at \url{https://github.com/SciViews/learnitdown/issues}
+  \item \url{https://github.com/learnitr/learnitdown}
+  \item \url{https://learnitr.github.io/learnitdown/}
+  \item Report bugs at \url{https://github.com/learnitr/learnitdown/issues}
 }
 
 }

@@ -1,4 +1,4 @@
-url: https://www.sciviews.org/learnitdown
+url: https://learnitr.github.io/learnitdown
 
 destination: docs
 
@@ -6,7 +6,6 @@ development:
   mode: auto
 
 template:
-  package: svPkgdown
   params:
     bootswatch: spacelab
     mathjax: true

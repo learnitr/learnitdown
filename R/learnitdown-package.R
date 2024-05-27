@@ -1,8 +1,8 @@
 #' @details
-#' The SciViews learnitdown package provides additional R Markdown tags to build
-#' richer learning material with interactivity and to manage H5P exercises,
-#' learnr tutorials and Shiny interactive applications with user identification
-#' and activity tracking in a MongoDB database.
+#' The learnitdown package provides additional R Markdown tags to build richer
+#' learning material with interactivity and to manage H5P exercises, learnr
+#' tutorials and Shiny interactive applications with user identification and
+#' activity tracking in a MongoDB database.
 #'
 #' See [h5p()] or [launch_shiny()]
 #' @keywords internal

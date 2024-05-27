@@ -5,11 +5,13 @@ BioDataScience
 bookdown
 Bookdown
 bookdown's
+clientdata
 css
 csv
 customizable
 decrypt
 decrypted
+dir
 divs
 gitbook
 Github
@@ -24,6 +26,7 @@ JSON
 keyring
 Learnitdown
 learnitdown
+learnitr
 learndown
 learnr
 LRS

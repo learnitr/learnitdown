@@ -1,3 +1,9 @@
+# learnitdown 1.5.6
+
+-   Small adaptations due to a transfer into the **learnitr** GitHub organization.
+
+-   License changed to MIT.
+
 # learnitdown 1.5.5
 
 -   More robust checking of password.
