@@ -11,6 +11,8 @@ on:
 
 name: pkgdown
 
+permissions: read-all
+
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
@@ -30,7 +32,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, any::remotes, local::.
+          extra-packages: any::pkgdown, local::.
           needs: website
 
       - name: Build site
