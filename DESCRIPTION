@@ -39,8 +39,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0)
 Remotes:
-    rstudio/learnr@v0.10.5.9000,
-    rstudio/gradethis@v0.2.8.9000
+    rstudio/gradethis
 License: MIT + file LICENSE
 URL: https://github.com/learnitr/learnitdown, https://learnitr.github.io/learnitdown/
 BugReports: https://github.com/learnitr/learnitdown/issues

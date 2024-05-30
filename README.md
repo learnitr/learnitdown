@@ -1,4 +1,4 @@
-# learnitdown- R markdown, bookdown and learnr additions for learning material
+# learnitdown - R markdown, bookdown and learnr additions for learning material
 
 <!-- badges: start -->
 
@@ -51,7 +51,7 @@ help("learnitdown-package")
 vignette("learnitdown") # None is installed with install_github()
 ```
 
-For further instructions, please, refer to these help pages at <https://www.sciviews.org/learnitdown/>.
+For further instructions, please, refer to these help pages at <https://learnitr.github.io/learnitdown/>.
 
 ## Code of Conduct
 
