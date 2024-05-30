@@ -10,36 +10,36 @@ Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   comment = c(ORCID = "0000-0002-2694-9471")))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends:
-    R (>= 3.0.0)
+  R (>= 3.0.0)
 Imports:
-    getPass,
-    glue,
-    gradethis,
-    httpuv,
-    httr,
-    jsonlite,
-    keyring,
-    later,
-    learnr,
-    magick,
-    mongolite,
-    PKI,
-    remotes,
-    rstudioapi,
-    shiny,
-    shinylogs,
-    shinytoastr,
-    stats,
-    utils,
-    webshot
+  getPass,
+  glue,
+  gradethis,
+  httpuv,
+  httr,
+  jsonlite,
+  keyring,
+  later,
+  learnr,
+  magick,
+  mongolite,
+  PKI,
+  remotes,
+  rstudioapi,
+  shiny,
+  shinylogs,
+  shinytoastr,
+  stats,
+  utils,
+  webshot
 Suggests:
-    covr,
-    knitr,
-    rmarkdown,
-    spelling,
-    testthat (>= 3.0.0)
+  covr,
+  knitr,
+  rmarkdown,
+  spelling,
+  testthat (>= 3.0.0)
 Remotes:
-    rstudio/gradethis
+  rstudio/gradethis
 License: MIT + file LICENSE
 URL: https://github.com/learnitr/learnitdown, https://learnitr.github.io/learnitdown/
 BugReports: https://github.com/learnitr/learnitdown/issues
