@@ -329,6 +329,45 @@ if (params !== undefined && params != '') {
   # Launch the Shiny app on click with URL parameters + theme
   if (isTRUE(shiny))
     res_header <- paste0(res_header, "
+// We have to add an authorization key to the header for the Shiny app
+//... but those two trials do not work!
+//async function getApp(src) {
+//  const res = await fetch(src, {
+//    method: 'GET',
+//    headers: {
+//      'Authorization': 'Key <connect_api_key>',
+//    }
+//  });
+//  const blob = await res.blob();
+//  const urlObject = URL.createObjectURL(blob);
+//  //document.querySelector('iframe').setAttribute('src', urlObject)
+//  return urlObject;
+//}
+// or:
+//loadIframe = function(src, token, app) {
+//    let xhr = new XMLHttpRequest();
+//
+//    function handler() {
+//      if (this.readyState === this.DONE) {
+//        if (this.status === 200) {
+//          console.log(this);
+//          //document.querySelector(`#${frameId}`).src = \"data:text/html;charset=utf-8,\" + encodeURIComponent(this.responseText);
+//          //app.src = \"data:text/html;charset=utf-8,\" + encodeURIComponent(this.responseText);
+//          //app.src = URL.createObjectURL(this.response);
+//        } else {
+//          //console.error('not loaded');
+//        }
+//      }
+//    }
+//
+//    xhr.open('GET', src);
+//    xhr.onreadystatechange = handler;
+//    xhr.responseType = 'blob';
+//    xhr.withCredentials = true;
+//    xhr.setRequestHeader('Authorization', 'Key ' + token);
+//    xhr.send();
+//  }
+
 launchApp = function(id, src) {
   //var params = window.location.toString().split('?')[1];
   var params = encodeQueryString();
@@ -343,6 +382,9 @@ launchApp = function(id, src) {
   }
   var img = document.getElementById('img' + id);
   var app = document.getElementById(id);
+
+  //app.src = getApp(src);
+  //loadIframe(src, '<connect_api_key>', app);
   app.src = src;
   app.style.display='block';
   img.style.display='none';

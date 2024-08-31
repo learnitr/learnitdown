@@ -7,6 +7,7 @@
 h5p(
   id,
   baseurl,
+  idurl = "wp-admin/admin-ajax.php?action=h5p_embed&id=",
   width = 780,
   height = 500,
   toc = "",
@@ -20,6 +21,11 @@ h5p(
 
 \item{baseurl}{The first part of the URL for your domain, usually something
 like \verb{https://my.site.com} \strong{without} the trailing \code{/}.}
+
+\item{idurl}{The URL to the H5P content, usually something like \code{""}
+for exercises from h5p.org or h5p.com, or
+\code{"wp-admin/admin-ajax.php?action=h5p_embed&id="} for Wordpress
+(by default).}
 
 \item{width}{The width of the iframe where the H5P content is displayed.}
 

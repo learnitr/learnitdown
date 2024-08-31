@@ -35,6 +35,7 @@ show_ex_toc <- function(header = "", clear.it = TRUE) {
 clean_ex_toc <- function() {
   ex_dir <- file.path(.get_output_dir(), "ex")
   unlink(ex_dir, recursive = TRUE)
+  dir.create(ex_dir, showWarnings = FALSE, recursive = TRUE)
   invisible(NULL)
 }
 
@@ -44,11 +45,11 @@ clean_ex_toc <- function() {
     config <- readLines("_bookdown.yml")
     output_dir <- config[grepl("output_dir", config)]
     if (!length(output_dir)) {
-      "_book" # Default value
+      "docs" # Default value
     } else {
       sub("^.*output_dir.*['\"](.+)['\"].*$", "\\1", output_dir)
     }
-  } else "_book" # Default value
+  } else "docs" # Default value
 }
 
 # Format a POSIXct value so that it can be used in JavaScript

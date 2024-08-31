@@ -1,3 +1,10 @@
+# learnitdown 1.6.0
+
+-  Argument `idurl=` added in `h5p()` to allow including exercises from h5p.org or h5p.com.
+
+- Default directory for assignments is now `docs` instead of `_book` with subdirectory being `ex` an which is now created by `clean_ex_doc()`.
+
+
 # learnitdown 1.5.6
 
 -   Small adaptations due to a transfer into the **learnitr** GitHub organization.
