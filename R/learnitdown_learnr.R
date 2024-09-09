@@ -98,7 +98,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     max <- as.integer(sub("^.*/([0-9]+)$", "\\1", tutorial_version))
   } else {# No indication of the number of exercises
     version <- tutorial_version
-    max <- 1 # We indicate 1 by default and score is by exercice only
+    max <- 1 # We indicate 1 by default and score is by exercise only
   }
 
   # Extract label and correct from data
@@ -461,7 +461,7 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   tutorial_options(exercise.timelimit = time.limit)
   tutorial_options(exercise.cap = cap)
 
-  # Set general knitr parameters (lmore suitable ones for learnr)
+  # Set general knitr parameters (more suitable ones for learnr)
   load_lib('knitr')
   knitr::opts_chunk$set(echo = echo, comment = comment)
 }

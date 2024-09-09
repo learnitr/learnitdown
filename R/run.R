@@ -47,7 +47,8 @@ ask = interactive(), upgrade = "never") {
   if (isTRUE(update) && !is.null(github_repos))
     updated <- update_pkg(package, github_repos, upgrade = upgrade)
 
-  if (missing(tutorial) || is.null(tutorial) || tutorial == "") {
+  if (missing(tutorial) || is.null(tutorial) || !length(tutorial) ||
+      tutorial[1] == "") {
     tutos <- dir(system.file("tutorials", package = package))
     if (isTRUE(ask) && interactive()) {
       # Allow selecting from the list...
@@ -84,7 +85,7 @@ ask = interactive(), upgrade = "never") {
   } else {
     # This is the classical learnr function, but the tutorial does not run in
     # the tutorial tab of RStudio in this case!
-    run_tutorial(tutorial, package = package, ...)
+    run_tutorial(tutorial[1], package = package, ...)
   }
 }
 
@@ -96,7 +97,7 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
   if (isTRUE(update) && !is.null(github_repos))
     updated <- update_pkg(package, github_repos, upgrade = upgrade)
 
-  if (missing(app) || is.null(app) || app == "") {
+  if (missing(app) || is.null(app) || !length(app) || app[1] == "") {
     apps <- dir(system.file("shiny", package = package))
     if (isTRUE(ask) && interactive()) {
       # Allow selecting from the list...
@@ -109,7 +110,7 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
       return(apps)
     }
   }
-  appDir <- system.file("shiny", app, package = package)
+  appDir <- system.file("shiny", app[1], package = package)
   port <- httpuv::randomPort()
 
   # Should we run the app in a job in RStudio?
@@ -121,7 +122,7 @@ run_app <- function(app, package, github_repos = NULL, ..., update = ask,
     cat("shiny::runApp('", appDir, "', port = ", port,
       ", launch.browser = FALSE, display.mode = 'normal')\n",
       file = script, sep = "")
-    rstudioapi::jobRunScript(script, name = paste("Shiny:", app, sep = ' '))
+    rstudioapi::jobRunScript(script, name = paste("Shiny:", app[1], sep = ' '))
     message("Waiting for the Shiny application...")
     url <- paste0("http://", getOption("shiny.host", "127.0.0.1"), ":", port)
     is_ready <- function(url) {

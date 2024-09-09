@@ -7,8 +7,10 @@
 #' information to the user (how the Shiny application would look like if it was
 #' started).
 #'
-#' @param url The URL to launch the Shiny app. If both `app =` and `baseurl =`
-#' @param app The name of the Shiny application.
+#' @param url The URL to launch the Shiny app, or to a screenshot of the app in
+#' PNG format.
+#' @param app The name of the Shiny application. If `NULL`, the base name of the
+#' URL without the extension is used.
 #' are provided, you don't need to specify it.
 #' @param imgdir The directory without trailing "/" where images relative
 #' to Shiny applications are stored. By default, it is relative to current
@@ -35,20 +37,28 @@
 #' (webshot_shiny("https://phgrosjean.shinyapps.io/histogram/", delay = 10))
 #'  # Now, look at this image. You can use it with launch_shiny()
 #'}
-webshot_shiny <- function(url, app = basename(url),
+webshot_shiny <- function(url, app = NULL,
 imgdir = "images/shinyapps", img = paste0(imgdir, "/", app, ".png"),
 width = 790, height = 500, offsetx = 30, offsety = 30, delay = 10, ...) {
   # Make sure imgdir directory exists
   dir.create(imgdir, showWarnings = FALSE, recursive = TRUE)
+
+  if (is.null(app))
+    app <- sub("\\.[^\\.]+$", "", basename(url))
 
   # Temporary screenshot and click icon images
   img_app_file <- paste0(imgdir, "/", app, "_temp.png")
   img_click_file <- system.file("images", "shinyapp_click.png",
     package = "learnitdown")
 
-  # Launch the Shiny app, wait delay and take screenshot
-  webshot(url, delay = delay, vwidth = width, vheight = height,
-    file = img_app_file)
+  # If url points to a .png file, just copy that file into img_app_file
+  if (endsWith(url, ".png")) {
+    file.copy(url, img_app_file)
+  } else {
+    # Launch the Shiny app, wait delay and take screenshot
+    webshot(url, delay = delay, vwidth = width, vheight = height,
+      file = img_app_file)
+  }
 
   # Combine both images
   img_app <- image_read(img_app_file)

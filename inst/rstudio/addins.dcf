@@ -1,5 +1,5 @@
 Name: Shiny Application Webshot
 Description: Select a launch_shiny("url", ...) code then start this addin to create the required screenshot
 Binding: webshot_shiny_addin
-Interactive: false
+Interactive: true
 

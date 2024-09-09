@@ -1,8 +1,12 @@
+# learnitdown 1.7.0
+
+-   `webshot_shiny()` now also accepts the path to a PNG file (the screenshot of the app) instead of the url to the Shiny application. This allows to create the webshot image in case the app cannot be accessed directly (for instance, a login in Posit Connect is required). The corresponding RStudio addin is modified to ask fpr a PNG screenshot if no suitable code is selected.
+
 # learnitdown 1.6.0
 
--  Argument `idurl=` added in `h5p()` to allow including exercises from h5p.org or h5p.com.
+-   Argument `idurl=` added in `h5p()` to allow including exercises from h5p.org or h5p.com.
 
-- Default directory for assignments is now `docs` instead of `_book` with subdirectory being `ex` an which is now created by `clean_ex_doc()`.
+-   Default directory for assignments is now `docs` instead of `_book` with subdirectory being `ex` an which is now created by `clean_ex_doc()`.
 
 
 # learnitdown 1.5.6
