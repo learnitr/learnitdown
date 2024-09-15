@@ -1,6 +1,10 @@
 # learnitdown 1.7.0
 
--   `webshot_shiny()` now also accepts the path to a PNG file (the screenshot of the app) instead of the url to the Shiny application. This allows to create the webshot image in case the app cannot be accessed directly (for instance, a login in Posit Connect is required). The corresponding RStudio addin is modified to ask fpr a PNG screenshot if no suitable code is selected.
+-   Shiny and learnr events are now recorded in the "events" table instead of "shiny" or "learnr" tables.
+
+# learnitdown 1.7.0
+
+-   `webshot_shiny()` now also accepts the path to a PNG file (the screenshot of the app) instead of the url to the Shiny application. This allows to create the webshot image in case the app cannot be accessed directly (for instance, a login in Posit Connect is required). The corresponding RStudio addin is modified to ask for a PNG screenshot if no suitable code is selected.
 
 # learnitdown 1.6.0
 

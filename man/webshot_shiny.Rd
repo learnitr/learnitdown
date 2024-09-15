@@ -6,7 +6,7 @@
 \usage{
 webshot_shiny(
   url,
-  app = basename(url),
+  app = NULL,
   imgdir = "images/shinyapps",
   img = paste0(imgdir, "/", app, ".png"),
   width = 790,
@@ -18,9 +18,11 @@ webshot_shiny(
 )
 }
 \arguments{
-\item{url}{The URL to launch the Shiny app. If both \verb{app =} and \verb{baseurl =}}
+\item{url}{The URL to launch the Shiny app, or to a screenshot of the app in
+PNG format.}
 
-\item{app}{The name of the Shiny application.
+\item{app}{The name of the Shiny application. If \code{NULL}, the base name of the
+URL without the extension is used.
 are provided, you don't need to specify it.}
 
 \item{imgdir}{The directory without trailing "/" where images relative

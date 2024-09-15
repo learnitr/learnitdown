@@ -68,7 +68,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     }
 
     # Try to access the database
-    m <- try(mongo(collection = "learnr", db = db, url = glue(url)),
+    m <- try(mongo(collection = "events", db = db, url = glue(url)),
       silent = TRUE)
     if (inherits(m, "try-error")) {
       options(learnitdown_learnr_record = FALSE)
@@ -198,7 +198,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   use_db <- isTRUE(getOption("learnitdown_learnr_record", default = TRUE))
   if (use_db) {
     m <- try({
-      m <- mongo(collection = "learnr", db = db, url = glue(url))
+      m <- mongo(collection = "events", db = db, url = glue(url))
       m$insert(toJSON(entry, auto_unbox = TRUE))
       if (debug)
         message("Learnr event '", entry$verb, "' inserted into database.")
@@ -237,7 +237,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
 #  url.server <- glue:glue(Sys.getenv("MONGO_URL_SERVER")
 #  if (isTRUE(server.db))
 #    url <- url.server
-#  mdb <- mongolite::mongo(collection = "learnr", db = db, url = url)
+#  mdb <- mongolite::mongo(collection = "events", db = db, url = url)
 #  if (mdb$count())
 #    mdb$find()
 #}
@@ -354,7 +354,7 @@ Thanks.
       subject = subject, address = address)
     invisible(data)
   } else {
-    message("No alearnr activity locally recorded")
+    message("No learnr activity locally recorded")
     invisible(character(0))
   }
 }

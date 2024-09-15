@@ -217,7 +217,7 @@ read_shinylogs <- function(file, version = "0",
   res
 }
 
-.record_shinylogs <- function(file, url, db, collection = "shiny",
+.record_shinylogs <- function(file, url, db, collection = "events",
 version = "0", log.errors = TRUE, log.outputs = FALSE,
 debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
 
@@ -290,7 +290,7 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
 #' @export
 #'
 #' @seealso [read_shinylogs()], [trackEvents()]
-record_shiny <- function(path, url, db, collection = "shiny",
+record_shiny <- function(path, url, db, collection = "events",
 version = "0", log.errors = TRUE, log.outputs = FALSE, drop.dir = FALSE,
 debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   debug <- isTRUE(debug)
@@ -564,7 +564,7 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
           Sys.getenv('SHINY_PORT') == ""
 
         is_server_up <- function(url, db) {
-          res <- try(mongo(collection = "shiny", db = db, url = url),
+          res <- try(mongo(collection = "events", db = db, url = url),
             silent = TRUE)
           !inherits(res, "try-error")
         }

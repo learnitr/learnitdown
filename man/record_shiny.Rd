@@ -8,7 +8,7 @@ record_shiny(
   path,
   url,
   db,
-  collection = "shiny",
+  collection = "events",
   version = "0",
   log.errors = TRUE,
   log.outputs = FALSE,
