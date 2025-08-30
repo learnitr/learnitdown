@@ -69,7 +69,7 @@ For further instructions, please, refer to these help pages at
 
 ## Code of Conduct
 
-Please note that the {svMisc} package is released with a [Contributor
-Code of
+Please note that the {learnitdown} package is released with a
+[Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
