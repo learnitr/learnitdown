@@ -1,24 +1,15 @@
-citHeader("To cite learnitr packages in publications use:")
-
-citEntry(
-  entry        = "Manual",
-  title        = "LearnIt::R",
-  author       = personList(as.person("Philippe Grosjean"),
-                            as.person("Guyliann Engels")),
+bibentry(
+  bibtype      = "Misc",
+  header       = "To cite learnitr packages in publications use:",
+  author       = c(person("Philippe", "Grosjean", role = c("aut", "cre"),
+                          email   = "phgrosjean@sciviews.org",
+                          comment = c(ORCID = "0000-0002-2694-9471")),
+                   person("Guyliann", "Engels", role = "aut",
+                          email   = "guyliann.engels@umons.ac.be",
+                          comment = c(ORCID = "0000-0001-9514-1014"))),
+  title        = "LearnItR - Education Platform for Teaching R, Statistics and Data Science",
+  year         = version$year,
   organization = "UMONS",
   address      = "MONS, Belgium",
-  year         = version$year,
   url          = "https://learnitr.r-universe.dev/",
-
-  textVersion =
-    paste("Grosjean, Ph. & Engels, G. (", version$year, "). ",
-      "LearnIt::R. ",
-      "UMONS, Mons, Belgium. ",
-      "URL https://learnitr.r-universe.dev/.",
-      sep = "")
 )
-
-citFooter("We have invested a lot of time and effort in creating LearnIt::R,",
-  "please cite it when using it together with R.",
-  "See also", sQuote("citation()"),
-  "for citing R.")

@@ -10,41 +10,41 @@ Authors@R: c(person("Philippe", "Grosjean", role = c("aut", "cre"),
   comment = c(ORCID = "0000-0002-2694-9471")))
 Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends:
-  R (>= 3.0.0)
+    R (>= 4.2.0)
 Imports:
-  getPass,
-  glue,
-  gradethis,
-  httpuv,
-  httr,
-  jsonlite,
-  keyring,
-  later,
-  learnr,
-  magick,
-  mongolite,
-  PKI,
-  remotes,
-  rstudioapi,
-  shiny,
-  shinylogs,
-  shinytoastr,
-  stats,
-  utils,
-  webshot
+    getPass (>= 0.2.4),
+    glue (>= 1.8.0),
+    gradethis (>= 0.2.0),
+    httpuv (>= 1.6.15),
+    httr (>= 1.4.7),
+    jsonlite (>= 2.0.0),
+    keyring (>= 1.3.2),
+    later (>= 1.4.2),
+    learnr (>= 0.11.0),
+    magick (>= 2.8.6),
+    mongolite (>= 4.0.0),
+    PKI (>= 0.1.14),
+    remotes (>= 2.5.0),
+    rstudioapi (>= 0.17.1),
+    shiny (>= 1.7.1),
+    shinylogs (>= 0.2.1),
+    shinytoastr (>= 2.2.0),
+    stats (>= 4.2.0),
+    utils (>= 4.2.0),
+    webshot (>= 0.5.5)
 Suggests:
-  covr,
-  knitr,
-  rmarkdown,
-  spelling,
-  testthat (>= 3.0.0)
+    covr (>= 3.5.0),
+    knitr (>= 1.42),
+    rmarkdown (>= 2.21),
+    spelling (>= 2.2.1),
+    testthat (>= 3.0.0)
 Remotes:
   rstudio/gradethis
 License: MIT + file LICENSE
-URL: https://github.com/learnitr/learnitdown, https://learnitr.github.io/learnitdown/
+URL: https://github.com/learnitr/learnitdown, https://learnitr.github.io/learnitdown/, https://learnitr.r-universe.dev/learnitdown
 BugReports: https://github.com/learnitr/learnitdown/issues
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-US

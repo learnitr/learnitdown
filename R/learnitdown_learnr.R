@@ -418,10 +418,10 @@ checker_ack_learnr <- function(label, user_code, solution_code, check_code,
 #' @param cap The caption for R code widgets.
 #' @param echo Do we echo commands in R chunks?
 #' @param comment The prefix added before each line of R chunk output.
-#' @param use.gradethis Do we use {gradethis}?
+#' @param use.gradethis Do we use \{gradethis\}?
 #' @param event.recorder The function to use as event recorder. you should
 #' probably not change the default value here.
-#' @param debug Do we issue additions debugging informations?
+#' @param debug Do we issue additions debugging information?
 #'
 #' @return Nothing. The function is used to setup the learnr environment.
 #' @export
@@ -441,7 +441,7 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
   load_lib('learnr')
   load_lib('learnitdown')
 
-  force(config) # Get configuration (database informations)
+  force(config) # Get configuration (database information)
   user <- sign_in # Get user info
   if (is.null(user$login)) {
     message("No login, no records!")

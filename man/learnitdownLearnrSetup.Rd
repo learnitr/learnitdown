@@ -43,12 +43,12 @@ learnitdownLearnrServer(input, output, session)
 
 \item{comment}{The prefix added before each line of R chunk output.}
 
-\item{use.gradethis}{Do we use {gradethis}?}
+\item{use.gradethis}{Do we use \{gradethis\}?}
 
 \item{event.recorder}{The function to use as event recorder. you should
 probably not change the default value here.}
 
-\item{debug}{Do we issue additions debugging informations?}
+\item{debug}{Do we issue additions debugging information?}
 
 \item{title}{The Title for the banner.}
 

@@ -6,6 +6,8 @@
 \alias{learnitdown-package}
 \title{learnitdown: R Markdown, Bookdown and Learnr Additions for Learning Material}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Extension to R Markdown, Bookdown and Learnr for building better learning and e-learning material: H5P integration, course-contextual divs, differed loading of Shiny and learnr applications, and much more ...
 }
 \details{
@@ -21,6 +23,7 @@ Useful links:
 \itemize{
   \item \url{https://github.com/learnitr/learnitdown}
   \item \url{https://learnitr.github.io/learnitdown/}
+  \item \url{https://learnitr.r-universe.dev/learnitdown}
   \item Report bugs at \url{https://github.com/learnitr/learnitdown/issues}
 }
 
