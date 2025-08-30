@@ -1,93 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/404.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/TODO.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/articles/learnitdown.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/assignment.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/checker_ack_learnr.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/config.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/diagnose_login.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/h5p.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/launch_shiny.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/learnitdown-package.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/learnitdownLearnrSetup.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/learnitdownShiny.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/learnitdown_init.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/learnr.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/obfuscate.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/read_shinylogs.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/record_learnr.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/record_shiny.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/run.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/send_mail_learnr.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/show_ex_toc.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/trackEvents.html</loc>
-  </url>
-  <url>
-    <loc>https://www.sciviews.org/learnitdown/reference/webshot_shiny.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://learnitr.github.io/learnitdown/404.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/LICENSE-text.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/LICENSE.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/TODO.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/articles/index.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/articles/learnitdown.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/authors.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/index.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/news/index.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/assignment.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/checker_ack_learnr.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/config.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/diagnose_login.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/h5p.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/index.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/launch_shiny.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/learnitdown-package.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/learnitdownLearnrSetup.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/learnitdownShiny.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/learnitdown_init.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/learnr.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/obfuscate.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/read_shinylogs.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/record_learnr.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/record_shiny.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/run.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/send_mail_learnr.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/show_ex_toc.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/trackEvents.html</loc></url>
+<url><loc>https://learnitr.github.io/learnitdown/reference/webshot_shiny.html</loc></url>
 </urlset>
+
