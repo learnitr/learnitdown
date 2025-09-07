@@ -534,19 +534,27 @@ learnitdownLearnrServer <- function(input, output, session) {
     if (is.null(getOption("learnitdown_learnr_user")$login)) {
       session_user <- session$user
       if (!is.null(session_user) && session_user != "rstudio-connect") {
-        # Get more data from the users database
-        users <- try(mongolite::mongo("users", url = "mongodb://127.0.0.1/sdd"), silent = TRUE)
-        if (inherits(users, "try-error"))
-          message("Impossible to connect to the users database.")
-        query <- paste0('{ "login": "', session_user, '" }')
-        fields <- '{ "login": true, "email": true, "firstname": true, "lastname": true, "iemail": true, "iid": true, "ifirstname": true, "ilastname": true, "icourse": true, "ictitle": true, "iurl": true, "institution": true, "iref": true, "_id": false }'
-        if (!users$count(query)) {
-          message("User '", session_user, "' not found in the users table.")
-          user_info <- list(login = session_user) # Minimal info...
-        } else {
-          user_info <- as.list(users$find(query, fields)[1L, ])
+        # Get more data from the users database, if possible
+        url.server <- Sys.getenv("MONGO_URL_SERVER")
+        db <- Sys.getenv("MONGO_BASE")
+        user <- Sys.getenv("MONGO_USER")
+        password <- Sys.getenv("MONGO_PASSWORD")
+        if (url.server != "") {
+          users <- try(mongo(collection = "users", db = db, url = glue(url)),
+            silent = TRUE)
+          if (inherits(users, "try-error"))
+            message("Impossible to connect to the users database.")
+          query <- paste0('{ "login": "', session_user, '" }')
+          fields <- '{ "login": true, "email": true, "firstname": true, "lastname": true, "iemail": true, "iid": true, "ifirstname": true, "ilastname": true, "icourse": true, "ictitle": true, "iurl": true, "institution": true, "iref": true, "_id": false }'
+          if (!users$count(query)) {
+            message("User '", session_user, "' not found in the users table.")
+            user_info <- list(login = session_user) # Minimal info...
+          } else {
+            message("User data recovered from the database")
+            user_info <- as.list(users$find(query, fields)[1L, ])
+          }
+          try(users$disconnect(), silent = TRUE)
         }
-        try(users$disconnect(), silent = TRUE)
       } else {# Try getting user data from sign_in or from the URL query string
         user_info <- parseQueryString(session$clientData$url_search)
       }
