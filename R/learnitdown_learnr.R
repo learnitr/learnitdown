@@ -529,8 +529,11 @@ learnitdownLearnrBanner <- function(title, text, image, align = "left",
 #' @param input The Shiny input.
 #' @param output The Shiny output.
 #' @param session The Shiny session.
-learnitdownLearnrServer <- function(input, output, session) {
-  observe({
+#' @param envir The environment to evaluate the function in (default to the
+#'   calling environment).
+learnitdownLearnrServer <- function(input, output, session,
+    envir = parent.frame()) {
+  eval(envir = envir, observe({# Need to evaluate this is the calling environment!
     if (is.null(getOption("learnitdown_learnr_user")$login)) {
       session_user <- session$user
       if (!is.null(session_user) && session_user != "rstudio-connect") {
@@ -568,7 +571,7 @@ learnitdownLearnrServer <- function(input, output, session) {
     } else {
       message("Recording enabled for ", user_info$login)
     }
-  })
-  output$login <- renderText(getOption("learnitdown_learnr_user")$login)
-  output$error <- renderText(as.character(record_learnr(data = NULL)))
+    output$login <- renderText(getOption("learnitdown_learnr_user")$login)
+    output$error <- renderText(as.character(record_learnr(data = NULL)))
+  }))
 }

@@ -28,7 +28,7 @@ learnitdownLearnrBanner(
   msg.error = "Error recording activity! "
 )
 
-learnitdownLearnrServer(input, output, session)
+learnitdownLearnrServer(input, output, session, envir = parent.frame())
 }
 \arguments{
 \item{config}{The \code{config()} command to use to get database info.}
@@ -72,6 +72,9 @@ the database occurs.}
 \item{output}{The Shiny output.}
 
 \item{session}{The Shiny session.}
+
+\item{envir}{The environment to evaluate the function in (default to the
+calling environment).}
 }
 \value{
 Nothing. The function is used to setup the learnr environment.
