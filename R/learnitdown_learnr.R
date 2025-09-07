@@ -52,11 +52,11 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
 
   # Only test we can open the database... otherwise set the system to only
   # record locally (otherwise, it will be too slow to retest each time).
-  if (is.null(data)) {
+  if (missing(data) || is.null(data)) {
     # First look of there is an internet connexion
     check_internet_access <- function() {
       # IANA's test website, but not accessible from everywhere
-      is_online <- function(site="http://example.com/") {
+      is_online <- function(site = "http://example.com/") {
         tryCatch({
           readLines(site, n = 1)
           TRUE
