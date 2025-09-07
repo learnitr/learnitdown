@@ -12,6 +12,7 @@ Maintainer: Philippe Grosjean <phgrosjean@sciviews.org>
 Depends:
     R (>= 4.2.0)
 Imports:
+    curl (>= 6.2.2),
     getPass (>= 0.2.4),
     glue (>= 1.8.0),
     gradethis (>= 0.2.0),

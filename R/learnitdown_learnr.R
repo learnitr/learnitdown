@@ -55,19 +55,20 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   if (missing(data) || is.null(data)) {
     # First look of there is an internet connexion
     check_internet_access <- function() {
-      # IANA's test website, but not accessible from everywhere
-      is_online <- function(site = "http://example.com/") {
-        tryCatch({
-          readLines(site, n = 1)
-          TRUE
-        },
-          warning = function(w) invokeRestart("muffleWarning"),
-          error = function(e) FALSE)
-      }
-      # We test two different sites successively
-      res <- is_online("http://www.google.com")
-      if (!res)
-        res <- is_online("http://www.github.com")
+      ## IANA's test website, but not accessible from everywhere
+      #is_online <- function(site = "http://example.com/") {
+      #  tryCatch({
+      #    readLines(site, n = 1)
+      #    TRUE
+      #  },
+      #    warning = function(w) invokeRestart("muffleWarning"),
+      #    error = function(e) FALSE)
+      #}
+      ## We test two different sites successively
+      #res <- is_online("http://www.google.com")
+      #if (!res)
+      #  res <- is_online("http://www.github.com")
+      res <- curl::has_internet()
       if (!res)
         stop("This computer does not seems to have access to the Internet, ", "
         impossible to record events in the database ",

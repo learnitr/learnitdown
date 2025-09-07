@@ -8,6 +8,7 @@
 #' @keywords internal
 "_PACKAGE"
 
+#' @importFrom curl has_internet
 #' @importFrom learnr run_tutorial tutorial_options answer
 #' @importFrom remotes install_github
 #' @importFrom glue glue
