@@ -540,14 +540,15 @@ learnitdownLearnrServer <- function(input, output, session) {
         user <- Sys.getenv("MONGO_USER")
         password <- Sys.getenv("MONGO_PASSWORD")
         if (url.server != "") {
-          users <- try(mongo(collection = "users", db = db, url = glue(url)),
+          users <- try(mongo(collection = "users", db = db, url = glue(url.server)),
             silent = TRUE)
           if (inherits(users, "try-error"))
             message("Impossible to connect to the users database.")
           query <- paste0('{ "login": "', session_user, '" }')
           fields <- '{ "login": true, "email": true, "firstname": true, "lastname": true, "iemail": true, "iid": true, "ifirstname": true, "ilastname": true, "icourse": true, "ictitle": true, "iurl": true, "institution": true, "iref": true, "_id": false }'
-          if (!users$count(query)) {
-            message("User '", session_user, "' not found in the users table.")
+          query_count <- try(users$count(query), silent = TRUE)
+          if (inherits(query_count, "try-error") || !query_count) {
+            message("Cannot retrieve '", session_user, "' in the users table.")
             user_info <- list(login = session_user) # Minimal info...
           } else {
             message("User data recovered from the database")
