@@ -32,7 +32,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   bds_file <- file.path(bds_dir, "learnr_events")
   debug <- (Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0)
   user_info <- getOption("learnitdown_learnr_user")
-  if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
+#  if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
 
   # In case url.server is defined, we prefer using it, if it works
