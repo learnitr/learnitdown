@@ -177,8 +177,8 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     if (data$type == "solution")
       verb <- "revealed"
     # If the name ends with _hX and this is hint x-1 (because counted from 0)
-    if (grepl("_h[1-9]$", label) && data$type == "hint" &&
-      as.integer(data$index) == as.integer(substring(label, nchar(label))) - 1)
+    if (isTRUE(grepl("_h[1-9]$", label) && data$type == "hint" &&
+      as.integer(data$index) == as.integer(substring(label, nchar(label))) - 1))
       verb <- "revealed"
   }
 
