@@ -458,11 +458,12 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
 
   force(config) # Get configuration (database information)
   user <- sign_in # Get user info
-  if (is.null(user$login)) {
-    message("No login, no records!")
-  } else {
-    message("Recording enabled for ", user$login)
-  }
+  # This in now done in learnitdownLearnrServer()
+  #if (is.null(user$login)) {
+  #  message("No login, no records!")
+  #} else {
+  #  message("Recording enabled for ", user$login)
+  #}
   options(learnitdown_learnr_user = user)
 
   if (isTRUE(use.gradethis)) {
@@ -530,27 +531,35 @@ learnitdownLearnrBanner <- function(title, text, image, align = "left",
 #' @param session The Shiny session.
 learnitdownLearnrServer <- function(input, output, session) {
   observe({
-    session_user <- session$user
-    if (!is.null(session_user) && session_user != "rstudio-connect") {
-      # Get more data from the users database
-      users <- try(mongolite::mongo("users", url = "mongodb://127.0.0.1/sdd"), silent = TRUE)
-      if (inherits(users, "try-error"))
-        message("Impossible to connect to the users database.")
-      query <- paste0('{ "login": "', session_user, '" }')
-      fields <- '{ "login": true, "email": true, "firstname": true, "lastname": true, "iemail": true, "iid": true, "ifirstname": true, "ilastname": true, "icourse": true, "ictitle": true, "iurl": true, "institution": true, "iref": true, "_id": false }'
-      if (!users$count(query)) {
-        message("User '", session_user, "' not found in the users table.")
-        user_info <- list(login = session_user) # Minimal info...
-      } else {
-        user_info <- as.list(users$find(query, fields)[1L, ])
+    if (is.null(getOption("learnitdown_learnr_user")$login)) {
+      session_user <- session$user
+      if (!is.null(session_user) && session_user != "rstudio-connect") {
+        # Get more data from the users database
+        users <- try(mongolite::mongo("users", url = "mongodb://127.0.0.1/sdd"), silent = TRUE)
+        if (inherits(users, "try-error"))
+          message("Impossible to connect to the users database.")
+        query <- paste0('{ "login": "', session_user, '" }')
+        fields <- '{ "login": true, "email": true, "firstname": true, "lastname": true, "iemail": true, "iid": true, "ifirstname": true, "ilastname": true, "icourse": true, "ictitle": true, "iurl": true, "institution": true, "iref": true, "_id": false }'
+        if (!users$count(query)) {
+          message("User '", session_user, "' not found in the users table.")
+          user_info <- list(login = session_user) # Minimal info...
+        } else {
+          user_info <- as.list(users$find(query, fields)[1L, ])
+        }
+        try(users$disconnect(), silent = TRUE)
+      } else {# Try getting user data from sign_in or from the URL query string
+        user_info <- parseQueryString(session$clientData$url_search)
       }
-      try(users$disconnect(), silent = TRUE)
-    } else {# Try getting user data from the URL query string
-      user_info <- parseQueryString(session$clientData$url_search)
+      options(learnitdown_learnr_user = user_info)
+    } else {# User data already available from sign_in
+      user_info <- getOption("learnitdown_learnr_user")
     }
-    options(learnitdown_learnr_user = user_info)
-
-    output$login <- renderText(getOption("learnitdown_learnr_user")$login)
-    output$error <- renderText(as.character(record_learnr(data = NULL)))
+    if (is.null(user_info$login)) {
+      message("No login, no records!")
+    } else {
+      message("Recording enabled for ", user_info$login)
+    }
   })
+  output$login <- renderText(getOption("learnitdown_learnr_user")$login)
+  output$error <- renderText(as.character(record_learnr(data = NULL)))
 }
