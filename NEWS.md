@@ -1,3 +1,7 @@
+# learnitdown 1.8.0
+
+-   Changes made to allow learnr running an a Posit Connect server, recognize user, and record in the server database (changes in `record_learnr()` and `learnitdownLearnrServer()`)
+
 # learnitdown 1.7.0
 
 -   Shiny and learnr events are now recorded in the "events" table instead of "shiny" or "learnr" tables.

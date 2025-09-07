@@ -35,6 +35,21 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
 
+  # In case url.server is defined, we prefer using it, if it works
+  is_server_up <- function(url, db) {
+    res <- try(mongo(collection = "events", db = db, url = url),
+      silent = TRUE)
+    !inherits(res, "try-error")
+  }
+  if (url.server != "" && is_server_up(url = glue(url.server), db = db)) {
+    if (isTRUE(debug))
+      message("Using server database")
+    url <- url.server # Use server URL instead
+  } else {
+    if (isTRUE(debug) && url.server != "")
+      message("Server database not available, using default database")
+  }
+
   # Only test we can open the database... otherwise set the system to only
   # record locally (otherwise, it will be too slow to retest each time).
   if (is.null(data)) {
@@ -514,6 +529,28 @@ learnitdownLearnrBanner <- function(title, text, image, align = "left",
 #' @param output The Shiny output.
 #' @param session The Shiny session.
 learnitdownLearnrServer <- function(input, output, session) {
-  output$login <- renderText(getOption("learnitdown_learnr_user")$login)
-  output$error <- renderText(as.character(record_learnr(data = NULL)))
+  observe({
+    session_user <- session$user
+    if (!is.null(session_user) && session_user != "rstudio-connect") {
+      # Get more data from the users database
+      users <- try(mongolite::mongo("users", url = "mongodb://127.0.0.1/sdd"), silent = TRUE)
+      if (inherits(users, "try-error"))
+        message("Impossible to connect to the users database.")
+      query <- paste0('{ "login": "', session_user, '" }')
+      fields <- '{ "login": true, "email": true, "firstname": true, "lastname": true, "iemail": true, "iid": true, "ifirstname": true, "ilastname": true, "icourse": true, "ictitle": true, "iurl": true, "institution": true, "iref": true, "_id": false }'
+      if (!users$count(query)) {
+        message("User '", session_user, "' not found in the users table.")
+        user_info <- list(login = session_user) # Minimal info...
+      } else {
+        user_info <- as.list(users$find(query, fields)[1L, ])
+      }
+      try(users$disconnect(), silent = TRUE)
+    } else {# Try getting user data from the URL query string
+      user_info <- parseQueryString(session$clientData$url_search)
+    }
+    options(learnitdown_learnr_user = user_info)
+
+    output$login <- renderText(getOption("learnitdown_learnr_user")$login)
+    output$error <- renderText(as.character(record_learnr(data = NULL)))
+  })
 }

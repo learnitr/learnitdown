@@ -507,7 +507,7 @@ debug = Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0) {
       toastr_warning("Utilisateur anonyme, aucun enregistrement.",
         closeButton = TRUE, position = "top-right", timeOut = 5000)
     } else {
-      # Check that 'path' exists and is writeable, or use a temporary directory
+      # Check that 'path' exists and is writable, or use a temporary directory
       if (!dir.exists(path))
         dir.create(path, showWarnings = FALSE, recursive = TRUE)
       test_file <- file.path(path, "test.txt")
