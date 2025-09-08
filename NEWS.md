@@ -1,6 +1,6 @@
 # learnitdown 1.8.1
 
--   Css loader animation added in learnr documents.
+-   The `observe()` statement is now evaluated in the R Markdown document environment.
 
 # learnitdown 1.8.0
 

@@ -29,7 +29,6 @@ Imports:
     rstudioapi (>= 0.17.1),
     shiny (>= 1.7.1),
     shinylogs (>= 0.2.1),
-    shinycssloaders (>= 1.1.0),
     shinytoastr (>= 2.2.0),
     stats (>= 4.2.0),
     utils (>= 4.2.0),
