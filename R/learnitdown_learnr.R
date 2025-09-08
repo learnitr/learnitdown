@@ -534,6 +534,7 @@ learnitdownLearnrBanner <- function(title, text, image, align = "left",
 #'   calling environment).
 learnitdownLearnrServer <- function(input, output, session,
     envir = parent.frame()) {
+  showPageSpinner(caption = div(strong("Loading"), br(), em("Please wait")))
   eval(envir = envir, observe({# Need to evaluate this is the calling environment!
     if (is.null(getOption("learnitdown_learnr_user")$login)) {
       session_user <- session$user
@@ -572,6 +573,7 @@ learnitdownLearnrServer <- function(input, output, session,
     } else {
       message("Recording enabled for ", user_info$login)
     }
+    hidePageSpinner()
     output$login <- renderText(getOption("learnitdown_learnr_user")$login)
     output$error <- renderText(as.character(record_learnr(data = NULL)))
   }))
