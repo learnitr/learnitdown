@@ -1,3 +1,7 @@
+# learnitdown 1.8.2
+
+-   The `launchApp()` javascript function in `learnitdown_init()` now includes a `framesource=` parameter to comply with new Posit Connect rules for embedded contents
+
 # learnitdown 1.8.1
 
 -   The `observe()` statement is now evaluated in the R Markdown document environment.

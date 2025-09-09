@@ -213,7 +213,7 @@ function diagnoseSystemFr() {
     content = content + \"\\n<li>Le r&eacute;sultat de certains exercices <b>ne sera pas enregistr&eacute;</b>.</li>\";
     content = content + \"\\n</ul>\";
     content = content + \"\\n<p>Si vous n'&ecirc;tes <i>pas</i> un &eacute;tudiant qui suit un cours li&eacute; &agrave; ce mat&eacute;riel p&eacute;dagogique, c'est normal, vous pouvez continuer votre visite... <b>Bienvenue&nbsp;!</b></p>\";
-    content = content + \"\\n<p>En revanche, si votre cours n&eacute;cessite que vous soyez d&ucirc;ment enregistr&eacute;, alors fermez cette page et relancer-l&agrave; depuis le syst&egrave;me d'apprentissage en ligne de votre Universit&eacute; (Moodle, ...). Si les donn&eacute;es sont toujours incorrectes, contactez vos enseignants.</p>\";
+    content = content + \"\\n<p>En revanche, si votre cours n&eacute;cessite que vous soyez d&ucirc;ment enregistr&eacute;, alors fermez cette page et relancez-l&agrave; depuis le syst&egrave;me d'apprentissage en ligne de votre Universit&eacute; (Moodle, ...). Si les donn&eacute;es sont toujours incorrectes, contactez vos enseignants.</p>\";
 
   } else {
     // Explore the content of the storage
@@ -278,9 +278,9 @@ function diagnoseSystemFr() {
     content = content + \"\\n<li>Institution&nbsp;: <u>\" + institution + \"</u></li>\";
     content = content + \"\\n</ul>\";
     if (context) {
-      content = content + \"<p><b>Le contenu sera adapt&eacute; en fonction de ce contexte.</b> V&eacute;rifiez qu'il est correct, sinon fermez cette page et relancer-l&agrave; depuis le syst&egrave;me d'apprentissage en ligne de votre Universit&eacute; (Moodle, ...). Si les donn&eacute;es sont toujours incorrectes, contactez vos enseignants.</p>\";
+      content = content + \"<p><b>Le contenu sera adapt&eacute; en fonction de ce contexte.</b> V&eacute;rifiez qu'il est correct, sinon fermez cette page et relancez-l&agrave; depuis le syst&egrave;me d'apprentissage en ligne de votre Universit&eacute; (Moodle, ...). Si les donn&eacute;es sont toujours incorrectes, contactez vos enseignants.</p>\";
     } else {// No context
-      content = content + \"<p><b>N'&eacute;tant dans aucun contexte de cours particulier, vous n'aurez acc&egrave;s qu'&agrave un contenu g&eacute;n&eacute;raliste.</b> Si c'est ce que vous souhaitez... Bienvenue&nbsp;! Sinon, fermez cette page et relancer-l&agrave; depuis le syst&egrave;me d'apprentissage en ligne de votre Universit&eacute; (Moodle, ...). Si les donn&eacute;es sont toujours incorrectes, contactez vos enseignants.</p>\";
+      content = content + \"<p><b>N'&eacute;tant dans aucun contexte de cours particulier, vous n'aurez acc&egrave;s qu'&agrave un contenu g&eacute;n&eacute;raliste.</b> Si c'est ce que vous souhaitez... Bienvenue&nbsp;! Sinon, fermez cette page et relancez-l&agrave; depuis le syst&egrave;me d'apprentissage en ligne de votre Universit&eacute; (Moodle, ...). Si les donn&eacute;es sont toujours incorrectes, contactez vos enseignants.</p>\";
     }
 
     // If registered user and/or special context, offer to reset it
