@@ -2,6 +2,8 @@
 
 -   The `launchApp()` javascript function in `learnitdown_init()` now includes a `framesource=` parameter to comply with new Posit Connect rules for embedded contents
 
+-   The `learnr()` function has a new argument: `connect.url=` to specify the URL of the Posit Connect server where the learnr should be run (if `NULL`, the `rstudio.url=` argument is used instead.
+
 # learnitdown 1.8.1
 
 -   The `observe()` statement is now evaluated in the R Markdown document environment.

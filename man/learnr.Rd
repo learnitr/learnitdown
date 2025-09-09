@@ -12,6 +12,7 @@ learnr(
   text = "Now let's make the exercises in the following tutorial:",
   toc.def = "Tutorial {id}",
   rstudio.url = "start_rstudio.html",
+  connect.url = NULL,
   tuto.img = "images/list-tuto.png",
   tuto.link = "tutorial"
 )
@@ -35,6 +36,9 @@ replacement, e.g., \code{{id}}.}
 
 \item{rstudio.url}{The URL to open a page in RStudio server in the SciViews
 box.}
+
+\item{connect.url}{The URL to open a page in Posit Connect. If provided, it
+is used instead of \code{rstudio.url}.}
 
 \item{tuto.img}{The image to display in front of the toc entry}
 

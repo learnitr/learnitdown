@@ -14,6 +14,8 @@
 #' replacement, e.g., `{id}`.
 #' @param rstudio.url The URL to open a page in RStudio server in the SciViews
 #' box.
+#' @param connect.url The URL to open a page in Posit Connect. If provided, it
+#' is used instead of `rstudio.url`.
 #' @param tuto.img The image to display in front of the toc entry
 #' @param tuto.link The link when the image is clicked (sends to an help page
 #' about learnr tutorials).
@@ -23,6 +25,7 @@
 learnr <- function(id, title = NULL, package, toc = "",
 text = "Now let's make the exercises in the following tutorial:",
 toc.def = "Tutorial {id}", rstudio.url = "start_rstudio.html",
+connect.url = NULL,
 tuto.img = "images/list-tuto.png", tuto.link = "tutorial") {
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
@@ -42,8 +45,14 @@ tuto.img = "images/list-tuto.png", tuto.link = "tutorial") {
     title <- paste0(id, " (", title, ")")
   }
 
-  url <- paste0(rstudio.url, "?runrcode=", package, "%3A%3Arun%28%22",
-    URLencode(id, reserved = TRUE), "%22%29")
+  if (!is.null(connect.url)) {
+    if (!endsWith(connect.url, "/"))
+      connect.url <- paste0(connect.url, "/")
+    url <- paste0(connect.url, URLencode(id, reserved = TRUE), "/")
+  } else {# Use RStudio URL instead
+    url <- paste0(rstudio.url, "?runrcode=", package, "%3A%3Arun%28%22",
+      URLencode(id, reserved = TRUE), "%22%29")
+  }
 
   glue::glue("\n\n\\BeginKnitrBlock{{tuto}}<div class=\"tuto\">
 {text} **[]{{#{id} }[{title}]({url}){{target=\"_blank\"}}**.
