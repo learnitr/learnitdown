@@ -369,19 +369,19 @@ if (params !== undefined && params != '') {
 //  }
 
 launchApp = function(id, src) {
-  var params = encodeQueryString();
-  if (params !== undefined && params != '') {
-    if (src.includes('?')) {
-      // There is already a search string => append parameters to it
-      src = src + '&' + params;
-    } else {
-      // Add a search string
-      src = src + '?' + params;
-    }
-  }
   // This is now required by Posit Connect for embedding content
   var address = window.location.toString().split('?')[0];
-  src = src + '&framesource=' + encodeURIComponent(address);
+  if (src.includes('?')) {
+    // There is already a search string => append parameters to it
+    src = src + '&' + 'framesource=' + encodeURIComponent(address);
+  } else {
+    // Add a search string
+    src = src + '?' + 'framesource=' + encodeURIComponent(address);
+  }
+  var params = encodeQueryString();
+  if (params !== undefined && params != '') {
+    src = src + '&' + params;
+  }
 
   var img = document.getElementById('img' + id);
   var app = document.getElementById(id);
