@@ -582,10 +582,9 @@ learnitdownLearnrServer <- function(input, output, session,
           message("Session user_id is not defined")
         } else {
           message("Session user_id: ", tuto_user_id)
-          session$request$tutorial.user_id <- user_info$login
-
-          message("Session user_id changed to: ", user_info$login)
         }
+        session$request$tutorial.user_id <- user_info$login
+        message("Session user_id changed to: ", user_info$login)
 
         # TODO: a mechanism to store more user data in an option list
       } else {# Set used data globally for this process
