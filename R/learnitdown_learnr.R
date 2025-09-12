@@ -583,7 +583,11 @@ learnitdownLearnrServer <- function(input, output, session,
         } else {
           message("Session user_id: ", tuto_user_id)
         }
-        session$request$tutorial.user_id <- user_info$login
+
+        do.call("unlockBinding", list("request", session))
+        session$request[["tutorial.user_id"]] <- user_info$login
+        do.call("lockBinding", list("request", session))
+        #session$request$tutorial.user_id <- user_info$login
         message("Session user_id changed to: ", user_info$login)
 
         # TODO: a mechanism to store more user data in an option list
