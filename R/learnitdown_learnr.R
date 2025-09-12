@@ -562,7 +562,8 @@ learnitdownLearnrServer <- function(input, output, session,
       } else {# Try getting user data from sign_in or from the URL query string
         user_info <- parseQueryString(session$clientData$url_search)
       }
-      options(learnitdown_learnr_user = user_info)
+      # No because it change it for all users!
+      #options(learnitdown_learnr_user = user_info)
     } else {# User data already available from sign_in
       user_info <- getOption("learnitdown_learnr_user")
     }
@@ -571,7 +572,8 @@ learnitdownLearnrServer <- function(input, output, session,
     } else {
       message("Recording enabled for ", user_info$login)
     }
-    output$login <- renderText(getOption("learnitdown_learnr_user")$login)
+    #output$login <- renderText(getOption("learnitdown_learnr_user")$login)
+    output$login <- renderText(user_info$login)
     output$error <- renderText(as.character(record_learnr(data = NULL)))
   }))
 }
