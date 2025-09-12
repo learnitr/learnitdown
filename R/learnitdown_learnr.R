@@ -499,7 +499,7 @@ learnitdownLearnrBanner <- function(title, text, image, align = "left",
   msg.nologin = "Anonymous user, no record!",
   msg.login = "Recording activated for ",
   msg.error = "Error recording activity! ") {
-  div(
+  div(id = "learnrBanner", class = "learnrBanner",
     conditionalPanel("output.login == ''",
       div(msg.nologin,
         class = "alert alert-warning", role = "alert", style = "width: 100%;")
@@ -512,7 +512,6 @@ learnitdownLearnrBanner <- function(title, text, image, align = "left",
       div(msg.error, textOutput("error", inline = TRUE),
         class = "alert alert-danger", role = "alert", style = "width: 100%;")
     ),
-
 
     # Do we add an image?
     if (!missing(image)) img(src = image, align = align) else "",
