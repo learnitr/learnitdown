@@ -21,14 +21,6 @@
 record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   # Arguments are imposed by learnr. Further arguments passed through options
   # or environment variables
-
-
-  if (!missing(user_id))
-    message("User ID is:", user_id)
-  #if (!missing(data))
-  #  print(data)
-  # Does not work !message("User is:", session$user)
-
   url <- Sys.getenv("MONGO_URL")
   url.server <- Sys.getenv("MONGO_URL_SERVER")
   db <- Sys.getenv("MONGO_BASE")
@@ -40,10 +32,10 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   bds_file <- file.path(bds_dir, "learnr_events")
   debug <- (Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0)
 
-  user_info <- getOption("learnitdown_learnr_user")
-  if (!missing(user_id) && user_id != 'rstudio-connect' &&
-    (is.null(user_info) || is.null(user_info$login)))
-    user_info <- list(login = user_id)
+  if (!missing(user_id))
+    user_info <- getOption("learnitdown_all_learnr_users", list())[user_id]
+  if (is.null(user_info))
+    user_info <- getOption("learnitdown_learnr_user")
   if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
 
@@ -576,24 +568,10 @@ learnitdownLearnrServer <- function(input, output, session,
       }
       # No because it change it for all users!
       #options(learnitdown_learnr_user = user_info)
-      if (is.environment(session$request)) {
-        tuto_user_id <- session$request$tutorial.user_id
-        if (is.null(tuto_user_id)) {
-          message("Session user_id is not defined")
-        } else {
-          message("Session user_id: ", tuto_user_id)
-        }
-
-        do.call("unlockBinding", list("request", session))
-        session$request[["tutorial.user_id"]] <- user_info$login
-        do.call("lockBinding", list("request", session))
-        #session$request$tutorial.user_id <- user_info$login
-        message("Session user_id changed to: ", user_info$login)
-
-        # TODO: a mechanism to store more user data in an option list
-      } else {# Set used data globally for this process
-        options(learnitdown_learnr_user = user_info)
-      }
+      # We use another option that stores a list with all connected users data
+      all_users <- getOption("learnitdown_all_learnr_users", list())
+      all_users[user_info$login] <- user_info
+      options(learnitdown_all_learnr_users = all_users)
     } else {# User data already available from sign_in
       user_info <- getOption("learnitdown_learnr_user")
     }
@@ -602,7 +580,6 @@ learnitdownLearnrServer <- function(input, output, session,
     } else {
       message("Recording enabled for ", user_info$login)
     }
-    #output$login <- renderText(getOption("learnitdown_learnr_user")$login)
     output$login <- renderText(user_info$login)
     output$error <- renderText(as.character(record_learnr(data = NULL)))
   }))
