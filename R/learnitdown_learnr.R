@@ -33,7 +33,7 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   debug <- (Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0)
 
   if (!missing(user_id)) {
-    user_info <- getOption("learnitdown_all_learnr_users", list())[user_id]
+    user_info <- getOption("learnitdown_all_learnr_users", list())[[user_id]]
   } else {
     user_info <- NULL
   }
@@ -573,7 +573,7 @@ learnitdownLearnrServer <- function(input, output, session,
       #options(learnitdown_learnr_user = user_info)
       # We use another option that stores a list with all connected users data
       all_users <- getOption("learnitdown_all_learnr_users", list())
-      all_users[user_info$login] <- user_info
+      all_users[[user_info$login]] <- user_info
       options(learnitdown_all_learnr_users = all_users)
     } else {# User data already available from sign_in
       user_info <- getOption("learnitdown_learnr_user")
