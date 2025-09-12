@@ -21,6 +21,14 @@
 record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   # Arguments are imposed by learnr. Further arguments passed through options
   # or environment variables
+
+
+  if (!missing(user_id))
+    message("User ID is:", user_id)
+  #if (!missing(data))
+  #  print(data)
+  # Does not work !message("User is:", session$user)
+
   url <- Sys.getenv("MONGO_URL")
   url.server <- Sys.getenv("MONGO_URL_SERVER")
   db <- Sys.getenv("MONGO_BASE")
@@ -31,7 +39,10 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
     bds_dir <- "~/.local/share/R/learnitdown" # Default value
   bds_file <- file.path(bds_dir, "learnr_events")
   debug <- (Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0)
+
   user_info <- getOption("learnitdown_learnr_user")
+  if (user_id != 'rstudio-connect' && (is.null(user_info) || is.null(user_info$login)))
+    user_info <- list(login = user_id)
   if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
 
@@ -564,6 +575,21 @@ learnitdownLearnrServer <- function(input, output, session,
       }
       # No because it change it for all users!
       #options(learnitdown_learnr_user = user_info)
+      if (is.environment(session$request)) {
+        tuto_user_id <- session$request$tutorial.user_id
+        if (is.null(tuto_user_id)) {
+          message("Session user_id is not defined")
+        } else {
+          message("Session user_id: ", tuto_user_id)
+          session$request$tutorial.user_id <- user_info$login
+
+          message("Session user_id changed to: ", user_info$login)
+        }
+
+        # TODO: a mechanism to store more user data in an option list
+      } else {# Set used data globally for this process
+        options(learnitdown_learnr_user = user_info)
+      }
     } else {# User data already available from sign_in
       user_info <- getOption("learnitdown_learnr_user")
     }
