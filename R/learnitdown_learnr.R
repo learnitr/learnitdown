@@ -41,7 +41,8 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
   debug <- (Sys.getenv("LEARNITDOWN_DEBUG", 0) != 0)
 
   user_info <- getOption("learnitdown_learnr_user")
-  if (user_id != 'rstudio-connect' && (is.null(user_info) || is.null(user_info$login)))
+  if (!mising(user_id) && user_id != 'rstudio-connect' &&
+    (is.null(user_info) || is.null(user_info$login)))
     user_info <- list(login = user_id)
   if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
     return()
