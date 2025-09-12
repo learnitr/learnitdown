@@ -572,9 +572,11 @@ learnitdownLearnrServer <- function(input, output, session,
       # No because it change it for all users!
       #options(learnitdown_learnr_user = user_info)
       # We use another option that stores a list with all connected users data
-      all_users <- getOption("learnitdown_all_learnr_users", list())
-      all_users[[user_info$login]] <- user_info
-      options(learnitdown_all_learnr_users = all_users)
+      if (!is.null(user_info$login)) {
+        all_users <- getOption("learnitdown_all_learnr_users", list())
+        all_users[[user_info$login]] <- user_info
+        options(learnitdown_all_learnr_users = all_users)
+      }
     } else {# User data already available from sign_in
       user_info <- getOption("learnitdown_learnr_user")
     }
