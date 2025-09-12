@@ -34,11 +34,13 @@ record_learnr <- function(tutorial_id, tutorial_version, user_id, event, data) {
 
   if (!missing(user_id)) {
     user_info <- getOption("learnitdown_all_learnr_users", list())[user_id]
-    if (is.null(user_info))
-      user_info <- getOption("learnitdown_learnr_user")
-    if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
-      return()
+  } else {
+    user_info <- NULL
   }
+  if (is.null(user_info))
+    user_info <- getOption("learnitdown_learnr_user")
+  if (is.null(user_info) || is.null(user_info$login)) # No login => no records!
+    return()
 
   # In case url.server is defined, we prefer using it, if it works
   is_server_up <- function(url, db) {
