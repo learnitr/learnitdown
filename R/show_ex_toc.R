@@ -26,8 +26,9 @@ show_ex_toc <- function(id, header = "", clear.it = TRUE, finalize = FALSE) {
   # Compile an apps_id.csv file per module,
   ex_dir <- file.path(.get_output_dir(), "ex")
   apps <- getOption("learnitdown_apps", data.frame())
-  write.csv(apps, file.path(ex_dir, paste0("apps_", id, ".csv")),
-    row.names = FALSE)
+  if (NROW(apps))
+    write.csv(apps, file.path(ex_dir, paste0("apps_", id, ".csv")),
+      row.names = FALSE)
   if (isTRUE(clear.it))
     options(learnitdown_apps = NULL)
 
