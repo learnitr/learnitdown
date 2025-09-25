@@ -5,14 +5,19 @@
 \alias{clean_ex_toc}
 \title{Insert a table of content for the exercises at the end of a bookdown chapter}
 \usage{
-show_ex_toc(header = "", clear.it = TRUE)
+show_ex_toc(id, header = "", clear.it = TRUE, finalize = FALSE)
 
 clean_ex_toc()
 }
 \arguments{
+\item{id}{An identifier for this table of content.}
+
 \item{header}{A Markdown text to place as header of the exercises toc.}
 
 \item{clear.it}{Do we clear the toc list (\code{TRUE} by default)?}
+
+\item{finalize}{If \code{TRUE}, we also compile the \code{assignments.csv} and
+\code{apps.csv} files with all assignments and all apps.}
 }
 \value{
 The Markdown chunk with the exercises toc.

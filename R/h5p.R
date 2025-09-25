@@ -1,6 +1,7 @@
 #' Insert H5P content in the document
 #'
 #' @param id The ID of the H5P content in your Wordpress.
+#' @param name The name you give to your H5P content.
 #' @param baseurl The first part of the URL for your domain, usually something
 #' like `https://my.site.com` **without** the trailing `/`.
 #' @param idurl The URL to the H5P content, usually something like `""`
@@ -34,7 +35,7 @@
 #' subdirectory inside of the same Wordpress site to allow free communication
 #' between the parent (the bookdown page) and the child document in the iframe
 #' (the H5P content).
-h5p <- function(id, baseurl,
+h5p <- function(id, name, baseurl,
     idurl = "wp-admin/admin-ajax.php?action=h5p_embed&id=",
     width = 780, height = 500, toc = "", toc.def = "H5P exercise {id}",
     h5p.img = "images/list-h5p.png", h5p.link = "h5p", icourse = "",
@@ -47,20 +48,20 @@ h5p <- function(id, baseurl,
       toc <- glue::glue(toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
-      glue::glue("- [![h5p]({h5p.img})]({h5p.link}) [{toc}](#h5p_{id})"))
+      glue::glue("- [![h5p]({h5p.img})]({h5p.link}) [{name} - {toc}](#h5p_{id})"))
     options(learnitdown_ex_toc = ex_toc)
 
     # Also add an entry in the apps
     apps <- getOption("learnitdown_apps", data.frame())
     app <- data.frame(
-      app         = id,
+      app         = name,
       type        = "h5p",
       icourse     = icourse,
       institution = institution,
-      course      = substring(id, 1, 1),
+      course      = substring(name, 1, 1),
       acad_year   = acad_year,
       term        = term,
-      module      = substring(id, 1, 3),
+      module      = substring(name, 1, 3),
       set         = set,
       assignment  = NA_character_,
       template    = NA_character_,

@@ -72,6 +72,9 @@ run.arg = URLencode(run.cmd, reserved = TRUE),
 app.img = "images/list-app.png", app.link = "shiny_app",
   icourse = "",
   institution = "", acad_year = "", term = "", set = "", ...) {
+
+  img <- force(img)
+
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
     ex_toc <- getOption("learnitdown_ex_toc", "")
@@ -80,12 +83,12 @@ app.img = "images/list-app.png", app.link = "shiny_app",
       toc <- glue::glue(toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
-      glue::glue("- [![app]({app.img})]({app.link}) [{toc}](#{app})"))
+      glue::glue("- [![app]({app.img})]({app.link}) [{app} - {toc}](#{app})"))
     options(learnitdown_ex_toc = ex_toc)
 
     # Also add an entry in the apps
     apps <- getOption("learnitdown_apps", data.frame())
-    app <- data.frame(
+    this_app <- data.frame(
       app         = app,
       type        = "shiny",
       icourse     = icourse,
@@ -108,7 +111,7 @@ app.img = "images/list-app.png", app.link = "shiny_app",
       n           = 1,
       level       = 1,
       weight      = 1) # Always 1 for now
-    apps <- rbind(apps, app)
+    apps <- rbind(apps, this_app)
     options(learnitdown_apps = apps)
   }
 

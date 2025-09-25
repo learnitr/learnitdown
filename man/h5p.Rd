@@ -6,6 +6,7 @@
 \usage{
 h5p(
   id,
+  name,
   baseurl,
   idurl = "wp-admin/admin-ajax.php?action=h5p_embed&id=",
   width = 780,
@@ -23,6 +24,8 @@ h5p(
 }
 \arguments{
 \item{id}{The ID of the H5P content in your Wordpress.}
+
+\item{name}{The name you give to your H5P content.}
 
 \item{baseurl}{The first part of the URL for your domain, usually something
 like \verb{https://my.site.com} \strong{without} the trailing \code{/}.}

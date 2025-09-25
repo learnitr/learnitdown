@@ -40,13 +40,14 @@ icourse = "", institution = "", acad_year = "", term = "", set = "") {
     title <- paste0(id, " (", title, ")")
   }
 
+  rstudio_url <- paste0(rstudio.url, "?runrcode=", package, "%3A%3Arun%28%22",
+    URLencode(id, reserved = TRUE), "%22%29")
   if (!is.null(connect.url)) {
     if (!endsWith(connect.url, "/"))
       connect.url <- paste0(connect.url, "/")
     url <- paste0(connect.url, URLencode(id, reserved = TRUE), "/")
   } else {# Use RStudio URL instead
-    url <- paste0(rstudio.url, "?runrcode=", package, "%3A%3Arun%28%22",
-      URLencode(id, reserved = TRUE), "%22%29")
+    url <- rstudio_url
   }
 
   if (!is.null(toc)) {
@@ -57,7 +58,7 @@ icourse = "", institution = "", acad_year = "", term = "", set = "") {
       toc <- glue::glue(toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
-      glue::glue("- [![tuto]({tuto.img})]({tuto.link}) [{toc}](#{id})"))
+      glue::glue("- [![tuto]({tuto.img})]({tuto.link}) [{id} - {toc}](#{id})"))
     options(learnitdown_ex_toc = ex_toc)
 
     # Also add an entry in the apps
@@ -74,8 +75,8 @@ icourse = "", institution = "", acad_year = "", term = "", set = "") {
       set         = set,
       assignment  = NA_character_,
       template    = NA_character_,
-      url         = connect.url,
-      alt_url     = url,
+      url         = url,
+      alt_url     = rstudio_url,
       start       = NA,
       end         = NA,
       deadline    = NA,

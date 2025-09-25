@@ -137,7 +137,7 @@ template = "assignment_en.html", baseurl = "/") {
     clone       = as.logical(clone),
     n           = n,
     level       = level,
-    weight      = 1) # For now, weight is always 1
+    weight      = if (level == 0) 0 else 1)
   # Write this file in ex_dir
   write.csv(ex_data, file_csv, row.names = FALSE)
 
@@ -195,7 +195,7 @@ template = "assignment_en.html", baseurl = "/") {
       toc <- glue::glue(texts$toc.def)
     }
     ex_toc <- paste0(ex_toc, "\n",
-      glue::glue("- [![git]({assign.img})]({assign.link}) [{toc}](#{anchor})"))
+      glue::glue("- [![git]({assign.img})]({assign.link}) [{name} - {toc}](#{anchor})"))
     options(learnitdown_ex_toc = ex_toc)
   }
 

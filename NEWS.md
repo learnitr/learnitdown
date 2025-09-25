@@ -4,6 +4,10 @@
 
 -   The `learnr()`, `h5p()` and `shiny()` functions now populate a "learnitdown_apps" option that is used by `show_ex_toc()` to create an ex/apps.csv file with all exercises together with the assignments. They have new arguments `icourse=`, `institution=`, `acad_year=`, `term=` and `set=` to populate this table (also `baseurl=` for `launch_shiny()`).
 
+-   A file with all assignments (`assignments.csv`) and with all apps (`apps.csv`) is compiled in the `/ex` subdirectory when using `show_ex_toc(..., finalize = TRUE)`.
+
+-   The name of the app is now also indicated in the exercises table of content.
+
 # learnitdown 1.8.2
 
 -   The `launchApp()` javascript function in `learnitdown_init()` now includes a `framesource=` parameter to comply with new Posit Connect rules for embedded contents
