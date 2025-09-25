@@ -1,3 +1,9 @@
+# learnitdown 1.9.0
+
+-   `assignment()`, `assignment2()`, `challenge()` and `challenge2()` functions now have new arguments `institution=` and `set=`.
+
+-   The `learnr()`, `h5p()` and `shiny()` functions now populate a "learnitdown_apps" option that is used by `show_ex_toc()` to create an ex/apps.csv file with all exercises together with the assignments. They have new arguments `icourse=`, `institution=`, `acad_year=`, `term=` and `set=` to populate this table (also `baseurl=` for `launch_shiny()`).
+
 # learnitdown 1.8.2
 
 -   The `launchApp()` javascript function in `learnitdown_init()` now includes a `framesource=` parameter to comply with new Posit Connect rules for embedded contents

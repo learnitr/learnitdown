@@ -18,11 +18,17 @@ launch_shiny(
     "or [run `{run.cmd}`]({run.url}{run.arg}){{target=\\"_blank\\"}}.*"),
   toc = "",
   toc.def = "Shiny application {app}",
+  baseurl = "",
   run.url = "start_rstudio.html?runrcode=",
   run.cmd = glue("{fun}(\\"{app}\\")"),
   run.arg = URLencode(run.cmd, reserved = TRUE),
   app.img = "images/list-app.png",
   app.link = "shiny_app",
+  icourse = "",
+  institution = "",
+  acad_year = "",
+  term = "",
+  set = "",
   ...
 )
 }
@@ -63,6 +69,8 @@ entry, \code{""} for a default entry based on \verb{toc.def =}).}
 \item{toc.def}{Text for a default toc entry using \code{\link[=glue]{glue()}} syntax for
 replacement, e.g., \code{{app}}.}
 
+\item{baseurl}{The base URL of the Website}
+
 \item{run.url}{The URL to use to start the Shiny application in RStudio
 server in the SciViews Box. It should generally end with \verb{?runrcode=}, and
 the R code to execute will be appended to it from \verb{run.arg =}.}
@@ -75,6 +83,17 @@ the R code to execute will be appended to it from \verb{run.arg =}.}
 
 \item{app.link}{The link when the image is clicked (sends to an help page
 about Shiny applications).}
+
+\item{icourse}{The course identifier, e.g., \code{"MATH101"}.}
+
+\item{institution}{The institution name, e.g., \code{"My University"}.}
+
+\item{acad_year}{The academic year, e.g., \code{"2023-2024"}.}
+
+\item{term}{The term, e.g., \code{"Q1"}.}
+
+\item{set}{The set identifier, e.g., \code{"21M"} where 21 is the year and M is a
+set identifier.}
 
 \item{...}{Not used here, but it allows to add more arguments used by the
 screenshot addin, like \verb{delay =}, \verb{offsetx =} or \verb{offsety =}, see

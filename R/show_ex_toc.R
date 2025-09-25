@@ -20,13 +20,21 @@ show_ex_toc <- function(header = "", clear.it = TRUE) {
       options(learnitdown_ex_toc = NULL)
   }
 
-  # Also compile a single assignments.csv file
+  # Compile a single assignments.csv file
   ex_dir <- file.path(.get_output_dir(), "ex")
   files <- dir(ex_dir, pattern = "^assignment_.+\\.csv$", full.names = TRUE)
   res <- data.frame()
   for (file in files)
     res <- rbind(res, read.csv(file))
   write.csv(res, file.path(ex_dir, "assignments.csv"), row.names = FALSE)
+
+  # Also compile a apps.csv file
+  apps <- getOption("learnitdown_apps", data.frame())
+  apps <- rbind(apps, res)
+  # Sort by app name
+  apps <- apps[order(apps$app), ]
+  write.csv(apps, file.path(ex_dir, "apps.csv"), row.names = FALSE)
+
   toc
 }
 

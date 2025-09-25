@@ -30,8 +30,10 @@ assignment(
   level = 3,
   n = 1,
   type = if (n == 1) "ind. github" else "group github",
+  institution = "",
   acad_year = "",
   term = "",
+  set = "",
   texts = assignment_en(),
   assign.img = "images/list-assign.png",
   assign.link = "github_assignment",
@@ -55,8 +57,10 @@ assignment2(
   level = 3,
   n = 1,
   type = if (n == 1) "ind. github" else "group github",
+  institution = "",
   acad_year = "",
   term = "",
+  set = "",
   texts = assignment2_en(),
   assign.img = "images/list-assign2.png",
   assign.link = "github_assignment",
@@ -80,8 +84,10 @@ challenge(
   level = 3,
   n = 1,
   type = if (n == 1) "ind. challenge" else "group challenge",
+  institution = "",
   acad_year = "",
   term = "",
+  set = "",
   texts = challenge_en(),
   assign.img = "images/list-challenge.png",
   assign.link = "github_challenge",
@@ -105,8 +111,10 @@ challenge2(
   level = 3,
   n = 1,
   type = if (n == 1) "ind. challenge" else "group challenge",
+  institution = "",
   acad_year = "",
   term = "",
+  set = "",
   texts = challenge2_en(),
   assign.img = "images/list-challenge2.png",
   assign.link = "github_challenge",
@@ -182,9 +190,14 @@ assignments and 2 for group assignments).}
 \code{"ind. challenge"} if n = 1, or \code{"group github"}/\code{"group challenge"}
 otherwise.}
 
+\item{institution}{The name of the institution (e.g., "My University").}
+
 \item{acad_year}{The academic year (e.g., 2021-2022).}
 
 \item{term}{The term (e.g., Q1, Q2, Q3).}
+
+\item{set}{A short identifier for a  set of assignments (e.g., "21M" where 21
+is the year the set starts, and "M" a set specification).}
 
 \item{texts}{Various sentences used to construct the assignment bloc. You
 can make a call to \code{assignment_en()} or \code{assignment_fr()} as a basis

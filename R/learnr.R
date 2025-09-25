@@ -19,6 +19,12 @@
 #' @param tuto.img The image to display in front of the toc entry
 #' @param tuto.link The link when the image is clicked (sends to an help page
 #' about learnr tutorials).
+#' @param icourse The course identifier, e.g., `"MATH101"`.
+#' @param institution The institution name, e.g., `"My University"`.
+#' @param acad_year The academic year, e.g., `"2023-2024"`.
+#' @param term The term, e.g., `"Q1"`.
+#' @param set The set identifier, e.g., `"21M"` where 21 is the year and M is a
+#' set identifier.
 #'
 #' @return The Markdown chunk to insert a learnr tutorial block in the document.
 #' @export
@@ -26,19 +32,8 @@ learnr <- function(id, title = NULL, package, toc = "",
 text = "Now let's make the exercises in the following tutorial:",
 toc.def = "Tutorial {id}", rstudio.url = "start_rstudio.html",
 connect.url = NULL,
-tuto.img = "images/list-tuto.png", tuto.link = "tutorial") {
-  if (!is.null(toc)) {
-    # Add an entry in the ex_toc
-    ex_toc <- getOption("learnitdown_ex_toc", "")
-    if (toc == "") {
-      # Use default text
-      toc <- glue::glue(toc.def)
-    }
-    ex_toc <- paste0(ex_toc, "\n",
-      glue::glue("- [![tuto]({tuto.img})]({tuto.link}) [{toc}](#{id})"))
-    options(learnitdown_ex_toc = ex_toc)
-  }
-
+tuto.img = "images/list-tuto.png", tuto.link = "tutorial",
+icourse = "", institution = "", acad_year = "", term = "", set = "") {
   if (is.null(title)) {
     title <- id
   } else {
@@ -52,6 +47,46 @@ tuto.img = "images/list-tuto.png", tuto.link = "tutorial") {
   } else {# Use RStudio URL instead
     url <- paste0(rstudio.url, "?runrcode=", package, "%3A%3Arun%28%22",
       URLencode(id, reserved = TRUE), "%22%29")
+  }
+
+  if (!is.null(toc)) {
+    # Add an entry in the ex_toc
+    ex_toc <- getOption("learnitdown_ex_toc", "")
+    if (toc == "") {
+      # Use default text
+      toc <- glue::glue(toc.def)
+    }
+    ex_toc <- paste0(ex_toc, "\n",
+      glue::glue("- [![tuto]({tuto.img})]({tuto.link}) [{toc}](#{id})"))
+    options(learnitdown_ex_toc = ex_toc)
+
+    # Also add an entry in the apps
+    apps <- getOption("learnitdown_apps", data.frame())
+    app <- data.frame(
+      app         = id,
+      type        = "learnr",
+      icourse     = icourse,
+      institution = institution,
+      course      = substring(id, 1, 1),
+      acad_year   = acad_year,
+      term        = term,
+      module      = substring(id, 1, 3),
+      set         = set,
+      assignment  = NA_character_,
+      template    = NA_character_,
+      url         = connect.url,
+      alt_url     = url,
+      start       = NA,
+      end         = NA,
+      deadline    = NA,
+      part        = NA,
+      toc         = TRUE,
+      clone       = FALSE,
+      n           = 1,
+      level       = 2,
+      weight      = 1) # Always 1 for now
+    apps <- rbind(apps, app)
+    options(learnitdown_apps = apps)
   }
 
   glue::glue("\n\n\\BeginKnitrBlock{{tuto}}<div class=\"tuto\">

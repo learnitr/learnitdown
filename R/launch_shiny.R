@@ -31,6 +31,7 @@
 #' entry, `""` for a default entry based on `toc.def =`).
 #' @param toc.def Text for a default toc entry using [glue()] syntax for
 #' replacement, e.g., `{app}`.
+#' @param baseurl The base URL of the Website
 #' @param run.url The URL to use to start the Shiny application in RStudio
 #' server in the SciViews Box. It should generally end with `?runrcode=`, and
 #' the R code to execute will be appended to it from `run.arg =`.
@@ -39,6 +40,12 @@
 #' @param app.img The image to display in front of the toc entry
 #' @param app.link The link when the image is clicked (sends to an help page
 #' about Shiny applications).
+#' @param icourse The course identifier, e.g., `"MATH101"`.
+#' @param institution The institution name, e.g., `"My University"`.
+#' @param acad_year The academic year, e.g., `"2023-2024"`.
+#' @param term The term, e.g., `"Q1"`.
+#' @param set The set identifier, e.g., `"21M"` where 21 is the year and M is a
+#' set identifier.
 #' @param ... Not used here, but it allows to add more arguments used by the
 #' screenshot addin, like `delay =`, `offsetx =` or `offsety =`, see
 #' [webshot_shiny()].
@@ -59,10 +66,12 @@ createimg = TRUE, width = 790, height = 500, fun = NULL,
 alt1 = "*Click to start the Shiny application.*",
 alt2 = paste0("*Click to start",
   "or [run `{run.cmd}`]({run.url}{run.arg}){{target=\"_blank\"}}.*"),
-toc = "", toc.def = "Shiny application {app}",
+toc = "", toc.def = "Shiny application {app}", baseurl = "",
 run.url = "start_rstudio.html?runrcode=", run.cmd = glue("{fun}(\"{app}\")"),
 run.arg = URLencode(run.cmd, reserved = TRUE),
-app.img = "images/list-app.png", app.link = "shiny_app", ...) {
+app.img = "images/list-app.png", app.link = "shiny_app",
+  icourse = "",
+  institution = "", acad_year = "", term = "", set = "", ...) {
   if (!is.null(toc)) {
     # Add an entry in the ex_toc
     ex_toc <- getOption("learnitdown_ex_toc", "")
@@ -73,6 +82,34 @@ app.img = "images/list-app.png", app.link = "shiny_app", ...) {
     ex_toc <- paste0(ex_toc, "\n",
       glue::glue("- [![app]({app.img})]({app.link}) [{toc}](#{app})"))
     options(learnitdown_ex_toc = ex_toc)
+
+    # Also add an entry in the apps
+    apps <- getOption("learnitdown_apps", data.frame())
+    app <- data.frame(
+      app         = app,
+      type        = "shiny",
+      icourse     = icourse,
+      institution = institution,
+      course      = substring(app, 1, 1),
+      acad_year   = acad_year,
+      term        = term,
+      module      = substring(app, 1, 3),
+      set         = set,
+      assignment  = NA_character_,
+      template    = NA_character_,
+      url         = url,
+      alt_url     = paste0(baseurl, "/", run.url, run.arg),
+      start       = NA,
+      end         = NA,
+      deadline    = NA,
+      part        = NA,
+      toc         = TRUE,
+      clone       = FALSE,
+      n           = 1,
+      level       = 1,
+      weight      = 1) # Always 1 for now
+    apps <- rbind(apps, app)
+    options(learnitdown_apps = apps)
   }
 
   # Use alt2 if fun is provided, otherwise, use alt1

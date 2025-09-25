@@ -13,7 +13,12 @@ h5p(
   toc = "",
   toc.def = "H5P exercise {id}",
   h5p.img = "images/list-h5p.png",
-  h5p.link = "h5p"
+  h5p.link = "h5p",
+  icourse = "",
+  institution = "",
+  acad_year = "",
+  term = "",
+  set = ""
 )
 }
 \arguments{
@@ -41,6 +46,17 @@ replacement, e.g., \code{{var}}.}
 
 \item{h5p.link}{The link when the image is clicked (sends to an help page
 about learnr tutorials).}
+
+\item{icourse}{The course identifier, e.g., \code{"MATH101"}.}
+
+\item{institution}{The institution name, e.g., \code{"My University"}.}
+
+\item{acad_year}{The academic year, e.g., \code{"2023-2024"}.}
+
+\item{term}{The term, e.g., \code{"Q1"}.}
+
+\item{set}{The set identifier, e.g., \code{"21M"} where 21 is the year and M is a
+set identifier.}
 }
 \value{
 HTML code that generates the iframe. It is most conveniently used

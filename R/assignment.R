@@ -39,8 +39,11 @@
 #' @param type The type of exercise. By default, it is `"ind. github"` or
 #' `"ind. challenge"` if n = 1, or `"group github"`/`"group challenge"`
 #' otherwise.
+#' @param institution The name of the institution (e.g., "My University").
 #' @param acad_year The academic year (e.g., 2021-2022).
 #' @param term The term (e.g., Q1, Q2, Q3).
+#' @param set A short identifier for a  set of assignments (e.g., "21M" where 21
+#' is the year the set starts, and "M" a set specification).
 #' @param texts Various sentences used to construct the assignment bloc. You
 #' can make a call to `assignment_en()` or `assignment_fr()` as a basis
 #' and modify only the sentences you want.
@@ -75,7 +78,7 @@ assignment <- function(name, url, alturl = url, course.ids = NULL,
 course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
 course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
 n = 1, type = if (n == 1) "ind. github" else "group github",
-acad_year = "", term = "",
+institution = "", acad_year = "", term = "", set = "",
 texts = assignment_en(), assign.img = "images/list-assign.png",
 assign.link = "github_assignment", block = "assign",
 template = "assignment_en.html", baseurl = "/") {
@@ -113,24 +116,28 @@ template = "assignment_en.html", baseurl = "/") {
   starts <- if (is.null(course.starts)) NA else course.starts
   ends <- if (is.null(course.ends)) NA else course.ends
   ex_data <- data.frame(
-    app = name,
-    type = type,
-    icourse = names(urls),
-    course = substring(name, 1, 1),
-    acad_year = acad_year,
-    term = term,
-    module = substring(name, 1, 3),
-    assignment = as.character(ids),
-    template = url,
-    url = as.character(urls[names(ids)]),
-    alt_url = alturl,
-    start = as.character(starts[names(ids)]),
-    end = as.character(ends[names(ids)]),
-    part = part2,
-    toc = !is.null(toc),
-    clone = as.logical(clone),
-    n = n,
-    level = level)
+    app         = name,
+    type        = type,
+    icourse     = names(urls),
+    institution = institution,
+    course      = substring(name, 1, 1),
+    acad_year   = acad_year,
+    term        = term,
+    module      = substring(name, 1, 3),
+    set         = set,
+    assignment  = as.character(ids),
+    template    = url,
+    url         = as.character(urls[names(ids)]),
+    alt_url     = alturl,
+    start       = as.character(starts[names(ids)]),
+    end         = as.character(ends[names(ids)]),
+    deadline    = as.character(ends[names(ids)]), # Same as end for now
+    part        = part2,
+    toc         = !is.null(toc),
+    clone       = as.logical(clone),
+    n           = n,
+    level       = level,
+    weight      = 1) # For now, weight is always 1
   # Write this file in ex_dir
   write.csv(ex_data, file_csv, row.names = FALSE)
 
@@ -241,16 +248,16 @@ assignment2 <- function(name, url, alturl = url, course.ids = NULL,
 course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
 course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
 n = 1, type = if (n == 1) "ind. github" else "group github",
-acad_year = "", term = "",
+institution = "", acad_year = "", term = "", set = "",
 texts = assignment2_en(), assign.img = "images/list-assign2.png",
 assign.link = "github_assignment", block = "assign2",
 template = "assignment_en.html", baseurl = "/")
   assignment(name, url, course.ids = course.ids, course.urls = course.urls,
     course.starts = course.starts, course.ends = course.ends, part = part,
     course.names = course.names, toc = toc, clone = clone, level = level, n = n,
-    type = type, acad_year = acad_year, term = term, texts = texts,
-    assign.img = assign.img, assign.link = assign.link, block = block,
-    template = template, baseurl = baseurl)
+    type = type, institution = institution, acad_year = acad_year, term = term,
+    set = set, texts = texts, assign.img = assign.img, assign.link = assign.link,
+    block = block, template = template, baseurl = baseurl)
 
 #' @rdname assignment
 #' @export
@@ -258,33 +265,33 @@ challenge <- function(name, url, alturl = url, course.ids = NULL,
 course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
 course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
 n = 1, type = if (n == 1) "ind. challenge" else "group challenge",
-acad_year = "", term = "",
+institution = "", acad_year = "", term = "", set = "",
 texts = challenge_en(), assign.img = "images/list-challenge.png",
 assign.link = "github_challenge", block = "challenge",
 template = "assignment_en.html", baseurl = "/")
   assignment(name, url, course.ids = course.ids, course.urls = course.urls,
     course.starts = course.starts, course.ends = course.ends, part = part,
     course.names = course.names, toc = toc, clone = clone, level = level, n = n,
-    type = type, acad_year = acad_year, term = term, texts = texts,
-    assign.img = assign.img, assign.link = assign.link, block = block,
-    template = template, baseurl = baseurl)
+    type = type, institution = institution, acad_year = acad_year, term = term,
+    set = set, texts = texts, assign.img = assign.img, assign.link = assign.link,
+    block = block, template = template, baseurl = baseurl)
 
 #' @rdname assignment
 #' @export
 challenge2 <- function(name, url, alturl = url, course.ids = NULL,
 course.urls = NULL, course.starts = NULL, course.ends = NULL, part = NULL,
 course.names = c(course1 = "Data Science"), toc = "", clone = TRUE, level = 3,
-  n = 1, type = if (n == 1) "ind. challenge" else "group challenge",
-acad_year = "", term = "",
+n = 1, type = if (n == 1) "ind. challenge" else "group challenge",
+institution = "", acad_year = "", term = "", set = "",
 texts = challenge2_en(), assign.img = "images/list-challenge2.png",
 assign.link = "github_challenge", block = "challenge2",
 template = "assignment_en.html", baseurl = "/")
   assignment(name, url, course.ids = course.ids, course.urls = course.urls,
     course.starts = course.starts, course.ends = course.ends, part = part,
     course.names = course.names, toc = toc, clone = clone, level = level, n = n,
-    type = type, acad_year = acad_year, term = term, texts = texts,
-    assign.img = assign.img, assign.link = assign.link, block = block,
-    template = template, baseurl = baseurl)
+    type = type, institution = institution, acad_year = acad_year, term = term,
+    set = set, texts = texts, assign.img = assign.img, assign.link = assign.link,
+    block = block, template = template, baseurl = baseurl)
 
 #' @rdname assignment
 #' @export
