@@ -35,15 +35,21 @@ show_ex_toc <- function(id, header = "", clear.it = TRUE, finalize = FALSE) {
     # Compile a single assignments.csv file
     files <- dir(ex_dir, pattern = "^assignment_.+\\.csv$", full.names = TRUE)
     res <- data.frame()
-    for (file in files)
-      res <- rbind(res, read.csv(file))
+    for (file in files) {
+      one_res <- read.csv(file)
+      if (NROW(one_res))
+        res <- rbind(res, one_res)
+    }
     write.csv(res, file.path(ex_dir, "assignments.csv"), row.names = FALSE)
 
     # Also compile an apps.csv with all apps and assignments
     apps_files <- dir(ex_dir, pattern = "^apps_.+\\.csv$", full.names = TRUE)
     apps_res <- data.frame()
-    for (app_file in apps_files)
-      apps_res <- rbind(apps_res, read.csv(app_file))
+    for (app_file in apps_files) {
+      app_res <- read.csv(app_file)
+      if (NROW(app_res))
+        apps_res <- rbind(apps_res, app_res)
+    }
     all_apps <- rbind(apps_res, res)
     # Sort by app name
     all_apps <- all_apps[order(all_apps$app), ]
