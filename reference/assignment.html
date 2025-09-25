@@ -18,7 +18,7 @@ data related to a GitHub (Classroom) assignment."><meta property="og:image" cont
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">learnitdown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0</span>
       </span>
     </div>
 
@@ -73,8 +73,10 @@ data related to a GitHub (Classroom) assignment.</p>
 <span>  level <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. github"</span> <span class="kw">else</span> <span class="st">"group github"</span>,</span>
+<span>  institution <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  acad_year <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  term <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  set <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  texts <span class="op">=</span> <span class="fu">assignment_en</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  assign.img <span class="op">=</span> <span class="st">"images/list-assign.png"</span>,</span>
 <span>  assign.link <span class="op">=</span> <span class="st">"github_assignment"</span>,</span>
@@ -98,8 +100,10 @@ data related to a GitHub (Classroom) assignment.</p>
 <span>  level <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. github"</span> <span class="kw">else</span> <span class="st">"group github"</span>,</span>
+<span>  institution <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  acad_year <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  term <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  set <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  texts <span class="op">=</span> <span class="fu">assignment2_en</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  assign.img <span class="op">=</span> <span class="st">"images/list-assign2.png"</span>,</span>
 <span>  assign.link <span class="op">=</span> <span class="st">"github_assignment"</span>,</span>
@@ -123,8 +127,10 @@ data related to a GitHub (Classroom) assignment.</p>
 <span>  level <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. challenge"</span> <span class="kw">else</span> <span class="st">"group challenge"</span>,</span>
+<span>  institution <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  acad_year <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  term <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  set <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  texts <span class="op">=</span> <span class="fu">challenge_en</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  assign.img <span class="op">=</span> <span class="st">"images/list-challenge.png"</span>,</span>
 <span>  assign.link <span class="op">=</span> <span class="st">"github_challenge"</span>,</span>
@@ -148,8 +154,10 @@ data related to a GitHub (Classroom) assignment.</p>
 <span>  level <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  type <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">n</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="st">"ind. challenge"</span> <span class="kw">else</span> <span class="st">"group challenge"</span>,</span>
+<span>  institution <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  acad_year <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  term <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  set <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  texts <span class="op">=</span> <span class="fu">challenge2_en</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  assign.img <span class="op">=</span> <span class="st">"images/list-challenge2.png"</span>,</span>
 <span>  assign.link <span class="op">=</span> <span class="st">"github_challenge"</span>,</span>
@@ -257,12 +265,21 @@ assignments and 2 for group assignments).</p></dd>
 otherwise.</p></dd>
 
 
+<dt id="arg-institution">institution<a class="anchor" aria-label="anchor" href="#arg-institution"></a></dt>
+<dd><p>The name of the institution (e.g., "My University").</p></dd>
+
+
 <dt id="arg-acad-year">acad_year<a class="anchor" aria-label="anchor" href="#arg-acad-year"></a></dt>
 <dd><p>The academic year (e.g., 2021-2022).</p></dd>
 
 
 <dt id="arg-term">term<a class="anchor" aria-label="anchor" href="#arg-term"></a></dt>
 <dd><p>The term (e.g., Q1, Q2, Q3).</p></dd>
+
+
+<dt id="arg-set">set<a class="anchor" aria-label="anchor" href="#arg-set"></a></dt>
+<dd><p>A short identifier for a  set of assignments (e.g., "21M" where 21
+is the year the set starts, and "M" a set specification).</p></dd>
 
 
 <dt id="arg-texts">texts<a class="anchor" aria-label="anchor" href="#arg-texts"></a></dt>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">learnitdown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.0</span>
       </span>
     </div>
 
@@ -50,6 +50,11 @@
       <small>Source: <a href="https://github.com/learnitr/learnitdown/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.9.0" id="learnitdown-190">learnitdown 1.9.0<a class="anchor" aria-label="anchor" href="#learnitdown-190"></a></h2>
+<ul><li><p><code><a href="../reference/assignment.html">assignment()</a></code>, <code><a href="../reference/assignment.html">assignment2()</a></code>, <code><a href="../reference/assignment.html">challenge()</a></code> and <code><a href="../reference/assignment.html">challenge2()</a></code> functions now have new arguments <code>institution=</code> and <code>set=</code>.</p></li>
+<li><p>The <code><a href="../reference/learnr.html">learnr()</a></code>, <code><a href="../reference/h5p.html">h5p()</a></code> and <code>shiny()</code> functions now populate a “learnitdown_apps” option that is used by <code><a href="../reference/show_ex_toc.html">show_ex_toc()</a></code> to create an ex/apps.csv file with all exercises together with the assignments. They have new arguments <code>icourse=</code>, <code>institution=</code>, <code>acad_year=</code>, <code>term=</code> and <code>set=</code> to populate this table (also <code>baseurl=</code> for <code><a href="../reference/launch_shiny.html">launch_shiny()</a></code>).</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.8.2" id="learnitdown-182">learnitdown 1.8.2<a class="anchor" aria-label="anchor" href="#learnitdown-182"></a></h2>
 <ul><li><p>The <code>launchApp()</code> javascript function in <code><a href="../reference/learnitdown_init.html">learnitdown_init()</a></code> now includes a <code>framesource=</code> parameter to comply with new Posit Connect rules for embedded contents</p></li>
