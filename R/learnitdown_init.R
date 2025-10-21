@@ -274,7 +274,7 @@ window.onload = function() {processParameters(); hideCode();};
 function encodeQueryParam(name, first = false) {
   var value = localStorage.getItem(name);
   if (value === null || value == '') return '';
-  var sep = first ? '?' : '&';
+  var sep = first ? '' : '&';
   return sep + encodeURIComponent(name) + '=' + encodeURIComponent(value);
 }
 
@@ -371,7 +371,7 @@ if (params !== undefined && params != '') {
 launchApp = function(id, src) {
   var params = encodeQueryString();
   if (params !== undefined && params != '') {
-    src = src + params;
+    src = src + '?' + params;
   }
   // This is now required by Posit Connect for embedding content in a site
   var address = window.location.toString().split('?')[0].split('#')[0];
