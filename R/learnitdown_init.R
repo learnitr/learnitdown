@@ -281,14 +281,14 @@ function encodeQueryParam(name, first = false) {
 function encodeQueryString() {
   // We got data from localStorage. So, if no data, no query string!
   if (!window.localStorage) return('');
-  query = encodeQueryParam('iemail', true) + encodeQueryParam('iid');
+  query = encodeQueryParam('login', true);
+  query += encodeQueryParam('email') + encodeQueryParam('displayname');
+  query += encodeQueryParam('firstname') + encodeQueryParam('lastname');
+  query += encodeQueryParam('iemail') + encodeQueryParam('iid');
   query += encodeQueryParam('ifirstname') + encodeQueryParam('ilastname');
   query += encodeQueryParam('institution');
   query += encodeQueryParam('icourse') + encodeQueryParam('ictitle');
   query += encodeQueryParam('iurl') + encodeQueryParam('iref');
-  query += encodeQueryParam('login');
-  query += encodeQueryParam('email') + encodeQueryParam('displayname');
-  query += encodeQueryParam('firstname') + encodeQueryParam('lastname');
   // Detect if we have the Sepia or Night theme
   // TODO: refine this because it is *always* detected
   //if (document.getElementsByClassName('color-theme-1')) {
