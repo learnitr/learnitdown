@@ -369,19 +369,20 @@ if (params !== undefined && params != '') {
 //  }
 
 launchApp = function(id, src) {
-  //var params = encodeQueryString();
-  //if (params !== undefined && params != '') {
-  //  src = src + '?' + params;
-  //}
-  // This is now required by Posit Connect for embedding content in a site
-  var address = window.location.toString().split('?')[0].split('#')[0];
-  if (src.includes('?')) {
-    // There is already a search string => append parameters to it
-    src = src + '&' + 'framesource=' + address; //encodeURIComponent(address);
-  } else {
-    // Add a search string
-    src = src + '?' + 'framesource=' + address; //encodeURIComponent(address);
+  var params = encodeQueryString();
+  if (params !== undefined && params != '') {
+    src = src + '?' + params;
   }
+  // No framesource= because it does not work!
+  //// This is now required by Posit Connect for embedding content in a site
+  //var address = window.location.toString().split('?')[0].split('#')[0];
+  //if (src.includes('?')) {
+  //  // There is already a search string => append parameters to it
+  //  src = src + '&' + 'framesource=' + address; //encodeURIComponent(address);
+  //} else {
+  //  // Add a search string
+  //  src = src + '?' + 'framesource=' + address; //encodeURIComponent(address);
+  //}
 
   var img = document.getElementById('img' + id);
   var app = document.getElementById(id);
