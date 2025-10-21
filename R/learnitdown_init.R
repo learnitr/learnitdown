@@ -369,10 +369,10 @@ if (params !== undefined && params != '') {
 //  }
 
 launchApp = function(id, src) {
-  var params = encodeQueryString();
-  if (params !== undefined && params != '') {
-    src = src + '?' + params;
-  }
+  //var params = encodeQueryString();
+  //if (params !== undefined && params != '') {
+  //  src = src + '?' + params;
+  //}
   // This is now required by Posit Connect for embedding content in a site
   var address = window.location.toString().split('?')[0].split('#')[0];
   if (src.includes('?')) {
