@@ -369,7 +369,11 @@ if (params !== undefined && params != '') {
 //  }
 
 launchApp = function(id, src) {
-  // This is now required by Posit Connect for embedding content
+  var params = encodeQueryString();
+  if (params !== undefined && params != '') {
+    src = src + '&' + params;
+  }
+  // This is now required by Posit Connect for embedding content in a site
   var address = window.location.toString().split('?')[0].split('#')[0];
   if (src.includes('?')) {
     // There is already a search string => append parameters to it
@@ -377,10 +381,6 @@ launchApp = function(id, src) {
   } else {
     // Add a search string
     src = src + '?' + 'framesource=' + address; //encodeURIComponent(address);
-  }
-  var params = encodeQueryString();
-  if (params !== undefined && params != '') {
-    src = src + '&' + params;
   }
 
   var img = document.getElementById('img' + id);
