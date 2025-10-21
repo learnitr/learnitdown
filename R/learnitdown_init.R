@@ -274,7 +274,7 @@ window.onload = function() {processParameters(); hideCode();};
 function encodeQueryParam(name, first = false) {
   var value = localStorage.getItem(name);
   if (value === null || value == '') return '';
-  var sep = first ? '' : '&';
+  var sep = first ? '?' : '&';
   return sep + encodeURIComponent(name) + '=' + encodeURIComponent(value);
 }
 
