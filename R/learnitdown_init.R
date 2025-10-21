@@ -371,7 +371,11 @@ if (params !== undefined && params != '') {
 launchApp = function(id, src) {
   var params = encodeQueryString();
   if (params !== undefined && params != '') {
-    src = src + '?' + params;
+    if (src.includes('?')) {
+      src = src + '&' + params;
+    } else {
+      src = src + '?' + params;
+    }
   }
   // No framesource= because it does not work!
   //// This is now required by Posit Connect for embedding content in a site
