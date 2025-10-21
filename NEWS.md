@@ -1,3 +1,7 @@
+# learnitdown 1.9.1
+
+-   Eliminate `#` component from address and do not encode it for `framesource=` in `launchShiny()` javascript function in `learnitdown_init()`.
+
 # learnitdown 1.9.0
 
 -   `assignment()`, `assignment2()`, `challenge()` and `challenge2()` functions now have new arguments `institution=` and `set=`.

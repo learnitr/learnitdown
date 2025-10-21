@@ -370,13 +370,13 @@ if (params !== undefined && params != '') {
 
 launchApp = function(id, src) {
   // This is now required by Posit Connect for embedding content
-  var address = window.location.toString().split('?')[0];
+  var address = window.location.toString().split('?')[0].split('#')[0];
   if (src.includes('?')) {
     // There is already a search string => append parameters to it
-    src = src + '&' + 'framesource=' + encodeURIComponent(address);
+    src = src + '&' + 'framesource=' + address; //encodeURIComponent(address);
   } else {
     // Add a search string
-    src = src + '?' + 'framesource=' + encodeURIComponent(address);
+    src = src + '?' + 'framesource=' + address; //encodeURIComponent(address);
   }
   var params = encodeQueryString();
   if (params !== undefined && params != '') {
